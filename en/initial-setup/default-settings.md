@@ -1,8 +1,8 @@
 ---
-title: "Setup with default settings"
-date: 2021-01-12T11:02:05+01:00
-type: "post"
-weight : 2
+layout: default
+title: Setup with default settings
+parent: Initial Setup
+nav_order: 1
 ---
 
 We'll create basic attributes and one product type "simple product" for you. You can optimize and enhance this settings

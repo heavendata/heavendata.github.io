@@ -1,8 +1,8 @@
 ---
-title: "Setup from empty account"
-date: 2021-01-12T11:02:05+01:00
-type: "post"
-weight : 2
+layout: default
+title: Setup from empty account
+parent: Initial Setup
+nav_order: 2
 ---
 
 The heavendata platform is fully customizable. If you start with an empty account, you have to do the product database setup manually
