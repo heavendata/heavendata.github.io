@@ -24,9 +24,10 @@ Before starting to configure product types, ensure all required product attribut
 
 # Product Type Settings
 ## General
-|Form field |Description|
+
+|Form field |Description |
 --- | ---
-|Name | Name of product type as used inside of app.|
+|Name | Name of product type as used inside of app.
 
 ## Attribute Sections
 That's where you define which attributes are available for this kind of product.
