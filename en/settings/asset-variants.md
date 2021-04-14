@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Asset Variants
+title: Asset variants
 parent: Settings
 nav_order: 10
 ---

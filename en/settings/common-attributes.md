@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Attributes & Sections
+title: Common attributes
 parent: Settings
 nav_order: 5
 ---

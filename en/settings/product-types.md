@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Product Types
+title: Product types
 parent: Settings
 nav_order: 2
 ---
