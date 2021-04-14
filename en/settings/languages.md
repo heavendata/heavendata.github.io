@@ -2,8 +2,10 @@
 layout: default
 title: Languages
 parent: Settings
-nav_order: 1
+nav_order: 10
 ---
+
+# Languages
 
 Define all languages used in your product data here. That will be the languages available for translatable product attributes.
 

@@ -2,8 +2,10 @@
 layout: default
 title: Product Types
 parent: Settings
-nav_order: 1
+nav_order: 2
 ---
+
+# Product Types
 
 Product types describe what data is stored for one kind of product and how it's organized. This includes
 
@@ -11,18 +13,19 @@ Product types describe what data is stored for one kind of product and how it's 
 * Are variants available and how should they be organized
 
 ## Prerequisites
-Before starting to configure product types, ensure all required product attributes are created. See [Attributes & Sections](./attributes.md) for details on how to create and update product attributes.
+Before starting to configure product types, ensure all product attributes are created. See [Attributes & Sections](./attributes.md) for details on how to create and update product attributes.
 
 ## Create or Modify Product Types
 
 * Click "Settings" in app header
 * Select "Product types" from menu
-* Click "Create product type" button
-* ... or select an existing product type
-* Update and save settings
-* Done ;-)
+* Click "New product type" button or select an existing product type
+* Click "Manage sections" and mark all sections you want to use
+* Enable all attributes that should be available
+* Click "Save"
 
-## Product Type Settings
+## Product Type Settings 
+
 ### General
 
 |Form field |Description |
@@ -30,49 +33,16 @@ Before starting to configure product types, ensure all required product attribut
 |Name | Name of product type as used inside of app.
 
 ### Attribute Sections
-That's where you define which attributes are available for this kind of product.
+That's where you define which attributes are available for this kind of product. To add / remove attributes, first click "Manage sections" and mark all sections that should be visible. Then mark each attribute that should be activated.
 
-#### Disabled Attributes
-![attribute disabled](images/pt-attribute-disabled.png)
-
-Not checked attributes are defined but will not be available.
-
-#### Enabled Attributes
-![attribute enabled](images/pt-attribute-enabled.png)
-
-Checked attributes are available and will be visible when editing or importing products.
-
-#### Common Attributes
-![common attribute](images/pt-attribute-common.png)
-
-This attributes are available because you defined them as "common attributes" which are available for all products. See [Attributes & Sections](./attributes.md) for details.
+|Status|Description |
+--- | ---
+|![attribute disabled](images/pt-attribute-disabled.png) | If unchecked, the attribute is not enabled for this product type and will not be visible, when editing products of this type.
+|![attribute enabled](images/pt-attribute-enabled.png) | Checked attributes are available and will be visible when editing or importing products.
+|![common attribute](images/pt-attribute-common.png) | This attributes are available because you defined them as "common attributes" which are available for all products. See [Attributes & Sections](./attributes.md) for details.
 
 ### Variants
-Variants allow you to manage all version of one product together. A typical example are fashion products where you have multiple sizes.
+Here you define if products of this type have variants and how they are defined. Please see [variant settings](./product-variants.md) for details.
 
-|Product name |Size code |Price|SKU |
---- | --- | --- | ---
-|Shirt with logo |S |10 |shirt1-s
-|Shirt with logo |M |10 |shirt1-m
-|Shirt with logo |L |10 |shirt1-m
-|Shirt uni |S |12 |shirt2-s
-|Shirt uni |M |12 |shirt2-m
-|Shirt uni |L |12 |shirt2-m
-
-We have two products here, and each has three variants (sizes). Without variants we would have six independent products. If we change text or upload product images, we have to do this for each size.
-
-To simplify this, we use variants and tell the system to use the same values for some attributes for all sizes. To do that we need to configure...
-
-* Based on which attribute(s) separate variants must be created. In our example: Attribute "Size code".
-* Which attributes are the same for all variants (in our example "Product name" and "Price") and which attributes need a separate value for each ("SKU").
-
-With this setup, our example would result in two products and each of them has three variants.
-
-#### Variant Settings
-Define which product attribute will "split" the product into variants first:
-
-![](images/pt-create-variant-dialog.png)
-
-Then in the next screen drag and drop attributes on the right variant levels:
-
-![](images/pt-variants-assign-attributes.png)
+## Why do I Need Product Types?
+Most catalogs contain different types of products and many attributes simply make no sense for some types. Let's assume a retailer sells shoes and TVs. For shoes we need an attribute "shoe size" and for TVs "display diagonal" and "operating system". Without product types our shoes would have an operating system and that wouldn't make sense (at least in 2021). To solve this, we create one product type "Shoe" and activate "shoe size" and another type "TV" and activate "display diagonal" and "operating system".
