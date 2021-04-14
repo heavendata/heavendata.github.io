@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Languages
+title: Brand portal
 parent: Settings
 nav_order: 20
 ---
