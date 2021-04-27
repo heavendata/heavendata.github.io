@@ -31,7 +31,7 @@ Different types of products may need a different set of attributes to describe t
 4. Add all attributes
 5. Save it and we're done
 
-The article [Product Type Settings](../settings/product-types.md) describes how to configure product types.
+The article [Product Type Settings](../settings/product-types.md) describes how to configure product types. You'll find details how to configure variants in [Product Variants](../settings/product-variants.md).
 
 ### Common attributes
 
