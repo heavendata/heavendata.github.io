@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Optimize catalog structure
-parent: Initial Setup
+parent: Initial setup
 nav_order: 2
 ---
 

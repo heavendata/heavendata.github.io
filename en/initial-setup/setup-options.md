@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Setup Options
-parent: Initial Setup
+title: Setup options
+parent: Initial setup
 nav_order: 1
 ---
 
