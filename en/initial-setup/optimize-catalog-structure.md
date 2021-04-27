@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Setup from empty account
+title: Optimize Catalog Structure
 parent: Initial Setup
 nav_order: 2
 ---
