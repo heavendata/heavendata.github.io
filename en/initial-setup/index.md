@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Initial Setup
+title: Initial setup
 has_children: true
 nav_order: 1
 ---

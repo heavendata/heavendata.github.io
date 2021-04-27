@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Attribute Roles
+title: Attribute roles
 parent: Settings
 nav_order: 1
 ---

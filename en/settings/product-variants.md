@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Product Variants
+title: Product variants
 parent: Settings
 nav_order: 3
 ---
