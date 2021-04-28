@@ -46,3 +46,7 @@ Here you define if products of this type have variants and how they are defined.
 
 ## Why do I Need Product Types?
 Most catalogs contain different types of products and many attributes simply make no sense for some types. Let's assume a retailer sells shoes and TVs. For shoes we need an attribute "shoe size" and for TVs "display diagonal" and "operating system". Without product types our shoes would have an operating system and that wouldn't make sense (at least in 2021). To solve this, we create one product type "Shoe" and activate "shoe size" and another type "TV" and activate "display diagonal" and "operating system".
+
+## Further Reading
+
+* [Common attributes](./common-attributes.md) - enable attributes for all products
