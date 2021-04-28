@@ -24,10 +24,22 @@ Example:
 * Section "Technical details" with attributes "power consumption", "voltage", ...
 * Section "Common" with "name", "long description", "short description", "price", ...
 
-### Edit attributes
+## Edit attributes
 
 1. Go to Settings > Attributes & Sections
 2. Select the section that contains the attributes you want to edit or create a new section
 3. Add or update attributes
 4. Save it
 5. Go to Settings > Product types and enable new attributes where you need them
+
+## How To...
+
+### Change Attribute Type or Translatable Settings Later?
+The attribute type and translatable settings affect how data is stored in database. For this reason, you cannot change those settings for existing attributes. If you need to change them, follow the following procedure:
+
+1. Export products (product list > export) and select the product identifier column and the column you need to change
+2. Verify your export and ensure it contains the right data
+3. Delete the attribute
+4. Create a new attribute with same name and code
+5. Enable the new attribute in product types
+6. Re-import products from step 2 (product list > import)
