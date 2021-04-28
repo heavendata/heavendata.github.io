@@ -1,4 +1,5 @@
 remote_theme: pmarsceill/just-the-docs
+title: heavendata.com
 logo: "/layout/heavendata-logo.png"
 
 gh_edit_link: true
