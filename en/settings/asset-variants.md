@@ -14,6 +14,8 @@ These settings apply to all assets of type image. This includes
 
 We'll create all defined variants for all images. When accessing the images, you define which variant to use by providing the key as part of the asset url.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mWZbFU9ICIU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Variant Settings
 
 |Field|Description |
