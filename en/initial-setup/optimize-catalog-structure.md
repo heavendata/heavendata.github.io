@@ -9,6 +9,8 @@ nav_order: 2
 
 Different types of products need different attributes to describe them. That's why the heavendata platform is fully customizable. In this article, you'll learn about the basic building blocks to configure your product catalog to perfectly match your or your customers product requirements.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rzyqCF62f7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Define Product Attributes
 Product attributes describe which data fields are available for your products.
 Go to settings > attributes and define which attributes you need. A minimal list could be:
