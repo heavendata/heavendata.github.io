@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Sharing Product Data
+title: Sharing product data
 has_children: true
 nav_order: 3
 ---

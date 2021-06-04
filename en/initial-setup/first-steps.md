@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Setup options
+title: First steps
 parent: Initial setup
 nav_order: 2
 ---
