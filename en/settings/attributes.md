@@ -43,3 +43,10 @@ The attribute type and translatable settings affect how data is stored in databa
 4. Create a new attribute with same name and code
 5. Enable the new attribute in product types
 6. Re-import products from step 2 (product list > import)
+
+## Related Articles
+
+* [Product types](./product-types.md) - enable attributes for product types
+* [Common attributes](./common-attributes.md) - enable attributes for all products
+* [Optimize catalog structure](../initial-setup/optimize-catalog-structure.md)
+Guide covering attributes and product types management.

@@ -18,3 +18,9 @@ Typically creating attributes needs two steps: 1) create the attribute (in attri
 3. Click "Manage sections" to add sections
 4. Enable the checkbox for all attributes that should be enabled for all products
 5. Click "Save"
+
+## Related
+
+* [Product attributes and sections](./attributes.md) - manage available product attributes
+* [Optimize catalog structure](../initial-setup/optimize-catalog-structure.md)
+Guide covering attributes and product types management.
