@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Custom product feeds
-parent: Sharing Product Data
+parent: Sharing product data
 ---
 
 # Custom Product Feeds

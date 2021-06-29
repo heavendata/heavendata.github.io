@@ -1,7 +1,7 @@
 ---
 layout: default
 title: FTP Server (hosted by heavendata)
-parent: Sharing Product Data
+parent: Sharing product data
 ---
 
 This article describes how to connect to our ftp server to access import and export files. 
