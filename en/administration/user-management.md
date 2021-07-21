@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Overview
+title: User management
 parent: Account administration
 nav_order: 2
 ---
