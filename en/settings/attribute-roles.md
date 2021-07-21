@@ -26,4 +26,4 @@ We solve this, by assigning roles, e.g. the attribute "name of product" need the
 
 ## Semantic Roles
 
-These roles are not strictly required, but help the system to map your data to formats as expected by target systems. You can ignore them during setup and we will ask you as soon as needed.
+These roles are not strictly required but help the system map your data to formats as expected by target systems. You can ignore them during setup; we will ask you as soon as needed.

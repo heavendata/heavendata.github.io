@@ -7,7 +7,7 @@ nav_order: 3
 
 # Product Variants
 
-Variants allow you to manage all version of one product together. A typical example are fashion products where you have multiple sizes.
+Variants allow you to manage all versions of one product together. A typical example is fashion products where you have multiple sizes.
 
 |Product name |Size code |Price|SKU |
 --- | --- | --- | ---
@@ -18,12 +18,12 @@ Variants allow you to manage all version of one product together. A typical exam
 |Shirt uni |M |12 |shirt2-m
 |Shirt uni |L |12 |shirt2-m
 
-We have two products here, and each has three variants (sizes). Without variants we would have six independent products. If we change text or upload product images, we have to do this for each size.
+We have two products here, and each has three variants (sizes). Without variants, we would have six independent products. If we change text or upload product images, we have to do this for each size.
 
 To simplify this, we use variants and tell the system to use the same values for some attributes for all sizes. To do that we need to configure...
 
-* Based on which attribute(s) separate variants must be created. In our example: Attribute "Size code".
-* Which attributes are the same for all variants (in our example "Product name" and "Price") and which attributes need a separate value for each ("SKU").
+* Based on which attribute(s) separate variants must be created. In our example: Attribute "Size code."
+* Which attributes are the same for all variants (in our example "Product name" and "Price") and which attributes need a different value for each ("SKU").
 
 With this setup, our example would result in two products and each of them has three variants.
 

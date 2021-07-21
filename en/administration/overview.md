@@ -1,11 +1,11 @@
 ---
 layout: default
 title: Overview
-parent: System administration
+parent: Account administration
 nav_order: 2
 ---
 
-# System Administration Overview
+# Account Administration Overview
 
 Our platform provides a rich set of administration features including
 
@@ -19,7 +19,7 @@ Let's have a look at the building blocks...
 Each user represents a single person. There are no shared logins supported. Each user can have access to multiple heavendata.com accounts.
 
 ## Organizations
-An organization represents a heavendata.com customer. That's where things like billing address and tax related settings are stored.
+An organization represents a heavendata.com customer. That's where things like billing addresses and tax-related settings are stored.
 
 ## (Sub) Accounts
 Each account is a fully separated PIM database. An organization has at least one account. Use additional accounts if you need a separate playground database or need separated accounts for multiple departments or customers.

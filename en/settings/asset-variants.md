@@ -12,7 +12,7 @@ These settings apply to all assets of type image. This includes
 * Images used in product attributes
 * Images stored in cloud drive
 
-We'll create all defined variants for all images. When accessing the images, you define which variant to use by providing the key as part of the asset url.
+We'll create all defined variants for all images. Then, when accessing the images, you specify which variant to use by providing the key as part of the asset URL.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mWZbFU9ICIU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -21,7 +21,7 @@ We'll create all defined variants for all images. When accessing the images, you
 |Field|Description |
 |--|-- |
 |Width, height|Output size. Leave empty if you don't want to resize the image.
-|Resize mode| Defines if width x height should be fully filled (but image might be cropped) or if it should fit withing these dimensions (and in most cases, one side will we smaller than defined). We'll always keep the aspect ratio.
+|Resize mode| Defines if width x height should be filled (but the image might be cropped) or if it should fit within these dimensions (and in most cases, one side will be smaller than defined). We'll always keep the aspect ratio.
 |File format|Output file format
 
 ### Transformations

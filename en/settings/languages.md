@@ -7,7 +7,7 @@ nav_order: 10
 
 # Languages
 
-Define all languages used in your product data here. That will be the languages available for translatable product attributes.
+Define all languages used in your product data here. Those will be the languages available for translatable product attributes.
 
 ## Settings
 
@@ -26,5 +26,5 @@ Fallback languages are great if you want to "overwrite" just some attribute valu
 |English (GB) | -
 |English (US) | English (GB)
 
-Now you can provide separate content in American English but for most products the British English content might be fine.
+Now you can provide different content in American English, but the British English content might be acceptable for most products.
 

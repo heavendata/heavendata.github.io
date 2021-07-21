@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Overview
-parent: System administration
+parent: Account administration
 nav_order: 2
 ---
 

@@ -7,17 +7,17 @@ nav_order: 1
 
 # Product Attributes
 
-Goal of a product information management system is to be the single source of truth for all your product data in best possible quality. You can store text information, product relations and other data types as well as binary assets and categories.
+The goal of a product information management system is to be the single source of truth for all your product data in the best possible quality. You can store text information, product relations and other data types, and binary assets and categories.
 
 This document describes what attributes are and how to manage them.
 
 ## Concept
-It's important to have all peaces of information information in dedicated fields. We call this fields "product attributes". Common examples for attributes are "product name", "width", "price", "color", ... If you're working with Excel or databases, one product attribute will store the data of one column in a worksheet.
+It's crucial to have all pieces of information in dedicated fields. We call these fields "product attributes." Typical examples for attributes are "product name", "width", "price", "color", ... If you're working with Excel or databases, one product attribute will store the data of one column in a worksheet.
 
 Note: Do not add all those data in one single text attribute. Prefer one attribute for each fact.
 
 ### Attribute Sections
-An attribute is always part of one attribute section. Just a group for better readability.
+An attribute is always part of one attribute section — just a group for better readability.
 
 Example:
 
@@ -38,9 +38,9 @@ Example:
 The attribute type and translatable settings affect how data is stored in database. For this reason, you cannot change those settings for existing attributes. If you need to change them, follow the following procedure:
 
 1. Export products (product list > export) and select the product identifier column and the column you need to change
-2. Verify your export and ensure it contains the right data
+2. Verify your export and ensure it contains the proper data
 3. Delete the attribute
-4. Create a new attribute with same name and code
+4. Create a new attribute with the same name and code
 5. Enable the new attribute in product types
 6. Re-import products from step 2 (product list > import)
 

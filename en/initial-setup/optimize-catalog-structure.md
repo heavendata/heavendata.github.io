@@ -7,7 +7,7 @@ nav_order: 10
 
 # Optimize Catalog Structure
 
-Different types of products need different attributes to describe them. That's why the heavendata platform is fully customizable. In this article, you'll learn about the basic building blocks to configure your product catalog to perfectly match your or your customers product requirements.
+Different types of products need different attributes to describe them. That's why the heavendata platform is fully customizable. In this article, you'll learn about the basic building blocks to configure your product catalog to match your customers' product requirements perfectly.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/rzyqCF62f7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -37,8 +37,8 @@ The article [Product Type Settings](../settings/product-types.md) describes how 
 
 ### Common attributes
 
-You'll typically have some attributes like "product name" or "sku" that are shared by all products. To simplify the setup you should
-add those attributes as "common attributes".
+You'll typically have attributes like "product name" or "sku" shared by all products. To simplify the setup, you should
+add those attributes as "common attributes."
 
 1. Go to settings > common attributes
 2. Add all sections that contain attributes shared by all products

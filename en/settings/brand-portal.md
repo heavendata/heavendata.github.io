@@ -15,7 +15,7 @@ The brand portal is a website where retailers and partners can access all they n
 * News
 
 ## Prerequisites
-Please ensure that you've assigned the following roles to product attributes: system.sku, product.name - we need them to setup the public user interface.
+Please ensure that you've assigned the following roles to product attributes: system.sku, product.name - we need them to set up the public user interface.
 
 ## Settings
 

@@ -33,7 +33,7 @@ Before starting to configure product types, ensure all product attributes are cr
 |Name | Name of product type as used inside of app.
 
 ### Attribute Sections
-That's where you define which attributes are available for this kind of product. To add / remove attributes, first click "Manage sections" and mark all sections that should be visible. Then mark each attribute that should be activated.
+That's where you define which attributes are available for this kind of product. To add/remove attributes, first click "Manage sections" and mark all sections that should be visible. Then mark each attribute that should be activated.
 
 |Status|Description |
 --- | ---
@@ -45,7 +45,7 @@ That's where you define which attributes are available for this kind of product.
 Here you define if products of this type have variants and how they are defined. Please see [variant settings](./product-variants.md) for details.
 
 ## Why do I Need Product Types?
-Most catalogs contain different types of products and many attributes simply make no sense for some types. Let's assume a retailer sells shoes and TVs. For shoes we need an attribute "shoe size" and for TVs "display diagonal" and "operating system". Without product types our shoes would have an operating system and that wouldn't make sense (at least in 2021). To solve this, we create one product type "Shoe" and activate "shoe size" and another type "TV" and activate "display diagonal" and "operating system".
+Most catalogs contain different types of products, and many attributes make no sense for some types. For example, let's assume a retailer sells shoes and TVs. For shoes we need an attribute "shoe size" and for TVs "display diagonal" and "operating system." Without product types, our shoes would have an operating system, which wouldn't make sense (at least in 2021). To solve this, we create one product type "Shoe" and activate "shoe size" and another type "TV" and activate "display diagonal" and "operating system."
 
 ## Related Articles
 
