@@ -34,7 +34,7 @@ Please replace `attribute_code` with the code of an attribute of your instance. 
 
 If a product has variants, you can access the variants like so:
 
-```
+```scriban-html
     {{ for variant in variants }}
         {{ variant.color_code }}
     {{ end }}
