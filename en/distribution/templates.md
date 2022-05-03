@@ -50,6 +50,12 @@ To output the value of translatable attribute, you need to provide the language 
      {{ product.my_translatable_attr | t 'en-US' }}
 {% endraw %}
 
+You can provide a default value if there is no translation for the requested culture available:
+
+{% raw %}
+     {{ product.my_translatable_attr | t 'en-US' 'No value available' }}
+{% endraw %}
+
 ### Escaping values for XML / HTML
 
 Attributes may contain characters that need to be escaped in XML documents: 
