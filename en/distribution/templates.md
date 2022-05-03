@@ -35,16 +35,18 @@ Please replace `attribute_code` with the code of an attribute of your instance. 
 If a product has variants, you can access the variants like so:
 
 ```
+{% raw %}
     {{ for variant in variants }}
         {{ variant.color_code }}
     {{ end }}
+{% endraw %}
 ```
 
 ### Translatable Attributes
 
 To output the value of translatable attribute, you need to provide the language ISO code:
 
-     `{{ product.my_translatable_attr | t 'en-US' }}`
+     `{% raw %}{{ product.my_translatable_attr | t 'en-US' }}{% endraw %}`
 
 ### Escaping values for XML / HTML
 
