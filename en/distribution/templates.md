@@ -15,7 +15,7 @@ As with all other channels, you can distribute the result as an http feed or cop
 Templates are written using the Scriban template language. 
 
     <product>
-      <name>{{ variant.name }}</name>
+      <name>\{\{ variant.name \}\}</name>
     </product>
 
 Please refer to the following docs for further information:
@@ -34,18 +34,18 @@ Please replace `attribute_code` with the code of an attribute of your instance. 
 
 If a product has variants, you can access the variants like so:
 
-    {{ for variant in variants }}
-        {{ variant.color_code }}
-    {{ end }}
+    \{\{ for variant in variants \}\}
+        \{\{ variant.color_code \}\}
+    \{\{ end \}\}
 
 ### Translatable Attributes
 
 To output the value of translatable attribute, you need to provide the language ISO code:
 
-     {{ product.my_translatable_attr | t 'en-US' }}
+     \{\{ product.my_translatable_attr | t 'en-US' \}\}
 
 ### Escaping values for XML / HTML
 
 Attributes may contain characters that need to be escaped in XML documents: 
 
-    {{ variant.description | html.escape }}
+    \{\{ variant.description | html.escape \}\}
