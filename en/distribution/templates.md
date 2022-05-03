@@ -14,11 +14,11 @@ As with all other channels, you can distribute the result as an http feed or cop
 
 Templates are written using the Scriban template language. 
 
-<!-- {% raw %} -->
+{% raw %}
     <product>
       <name>{{ variant.name }}</name>
     </product>
-<!-- {% endraw %} -->
+{% endraw %}
 
 Please refer to the following docs for further information:
 
