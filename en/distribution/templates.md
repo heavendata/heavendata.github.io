@@ -14,9 +14,11 @@ As with all other channels, you can distribute the result as an http feed or cop
 
 Templates are written using the Scriban template language. 
 
+<!-- {% raw %} -->
     <product>
-      <name>\{\{ variant.name \}\}</name>
+      <name>{{ variant.name }}</name>
     </product>
+<!-- {% endraw %} -->
 
 Please refer to the following docs for further information:
 
@@ -34,22 +36,24 @@ Please replace `attribute_code` with the code of an attribute of your instance. 
 
 If a product has variants, you can access the variants like so:
 
-```
-{% raw %}
+<!-- {% raw %} -->
     {{ for variant in variants }}
         {{ variant.color_code }}
     {{ end }}
-{% endraw %}
-```
+<!-- {% endraw %} -->
 
 ### Translatable Attributes
 
 To output the value of translatable attribute, you need to provide the language ISO code:
 
-     `{% raw %}{{ product.my_translatable_attr | t 'en-US' }}{% endraw %}`
+<!-- {% raw %} -->
+     {{ product.my_translatable_attr | t 'en-US' }}
+<!-- {% endraw %} -->
 
 ### Escaping values for XML / HTML
 
 Attributes may contain characters that need to be escaped in XML documents: 
 
-    \{{ variant.description | html.escape }}
+<!-- {% raw %} -->
+    {{ variant.description | html.escape }}
+<!-- {% endraw %} -->
