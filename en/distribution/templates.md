@@ -36,7 +36,7 @@ If a product has variants, you can access the variants like so:
 
 ```scriban-html
     {{ for variant in variants }}
-        {{ variant.color_code }}
+        { variant.color_code }
     {{ end }}
 ```
 
