@@ -22,17 +22,18 @@ Templates are written using the Scriban template language.
 
 Please refer to the following docs for further information:
 
-* https://github.com/scriban/scriban/blob/master/doc/language.md
-* https://github.com/scriban/scriban/blob/master/doc/builtins.md
+* [Template language](https://github.com/scriban/scriban/blob/master/doc/language.md)
+* [Functions](https://github.com/scriban/scriban/blob/master/doc/builtins.md)
  
 ## Accessing Product Attribute Values
 
-Product data is available in two objects:
+Product data is available as variable `product` in the record template:
 
-    product.attribute_code
-    variant.attribute_code
+    {% raw %}
+        {{ product.attribute_code }}
+    {% endraw %}
 
-Please replace `attribute_code` with the code of an attribute of your instance. To see available attributes, navigate to settings > attributes & sections;
+Please replace `attribute_code` with the code of an attribute of your instance. To see available attributes, navigate to settings > attributes & sections.
 
 If a product has variants, you can access the variants like so:
 
@@ -41,6 +42,8 @@ If a product has variants, you can access the variants like so:
         {{ variant.color_code }}
     {{ end }}
 {% endraw %}
+
+This code fragment will iterate over all variants of the current product and output the attribute with code `color_code` for each.
 
 ### Translatable Attributes
 
