@@ -50,13 +50,13 @@ This code fragment will iterate over all variants of the current product and out
 To output the value of translatable attribute, you need to provide the language ISO code:
 
 {% raw %}
-     {{ product.my_translatable_attr | t 'en-US' }}
+     {{ product.my_translatable_attr | i18n.t 'en-US' }}
 {% endraw %}
 
 You can provide a default value if there is no translation for the requested culture available:
 
 {% raw %}
-     {{ product.my_translatable_attr | t 'en-US' 'No value available' }}
+     {{ product.my_translatable_attr | i18n.t 'en-US' 'No value available' }}
 {% endraw %}
 
 ### Escaping values for XML / HTML
