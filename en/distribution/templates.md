@@ -30,7 +30,7 @@ Please refer to the following docs for further information:
 Product data is available as variable `product` in the record template:
 
     {% raw %}
-        {{ product.attribute_code }}
+        {{ record.attribute_code }}
     {% endraw %}
 
 Please replace `attribute_code` with the code of an attribute of your instance. To see available attributes, navigate to settings > attributes & sections.
@@ -50,14 +50,16 @@ This code fragment will iterate over all variants of the current product and out
 To output the value of translatable attribute, you need to provide the language ISO code:
 
 {% raw %}
-     {{ product.my_translatable_attr | i18n.t 'en-US' }}
+     {{ record.my_translatable_attr | i18n.t 'en-US' }}
 {% endraw %}
 
 You can provide a default value if there is no translation for the requested culture available:
 
 {% raw %}
-     {{ product.my_translatable_attr | i18n.t 'en-US' 'No value available' }}
+     {{ record.my_translatable_attr | i18n.t 'en-US' 'No value available' }}
 {% endraw %}
+
+See Settings > Languages for a list of available languages in your account. Remember to use the exact ISO code as configured. If you included the region code in the configuration (e.g. en-US) you must provide the region code, if you configured the language code only (e.g. en) you must not provide a region code in the template too.
 
 ### Escaping values for XML / HTML
 
