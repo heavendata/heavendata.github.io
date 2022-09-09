@@ -12,7 +12,17 @@ Example
 
 {% raw %}
     // output filename with full date and time
-    feed_{yyyy}{MM}{dd}_{HH}{mm}{ss}.xml
+    feed_{yyyyMMdd_HHmmss}.xml
 {% endraw %}
+
+Pattern | Output
+--------| ------
+yyyy | Full year, e.g. 2022
+MM   | Month as number, e.g. 08
+dd   | Day of month, e.g. 31
+HH   | Hour, e.g. 13
+mm   | Minute, e.g. 59
+ss   | Seconds, e.g. 30
+
 
 For a full reference of all supported formats, see https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
