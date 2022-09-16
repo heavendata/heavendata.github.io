@@ -68,3 +68,60 @@ Attributes may contain characters that need to be escaped in XML documents:
 {% raw %}
     {{ variant.description | html.escape }}
 {% endraw %}
+
+### Asset Attributes (Images, PDFs, Files)
+
+Each attribute of type asset contains a list of assets. To access the assets, ensure to iterate over this list or access items by their index.
+
+#### Examples
+
+This example iterates over all images stored in the attribute with code "my_images" and outputs their public urls.
+
+{% raw %}
+    {{ for a in variant.my_images }}
+      {{ a | asset.url }}
+    {{ end }}
+{% endraw %}
+
+This examples outputs the url of the asset variant "example_thumbnail" instead of the original image.
+
+{% raw %}
+    {{ for a in variant.my_images }}
+      {{ a | asset.url 'example_thumbnail' }}
+    {{ end }}
+{% endraw %}
+
+#### The Asset Object
+
+Property | Description
+---------| -----------
+id | The internal asset id.
+filename | The filename of the original file when it was uploaded.
+mimeType | Mime type (also known as content type) of binary, e.g. "image/png"
+
+    // Example: name-as-uploaded.png
+    myImage.filename
+
+#### Asset Functions
+
+`asset.url` prints the full, public http url for an asset.
+
+    // output public asset url
+    myImage | asset.url
+
+    // output url for configured asset variant
+    myImage | asset.url 'my-variant'
+
+    // output variant url and force filename
+    myImage | asset.url 'shop-thumb' 'thumb.png'
+
+`asset.updated` returns the last modified date of an asset or Sept, 9 2022 for assets uploaded before this date.
+
+    // date in default format
+    myImage | asset.updated
+
+    // format the date
+    // example: 2022-10-30
+    myImage | asset.updated | date.to_string "%F"
+    
+See [date.to_string](https://github.com/scriban/scriban/blob/master/doc/builtins.md#dateto_string) for a full list of all supported formats.
