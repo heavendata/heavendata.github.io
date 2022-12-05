@@ -125,3 +125,30 @@ mimeType | Mime type (also known as content type) of binary, e.g. "image/png"
     myImage | asset.updated | date.to_string "%F"
     
 See [date.to_string](https://github.com/scriban/scriban/blob/master/doc/builtins.md#dateto_string) for a full list of all supported formats.
+
+### Meta Information
+
+#### Cultures
+`i18n.culture_codes` contains a list of all cultures included in an export / channel. Included are the selected cultures or all configured cultures. `i18n.language_codes` provides a list of ISO language codes (without the country code part).
+
+{% raw %}
+    {{ for code in i18n.culture_codes }}
+      {{ c }}
+    {{ end }}
+
+    // example output
+    en-US
+    fr-FR
+
+    {{ for code in i18n.language_codes }}
+      {{ c }}
+    {{ end }}
+
+    // example output
+    en
+    fr
+{% endraw %}
+
+See [Settings > Languages](../settings/languages.md) how to configure system languages. If languages are configured without a region, `culture_codes` will contain the language code only.
+
+Note that the term "culture" (or "locale") is used in technical environments and describes a language "as spoken is a specific region" while we use just "language" in the PIM user interface. Both are the same.
