@@ -127,21 +127,32 @@ mimeType | Mime type (also known as content type) of binary, e.g. "image/png"
 See [date.to_string](https://github.com/scriban/scriban/blob/master/doc/builtins.md#dateto_string) for a full list of all supported formats.
 
 ### Meta Information
+The `export` object provides data related to the export job and catalog setup as well as some common helper functions.
 
 #### Cultures
-`i18n.culture_codes` contains a list of all cultures included in an export / channel. Included are the selected cultures or all configured cultures. `i18n.language_codes` provides a list of ISO language codes (without the country code part).
+`export.culture_codes` contains a list of all cultures included in an export / channel. Included are the selected cultures or all configured cultures. `export.language_codes` provides a list of ISO language codes (without the country code part).
 
 {% raw %}
-    {{ for code in i18n.culture_codes }}
-      {{ c }}
+    List of languages
+    {{ for code in export.culture_codes }}
+      {{ code }}
     {{ end }}
 
     // example output
     en-US
     fr-FR
 
-    {{ for code in i18n.language_codes }}
-      {{ c }}
+    List of languages but language and culture separated by underscore
+    {{ for code in export.culture_codes }}
+      {{ code | export.culture_code_uc }}
+    {{ end }}
+
+    // example output
+    en_US
+    de_AT
+
+    {{ for code in export.language_codes }}
+      {{ code }}
     {{ end }}
 
     // example output
@@ -152,3 +163,30 @@ See [date.to_string](https://github.com/scriban/scriban/blob/master/doc/builtins
 See [Settings > Languages](../settings/languages.md) how to configure system languages. If languages are configured without a region, `culture_codes` will contain the language code only.
 
 Note that the term "culture" (or "locale") is used in technical environments and describes a language "as spoken is a specific region" while we use just "language" in the PIM user interface. Both are the same.
+
+#### Attribute Metadata
+The `export.attribute` dictionary provides access to all configured data attributes.
+
+Property | Description
+---------| -----------
+id | Internal attribute id
+name | Attribute name, same as visible in PIM user interface
+required | True if input is required
+translatable | True if attribute value is language specific
+labels | Dictionary of label translations (culture code, string)
+
+    export.attribute.product_name.name
+    // example output:
+    Product name
+
+    // use index access (['attribute-code']) if code contains the minus sign
+    export.attribute['my-attribute'].name
+    // example output:
+    Product name
+
+
+Use `export.attr_label` to access attribute label translations. This function returns the attribute name if no label translation is available.
+
+    export.attr_label 'color' 'en-US'
+    // example output:
+    Color
