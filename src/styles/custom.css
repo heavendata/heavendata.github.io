@@ -1,0 +1,14 @@
+/* The lucode theme's SiteTitle override caps the logo at max-width: 32px, which
+   suits a square icon. Ours is a 1862x400 wordmark (4.66:1), so that squashes it
+   into an unreadable blob in the header of every page. Restore the aspect ratio
+   and size it by height, as the Jekyll site did.
+
+   !important is needed because the theme's rule ships inside an Astro-scoped
+   <style> block in a component we do not own, and its stylesheet is appended
+   after this one. */
+.site-title img.logo {
+  max-width: none !important;
+  max-height: 1.75rem !important;
+  width: auto !important;
+  height: 1.75rem !important;
+}
