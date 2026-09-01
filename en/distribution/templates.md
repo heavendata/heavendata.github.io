@@ -126,6 +126,79 @@ mimeType | Mime type (also known as content type) of binary, e.g. "image/png"
     
 See [date.to_string](https://github.com/scriban/scriban/blob/master/doc/builtins.md#dateto_string) for a full list of all supported formats.
 
+### Reference Attributes (Custom Entities)
+
+An attribute of type "reference" links a product to records of a [custom entity](../settings/custom-entities.md). Such an attribute contains a list of references. Each reference carries the id, name and identifier of the linked record — but not its other attribute values.
+
+Iterate over the list to output them. Using a loop also keeps the template working for products where the attribute is empty:
+
+{% raw %}
+    {{ for m in record.manufacturer }}
+      {{ m.target_name }}
+    {{ end }}
+{% endraw %}
+
+#### The Reference Object
+
+Property | Description
+---------| -----------
+target_id | Internal id of the linked record.
+target_name | Name of the linked record, taken from the label attribute of the custom entity.
+target_identifier | Value of the identifier attribute of the linked record.
+
+#### Accessing the Data of a Linked Record
+
+To output any other attribute of the linked record, look the record up with `export.custom_entity`. It takes the key of the custom entity as configured in Settings > Custom entities.
+
+Look the record up either by its id or by its identifier:
+
+{% raw %}
+    // by id, where r is a reference from the product
+    export.custom_entity('manufacturer').get('id.entityid', r.target_id)
+
+    // by identifier — note the ".value"
+    export.custom_entity('manufacturer').get('meta.identifier', r.target_identifier.value)
+{% endraw %}
+
+The two forms must be used exactly as shown: `target_id` goes with `id.entityid`, and `target_identifier.value` with `meta.identifier`. If you mix them up, or leave out the `.value`, the lookup finds nothing.
+
+This example outputs the support url and phone number stored on the linked manufacturer:
+
+{% raw %}
+    {{ for r in record.manufacturer }}
+      {{ m = export.custom_entity('manufacturer').get('id.entityid', r.target_id) }}
+      {{ if m }}
+        {{ m.support_url }}
+        {{ m.support_phone }}
+      {{ end }}
+    {{ end }}
+{% endraw %}
+
+The `if` guards against a record that cannot be found — without it, the template fails with an error message such as "Cannot get the member ... for a null object".
+
+Attributes of the linked record are available by their attribute code. Name, identifier and id are available like this:
+
+Property | Description
+---------| -----------
+m.my_attribute_code | Value of the attribute with code "my_attribute_code".
+m._meta.name | Name of the record.
+m._meta.identifier | Identifier of the record.
+m._id.entityid | Internal id of the record.
+
+#### Looking Up Records by Any Text Attribute
+
+Instead of `id.entityid` or `meta.identifier` you can look records up by any text attribute of the custom entity, using its attribute code. `get` returns the first matching record, `find` returns all of them:
+
+{% raw %}
+    {{ for m in export.custom_entity('manufacturer').find('country_code', 'DE') }}
+      {{ m._meta.name }}
+    {{ end }}
+{% endraw %}
+
+The value you search for has to match the stored value exactly — the comparison is case sensitive and there is no partial matching.
+
+Note that the first lookup loads all records of the custom entity. They are then kept for the rest of the export, but looking records up by a second attribute loads them again. In large exports, stick to one lookup attribute per custom entity.
+
 ### Meta Information
 The `export` object provides data related to the export job and catalog setup as well as some common helper functions.
 
