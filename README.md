@@ -34,7 +34,7 @@ pnpm preview   # serve dist/ exactly as it will be published
 | `src/content/docs/en/**/images/` | Page images, colocated with the page that uses them. Astro optimises them to WebP at build time. |
 | `astro.config.mjs` | Site config and the sidebar. **Read the comments before changing `build.format` or `locales`** — both have non-obvious failure modes. |
 | `src/assets/` | The header logo, in a light and a dark variant. |
-| `scripts/` | One-off asset tooling — see *The logo* below. |
+| `scripts/` | Asset generation — see *The logo* below. |
 | `public/` | Files copied verbatim, including `CNAME` (the custom domain). |
 | `.github/workflows/deploy.yml` | Builds every PR; publishes on push to `main`. |
 
@@ -53,17 +53,22 @@ built green:
 
 ## The logo
 
-There are two: the wordmark sets "heaven" in the brand navy `rgb(16,16,58)`, which
-is invisible on a dark background, so `heavendata-logo-dark.png` recolours that
-half to white. It is **generated, not hand-edited** — if the logo ever changes,
-replace `src/assets/heavendata-logo.png` and regenerate:
+`src/assets/heavendata-logo.png` is the source of truth. Two assets are **derived
+from it and must not be hand-edited**:
+
+| File | What it is |
+| --- | --- |
+| `src/assets/heavendata-logo-dark.png` | The wordmark sets "heaven" in the brand navy `rgb(16,16,58)`, which is invisible on a dark background. This variant recolours that half to white. |
+| `public/favicon.png` | The hexagon icon alone, cropped and squared — a 4.66:1 wordmark is illegible at 16x16. |
+
+If the logo changes, replace the source file and regenerate both:
 
 ```bash
-node scripts/make-dark-logo.mjs
+node scripts/make-logo-assets.mjs
 ```
 
-The script fails rather than emitting a half-invisible logo if it finds dark
-pixels it does not recognise.
+The script refuses to emit a half-invisible logo if it meets a dark pixel it does
+not recognise, and refuses to emit a non-square favicon.
 
 Note also that the theme's own header CSS caps a logo at 32x32, which would
 squash this 4.66:1 wordmark; `src/styles/custom.css` overrides that.
