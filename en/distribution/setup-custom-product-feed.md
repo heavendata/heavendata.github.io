@@ -59,7 +59,7 @@ Used if this channel is intended for manual processing. E.g. combine it with fil
 This will create a JSON array with one json object for each product.
 
 #### Text
-Allows you to create custom templates, e.g. XML or HTML for your feed. It's a very powerful way to format your output using Liquid template syntax. The following article is a good starting point: https://github.com/scriban/scriban/blob/master/doc/liquid-support.md
+Allows you to create custom templates, e.g. XML or HTML for your feed. It's a very powerful way to format your output using Liquid template syntax. The following article is a good starting point: https://scriban.github.io/docs/liquid-support/
 
 ### File Transfer
 Defines how other systems can access this feed.

@@ -22,8 +22,8 @@ Templates are written using the Scriban template language.
 
 Please refer to the following docs for further information:
 
-* [Template language](https://github.com/scriban/scriban/blob/master/doc/language.md)
-* [Functions](https://github.com/scriban/scriban/blob/master/doc/builtins.md)
+* [Template language](https://scriban.github.io/docs/language/)
+* [Functions](https://scriban.github.io/docs/builtins/)
  
 ## Accessing Product Attribute Values
 
@@ -128,7 +128,7 @@ mimeType | Mime type (also known as content type) of binary, e.g. "image/png"
     // example: 2022-10-30
     myImage | asset.updated | date.to_string "%F"
     
-See [date.to_string](https://github.com/scriban/scriban/blob/master/doc/builtins.md#dateto_string) for a full list of all supported formats.
+See [date.to_string](https://scriban.github.io/docs/builtins/#dateto_string) for a full list of all supported formats.
 
 ### Reference Attributes (Custom Entities)
 
