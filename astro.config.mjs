@@ -22,7 +22,16 @@ export default defineConfig({
     starlight({
       title: 'heavendata.com',
       description: 'heavendata Product Data Platform — user documentation',
-      logo: { src: './src/assets/heavendata-logo.png', alt: 'heavendata.com', replacesTitle: true },
+      // The wordmark sets "heaven" in the brand navy rgb(16,16,58), which is
+      // invisible on a dark background — only "data" stayed readable. The dark
+      // variant recolours that half to white and is generated from the light one
+      // by `node scripts/make-dark-logo.mjs`; regenerate it if the logo changes.
+      logo: {
+        light: './src/assets/heavendata-logo.png',
+        dark: './src/assets/heavendata-logo-dark.png',
+        alt: 'heavendata.com',
+        replacesTitle: true,
+      },
       favicon: '/heavendata-logo.png',
       customCss: ['./src/styles/custom.css'],
       plugins: [lucode()],

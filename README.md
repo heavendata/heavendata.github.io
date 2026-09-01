@@ -33,6 +33,8 @@ pnpm preview   # serve dist/ exactly as it will be published
 | `src/content/docs/` | Every page. `index.md` is the site landing page; `en/**` is the English documentation. |
 | `src/content/docs/en/**/images/` | Page images, colocated with the page that uses them. Astro optimises them to WebP at build time. |
 | `astro.config.mjs` | Site config and the sidebar. **Read the comments before changing `build.format` or `locales`** — both have non-obvious failure modes. |
+| `src/assets/` | The header logo, in a light and a dark variant. |
+| `scripts/` | One-off asset tooling — see *The logo* below. |
 | `public/` | Files copied verbatim, including `CNAME` (the custom domain). |
 | `.github/workflows/deploy.yml` | Builds every PR; publishes on push to `main`. |
 
@@ -48,6 +50,23 @@ built green:
 - the page count, search index, `CNAME` and sitemap are present;
 - the navigation links use the expected URL format;
 - **every internal link resolves** (`.github/scripts/check-links.mjs`).
+
+## The logo
+
+There are two: the wordmark sets "heaven" in the brand navy `rgb(16,16,58)`, which
+is invisible on a dark background, so `heavendata-logo-dark.png` recolours that
+half to white. It is **generated, not hand-edited** — if the logo ever changes,
+replace `src/assets/heavendata-logo.png` and regenerate:
+
+```bash
+node scripts/make-dark-logo.mjs
+```
+
+The script fails rather than emitting a half-invisible logo if it finds dark
+pixels it does not recognise.
+
+Note also that the theme's own header CSS caps a logo at 32x32, which would
+squash this 4.66:1 wordmark; `src/styles/custom.css` overrides that.
 
 ## Writing pages
 
