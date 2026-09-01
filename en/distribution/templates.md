@@ -16,7 +16,7 @@ Templates are written using the Scriban template language.
 
 {% raw %}
     <product>
-      <name>{{ variant.name }}</name>
+      <name>{{ record.product_name }}</name>
     </product>
 {% endraw %}
 
@@ -27,15 +27,17 @@ Please refer to the following docs for further information:
  
 ## Accessing Product Attribute Values
 
-Product data is available as variable `product` in the record template:
+Product data is available as variable `record` in the record template:
 
-    {% raw %}
-        {{ record.attribute_code }}
-    {% endraw %}
+{% raw %}
+    {{ record.attribute_code }}
+{% endraw %}
 
 Please replace `attribute_code` with the code of an attribute of your instance. To see available attributes, navigate to settings > attributes & sections.
 
-If a product has variants, you can access the variants like so:
+### Variants
+
+All variants of a product are available as `variants`, so it is common to iterate over them:
 
 {% raw %}
     {{ for variant in variants }}
@@ -43,7 +45,9 @@ If a product has variants, you can access the variants like so:
     {{ end }}
 {% endraw %}
 
-This code fragment will iterate over all variants of the current product and output the attribute with code `color_code` for each.
+This code fragment iterates over all variants of the current product and outputs the attribute with code `color_code` for each. Inside the loop, `variant` gives you the attribute values of that variant, while `record` still refers to the product.
+
+For products without variants, `variants` contains a single item — the product itself. A template written as a loop over `variants` therefore works for both, and there is no need to handle products with and without variants separately.
 
 ### Translatable Attributes
 
@@ -66,7 +70,7 @@ See Settings > Languages for a list of available languages in your account. Reme
 Attributes may contain characters that need to be escaped in XML documents: 
 
 {% raw %}
-    {{ variant.description | html.escape }}
+    {{ record.description | html.escape }}
 {% endraw %}
 
 ### Asset Attributes (Images, PDFs, Files)
@@ -78,7 +82,7 @@ Each attribute of type asset contains a list of assets. To access the assets, en
 This example iterates over all images stored in the attribute with code "my_images" and outputs their public urls.
 
 {% raw %}
-    {{ for a in variant.my_images }}
+    {{ for a in record.my_images }}
       {{ a | asset.url }}
     {{ end }}
 {% endraw %}
@@ -86,7 +90,7 @@ This example iterates over all images stored in the attribute with code "my_imag
 This examples outputs the url of the asset variant "example_thumbnail" instead of the original image.
 
 {% raw %}
-    {{ for a in variant.my_images }}
+    {{ for a in record.my_images }}
       {{ a | asset.url 'example_thumbnail' }}
     {{ end }}
 {% endraw %}
