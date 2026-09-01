@@ -1,0 +1,66 @@
+// @ts-check
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+import lucode from 'lucode-starlight';
+
+export default defineConfig({
+  site: 'https://docs.heavendata.com',
+
+  // Reproduces the URL scheme of the Jekyll site this replaced: a page renders at
+  // /en/settings/attributes.html, not /en/settings/attributes/. 22 of the 29
+  // published URLs stay byte-identical this way, including every docs URL the
+  // product deep-links to. Changing this breaks customer bookmarks and the app's
+  // help buttons — see pim-docs/plans/user-documentation/starlight-migration.md.
+  //
+  // It must be 'file', NOT 'preserve'. Both emit the same filenames here, but
+  // Starlight builds its own hrefs (sidebar, prev/next, logo) from its routing
+  // model: under 'preserve' it emits attributes.html while linking to
+  // /attributes/, so every navigation link 404s on a site that builds green.
+  build: { format: 'file' },
+
+  integrations: [
+    starlight({
+      title: 'heavendata.com',
+      description: 'heavendata Product Data Platform — user documentation',
+      logo: { src: './src/assets/heavendata-logo.png', alt: 'heavendata.com', replacesTitle: true },
+      favicon: '/heavendata-logo.png',
+      customCss: ['./src/styles/custom.css'],
+      plugins: [lucode()],
+
+
+      // `locales` is deliberately NOT configured yet, even though the content
+      // already lives under src/content/docs/en/ and publishes at /en/… .
+      //
+      // Turning it on makes Starlight's chrome locale-aware, and the logo then
+      // links to the locale root /en.html — which does not exist, because the
+      // Jekyll site never had an /en/ landing page either (it 404s there today).
+      // The result is a broken header link on every page. Authoring that landing
+      // page is an information-architecture decision, and IA belongs to the
+      // content project, not to this 1:1 migration.
+      //
+      // Enabling i18n later is: add `defaultLocale`/`locales`, create
+      // en/index.md, and change the autogenerate directories below to drop the
+      // `en/` prefix (they become relative to the locale root).
+
+      editLink: { baseUrl: 'https://github.com/heavendata/heavendata.github.io/edit/main/' },
+
+      // `lastUpdated` is deliberately OFF. It reads git history, and this
+      // migration rewrites every content path — so every page would advertise
+      // itself as updated today when most of it is from 2021. Turn it on once the
+      // content project has actually been through the pages.
+
+      // NOTE: autogenerate directories are relative to src/content/docs, so they
+      // carry the `en/` prefix while `locales` is off. If locales are ever turned
+      // on, they become relative to the locale root and the prefix must go.
+      // Getting this wrong yields an empty sidebar with no error and no warning.
+      sidebar: [
+        { label: 'Initial setup', items: [{ autogenerate: { directory: 'en/initial-setup' } }] },
+        { label: 'Working with products', items: [{ autogenerate: { directory: 'en/app' } }] },
+        { label: 'Sharing product data', items: [{ autogenerate: { directory: 'en/distribution' } }] },
+        { label: 'Settings', items: [{ autogenerate: { directory: 'en/settings' } }] },
+        { label: 'Reference', items: [{ autogenerate: { directory: 'en/reference' } }] },
+        { label: 'Account administration', items: [{ autogenerate: { directory: 'en/administration' } }] },
+      ],
+    }),
+  ],
+});
