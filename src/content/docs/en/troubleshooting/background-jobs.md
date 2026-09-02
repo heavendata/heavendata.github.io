@@ -1,7 +1,7 @@
 ---
 title: "Background jobs"
 sidebar:
-  order: 50
+  order: 1
 ---
 Here you'll find a list of running and finished background jobs with results.
 

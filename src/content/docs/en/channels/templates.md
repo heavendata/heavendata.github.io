@@ -1,5 +1,8 @@
 ---
 title: "Template based channels"
+reviewed: false
+sidebar:
+  order: 2
 ---
 Template based channels allow you to provide a custom template to render the output. As an example, you could provide all products in an XML document according to the specifications of your target system.
 

@@ -1,7 +1,8 @@
 ---
 title: "Product types"
+reviewed: false
 sidebar:
-  order: 2
+  order: 3
 ---
 Product types describe what data is stored for one kind of product and how it's organized. This includes
 

@@ -1,5 +1,8 @@
 ---
 title: "Data Center"
+reviewed: false
+sidebar:
+  order: 3
 ---
 ## Location
 

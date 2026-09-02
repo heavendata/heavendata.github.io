@@ -1,7 +1,8 @@
 ---
 title: "Common attributes"
+reviewed: false
 sidebar:
-  order: 5
+  order: 4
 ---
 Attributes that will be enabled for all products of any product type.
 

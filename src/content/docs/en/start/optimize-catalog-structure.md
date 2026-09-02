@@ -1,7 +1,8 @@
 ---
 title: "Optimize catalog structure"
+reviewed: false
 sidebar:
-  order: 10
+  order: 3
 ---
 Different types of products need different attributes to describe them. That's why the heavendata platform is fully customizable. In this article, you'll learn about the basic building blocks to configure your product catalog to match your customers' product requirements perfectly.
 

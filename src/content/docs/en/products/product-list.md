@@ -1,7 +1,8 @@
 ---
 title: "Product list"
+reviewed: false
 sidebar:
-  order: 2
+  order: 1
 ---
 Most tasks related to product editing, import and export start at the product list page.
 

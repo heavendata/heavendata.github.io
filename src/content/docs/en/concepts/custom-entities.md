@@ -1,7 +1,8 @@
 ---
 title: "Custom Entities"
+reviewed: false
 sidebar:
-  order: 20
+  order: 6
 ---
 Custom entities allow you to create your own data tables and link objects in these tables to your products. This way, you've reusable pieces of information and can save a lot of time and typos.
 

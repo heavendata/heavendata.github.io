@@ -1,7 +1,9 @@
 ---
 title: "Overview"
+reviewed: false
 sidebar:
-  order: 2
+  order: 1
+  label: "Organizations & accounts"
 ---
 Our platform provides a rich set of administration features including
 

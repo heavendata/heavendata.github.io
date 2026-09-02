@@ -1,0 +1,34 @@
+---
+// Appends the "may be out of date" notice to pages that have not been through
+// the content pass. See pim-docs/plans/user-documentation/content-execution.md
+// (refinement 2).
+//
+// It lives here, in ONE place, rather than as an aside pasted into each page:
+// the copy below is the single source of truth, and `reviewed: false` in
+// frontmatter is the only per-page state. Removing that flag is the unit of
+// progress in phase C.
+//
+// IMPORTANT — this COMPOSES lucode-starlight's PageTitle, it does not replace it.
+// The theme's version carries the prev/next buttons, the AI-tools dropdown and
+// the page description; overriding PageTitle without rendering it would silently
+// drop all three. Astro warns about the collision at build time, and the fix it
+// recommends is exactly this: render the theme's override inside ours.
+import LucodePageTitle from 'lucode-starlight/components/overrides/PageTitle.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+const { reviewed } = Astro.locals.starlightRoute.entry.data;
+---
+
+<LucodePageTitle />
+
+{
+  reviewed === false && (
+    <Aside type="note">
+      <strong>This page may be out of date.</strong> It hasn&rsquo;t been reviewed against
+      the current app yet &mdash; we&rsquo;re updating the documentation section by section.{' '}
+      <a href="https://github.com/heavendata/issues/issues/new">
+        Tell us if something here is wrong.
+      </a>
+    </Aside>
+  )
+}

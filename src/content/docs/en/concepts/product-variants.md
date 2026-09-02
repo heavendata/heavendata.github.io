@@ -1,7 +1,8 @@
 ---
 title: "Product variants"
+reviewed: false
 sidebar:
-  order: 3
+  order: 5
 ---
 Variants allow you to manage all versions of one product together. A typical example is fashion products where you have multiple sizes.
 

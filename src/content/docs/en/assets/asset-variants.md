@@ -1,7 +1,8 @@
 ---
 title: "Asset variants"
+reviewed: false
 sidebar:
-  order: 10
+  order: 1
 ---
 These settings apply to all assets of type image. This includes
 

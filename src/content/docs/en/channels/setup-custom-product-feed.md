@@ -1,5 +1,8 @@
 ---
 title: "Custom product feeds"
+reviewed: false
+sidebar:
+  order: 1
 ---
 Product feeds are text files that contain all or a filtered set of your products. Typically we'll provide a URL where other systems can find and read
 this feed and import your products from. This article describes how to create your own custom feeds or adjust feeds you've created from templates.

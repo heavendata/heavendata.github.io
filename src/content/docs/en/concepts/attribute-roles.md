@@ -1,7 +1,8 @@
 ---
 title: "Attribute roles"
+reviewed: false
 sidebar:
-  order: 1
+  order: 2
 ---
 Roles assign semantic meaning or technical roles to attributes. The platform catalog structure is 100% flexible and customizable to your needs. Now the system needs to learn which information is stored in which attributes.
 

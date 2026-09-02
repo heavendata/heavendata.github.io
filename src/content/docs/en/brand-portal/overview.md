@@ -1,7 +1,9 @@
 ---
 title: "Brand portal"
+reviewed: false
 sidebar:
-  order: 20
+  order: 1
+  label: "Portal settings"
 ---
 The brand portal is a website where retailers and partners can access all they need to list your products in their online (and offline) stores. This includes:
 

@@ -1,5 +1,8 @@
 ---
 title: "String Placeholders"
+reviewed: false
+sidebar:
+  order: 2
 ---
 String placeholders allow you to add dynamic elements to text values, for example to add the current date to a filename.
 
