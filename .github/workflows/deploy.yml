@@ -26,11 +26,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
+      # Must run BEFORE setup-node: `cache: pnpm` below needs the pnpm binary
+      # on PATH to resolve the store directory.
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      # Deliberately v5, not the latest v7: v5 is the first release on Node 24 (the
+      # deprecation this bump is for), and every major since has changed *automatic*
+      # cache detection — the one feature this step depends on. `cache: pnpm` is
+      # explicit so those changes should not reach us, but there is no reason to
+      # cross two breaking majors to fix a runtime deprecation. checkout and
+      # action-setup went to latest because their majors are inert for this workflow.
+      #
+      # node-version is the runtime the SITE builds with. It is unrelated to the Node
+      # the actions themselves run on, which the runner now forces to 24.
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: pnpm
