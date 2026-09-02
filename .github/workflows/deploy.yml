@@ -63,7 +63,14 @@ jobs:
       - name: Check every internal link resolves
         run: node .github/scripts/check-links.mjs
 
-      - uses: actions/upload-pages-artifact@v3
+      # v5, not v3: v3 pulls actions/upload-artifact@v4 internally, which is itself
+      # a deprecated Node 20 action — invisible in the warning until the three
+      # direct ones were fixed. v5 bundles upload-artifact@v7.
+      #
+      # v4 dropped dotfiles from the artifact (breaking). Checked: dist/ contains
+      # none, and no .nojekyll is needed because the Actions deploy path does not
+      # run Jekyll. v5 also adds `include-hidden-files` if that ever changes.
+      - uses: actions/upload-pages-artifact@v5
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           path: dist
@@ -80,4 +87,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        # These two are NOT version-locked — the official Pages starter workflow
+        # pairs upload-pages-artifact@v3 with deploy-pages@v5. v5 here is a pure
+        # Node 24 bump with no behaviour change.
+        uses: actions/deploy-pages@v5
