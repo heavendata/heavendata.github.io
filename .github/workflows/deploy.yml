@@ -42,17 +42,12 @@ jobs:
       # A green build is not proof the site is usable. Both of the failures found
       # during the migration were silent: an empty sidebar, and internal links
       # pointing at paths that were never emitted. Assert against the output.
+      # Both checks live in .github/scripts/ so they can be run locally with
+      # `pnpm verify` before pushing — which is the whole point. They used to be
+      # inline here, where nobody could run them, and the 2026-09-02 restructure
+      # duly broke one and only found out from a red build.
       - name: Smoke-check the built site
-        run: |
-          set -euo pipefail
-          pages=$(find dist -name '*.html' | wc -l)
-          echo "built $pages HTML pages"
-          [ "$pages" -ge 31 ] || { echo "::error::expected at least 31 pages, got $pages"; exit 1; }
-          test -f dist/pagefind/pagefind-entry.json || { echo "::error::search index missing"; exit 1; }
-          test -f dist/CNAME || { echo "::error::CNAME missing — the custom domain would drop"; exit 1; }
-          test -f dist/sitemap-index.xml || { echo "::error::sitemap missing"; exit 1; }
-          grep -q 'href="/en/settings/attributes.html"' dist/en/settings/product-types.html \
-            || { echo "::error::sidebar/nav links missing or wrong URL format"; exit 1; }
+        run: node .github/scripts/smoke-check.mjs
 
       - name: Check every internal link resolves
         run: node .github/scripts/check-links.mjs
