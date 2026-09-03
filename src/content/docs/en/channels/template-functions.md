@@ -113,9 +113,21 @@ An attribute's label in one language, falling back to the attribute name.
 {{ export.attr_label 'color' 'en-US' }}
 ```
 
+#### `export.load_custom_entities`
+
+Every custom entity record a reference attribute links to, in link order. Takes the record (or a variant) and the attribute's code:
+
+```plaintext frame="none"
+{{ for cert in export.load_custom_entities(record, 'certificates') }}
+  {{ cert.certificate_number }}
+{{ end }}
+```
+
+Fully described under [reference attributes](/en/channels/template-data.html#reference-attributes--custom-entities). Use parentheses around both arguments, especially as a `for` loop's source.
+
 #### `export.custom_entity`
 
-Look up records of a custom entity. Fully described under [reference attributes](/en/channels/template-data.html#reference-attributes--custom-entities).
+Look up records of a custom entity by any attribute — reference-driven or not. `.get` also accepts a reference directly (`export.custom_entity('manufacturer').get(r)`), as a shortcut for a template that already holds one. Fully described under [reference attributes](/en/channels/template-data.html#reference-attributes--custom-entities).
 
 #### `export.variants_by`
 

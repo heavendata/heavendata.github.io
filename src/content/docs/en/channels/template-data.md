@@ -102,13 +102,13 @@ Each asset carries:
 | --- | --- |
 | `id` | The internal asset id |
 | `filename` | The file name as uploaded |
-| `mimeType` | Content type of the file, for example `image/png` |
+| `mime_type` | Content type of the file, for example `image/png` |
 
 See [`asset.url`](/en/channels/template-functions.html#asseturl) and [`asset.updated`](/en/channels/template-functions.html#assetupdated).
 
 ## Reference attributes — custom entities
 
-A **reference** attribute links a product to records of a [custom entity](/en/concepts/custom-entities.html). Like assets, it holds a list.
+A **reference** attribute links a product to records of a [custom entity](/en/concepts/custom-entities.html) — its certificates, its manufacturer, its care instructions. It holds a **list**, even when there is only one link or none.
 
 Each reference carries the id, name and identifier of the linked record — **but none of its other values**:
 
@@ -126,11 +126,73 @@ Each reference carries the id, name and identifier of the linked record — **bu
 
 Looping also keeps the template working when the attribute is empty.
 
-### Reading the rest of a linked record
+### Reading every linked record
 
-For any other attribute of the linked record, look it up with `export.custom_entity`, passing the custom entity's key from **Settings → Custom entities**.
+To read a linked record's own attributes — not just its id, name and identifier — load it with `export.load_custom_entities`, naming the **record** (or a variant) and the **reference attribute's code**:
 
-Look up by id, or by identifier:
+```plaintext frame="none"
+{{ for cert in export.load_custom_entities(record, 'certificates') }}
+  <certificate id="{{ cert._id.entityid }}">
+    <name>{{ cert._meta.name }}</name>
+    <number>{{ cert.certificate_number }}</number>
+    <valid_until>{{ cert.valid_until | date.to_string '%Y-%m-%d' }}</valid_until>
+  </certificate>
+{{ end }}
+```
+
+This returns **every** linked record, in the order they were linked on the product — one call, whatever the attribute's cardinality. An attribute with no links returns an empty list, so the loop needs no separate guard. Duplicates (the same record linked twice) are kept, not collapsed.
+
+:::caution[Use parentheses]
+Write `export.load_custom_entities(record, 'certificates')` — with parentheses around both arguments — especially as a `for` loop's source. Scriban does not parse a multi-argument call without parentheses (`export.load_custom_entities record 'certificates'`) in that position.
+:::
+
+The variant form works the same way, for a reference attribute defined on variants rather than the product:
+
+```plaintext frame="none"
+{{ for v in variants }}
+  {{ for c in export.load_custom_entities(v, 'care_instructions') }}<care>{{ c.text }}</care>{{ end }}
+{{ end }}
+```
+
+On a loaded record:
+
+| Property | Description |
+| --- | --- |
+| `cert.my_attribute_code` | Value of that attribute |
+| `cert._meta.name` | Name of the record |
+| `cert._meta.identifier` | Identifier of the record |
+| `cert._id.entityid` | Internal id of the record |
+
+`_meta.name` and `_meta.identifier` are the same values the reference itself carries as `target_name` and `target_identifier` — so a loop over `export.load_custom_entities` never needs to hold onto the reference as well.
+
+A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the channel's job log rather than left for you to guess at from an empty result.
+
+### Reading one linked record you already have a reference for
+
+If a template loops `record.<attribute>` itself — to read `target_name`, or to keep the link order alongside other work — `export.custom_entity(key).get` accepts the reference directly, instead of picking `target_id` and the lookup field apart by hand:
+
+```plaintext frame="none"
+{{ for r in record.certificates }}
+  {{ cert = export.custom_entity('certificates').get(r) }}
+  <certificate number="{{ cert.certificate_number }}">{{ r.target_name }}</certificate>
+{{ end }}
+```
+
+`export.custom_entity('certificates').get(r)` is equivalent to `export.custom_entity('certificates').get('id.entityid', r.target_id)` — it exists so a template never has to know that `id.entityid` is the field a reference resolves through.
+
+### Looking up by any text attribute
+
+For a lookup that is not reference-driven — every manufacturer in Germany, say, rather than the one(s) a product links to — use `export.custom_entity(key).get` or `.find` with any attribute code, passing the custom entity's key from **Settings → Custom entities**:
+
+```plaintext frame="none"
+{{ for m in export.custom_entity('manufacturer').find('country_code', 'DE') }}
+  {{ m._meta.name }}
+{{ end }}
+```
+
+`get` returns the first match, `find` returns all of them. The value must match exactly — the comparison is case sensitive, with no partial matching.
+
+Looked up by id or identifier instead of a custom attribute:
 
 ```plaintext frame="none"
 {{ export.custom_entity('manufacturer').get('id.entityid', r.target_id) }}
@@ -139,47 +201,16 @@ Look up by id, or by identifier:
 ```
 
 :::caution
-**The two forms are not interchangeable.** `target_id` goes with `id.entityid`; `target_identifier.value` goes with `meta.identifier` — and the `.value` is required. Mix them up or drop the `.value` and the lookup silently finds nothing.
+**The two forms are not interchangeable.** `target_id` goes with `id.entityid`; `target_identifier.value` goes with `meta.identifier` — and the `.value` is required. Mix them up or drop the `.value` and the lookup silently finds nothing. When you already hold a reference, prefer `get(r)` (above) — it removes this trap entirely.
 :::
-
-A complete example, outputting values stored on the linked manufacturer:
-
-```plaintext frame="none"
-{{ for r in record.manufacturer }}
-  {{ m = export.custom_entity('manufacturer').get('id.entityid', r.target_id) }}
-  {{ if m }}
-    <support_url>{{ m.support_url }}</support_url>
-    <support_phone>{{ m.support_phone }}</support_phone>
-  {{ end }}
-{{ end }}
-```
-
-The `if` guards against a record that cannot be found. Without it the template stops with `Cannot get the member ... for a null object`.
-
-On a looked-up record:
-
-| Property | Description |
-| --- | --- |
-| `m.my_attribute_code` | Value of that attribute |
-| `m._meta.name` | Name of the record |
-| `m._meta.identifier` | Identifier of the record |
-| `m._id.entityid` | Internal id of the record |
-
-### Looking up by any text attribute
-
-Instead of `id.entityid` or `meta.identifier`, look up by any text attribute using its code. `get` returns the first match, `find` returns all of them:
-
-```plaintext frame="none"
-{{ for m in export.custom_entity('manufacturer').find('country_code', 'DE') }}
-  {{ m._meta.name }}
-{{ end }}
-```
-
-The value must match exactly — the comparison is case sensitive, with no partial matching.
 
 :::note[Performance]
-The first lookup loads **all** records of that custom entity and keeps them for the rest of the run. Looking up by a second attribute loads them again. In a large channel, stick to one lookup attribute per custom entity.
+The first lookup on a custom entity loads **all** of its records and keeps them for the rest of the run — including every record `export.load_custom_entities` resolves, since it shares this same cache. A second lookup **attribute** adds an index over those same records rather than loading them again, so looking up by several attributes of the same custom entity is cheap.
 :::
+
+### The old `<attribute>.data.<attribute>` fields
+
+An earlier, undocumented mechanism let a reference attribute's linked record show up flattened into `record` under keys like `record.manufacturer.data.support_url` — but only for the *first* linked record, silently overwriting `record.manufacturer` itself in the process. Those keys never worked reliably and are gone. If a template copied from a colleague uses them, replace it with `export.load_custom_entities` (above).
 
 ## Information about the channel run
 
