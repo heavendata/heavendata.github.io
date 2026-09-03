@@ -1,0 +1,9 @@
+# Hosts to skip in check-external-links.mjs.
+#
+# Only for hosts that refuse automated requests whatever the URL — so the check
+# cannot tell a live page from a dead one and any result it gives is noise.
+# Do NOT add a host just because one link under it broke; that is the check
+# working.
+#
+# Empty on purpose. 429s are retried once with a backoff before being reported,
+# which was enough for github.com.

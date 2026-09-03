@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "verify": "astro build && node .github/scripts/smoke-check.mjs && node .github/scripts/check-links.mjs"
+    "verify": "astro build && node .github/scripts/smoke-check.mjs && node .github/scripts/check-links.mjs",
+    "verify:external": "astro build && node .github/scripts/check-external-links.mjs"
   },
   "dependencies": {
     "astro": "7.2.10",

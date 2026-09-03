@@ -1,0 +1,39 @@
+name: External links
+
+# Link rot, caught on a schedule instead of by a customer.
+#
+# Deliberately NOT part of deploy.yml. A push to main is the release, and a
+# third-party outage must never be able to block it — that is the reasoning
+# check-links.mjs was written with, and it still holds for the deploy path.
+#
+# What it does not cover is the authoring path: a URL that never existed. That is
+# `pnpm verify:external`, run before pushing a batch of pages. This job is only
+# the slow half — links that were correct when written and have since moved.
+#
+# When it fails, it fails visibly in Actions and nowhere else. It deliberately
+# does not open an issue: the only customer-facing tracker we have is
+# heavendata/issues, and filling a public support channel with bot reports would
+# undo the point of consolidating on it.
+
+on:
+  schedule:
+    # Mondays, 06:00 UTC. Weekly is enough for rot; more often is just noise.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: node .github/scripts/check-external-links.mjs
