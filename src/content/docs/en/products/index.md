@@ -6,7 +6,7 @@ sidebar:
   label: "Overview"
 ---
 
-The day-to-day work of maintaining a catalogue: finding the products that need
+The day-to-day work of maintaining a catalog: finding the products that need
 attention, editing them, and getting them into a publishable state.
 
 Most tasks start from the [product list](/en/products/product-list.html). If you are looking

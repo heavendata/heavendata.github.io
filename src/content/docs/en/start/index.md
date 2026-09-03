@@ -7,7 +7,7 @@ sidebar:
 ---
 
 Your first half hour with heavendata. Start with the setup option you chose when
-the account was created, then plan the structure your catalogue needs before you
+the account was created, then plan the structure your catalog needs before you
 load data into it — a little thought here saves a lot of re-import later.
 
 If you already have products in the system and want to change them, go to

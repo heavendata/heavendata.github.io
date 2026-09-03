@@ -6,7 +6,7 @@ sidebar:
   label: "Overview"
 ---
 
-Everything outside the catalogue itself: who your organization is, which
+Everything outside the catalog itself: who your organization is, which
 accounts it holds, who can log in, and what they are allowed to do.
 
 To manage your account, team and organization settings, start the management app
