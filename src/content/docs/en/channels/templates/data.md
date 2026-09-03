@@ -161,7 +161,7 @@ On a loaded record:
 | `cert._meta.identifier` | Identifier of the record |
 | `cert._id.entityid` | Internal id of the record |
 
-`_meta.name` and `_meta.identifier` are the same values the reference itself carries as `target_name` and `target_identifier` — so a loop over `export.load_custom_entities` never needs to hold onto the reference as well.
+`_meta.name` and `_meta.identifier` usually match the reference's own `target_name` and `target_identifier` — they're copied onto the reference at the moment it's linked. If the linked record is renamed afterwards, the reference keeps the name it had when it was linked until the product itself is saved again, while `export.load_custom_entities` always reads the record's current name. So a loop over `export.load_custom_entities` doesn't need to hold onto the reference as well, but don't treat the two as interchangeable if you need the record's up-to-date name.
 
 A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the channel's job log rather than left for you to guess at from an empty result.
 
@@ -172,11 +172,17 @@ If a template loops `record.<attribute>` itself — to read `target_name`, or to
 ```plaintext frame="none"
 {{ for r in record.certificates }}
   {{ cert = export.custom_entity('certificates').get(r) }}
-  <certificate number="{{ cert.certificate_number }}">{{ r.target_name }}</certificate>
+  {{ if cert }}
+    <certificate number="{{ cert.certificate_number }}">{{ r.target_name }}</certificate>
+  {{ end }}
 {{ end }}
 ```
 
 `export.custom_entity('certificates').get(r)` is equivalent to `export.custom_entity('certificates').get('id.entityid', r.target_id)` — it exists so a template never has to know that `id.entityid` is the field a reference resolves through.
+
+:::caution
+**`get` returns nothing for a reference whose target has since been deleted** — an account's data can always drift out of sync with what a product still links to. `get(r)` returns null in that case, same as any other unmatched lookup; the `if` above guards against it. Without it the template stops with `Cannot get the member ... for a null object`. `export.load_custom_entities` (above) does not need this guard — it skips a deleted target and reports it in the job log instead of leaving a gap in the list.
+:::
 
 ### Looking up by any text attribute
 
