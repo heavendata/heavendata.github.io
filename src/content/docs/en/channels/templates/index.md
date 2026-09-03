@@ -17,7 +17,7 @@ A template is one of the **output formats**, chosen under **Format** in the chan
 **Format → Text is how you get a template channel.** The name is historical — a template is not limited to plain text, and most templates produce XML or JSON. Set the channel's **MIME type** on the same page to tell the receiving system what it is actually getting.
 :::
 
-A template channel is limited to **one dataset**. Other formats can carry several; this one cannot.
+A template channel is limited to **one feed**. Other formats can carry several; this one cannot.
 
 ## The three templates
 
