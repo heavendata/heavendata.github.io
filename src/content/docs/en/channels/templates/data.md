@@ -11,11 +11,17 @@ Not sure what is available in your account? [`debug.dump`](/en/channels/template
 
 | | |
 | --- | --- |
-| **`record`** | The current product. Only in the **record template**. |
+| **`record`** | The current record — a product, or one custom entity record for a custom-entity feed. In the **record template** and in the *Text template* node. |
 | **`variants`** | Every variant of the current product. Only in the **record template**. |
 | **`sources`** | The inputs of a field processing pipeline. Only inside the *Text template* node, not in a channel template. |
 
-Header and footer templates have none of these — they run once, with no product in scope.
+**Header and footer templates have none of these, and no functions either.** They render without a template context, so `export.*`, `asset.*`, `i18n.*` and `debug.*` are all unavailable there as well — not just `record`.
+
+:::caution[A *Text template* node has no channel context]
+`record` and `sources` work in the node, but the channel data behind the `export.*` functions is not loaded there. `export.attribute` and `export.culture_codes` come back empty, `i18n.t` always returns its fallback, and `export.custom_entity` and `export.load_custom_entities` **throw** — *"custom entity data is not available in mapper field templates"*.
+
+Everything on this page about attribute values, variants and assets applies in both places. Everything under [reference attributes](#reference-attributes--custom-entities) and the channel-run functions applies only to a channel template.
+:::
 
 ## Attribute values
 
@@ -65,7 +71,11 @@ With a fallback when that language is empty:
 ```
 
 :::caution
-**Use exactly the code configured in your account** — see **Settings → Languages**. If a language is configured with a region (`en-US`) you must pass the region; if it is configured without one (`en`) you must not. A mismatched code returns nothing, silently.
+**Check the codes configured in your account** — see **Settings → Languages**.
+
+A culture configured with a region also answers to its bare language code, so with `en-US` configured both `i18n.t 'en-US'` and `i18n.t 'en'` work. The reverse is not true: if a language is configured as bare `en`, then `'en-US'` finds nothing.
+
+**Two traps.** A code that matches nothing returns an empty value **silently** — no error, no log entry. And if you have configured two regions of one language, say `de-DE` and `de-AT`, the bare `de` resolves to just one of them. Pass the full code whenever more than one region of a language is configured.
 :::
 
 `export.culture_codes` lists the languages included in this channel, which lets one template serve all of them:
@@ -86,7 +96,7 @@ An asset attribute holds a **list**, even when there is only one file. Loop over
 {{ end }}
 ```
 
-For a configured [image variant](/en/assets/asset-variants.html) instead of the original:
+For a configured [image variant](/en/assets/asset-variants.html):
 
 ```plaintext frame="none"
 {{ for a in record.my_images }}
@@ -101,12 +111,23 @@ Each asset carries:
 | `id` | The internal asset id |
 | `filename` | The file name as uploaded |
 | `mime_type` | Content type of the file, for example `image/png` |
+| `name` | The asset's name, which is not its file name |
+| `description` | The asset's description |
+| `updated` · `stored` | When it was last modified, and when it was first stored |
+
+Note that `{{ a | asset.url }}` with no variant gives the **`default`** variant, not the uploaded original, and its URL carries no file extension — pass `'original'` for the file as uploaded. See [`asset.url`](/en/channels/templates/functions.html#asseturl).
 
 See [`asset.url`](/en/channels/templates/functions.html#asseturl) and [`asset.updated`](/en/channels/templates/functions.html#assetupdated).
 
 ## Reference attributes — custom entities
 
-A **reference** attribute links a product to records of a [custom entity](/en/concepts/custom-entities.html) — its certificates, its manufacturer, its care instructions. It holds a **list**, even when there is only one link or none.
+A **reference** attribute links a product to records of a [custom entity](/en/concepts/custom-entities.html) — its certificates, its manufacturer, its care instructions. When it has links, it holds a **list**, even if there is only one.
+
+:::caution[An unset reference attribute is missing, not empty]
+If nothing has ever been linked, the attribute is **not** an empty list — it is absent, so `record.certificates` is null. `{{ record.certificates.size }}` and `{{ record.certificates[0] }}` both fail.
+
+**Looping is safe**, which is why most templates never notice: a `for` over a null value renders nothing, without an error. Reach for `for` rather than an index or a count.
+:::
 
 Each reference carries the id, name and identifier of the linked record — **but none of its other values**:
 
@@ -161,7 +182,7 @@ On a loaded record:
 | `cert._meta.identifier` | Identifier of the record |
 | `cert._id.entityid` | Internal id of the record |
 
-`_meta.name` and `_meta.identifier` usually match the reference's own `target_name` and `target_identifier` — they're copied onto the reference at the moment it's linked. If the linked record is renamed afterwards, the reference keeps the name it had when it was linked until the product itself is saved again, while `export.load_custom_entities` always reads the record's current name. So a loop over `export.load_custom_entities` doesn't need to hold onto the reference as well, but don't treat the two as interchangeable if you need the record's up-to-date name.
+`_meta.name` and `_meta.identifier` match the reference's own `target_name` and `target_identifier`. They are copied onto the reference when it is linked, and **renaming the linked record updates every reference to it straight away** — you do not have to re-save the products. So the two stay in step, and a loop over `export.load_custom_entities` does not need to carry the reference alongside it.
 
 A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the channel's job log rather than left for you to guess at from an empty result.
 
