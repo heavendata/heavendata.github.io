@@ -50,7 +50,7 @@ Inside the loop, `variant` holds that variant's values while `record` still refe
 **For a product with no variants, `variants` contains one item — the product itself.** So a template written as a loop over `variants` works for both, and you never need to handle the two cases separately.
 :::
 
-To group variants — the usual case being colour, with sizes underneath — use [`export.variants_by`](/en/channels/template-functions.html#exportvariants_by).
+To group variants — the usual case being color, with sizes underneath — use [`export.variants_by`](/en/channels/template-functions.html#exportvariants_by).
 
 ## Translatable attributes
 

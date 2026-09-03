@@ -119,7 +119,7 @@ Look up records of a custom entity. Fully described under [reference attributes]
 
 #### `export.variants_by`
 
-Group the current product's variants by an attribute, and reach each group's variants through `_variants`. Written for the common case of grouping by colour and listing sizes underneath.
+Group the current product's variants by an attribute, and reach each group's variants through `_variants`. Written for the common case of grouping by color and listing sizes underneath.
 
 ```plaintext frame="none"
 {{ for color in export.variants_by 'color_code' }}
