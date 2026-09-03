@@ -2,7 +2,7 @@
 title: "Template-based channels"
 description: "Render a channel's output with your own template, when the receiving system needs an exact document shape."
 sidebar:
-  order: 20
+  label: "Overview"
 ---
 
 A **template-based channel** renders its output with a template you write, instead of a fixed table format. Use one when the receiving system specifies an exact document shape — an XML file to a schema, a JSON structure, or a text layout that has to match character for character.
@@ -26,7 +26,7 @@ A template channel has three templates, and they run at different times:
 | Template | Runs | What it can use |
 | --- | --- | --- |
 | **Header** | Once, before any products | No product data |
-| **Record** | **Once per product** (or per custom entity record) | `record`, `variants`, and everything on [the data page](/en/channels/template-data.html) |
+| **Record** | **Once per product** (or per custom entity record) | `record`, `variants`, and everything on [the data page](/en/channels/templates/data.html) |
 | **Footer** | Once, after all products | No product data |
 
 :::caution
@@ -70,7 +70,7 @@ The channel editor has a **Template language** setting with two values, **Scriba
 
 | | |
 | --- | --- |
-| **[Template language basics](/en/channels/template-language.html)** | The syntax: outputting values, conditions, loops, and filters |
-| **[The data in a template](/en/channels/template-data.html)** | What `record` and `variants` contain, and how to read each attribute type |
-| **[Template function reference](/en/channels/template-functions.html)** | Every function available, including the ones we add |
-| **[Testing and debugging templates](/en/channels/template-testing.html)** | See what your template produces before you publish it |
+| **[Template language basics](/en/channels/templates/language.html)** | The syntax: outputting values, conditions, loops, and filters |
+| **[The data in a template](/en/channels/templates/data.html)** | What `record` and `variants` contain, and how to read each attribute type |
+| **[Template function reference](/en/channels/templates/functions.html)** | Every function available, including the ones we add |
+| **[Testing and debugging templates](/en/channels/templates/testing.html)** | See what your template produces before you publish it |

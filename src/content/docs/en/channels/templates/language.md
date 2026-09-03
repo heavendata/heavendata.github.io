@@ -1,11 +1,9 @@
 ---
 title: "Template language basics"
 description: "The Scriban syntax you need for a product template: output, conditions, loops, filters and whitespace."
-sidebar:
-  order: 21
 ---
 
-Templates are written in **Scriban**. This page covers the syntax you need for a product template. For what data is available to put in it, see [the data in a template](/en/channels/template-data.html); for the functions, see the [function reference](/en/channels/template-functions.html).
+Templates are written in **Scriban**. This page covers the syntax you need for a product template. For what data is available to put in it, see [the data in a template](/en/channels/templates/data.html); for the functions, see the [function reference](/en/channels/templates/functions.html).
 
 :::note
 Everything here is Scriban. If your channel's **Template language** is set to **Liquid** — which is legacy, only partially supported, and the case for some older channels — none of this applies. See [Template-based channels](/en/channels/templates.html#which-template-language).
@@ -148,10 +146,10 @@ Single and double quotes both work. Concatenate with `+`.
 {{ 'SKU-' + record.sku }}
 ```
 
-**Escaping is not automatic.** A product name containing `&` or `<` will break an XML document unless you escape it. Use `export.xmlize` for XML and `html.escape` for HTML — see the [function reference](/en/channels/template-functions.html#escaping-and-strings).
+**Escaping is not automatic.** A product name containing `&` or `<` will break an XML document unless you escape it. Use `export.xmlize` for XML and `html.escape` for HTML — see the [function reference](/en/channels/templates/functions.html#escaping-and-strings).
 
 ## What to read next
 
-- [The data in a template](/en/channels/template-data.html) — `record`, `variants`, and each attribute type
-- [Template function reference](/en/channels/template-functions.html) — everything callable
-- [Testing and debugging templates](/en/channels/template-testing.html)
+- [The data in a template](/en/channels/templates/data.html) — `record`, `variants`, and each attribute type
+- [Template function reference](/en/channels/templates/functions.html) — everything callable
+- [Testing and debugging templates](/en/channels/templates/testing.html)

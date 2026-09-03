@@ -1,13 +1,11 @@
 ---
 title: "The data in a template"
 description: "What record and variants contain, and how to read every attribute type — text, translatable, asset and reference."
-sidebar:
-  order: 22
 ---
 
-What a template can read, and how to read each kind of attribute. For the syntax see [template language basics](/en/channels/template-language.html); for the functions, the [function reference](/en/channels/template-functions.html).
+What a template can read, and how to read each kind of attribute. For the syntax see [template language basics](/en/channels/templates/language.html); for the functions, the [function reference](/en/channels/templates/functions.html).
 
-Not sure what is available in your account? [`debug.dump`](/en/channels/template-testing.html#see-everything-that-is-available) prints the whole data structure.
+Not sure what is available in your account? [`debug.dump`](/en/channels/templates/testing.html#see-everything-that-is-available) prints the whole data structure.
 
 ## The three variables
 
@@ -50,7 +48,7 @@ Inside the loop, `variant` holds that variant's values while `record` still refe
 **For a product with no variants, `variants` contains one item — the product itself.** So a template written as a loop over `variants` works for both, and you never need to handle the two cases separately.
 :::
 
-To group variants — the usual case being color, with sizes underneath — use [`export.variants_by`](/en/channels/template-functions.html#exportvariants_by).
+To group variants — the usual case being color, with sizes underneath — use [`export.variants_by`](/en/channels/templates/functions.html#exportvariants_by).
 
 ## Translatable attributes
 
@@ -104,7 +102,7 @@ Each asset carries:
 | `filename` | The file name as uploaded |
 | `mime_type` | Content type of the file, for example `image/png` |
 
-See [`asset.url`](/en/channels/template-functions.html#asseturl) and [`asset.updated`](/en/channels/template-functions.html#assetupdated).
+See [`asset.url`](/en/channels/templates/functions.html#asseturl) and [`asset.updated`](/en/channels/templates/functions.html#assetupdated).
 
 ## Reference attributes — custom entities
 

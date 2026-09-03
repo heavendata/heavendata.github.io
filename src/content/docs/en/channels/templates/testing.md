@@ -1,8 +1,6 @@
 ---
 title: "Testing and debugging templates"
 description: "See what your template produces before you publish it, find out what data is available, and read the errors."
-sidebar:
-  order: 24
 ---
 
 You do not have to publish a channel to find out what it produces. This page covers the two tools that matter — the live **preview** and **`debug.dump`** — and how to read a template that has failed.
@@ -58,7 +56,7 @@ The template could not be parsed at all, so nothing ran. Almost always an unclos
 **The template renders, but a value is empty**
 Three usual causes, in order of likelihood:
 
-1. **A translatable attribute read without a language** — see [translatable attributes](/en/channels/template-data.html#translatable-attributes).
+1. **A translatable attribute read without a language** — see [translatable attributes](/en/channels/templates/data.html#translatable-attributes).
 2. **The wrong language code** — `en` where the account is configured as `en-US`, or the reverse. This fails silently.
 3. **The wrong attribute code.** Check under **Settings → Attributes & sections**, or use `debug.dump`.
 

@@ -1,8 +1,6 @@
 ---
 title: "Template function reference"
 description: "Every function available in a template — the Scriban built-ins we support, and the heavendata additions."
-sidebar:
-  order: 23
 ---
 
 Every function a template can call. Two groups: the **[Scriban built-ins](#scriban-built-ins)** we make available, and the **[heavendata functions](#heavendata-functions)** we add for product data.
@@ -103,7 +101,7 @@ A culture code with an underscore instead of a dash: `en-US` → `en_US`.
 
 #### `export.attribute`
 
-Every configured attribute, keyed by code — `id`, `name`, `required`, `translatable`, `labels`. See [attribute metadata](/en/channels/template-data.html#attribute-metadata).
+Every configured attribute, keyed by code — `id`, `name`, `required`, `translatable`, `labels`. See [attribute metadata](/en/channels/templates/data.html#attribute-metadata).
 
 #### `export.attr_label`
 
@@ -123,11 +121,11 @@ Every custom entity record a reference attribute links to, in link order. Takes 
 {{ end }}
 ```
 
-Fully described under [reference attributes](/en/channels/template-data.html#reference-attributes--custom-entities). Use parentheses around both arguments, especially as a `for` loop's source.
+Fully described under [reference attributes](/en/channels/templates/data.html#reference-attributes--custom-entities). Use parentheses around both arguments, especially as a `for` loop's source.
 
 #### `export.custom_entity`
 
-Look up records of a custom entity by any attribute — reference-driven or not. `.get` also accepts a reference directly (`export.custom_entity('manufacturer').get(r)`), as a shortcut for a template that already holds one. Fully described under [reference attributes](/en/channels/template-data.html#reference-attributes--custom-entities).
+Look up records of a custom entity by any attribute — reference-driven or not. `.get` also accepts a reference directly (`export.custom_entity('manufacturer').get(r)`), as a shortcut for a template that already holds one. Fully described under [reference attributes](/en/channels/templates/data.html#reference-attributes--custom-entities).
 
 #### `export.variants_by`
 
@@ -200,7 +198,7 @@ Builds SmartView `additionalInformation` XML elements for an attribute. Specific
 
 #### `debug.dump`
 
-Prints all available template data as formatted JSON. The fastest way to find out what you can actually reach. See [testing and debugging](/en/channels/template-testing.html#see-everything-that-is-available).
+Prints all available template data as formatted JSON. The fastest way to find out what you can actually reach. See [testing and debugging](/en/channels/templates/testing.html#see-everything-that-is-available).
 
 ## Limits
 
