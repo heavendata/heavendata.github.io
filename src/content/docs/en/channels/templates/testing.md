@@ -36,23 +36,30 @@ Put that in the record template, look at the preview, and you get every value av
 Errors from a template appear in the job log — see [background jobs](/en/troubleshooting/background-jobs.html).
 
 **`Cannot get the member ... for a null object`**
-The most common one. Something in the chain does not exist for this product — usually an empty attribute, or a custom entity lookup that found nothing. Guard it:
+The most common one. You read a member of something that does not exist for this product — an attribute that is not set (`record.my_images.size`), or a custom entity lookup that found nothing. A bare `{{ record.my_images }}` never fails; the `.size` after it does. Guard the object, then read its members:
 
 ```plaintext frame="none"
-{{ if record.description }}
-  <description>{{ record.description }}</description>
+{{# stops the run when the lookup finds nothing: #}}
+<number>{{ export.custom_entity('certificates').get(r).certificate_number }}</number>
+
+{{# guarded: #}}
+{{ cert = export.custom_entity('certificates').get(r) }}
+{{ if cert }}
+  <number>{{ cert.certificate_number }}</number>
 {{ end }}
 ```
 
-One product missing one attribute fails the whole run, so guard anything that is not required.
+`Object ... is null. Cannot access indexer` is the same mistake with `[0]` instead of a member name.
+
+One product with one missing value fails the whole run, so guard anything that is not required. Looping over a missing list is safe — `{{ for a in record.my_images }}` renders nothing when the attribute is absent.
 
 **`Error parsing record template: ...`**
 The template could not be parsed at all, so nothing ran. Almost always an unclosed `{{`, or an `if`/`for` without its `end`. The header template is parsed first and reports the same way, as `Error parsing header template: ...`.
 
-**The template renders, but a value is empty**
+**The template renders, but a value is empty or looks wrong**
 Three usual causes, in order of likelihood:
 
-1. **A translatable attribute read without a language** — see [translatable attributes](/en/channels/templates/data.html#translatable-attributes).
+1. **A translatable attribute read without a language** — it renders as a list of `{key: "de", value: ...}` pairs instead of a value. Pass it through `i18n.t` — see [translatable attributes](/en/channels/templates/data.html#translatable-attributes).
 2. **A language code that matches nothing configured** — `en-US` where the account has bare `en`. This fails silently; see [translatable attributes](/en/channels/templates/data.html#translatable-attributes).
 3. **The wrong attribute code.** Check under **Settings → Attributes & sections**, or use `debug.dump`.
 

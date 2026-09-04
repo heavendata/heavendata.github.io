@@ -53,10 +53,12 @@ Four namespaces we add. These are specific to product data and are documented in
 The full public URL of an asset.
 
 ```plaintext frame="none"
-{{ myImage | asset.url }}
-{{ myImage | asset.url 'original' }}
-{{ myImage | asset.url 'my-variant' }}
-{{ myImage | asset.url 'shop-thumb' 'thumb.png' }}
+{{ for a in record.my_images }}
+  {{ a | asset.url }}
+  {{ a | asset.url 'original' }}
+  {{ a | asset.url 'my-variant' }}
+  {{ a | asset.url 'shop-thumb' 'thumb.png' }}
+{{ end }}
 ```
 
 :::caution[Only `'original'` keeps the file extension]
@@ -76,20 +78,23 @@ When the asset was last modified. Assets with no stored modification date — ev
 Takes an optional *variant*: with one, you get the later of the asset's own date and that variant's last settings change, which is what you want for cache-busting a variant URL.
 
 ```plaintext frame="none"
-{{ myImage | asset.updated }}
-{{ myImage | asset.updated 'shop-thumb' }}
-{{ myImage | asset.updated | date.to_string '%F' }}
+{{ for a in record.my_images }}
+  {{ a | asset.updated }}
+  {{ a | asset.updated 'shop-thumb' }}
+  {{ a | asset.updated | date.to_string '%F' }}
+{{ end }}
 ```
 
 ### Languages
 
 #### `i18n.t`
 
-The value of a translatable attribute in one language, with an optional fallback.
+The value of a translatable attribute in one language, with an optional fallback for when that language has no entry. A stored empty string is an entry — to replace that too, pipe through `object.default`.
 
 ```plaintext frame="none"
 {{ record.my_translatable_attr | i18n.t 'en-US' }}
 {{ record.my_translatable_attr | i18n.t 'en-US' 'No value available' }}
+{{ record.my_translatable_attr | i18n.t 'en-US' | object.default 'No value available' }}
 ```
 
 #### `i18n.has`
@@ -97,8 +102,8 @@ The value of a translatable attribute in one language, with an optional fallback
 True if the attribute has an entry stored for **exactly** that language.
 
 ```plaintext frame="none"
-{{ if record.description | i18n.has 'de-DE' }}
-  <description>{{ record.description | i18n.t 'de-DE' }}</description>
+{{ if record.my_translatable_attr | i18n.has 'de-DE' }}
+  <description>{{ record.my_translatable_attr | i18n.t 'de-DE' }}</description>
 {{ end }}
 ```
 
@@ -108,7 +113,7 @@ True if the attribute has an entry stored for **exactly** that language.
 So the pairing above can still emit an empty `<description>`, and it can skip one where `i18n.t` would have produced a value from a fallback language. To guarantee a non-empty element, test the translated value instead:
 
 ```plaintext frame="none"
-{{ desc = record.description | i18n.t 'de-DE' }}
+{{ desc = record.my_translatable_attr | i18n.t 'de-DE' }}
 {{ if desc != '' }}
   <description>{{ desc }}</description>
 {{ end }}
@@ -173,7 +178,7 @@ Group the current product's variants by an attribute, and reach each group's var
 {{ end }}
 ```
 
-Each group also carries the values of its first variant, so `color.color_name` works without reaching into `_variants`.
+Each group also carries the values of its first variant, so `color.color_name` works without reaching into `_variants`. Variants that have no `color_code` are not dropped — they form one group whose key is empty, so the template above emits `<color code="">` around them.
 
 #### `export.collect_attribute_values`
 

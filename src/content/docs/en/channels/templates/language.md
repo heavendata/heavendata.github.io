@@ -19,11 +19,11 @@ Anything between `{{` and `}}` is evaluated and its result written into the outp
 
 ## Statements
 
-`{{` … `}}` also runs statements. Assign with `=`; the assignment itself prints nothing.
+`{{` … `}}` also runs statements. Assign with `=`; the assignment itself prints nothing — but the line break after it does, which is what the `-` is for (see [whitespace](#whitespace)).
 
 ```plaintext frame="none"
-{{ shipping = 4.95 }}
-{{ total = record.price + shipping }}
+{{ shipping = 4.95 -}}
+{{ total = record.price + shipping -}}
 Total: {{ total }}
 ```
 
@@ -65,16 +65,25 @@ An attribute that has no value is **absent** from the record, and an absent valu
 ```
 
 :::caution[Only an absent value is false]
-This is narrower than it looks. An **empty string, a zero and an empty list are all true** in a template — only a value that is absent or explicitly null is false. So `{{ if record.price }}` is true when the price is `0`, and a guard like this will still emit an empty element if the attribute is stored with an empty value rather than left unset.
+This is narrower than it looks. An **empty string, a zero and an empty list are all true** in a template — only a value that is absent or explicitly null is false. So `{{ if record.price }}` is true when the price is `0`, and `{{ if record.description }}` is true when the description is stored as an empty string.
 
-When it has to be non-empty, compare instead:
+When the value has to be present *and* non-empty, test for that — one guard per type:
 
 ```plaintext frame="none"
-{{ if record.description != '' && record.description }}
+{{# number — false when absent, false when 0 #}}
+{{ if record.price > 0 }}
+
+{{# text — false when absent, empty, or only whitespace #}}
+{{ if !(record.description | string.whitespace) }}
+
+{{# list (assets, references) — test it exists before asking for its size #}}
+{{ if record.my_images && record.my_images.size > 0 }}
 ```
+
+Comparisons, on the other hand, are loose: `record.price == '0'` is **true** when the price is the number `0`, and `record.price > 0` is simply false when the price is absent — no error.
 :::
 
-An unguarded read of a missing value stops the whole run — see [reading errors](/en/channels/templates/testing.html#reading-errors).
+Reading a member of a missing value — `record.my_images.size`, `record.manufacturer[0]` — stops the whole run; a bare `{{ record.missing }}` just renders nothing. See [reading errors](/en/channels/templates/testing.html#reading-errors).
 
 ## Loops
 

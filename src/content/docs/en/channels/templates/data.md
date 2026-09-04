@@ -64,10 +64,16 @@ A translatable attribute holds one value per language, so it needs a language co
 {{ record.my_translatable_attr | i18n.t 'en-US' }}
 ```
 
-With a fallback when that language is empty:
+With a fallback when that language has **no entry**:
 
 ```plaintext frame="none"
 {{ record.my_translatable_attr | i18n.t 'en-US' 'No value available' }}
+```
+
+A value stored as an empty string is an entry, so the fallback does not replace it. For "non-empty, or the fallback", add `object.default`:
+
+```plaintext frame="none"
+{{ record.my_translatable_attr | i18n.t 'en-US' | object.default 'No value available' }}
 ```
 
 :::caution
@@ -82,7 +88,7 @@ A culture configured with a region also answers to its bare language code, so wi
 
 ```xml frame="none"
 {{ for c in export.culture_codes }}
-  <name lang="{{ c }}">{{ record.product_name | i18n.t c }}</name>
+  <name lang="{{ c }}">{{ record.my_translatable_attr | i18n.t c }}</name>
 {{ end }}
 ```
 
@@ -246,7 +252,7 @@ en-US fr-FR
 {{ for code in export.culture_codes }}{{ code | export.culture_code_uc }} {{ end }}
 ```
 ```plaintext frame="none"
-en_US de_AT
+en_US fr_FR
 ```
 
 :::note
