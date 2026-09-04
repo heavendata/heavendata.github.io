@@ -154,7 +154,7 @@ Extra arguments follow the function name, separated by spaces:
 {{ end }}
 ```
 
-You can also use parentheses with commas — `string.truncate(record.product_name, 20)`. What does **not** work is mixing them: spaces *and* commas without parentheses is a parse error. Some functions need parentheses, notably [`export.load_custom_entities`](/en/channels/templates/data.html#reference-attributes--custom-entities) as a `for` loop's source.
+You can also use parentheses with commas — `string.truncate(record.product_name, 20)`. What does **not** work is mixing them: spaces *and* commas without parentheses is a parse error. Some functions need parentheses, notably [`export.load_custom_entities`](/en/channels/templates/custom-entities.html#reading-every-linked-record--exportload_custom_entities) as a `for` loop's source.
 
 Pipes chain left to right, which is how most real lines are built:
 
@@ -197,6 +197,7 @@ Single and double quotes both work. Concatenate with `+`.
 
 ## What to read next
 
-- [The data in a template](/en/channels/templates/data.html) — `record`, `variants`, and each attribute type
+- [The data in a template](/en/channels/templates/data.html) — `record`, `variants`, and plain attributes
+- [Translatable attributes](/en/channels/templates/translations.html), [assets](/en/channels/templates/assets.html) and [custom entities](/en/channels/templates/custom-entities.html) — the value types that need a function
 - [Template function reference](/en/channels/templates/functions.html) — everything callable
 - [Testing and debugging templates](/en/channels/templates/testing.html)

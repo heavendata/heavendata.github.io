@@ -1,9 +1,9 @@
 ---
 title: "Template function reference"
-description: "Every function available in a template — the Scriban built-ins we support, and the heavendata additions."
+description: "Every function available in a template — the Scriban built-ins we support, and the heavendata additions — with where each one is documented."
 ---
 
-The functions a template can call. Two groups: the **[Scriban built-ins](#scriban-built-ins)** we make available, and the **[heavendata functions](#heavendata-functions)** we add for product data.
+The functions a template can call. Two groups: the **[Scriban built-ins](#scriban-built-ins)** we make available, and the **[heavendata functions](#heavendata-functions)** we add for product data. The heavendata functions for [assets](/en/channels/templates/assets.html), [translatable attributes](/en/channels/templates/translations.html) and [custom entities](/en/channels/templates/custom-entities.html) are documented on those pages, next to the data they read; the [index](#every-heavendata-function) below lists all of them.
 
 :::caution[Templates cannot read files]
 There is no file system access from a template, and no template loader — so **`{{ include }}` always fails**, and `include_join` is not available at all. Anything in Scriban's documentation that loads a file or another template will not work here. The complete list of what *is* available is below.
@@ -44,125 +44,33 @@ The ones that come up constantly in product templates:
 
 ## heavendata functions
 
-Four namespaces we add. These are specific to product data and are documented in full here, because they are not in Scriban's documentation.
+Four namespaces we add. These are specific to product data and are not in Scriban's documentation.
 
-### Assets
+### Every heavendata function
 
-#### `asset.url`
+| Function | What it does | Documented |
+| --- | --- | --- |
+| `asset.url` | The public URL of an asset, optionally for an image variant | [Assets](/en/channels/templates/assets.html#asseturl) |
+| `asset.updated` | When an asset was last modified | [Assets](/en/channels/templates/assets.html#assetupdated) |
+| `i18n.t` | A translatable attribute's value in one language, with a fallback | [Translatable attributes](/en/channels/templates/translations.html#read-one-language--i18nt) |
+| `i18n.has` | Whether a translatable attribute has an entry for exactly that language | [Translatable attributes](/en/channels/templates/translations.html#check-whether-a-language-has-a-value--i18nhas) |
+| `export.culture_codes` · `export.language_codes` | The languages in this channel | [Translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) |
+| `export.culture_code_uc` | A culture code with an underscore: `en-US` → `en_US` | [Translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) |
+| `export.attr_label` | An attribute's label in one language | [Translatable attributes](/en/channels/templates/translations.html#exportattr_label) |
+| `export.xml_attr_labels` | An attribute's label in every channel language, as XML attributes | [Translatable attributes](/en/channels/templates/translations.html#exportxml_attr_labels) |
+| `export.load_custom_entities` | Every custom entity record a reference attribute links to | [Custom entities](/en/channels/templates/custom-entities.html#reading-every-linked-record--exportload_custom_entities) |
+| `export.custom_entity` | Look custom entity records up by any attribute — `.get`, `.find`, `.key` | [Custom entities](/en/channels/templates/custom-entities.html#exportcustom_entity--reference) |
+| `export.attribute` | Every configured attribute's metadata | [Data](/en/channels/templates/data.html#attribute-metadata) |
+| `export.variants_by` | Group the product's variants by an attribute | [below](#exportvariants_by) |
+| `export.collect_attribute_values` | Every distinct value of an attribute across variants | [below](#exportcollect_attribute_values) |
+| `export.account_id` | Your account's internal id | [below](#exportaccount_id) |
+| `export.xmlize` | Escape a value for XML | [below](#exportxmlize) |
+| `export.sanitize_filename` | Make a string safe as a file name | [below](#exportsanitize_filename) |
+| `export.to_sorting_number` | Turn a string into a sortable integer | [below](#exportto_sorting_number) |
+| `export.sv_additional_information` | SmartView `additionalInformation` elements | [below](#exportsv_additional_information) |
+| `debug.dump` | Print every value the template can reach | [below](#debugdump) |
 
-The full public URL of an asset.
-
-```plaintext frame="none"
-{{ for a in record.my_images }}
-  {{ a | asset.url }}
-  {{ a | asset.url 'original' }}
-  {{ a | asset.url 'my-variant' }}
-  {{ a | asset.url 'shop-thumb' 'thumb.png' }}
-{{ end }}
-```
-
-:::caution[Only `'original'` keeps the file extension]
-Every other variant may be stored in a different format, so the URL is built without one — `picture.png` becomes `…/picture`. If the system consuming your feed requires an image URL ending in `.png` or `.jpg`, either pass `'original'` or set the *filename* argument yourself.
-:::
-
-| Argument | Description |
-| --- | --- |
-| *variant* | An [image variant](/en/assets/asset-variants.html) key. **Omitting it gives the `default` variant, not the original** — pass `'original'` explicitly for the uploaded file. |
-| *filename* | Force a file name in the URL instead of the stored one. |
-| *sanitize* | `true` replaces characters that are not safe in a file name with underscores. |
-
-#### `asset.updated`
-
-When the asset was last modified. Assets with no stored modification date — everything from before that field was introduced — return **27 September 2022**.
-
-Takes an optional *variant*: with one, you get the later of the asset's own date and that variant's last settings change, which is what you want for cache-busting a variant URL.
-
-```plaintext frame="none"
-{{ for a in record.my_images }}
-  {{ a | asset.updated }}
-  {{ a | asset.updated 'shop-thumb' }}
-  {{ a | asset.updated | date.to_string '%F' }}
-{{ end }}
-```
-
-### Languages
-
-#### `i18n.t`
-
-The value of a translatable attribute in one language, with an optional fallback for when that language has no entry. A stored empty string is an entry — to replace that too, pipe through `object.default`.
-
-```plaintext frame="none"
-{{ record.my_translatable_attr | i18n.t 'en-US' }}
-{{ record.my_translatable_attr | i18n.t 'en-US' 'No value available' }}
-{{ record.my_translatable_attr | i18n.t 'en-US' | object.default 'No value available' }}
-```
-
-#### `i18n.has`
-
-True if the attribute has an entry stored for **exactly** that language.
-
-```plaintext frame="none"
-{{ if record.my_translatable_attr | i18n.has 'de-DE' }}
-  <description>{{ record.my_translatable_attr | i18n.t 'de-DE' }}</description>
-{{ end }}
-```
-
-:::caution[`i18n.has` and `i18n.t` do not answer the same question]
-`i18n.has` checks only whether a key exists for that exact language. It does **not** follow the language fallback that `i18n.t` uses, and it returns `true` for a stored but empty value.
-
-So the pairing above can still emit an empty `<description>`, and it can skip one where `i18n.t` would have produced a value from a fallback language. To guarantee a non-empty element, test the translated value instead:
-
-```plaintext frame="none"
-{{ desc = record.my_translatable_attr | i18n.t 'de-DE' }}
-{{ if desc != '' }}
-  <description>{{ desc }}</description>
-{{ end }}
-```
-:::
-
-### The channel run
-
-#### `export.culture_codes` · `export.language_codes`
-
-The languages in this channel. `culture_codes` gives `en-US`; `language_codes` gives `en`.
-
-#### `export.culture_code_uc`
-
-A culture code with an underscore instead of a dash: `en-US` → `en_US`.
-
-#### `export.attribute`
-
-Every configured attribute, keyed by code — `id`, `name`, `required`, `translatable`, `labels`. See [attribute metadata](/en/channels/templates/data.html#attribute-metadata).
-
-#### `export.attr_label`
-
-An attribute's label in one language, falling back to the attribute name.
-
-```plaintext frame="none"
-{{ export.attr_label 'color' 'en-US' }}
-```
-
-#### `export.load_custom_entities`
-
-Every custom entity record a reference attribute links to, in link order. Takes the record (or a variant) and the attribute's code:
-
-```plaintext frame="none"
-{{ for cert in export.load_custom_entities(record, 'certificates') }}
-  {{ cert.certificate_number }}
-{{ end }}
-```
-
-Fully described under [reference attributes](/en/channels/templates/data.html#reference-attributes--custom-entities). Use parentheses around both arguments, especially as a `for` loop's source.
-
-#### `export.custom_entity`
-
-Look up records of a custom entity by any attribute — reference-driven or not. Fully described under [reference attributes](/en/channels/templates/data.html#reference-attributes--custom-entities).
-
-| | |
-| --- | --- |
-| `.get` *attribute*, *value* | The first matching record. Also accepts a reference directly — `export.custom_entity('manufacturer').get(r)` — as a shortcut for a template that already holds one. The value must match exactly: case sensitive, no partial matching. |
-| `.find` *attribute*, *value*, *limit* | **All** matching records, optionally capped. Use it where one value matches several records. Same exact-match rule. |
-| `.key` | The custom entity's key, as stored. |
+### Variants
 
 #### `export.variants_by`
 
@@ -190,6 +98,8 @@ Every distinct value of an attribute across a list of variants — for a summary
 
 Pass `true` as a second argument to flatten values that are themselves lists.
 
+### The channel run
+
 #### `export.account_id`
 
 Your account's internal id.
@@ -213,19 +123,6 @@ Replaces characters that are not valid in a file name with underscores.
 #### `export.to_sorting_number`
 
 Turns a string into an integer usable as a sort key. Empty values give `0`.
-
-#### `export.xml_attr_labels`
-
-Builds a set of XML attributes carrying an attribute's label in every language of the channel.
-
-```plaintext frame="none"
-<field {{ export.xml_attr_labels 'color' 'label_' }}/>
-```
-```xml frame="none"
-<field label_en-US="Color" label_de-DE="Farbe" />
-```
-
-Pass `true` as a third argument to use underscores in the language codes (`label_en_US`).
 
 #### `export.sv_additional_information`
 

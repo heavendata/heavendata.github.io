@@ -59,8 +59,8 @@ The template could not be parsed at all, so nothing ran. Almost always an unclos
 **The template renders, but a value is empty or looks wrong**
 Three usual causes, in order of likelihood:
 
-1. **A translatable attribute read without a language** — it renders as a list of `{key: "de", value: ...}` pairs instead of a value. Pass it through `i18n.t` — see [translatable attributes](/en/channels/templates/data.html#translatable-attributes).
-2. **A language code that matches nothing configured** — `en-US` where the account has bare `en`. This fails silently; see [translatable attributes](/en/channels/templates/data.html#translatable-attributes).
+1. **A translatable attribute read without a language** — it renders as a list of `{key: "de", value: ...}` pairs instead of a value. Pass it through `i18n.t` — see [translatable attributes](/en/channels/templates/translations.html).
+2. **A language code that matches nothing configured** — `en-US` where the account has bare `en`. This fails silently; see [translatable attributes](/en/channels/templates/translations.html).
 3. **The wrong attribute code.** Check under **Settings → Attributes & sections**, or use `debug.dump`.
 
 **Everything fails, and the syntax looks right**
