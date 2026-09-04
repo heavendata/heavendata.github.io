@@ -5,6 +5,8 @@ description: "The Scriban syntax you need for a product template: output, condit
 
 Templates are written in **Scriban**. This page covers the syntax you need for a product template. For what data is available to put in it, see [the data in a template](/en/channels/templates/data.html); for the functions, see the [function reference](/en/channels/templates/functions.html).
 
+Examples with a **Try it** link open in Scriban's own playground, with the example and its sample data filled in. The playground runs the current Scriban release and has none of the heavendata functions, which is why examples using `export`, `asset`, `i18n` or `debug` carry no link.
+
 :::note
 Everything here is Scriban. If **Options → Template language** on your channel says **Liquid**, none of this applies — see [Which template language?](/en/channels/templates.html#which-template-language).
 :::
@@ -13,7 +15,7 @@ Everything here is Scriban. If **Options → Template language** on your channel
 
 Anything between `{{` and `}}` is evaluated and its result written into the output. Everything outside stays as it is.
 
-```xml frame="none"
+```xml frame="none" try model='{"record":{"sku":"A-100"}}'
 <sku>{{ record.sku }}</sku>
 ```
 
@@ -21,7 +23,7 @@ Anything between `{{` and `}}` is evaluated and its result written into the outp
 
 `{{` … `}}` also runs statements. Assign with `=`; the assignment itself prints nothing — but the line break after it does, which is what the `-` is for (see [whitespace](#whitespace)).
 
-```plaintext frame="none"
+```plaintext frame="none" try model='{"record":{"price":19.95}}'
 {{ shipping = 4.95 -}}
 {{ total = record.price + shipping -}}
 Total: {{ total }}
@@ -29,16 +31,17 @@ Total: {{ total }}
 
 Several statements can share one block, one per line:
 
-```plaintext frame="none"
+```plaintext frame="none" try model='{"record":{"price":19.95}}'
 {{
   shipping = 4.95
   total = record.price + shipping
 }}
+Total: {{ total }}
 ```
 
 ## Comments
 
-```plaintext frame="none"
+```plaintext frame="none" try
 {{# this never appears in the output #}}
 ```
 
@@ -46,7 +49,7 @@ Do not use your output format's comment syntax to hide template logic — an XML
 
 ## Conditions
 
-```plaintext frame="none"
+```plaintext frame="none" try model='{"record":{"stock":0,"restock_date":"2026-10-01"}}'
 {{ if record.stock > 0 }}
   <availability>in stock</availability>
 {{ else if record.restock_date }}
@@ -58,7 +61,7 @@ Do not use your output format's comment syntax to hide template logic — an XML
 
 An attribute that has no value is **absent** from the record, and an absent value is false. So the common "only output this if it is set" is just:
 
-```plaintext frame="none"
+```plaintext frame="none" try model='{"record":{"description":"A fine thing"}}'
 {{ if record.description }}
   <description>{{ record.description }}</description>
 {{ end }}
@@ -110,7 +113,7 @@ Reading a member of a missing value — `record.my_images.size`, `record.manufac
 
 ## Loops
 
-```plaintext frame="none"
+```plaintext frame="none" try model='{"record":{"sku":"A-100"},"variants":[{"ean":"4006381333931"},{"ean":"4006381333948"}]}'
 {{ for variant in variants }}
   <variant>{{ variant.ean }}</variant>
 {{ end }}
@@ -138,7 +141,7 @@ There is a **loop limit of 100,000 iterations per top-level loop**, counted afre
 
 A pipe passes the value on the left as the **first argument** of the function on the right. These two are identical:
 
-```plaintext frame="none"
+```plaintext frame="none" try model='{"record":{"description":"Fits <b>all</b> sizes & shapes"}}'
 {{ record.description | html.escape }}
 {{ html.escape record.description }}
 ```
@@ -165,7 +168,7 @@ Templates are usually indented for readability, and that indentation lands in th
 
 Add `-` to a delimiter to strip whitespace on that side:
 
-```plaintext frame="none"
+```plaintext frame="none" try model='{"record":{"sku":"A-100"}}'
 {{- record.sku -}}
 ```
 
@@ -174,7 +177,7 @@ Add `-` to a delimiter to strip whitespace on that side:
 
 To keep a large XML template readable without shipping blank lines, put `-` on the control statements:
 
-```xml frame="none"
+```xml frame="none" try model='{"record":{"description":"A fine thing"}}'
 <product>
   {{- if record.description }}
   <description>{{ record.description }}</description>
@@ -186,7 +189,7 @@ To keep a large XML template readable without shipping blank lines, put `-` on t
 
 Single and double quotes both work. Concatenate with `+`.
 
-```plaintext frame="none"
+```plaintext frame="none" try model='{"record":{"sku":"A-100"}}'
 {{ 'SKU-' + record.sku }}
 ```
 

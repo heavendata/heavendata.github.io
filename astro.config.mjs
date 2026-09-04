@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import lucode from 'lucode-starlight';
+import { scribanTryIt } from './src/plugins/scriban-try-it.mjs';
 
 export default defineConfig({
   site: 'https://docs.heavendata.com',
@@ -80,6 +81,8 @@ export default defineConfig({
       // One place, so the copy and the rule live together — see the component.
       components: { PageTitle: './src/components/PageTitle.astro' },
       plugins: [lucode()],
+      // A generated "Try it" link under Scriban fences marked `try` — see the plugin.
+      expressiveCode: { plugins: [scribanTryIt()] },
 
 
       // `locales` is deliberately NOT configured yet, even though the content
@@ -132,7 +135,7 @@ export default defineConfig({
             { slug: 'en/channels' },
             { slug: 'en/channels/setup-custom-product-feed' },
             {
-              label: 'Template-based channels',
+              label: 'Template channels',
               collapsed: true,
               items: [
                 { slug: 'en/channels/templates' },

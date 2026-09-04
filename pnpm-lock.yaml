@@ -20,6 +20,10 @@ importers:
       sharp:
         specifier: 0.34.4
         version: 0.34.4
+    devDependencies:
+      '@expressive-code/core':
+        specifier: 0.44.2
+        version: 0.44.2
 
 packages:
 
