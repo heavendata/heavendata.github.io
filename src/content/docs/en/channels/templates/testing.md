@@ -61,7 +61,7 @@ Three usual causes, in order of likelihood:
 3. **The wrong attribute code.** Check under **Settings → Attributes & sections**, or use `debug.dump`.
 
 **Everything fails, and the syntax looks right**
-Check the channel's **Template language**. If it is set to **Liquid**, none of the examples in this documentation apply — see [Template-based channels](/en/channels/templates.html#which-template-language).
+Check the channel's **Template language** — and note that a channel where it was never chosen runs as **Liquid**, so this can bite a channel that looks unconfigured rather than one set to Liquid deliberately. If it is Liquid, none of the examples in this documentation apply — see [Template-based channels](/en/channels/templates.html#which-template-language).
 
 ## Before you activate a channel
 
