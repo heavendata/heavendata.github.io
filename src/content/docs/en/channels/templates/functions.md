@@ -12,7 +12,7 @@ There is no file system access from a template, and no template loader — so **
 :::note[Two places a template runs]
 This page describes a template used as a channel's **whole output** — a [template channel](/en/channels/templates.html#create-it-as-a-template-channel).
 
-A template can also be used on a **single field**, through the *Text template* node in a field processing pipeline. There, the channel context does not exist: `export.culture_codes`, `export.language_codes` and `export.attribute` come back empty, `export.attr_label` and `export.xml_attr_labels` return an empty string, and `export.custom_entity` raises *"custom entity data is not available in mapper field templates"*. The Scriban built-ins, `string`, `math` and the like all behave normally.
+A template can also be used on a **single field**, through the *Text template* node in a field processing pipeline. There the channel context does not exist and most `export.*` functions return nothing — see [A *Text template* node has no channel context](/en/channels/templates/data.html#the-three-variables).
 :::
 
 ## Scriban built-ins
@@ -155,8 +155,8 @@ Look up records of a custom entity by any attribute — reference-driven or not.
 
 | | |
 | --- | --- |
-| `.get` *attribute*, *value* | The first matching record. Also accepts a reference directly — `export.custom_entity('manufacturer').get(r)` — as a shortcut for a template that already holds one. |
-| `.find` *attribute*, *value*, *limit* | **All** matching records, optionally capped. Use it where one value matches several records. |
+| `.get` *attribute*, *value* | The first matching record. Also accepts a reference directly — `export.custom_entity('manufacturer').get(r)` — as a shortcut for a template that already holds one. The value must match exactly: case sensitive, no partial matching. |
+| `.find` *attribute*, *value*, *limit* | **All** matching records, optionally capped. Use it where one value matches several records. Same exact-match rule. |
 | `.key` | The custom entity's key, as stored. |
 
 #### `export.variants_by`

@@ -11,14 +11,14 @@ Not sure what is available in your account? [`debug.dump`](/en/channels/template
 
 | | |
 | --- | --- |
-| **`record`** | The current record — a product, or one custom entity record for a custom-entity feed. In the **record template** and in the *Text template* node. |
+| **`record`** | The current record — a product, or one custom entity record for a custom entity feed. In the **record template** and in the *Text template* node. |
 | **`variants`** | Every variant of the current product. Only in the **record template**. |
 | **`sources`** | The inputs of a field processing pipeline. Only inside the *Text template* node, not in a channel template. |
 
-**Header and footer templates have none of these, and no functions either.** They render without a template context, so `export.*`, `asset.*`, `i18n.*` and `debug.*` are all unavailable there as well — not just `record`.
+**Header and footer templates have none of these, and no functions either** — `export.*`, `asset.*`, `i18n.*` and `debug.*` are all unavailable there.
 
 :::caution[A *Text template* node has no channel context]
-`record` and `sources` work in the node, but the channel data behind the `export.*` functions is not loaded there. `export.attribute` and `export.culture_codes` come back empty, `i18n.t` always returns its fallback, and `export.custom_entity` and `export.load_custom_entities` **throw** — *"custom entity data is not available in mapper field templates"*.
+`record` and `sources` work in the node, but the channel data behind the `export.*` functions is not loaded there. `export.culture_codes`, `export.language_codes` and `export.attribute` come back empty; `export.attr_label` and `export.xml_attr_labels` return an empty string; `i18n.t` always returns its fallback; and `export.custom_entity` and `export.load_custom_entities` **throw** — *"custom entity data is not available in mapper field templates"*. The Scriban built-ins behave normally.
 
 Everything on this page about attribute values, variants and assets applies in both places. Everything under [reference attributes](#reference-attributes--custom-entities) and the channel-run functions applies only to a channel template.
 :::
@@ -115,9 +115,7 @@ Each asset carries:
 | `description` | The asset's description |
 | `updated` · `stored` | When it was last modified, and when it was first stored |
 
-Note that `{{ a | asset.url }}` with no variant gives the **`default`** variant, not the uploaded original, and its URL carries no file extension — pass `'original'` for the file as uploaded. See [`asset.url`](/en/channels/templates/functions.html#asseturl).
-
-See [`asset.url`](/en/channels/templates/functions.html#asseturl) and [`asset.updated`](/en/channels/templates/functions.html#assetupdated).
+With no variant, `asset.url` gives the **`default`** variant, without a file extension — see [`asset.url`](/en/channels/templates/functions.html#asseturl) for `'original'` and the other arguments, and [`asset.updated`](/en/channels/templates/functions.html#assetupdated).
 
 ## Reference attributes — custom entities
 
@@ -142,8 +140,6 @@ Each reference carries the id, name and identifier of the linked record — **bu
   <manufacturer>{{ m.target_name }}</manufacturer>
 {{ end }}
 ```
-
-Looping also keeps the template working when the attribute is empty.
 
 ### Reading every linked record
 
@@ -182,9 +178,9 @@ On a loaded record:
 | `cert._meta.identifier` | Identifier of the record |
 | `cert._id.entityid` | Internal id of the record |
 
-`_meta.name` and `_meta.identifier` match the reference's own `target_name` and `target_identifier`. They are copied onto the reference when it is linked, and **renaming the linked record updates every reference to it straight away** — you do not have to re-save the products. So the two stay in step, and a loop over `export.load_custom_entities` does not need to carry the reference alongside it.
+`_meta.name` and `_meta.identifier` always match the reference's own `target_name` and `target_identifier`, so a loop over `export.load_custom_entities` does not need to carry the reference alongside it.
 
-A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the channel's job log rather than left for you to guess at from an empty result.
+A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the job log — see [background jobs](/en/troubleshooting/background-jobs.html) — rather than left for you to guess at from an empty result.
 
 ### Reading one linked record you already have a reference for
 
@@ -202,6 +198,10 @@ If a template loops `record.<attribute>` itself — to read `target_name`, or to
 `export.custom_entity('certificates').get(r)` is equivalent to `export.custom_entity('certificates').get('id.entityid', r.target_id)` — it exists so a template never has to know that `id.entityid` is the field a reference resolves through.
 
 :::caution
+**The long form still works, but it has a trap.** `get('id.entityid', r.target_id)` and `get('meta.identifier', r.target_identifier.value)` are the two valid pairings, and the `.value` is required — mix them up or drop the `.value` and the lookup silently finds nothing. `get(r)` exists so you never need either.
+:::
+
+:::caution
 **`get` returns nothing for a reference whose target has since been deleted** — an account's data can always drift out of sync with what a product still links to. `get(r)` returns null in that case, same as any other unmatched lookup; the `if` above guards against it. Without it the template stops with `Cannot get the member ... for a null object`. `export.load_custom_entities` (above) does not need this guard — it skips a deleted target and reports it in the job log instead of leaving a gap in the list.
 :::
 
@@ -217,25 +217,13 @@ For a lookup that is not reference-driven — every manufacturer in Germany, say
 
 `get` returns the first match, `find` returns all of them. The value must match exactly — the comparison is case sensitive, with no partial matching.
 
-Looked up by id or identifier instead of a custom attribute:
-
-```plaintext frame="none"
-{{ export.custom_entity('manufacturer').get('id.entityid', r.target_id) }}
-
-{{ export.custom_entity('manufacturer').get('meta.identifier', r.target_identifier.value) }}
-```
-
-:::caution
-**The two forms are not interchangeable.** `target_id` goes with `id.entityid`; `target_identifier.value` goes with `meta.identifier` — and the `.value` is required. Mix them up or drop the `.value` and the lookup silently finds nothing. When you already hold a reference, prefer `get(r)` (above) — it removes this trap entirely.
-:::
-
 :::note[Performance]
 The first lookup on a custom entity loads **all** of its records and keeps them for the rest of the run — including every record `export.load_custom_entities` resolves, since it shares this same cache. A second lookup **attribute** adds an index over those same records rather than loading them again, so looking up by several attributes of the same custom entity is cheap.
 :::
 
 ### The old `<attribute>.data.<attribute>` fields
 
-An earlier, undocumented mechanism let a reference attribute's linked record show up flattened into `record` under keys like `record.manufacturer.data.support_url` — but only for the *first* linked record, silently overwriting `record.manufacturer` itself in the process. Those keys never worked reliably and are gone. If a template copied from a colleague uses them, replace it with `export.load_custom_entities` (above).
+Older templates may read a linked record through keys like `record.manufacturer.data.support_url`. Those keys are gone; replace them with `export.load_custom_entities` (above).
 
 ## Information about the channel run
 
@@ -282,8 +270,4 @@ en_US de_AT
 {{ export.attribute['my-attribute'].name }}
 ```
 
-Use `export.attr_label` for a translated label; it falls back to the attribute name when no translation exists.
-
-```plaintext frame="none"
-{{ export.attr_label 'color' 'en-US' }}
-```
+For a translated label use [`export.attr_label`](/en/channels/templates/functions.html#exportattr_label).

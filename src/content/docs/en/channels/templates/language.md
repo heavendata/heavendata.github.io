@@ -6,9 +6,7 @@ description: "The Scriban syntax you need for a product template: output, condit
 Templates are written in **Scriban**. This page covers the syntax you need for a product template. For what data is available to put in it, see [the data in a template](/en/channels/templates/data.html); for the functions, see the [function reference](/en/channels/templates/functions.html).
 
 :::note
-Everything here is Scriban. If your channel's **Template language** is **Liquid** — legacy and only partially supported — none of this applies.
-
-**Check the setting rather than assuming.** A channel where the language was never chosen runs as **Liquid** and shows Liquid under **Options → Template language** — an untouched older channel, or one created from a **Template "‹entity›" feed** card, is on Liquid without anyone having picked it. See [Template-based channels](/en/channels/templates.html#which-template-language).
+Everything here is Scriban. If **Options → Template language** on your channel says **Liquid**, none of this applies — see [Which template language?](/en/channels/templates.html#which-template-language).
 :::
 
 ## Output a value
@@ -76,7 +74,7 @@ When it has to be non-empty, compare instead:
 ```
 :::
 
-That guard matters more than it looks. Reading a member of something that does not exist stops the template with an error like `Cannot get the member ... for a null object`, and one product missing one attribute fails the whole run.
+An unguarded read of a missing value stops the whole run — see [reading errors](/en/channels/templates/testing.html#reading-errors).
 
 ## Loops
 
@@ -85,8 +83,6 @@ That guard matters more than it looks. Reading a member of something that does n
   <variant>{{ variant.ean }}</variant>
 {{ end }}
 ```
-
-Inside the loop `variant` is the current one and `record` still refers to the product.
 
 Scriban provides a loop object:
 
@@ -123,7 +119,7 @@ Extra arguments follow the function name, separated by spaces:
 {{ end }}
 ```
 
-You can also use the bracketed form with commas — `string.truncate(record.product_name, 20)`. What does **not** work is mixing them: spaces *and* commas without brackets is a parse error. Some functions need the bracketed form, notably [`export.load_custom_entities`](/en/channels/templates/data.html#reference-attributes--custom-entities) as a `for` loop's source.
+You can also use parentheses with commas — `string.truncate(record.product_name, 20)`. What does **not** work is mixing them: spaces *and* commas without parentheses is a parse error. Some functions need parentheses, notably [`export.load_custom_entities`](/en/channels/templates/data.html#reference-attributes--custom-entities) as a `for` loop's source.
 
 Pipes chain left to right, which is how most real lines are built:
 
