@@ -5,7 +5,7 @@ sidebar:
   label: "Translatable attributes"
 ---
 
-A translatable attribute holds one value per language, so reading it needs a language code — through **`i18n.t`**. Read it bare and you get the whole list of translations, not a value. This page covers `i18n.t` and `i18n.has`, the channel's languages in `export.culture_codes`, and translated attribute labels.
+A translatable attribute holds one value per language, so reading it needs a language code — through **`i18n.t`**. Read it bare and you get the whole list of translations as `{key: "de", value: ...}` pairs, not a value. This page covers `i18n.t` and `i18n.has`, the channel's languages in `export.culture_codes`, and translated attribute labels.
 
 ## Read one language — `i18n.t`
 
@@ -25,12 +25,18 @@ A value stored as an empty string is an entry, so the fallback does not replace 
 {{ record.my_translatable_attr | i18n.t 'en-US' | object.default 'No value available' }}
 ```
 
+### Which code finds what
+
+The codes are the ones configured under **Settings → Languages**. A code with a region also answers to its bare language code; the reverse is not true.
+
+| Configured in the account | `i18n.t 'en-US'` | `i18n.t 'en'` |
+| --- | --- | --- |
+| `en-US` | finds it | finds it |
+| `en` | finds nothing | finds it |
+| `de-DE` **and** `de-AT` | — | `'de'` resolves to just **one** of them; pass the full code |
+
 :::caution
-**Check the codes configured in your account** — see **Settings → Languages**.
-
-A culture configured with a region also answers to its bare language code, so with `en-US` configured both `i18n.t 'en-US'` and `i18n.t 'en'` work. The reverse is not true: if a language is configured as bare `en`, then `'en-US'` finds nothing.
-
-**Two traps.** A code that matches nothing returns an empty value **silently** — no error, no log entry. And if you have configured two regions of one language, say `de-DE` and `de-AT`, the bare `de` resolves to just one of them. Pass the full code whenever more than one region of a language is configured.
+A code that matches nothing returns an empty value **silently** — no error, no log entry.
 :::
 
 ## Check whether a language has a value — `i18n.has`
@@ -112,3 +118,9 @@ Builds a set of XML attributes carrying an attribute's label in every language o
 Pass `true` as a third argument to use underscores in the language codes (`label_en_US`).
 
 For the other attribute metadata — name, whether it is required or translatable — see [attribute metadata](/en/channels/templates/data.html#attribute-metadata).
+
+## What to read next
+
+- [The data in a template](/en/channels/templates/data.html) — `record`, `variants`, and plain attributes
+- [Template function reference](/en/channels/templates/functions.html) — everything callable
+- [Testing and debugging templates](/en/channels/templates/testing.html) — when a value comes out empty

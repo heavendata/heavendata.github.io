@@ -16,15 +16,13 @@ Under **Channels → Create New Channel**, pick one of the template cards and cl
 | **Template product feed** | product | `application/xml` |
 | **Template "‹entity›" feed** — one card per custom entity type | record of that custom entity | `text/plain` |
 
-The editor of a template channel has no **Feeds** and no **Format** step. In their place it shows **Header template**, **Record template**, **Footer template** and **Options**.
+The editor of a template channel has no **Feeds** step — a template channel always has exactly **one feed** — and no **Format** step. In their place it shows **Header template**, **Record template**, **Footer template** and **Options**.
 
 :::note
 **An existing CSV, JSON or Excel channel cannot be turned into a template channel** — its **Format** step offers only those three. Create a new channel from a template card instead. In the channels list a template channel shows **Text** in the *Format* column; that is a label, not a choice you can make.
 :::
 
 **The content type is fixed by the card**, and the editor has no field to change it. The file is named with a `.txt` extension unless you set **Filename** under **Options**.
-
-A template channel is limited to **one feed**.
 
 ## The three templates
 
@@ -33,12 +31,8 @@ A template channel has three templates, and they run at different times:
 | Template | Runs | What it can use |
 | --- | --- | --- |
 | **Header** | Once, before any products | Nothing — no product data and no functions |
-| **Record** | **Once per product** (or per custom entity record) | `record`, `variants`, and everything on [the data page](/en/channels/templates/data.html) |
+| **Record** | **Once per product** (or per custom entity record) | [`record` and `variants`](/en/channels/templates/data.html), and [every function](/en/channels/templates/functions.html) |
 | **Footer** | Once, after all products | Nothing — no product data and no functions |
-
-:::caution
-**`record` only exists in the record template.** The header and footer run once, before and after the products, so there is no product to refer to.
-:::
 
 A minimal XML feed, split across the three:
 
@@ -65,18 +59,18 @@ A minimal XML feed, split across the three:
 
 Templates are written in **[Scriban](https://scriban.github.io)**. Everything in this documentation is Scriban.
 
-:::caution[Check your channel's template language first]
-Under **Options**, the channel has a **Template language** setting with two values, **Scriban (recommended)** and **Liquid**.
+Under **Options**, the channel has a **Template language** setting with two values, **Scriban (recommended)** and **Liquid**. **Liquid is legacy and only partially supported.** We do not document it, and the examples on this site are written and tested for Scriban only — Liquid's control flow (`{% if %}`) is different, so do not expect them to work unchanged.
 
-**Liquid is legacy and only partially supported.** We do not document it, and the examples on this site are written and tested for Scriban only — Liquid's control flow (`{% if %}`) is different, so do not expect them to work unchanged.
+A channel can be on Liquid without anyone having chosen it:
 
-**Three cases where a channel is on Liquid without anyone choosing it:**
+| Channel | What **Options → Template language** shows | What to do |
+| --- | --- | --- |
+| Created before the setting existed | **Liquid** | Switching means rewriting its templates — **Duplicate** the channel from the channels list and convert the copy |
+| Created from a **Template "‹entity›" feed** card | Created without a language, which runs as Liquid | Set **Scriban (recommended)** and save before you write anything |
+| Created from the **Template product feed** card | **Scriban** — the card's subtitle still says *Liquid template formatted*; the subtitle is out of date, not the channel | Nothing |
 
-- A channel created before the setting existed runs as Liquid, and shows **Liquid** under **Options → Template language**.
-- A channel created from a **Template "‹entity›" feed** card is created without a language, which also means Liquid. Set **Template language** to **Scriban (recommended)** and save before you write anything.
-- The **Template product feed** card's subtitle still says *Liquid template formatted*. The channel it creates is set to Scriban — the subtitle is out of date, not the channel.
-
-If a template that looks correct produces nothing or fails, check this setting before anything else — then [reading errors](/en/channels/templates/testing.html#reading-errors). Switching an existing channel to Scriban means rewriting its templates, so **Duplicate** the channel from the channels list and test on the copy first.
+:::caution
+If a template that looks correct produces nothing or fails, check this setting before anything else — then [reading errors](/en/channels/templates/testing.html#reading-errors).
 :::
 
 ## Where to go next

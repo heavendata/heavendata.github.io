@@ -81,7 +81,7 @@ Only two things are false in a condition: a value that is **absent** (or null), 
 | List, **including an empty one** | true |
 | Translatable attribute | true |
 
-So `{{ if record.price }}` is true when the price is `0`, and `{{ if record.description }}` is true when the description is stored as an empty string. When the value has to be present *and* non-empty, test for that — one guard per type:
+When the value has to be present *and* non-empty, test for that — one guard per type:
 
 ```plaintext frame="none"
 {{# number — false when absent, false when 0 #}}
@@ -96,7 +96,7 @@ So `{{ if record.price }}` is true when the price is `0`, and `{{ if record.desc
 
 ### Comparing values of different types
 
-`==` compares by value within a type. Across types it converts where it can and is false where it cannot — except that a **list or a translatable attribute compared to a number stops the run**.
+`==` compares by value within a type. Across types it converts where it can and is false where it cannot, with two exceptions that stop the run:
 
 | Comparison | Result |
 | --- | --- |

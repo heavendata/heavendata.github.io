@@ -12,9 +12,7 @@ A **reference** attribute links a product to records of a [custom entity](/en/co
 When it has links, it holds a **list**, even if there is only one.
 
 :::caution[An unset reference attribute is missing, not empty]
-If nothing has ever been linked, the attribute is **not** an empty list — it is absent, so `record.certificates` is null. `{{ record.certificates.size }}` and `{{ record.certificates[0] }}` both fail.
-
-**Looping is safe**, which is why most templates never notice: a `for` over a null value renders nothing, without an error. Reach for `for` rather than an index or a count.
+If nothing has ever been linked, the attribute is **not** an empty list — it is absent. Loop over it rather than indexing or counting it; see [reading errors](/en/channels/templates/testing.html#reading-errors).
 :::
 
 Each reference carries the id, name and identifier of the linked record — **but none of its other values**:
@@ -70,7 +68,7 @@ On a loaded record:
 
 `_meta.name` and `_meta.identifier` always match the reference's own `target_name` and `target_identifier`, so a loop over `export.load_custom_entities` does not need to carry the reference alongside it.
 
-A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the job log — see [background jobs](/en/troubleshooting/background-jobs.html) — rather than left for you to guess at from an empty result.
+A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the job log — see [background jobs](/en/troubleshooting/background-jobs.html).
 
 ## Reading one linked record you already have a reference for
 
@@ -85,14 +83,10 @@ If a template loops `record.<attribute>` itself — to read `target_name`, or to
 {{ end }}
 ```
 
-`export.custom_entity('certificates').get(r)` is equivalent to `export.custom_entity('certificates').get('id.entityid', r.target_id)` — it exists so a template never has to know that `id.entityid` is the field a reference resolves through.
+`get(r)` is equivalent to `get('id.entityid', r.target_id)`, and it exists so a template never has to know that. The long form is a trap: `id.entityid` pairs with `r.target_id`, `meta.identifier` with `r.target_identifier.value` — and mixing them up, or dropping the `.value`, silently finds nothing.
 
 :::caution
-**The long form still works, but it has a trap.** `get('id.entityid', r.target_id)` and `get('meta.identifier', r.target_identifier.value)` are the two valid pairings, and the `.value` is required — mix them up or drop the `.value` and the lookup silently finds nothing. `get(r)` exists so you never need either.
-:::
-
-:::caution
-**`get` returns nothing for a reference whose target has since been deleted** — an account's data can always drift out of sync with what a product still links to. `get(r)` returns null in that case, same as any other unmatched lookup; the `if` above guards against it. Without it the template stops with `Cannot get the member ... for a null object`. `export.load_custom_entities` (above) does not need this guard — it skips a deleted target and reports it in the job log instead of leaving a gap in the list.
+**`get` returns nothing for a reference whose target has since been deleted** — an account's data can always drift out of sync with what a product still links to. `get(r)` returns null in that case, same as any other unmatched lookup; the `if` above guards against it. Without it the template stops with `Cannot get the member ... for a null object` — see [reading errors](/en/channels/templates/testing.html#reading-errors). `export.load_custom_entities` (above) does not need this guard — it skips a deleted target and reports it in the job log instead of leaving a gap in the list.
 :::
 
 ## Looking up by any text attribute
@@ -105,7 +99,7 @@ For a lookup that is not reference-driven — every manufacturer in Germany, say
 {{ end }}
 ```
 
-`get` returns the first match, `find` returns all of them. The value must match exactly — the comparison is case sensitive, with no partial matching.
+`get` returns the first match, `find` returns all of them.
 
 :::note[Performance]
 The first lookup on a custom entity loads **all** of its records and keeps them for the rest of the run — including every record `export.load_custom_entities` resolves, since it shares this same cache. A second lookup **attribute** adds an index over those same records rather than loading them again, so looking up by several attributes of the same custom entity is cheap.
@@ -115,10 +109,18 @@ The first lookup on a custom entity loads **all** of its records and keeps them 
 
 | | |
 | --- | --- |
-| `.get` *attribute*, *value* | The first matching record. Also accepts a reference directly — `export.custom_entity('manufacturer').get(r)` — as a shortcut for a template that already holds one. The value must match exactly: case sensitive, no partial matching. |
-| `.find` *attribute*, *value*, *limit* | **All** matching records, optionally capped. Use it where one value matches several records. Same exact-match rule. |
+| `.get` *attribute*, *value* | The first matching record. Also accepts a reference directly: `.get(r)`. |
+| `.find` *attribute*, *value*, *limit* | **All** matching records, optionally capped. |
 | `.key` | The custom entity's key, as stored. |
+
+For both, the value must match exactly — case sensitive, no partial matching.
 
 ## The old `<attribute>.data.<attribute>` fields
 
 Older templates may read a linked record through keys like `record.manufacturer.data.support_url`. Those keys are gone; replace them with `export.load_custom_entities` (above).
+
+## What to read next
+
+- [The data in a template](/en/channels/templates/data.html) — `record`, `variants`, and plain attributes
+- [Template function reference](/en/channels/templates/functions.html) — everything callable
+- [Testing and debugging templates](/en/channels/templates/testing.html) — reading the errors a lookup can raise

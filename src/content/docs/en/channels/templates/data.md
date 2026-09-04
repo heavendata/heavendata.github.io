@@ -18,9 +18,14 @@ Not sure what is available in your account? [`debug.dump`](/en/channels/template
 **Header and footer templates have none of these, and no functions either** — `export.*`, `asset.*`, `i18n.*` and `debug.*` are all unavailable there.
 
 :::caution[A *Text template* node has no channel context]
-`record` and `sources` work in the node, but the channel data behind the `export.*` functions is not loaded there. `export.culture_codes`, `export.language_codes` and `export.attribute` come back empty; `export.attr_label` and `export.xml_attr_labels` return an empty string; `i18n.t` always returns its fallback; and `export.custom_entity` and `export.load_custom_entities` **throw** — *"custom entity data is not available in mapper field templates"*. The Scriban built-ins behave normally.
+`record` and `sources` work in the node, but the channel data behind the `export.*` functions is not loaded there. What that means per page:
 
-Everything on this page and on the [assets](/en/channels/templates/assets.html) page applies in both places. Everything on the [custom entities](/en/channels/templates/custom-entities.html) page and the channel-run functions applies only to a channel template.
+| Page | In a *Text template* node |
+| --- | --- |
+| This page | `record` and the Scriban built-ins work. `export.attribute` is empty. |
+| [Assets](/en/channels/templates/assets.html) | Works |
+| [Translatable attributes](/en/channels/templates/translations.html) | `i18n.t` always returns its fallback; `export.culture_codes` and `export.language_codes` are empty; `export.attr_label` and `export.xml_attr_labels` return an empty string |
+| [Custom entities](/en/channels/templates/custom-entities.html) | `export.custom_entity` and `export.load_custom_entities` **throw** — *"custom entity data is not available in mapper field templates"* |
 :::
 
 ## Attribute values
@@ -66,13 +71,9 @@ Each needs a function to read, and each has its own page covering the attribute 
 | **Assets** — images, PDFs, files | `asset.url` | [Assets in a template](/en/channels/templates/assets.html) |
 | **References** to custom entity records | `export.load_custom_entities` | [Custom entities in a template](/en/channels/templates/custom-entities.html) |
 
-## Information about the channel run
+## Attribute metadata
 
-The `export` object also carries data about the run and the catalog setup. The channel's languages — `export.culture_codes` — are on the [translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) page.
-
-### Attribute metadata
-
-`export.attribute` gives access to every configured attribute:
+`export.attribute` gives access to every configured attribute. (The channel's languages — `export.culture_codes` — are on the [translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) page.)
 
 | Property | Description |
 | --- | --- |

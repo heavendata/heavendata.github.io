@@ -15,11 +15,7 @@ The panel header shows:
 - the **content type**, fixed when the channel was created — see [Template channels](/en/channels/templates.html#create-it-as-a-template-channel),
 - **settings changed**, briefly, while an edit is waiting to be rendered. It disappears once the preview has caught up; if it stays, the preview is not running.
 
-This is the answer to "what will actually go out?" — check it before you activate a channel, not after.
-
-:::tip
-The preview renders the first **50 records**, not the whole catalog — and a product with variants counts once per variant, so a catalog of variant-heavy products previews only a handful of them. It is the right tool for *is my template correct*, not for *how long will this take*.
-:::
+The preview renders the first **50 records**, not the whole catalog — and a product with variants counts once per variant, so a catalog of variant-heavy products previews only a handful of them.
 
 ## See everything that is available
 
@@ -36,20 +32,19 @@ Put that in the record template, look at the preview, and you get every value av
 Errors from a template appear in the job log — see [background jobs](/en/troubleshooting/background-jobs.html).
 
 **`Cannot get the member ... for a null object`**
-The most common one. You read a member of something that does not exist for this product — an attribute that is not set (`record.my_images.size`), or a custom entity lookup that found nothing. A bare `{{ record.my_images }}` never fails; the `.size` after it does. Guard the object, then read its members:
+The most common one. You read a member of something that does not exist for this product — usually an attribute that is not set. A bare `{{ record.my_images }}` never fails; the `.size` after it does. Guard the object, then read its members:
 
 ```plaintext frame="none"
-{{# stops the run when the lookup finds nothing: #}}
-<number>{{ export.custom_entity('certificates').get(r).certificate_number }}</number>
+{{# stops the run on a product with no images: #}}
+<image_count>{{ record.my_images.size }}</image_count>
 
 {{# guarded: #}}
-{{ cert = export.custom_entity('certificates').get(r) }}
-{{ if cert }}
-  <number>{{ cert.certificate_number }}</number>
+{{ if record.my_images }}
+  <image_count>{{ record.my_images.size }}</image_count>
 {{ end }}
 ```
 
-`Object ... is null. Cannot access indexer` is the same mistake with `[0]` instead of a member name.
+`Object ... is null. Cannot access indexer` is the same mistake with `[0]` instead of a member name. The other common source is a custom entity lookup that found nothing — see [reading one linked record](/en/channels/templates/custom-entities.html#reading-one-linked-record-you-already-have-a-reference-for) for the guarded form.
 
 One product with one missing value fails the whole run, so guard anything that is not required. Looping over a missing list is safe — `{{ for a in record.my_images }}` renders nothing when the attribute is absent.
 

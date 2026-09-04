@@ -29,7 +29,6 @@ These namespaces are available in every template. They behave exactly as Scriban
 | `regex` | Match, replace and split with regular expressions | [regex functions](https://scriban.github.io/docs/builtins/regex/) |
 | `string` | Trim, pad, case, truncate, split, replace | [string functions](https://scriban.github.io/docs/builtins/string/) |
 | `timespan` | Durations | [timespan functions](https://scriban.github.io/docs/builtins/timespan/) |
-| `empty` / `blank` | The empty value, for comparisons | — |
 
 The ones that come up constantly in product templates:
 
@@ -102,7 +101,11 @@ Pass `true` as a second argument to flatten values that are themselves lists.
 
 #### `export.account_id`
 
-Your account's internal id.
+Your account's internal id — useful as a stable identifier in a feed header.
+
+```xml frame="none"
+<feed account="{{ export.account_id }}">
+```
 
 ### Escaping and strings
 
@@ -120,13 +123,25 @@ For HTML, use Scriban's `html.escape`.
 
 Replaces characters that are not valid in a file name with underscores.
 
+```plaintext frame="none"
+<file>{{ record.product_name | export.sanitize_filename }}.pdf</file>
+```
+
 #### `export.to_sorting_number`
 
 Turns a string into an integer usable as a sort key. Empty values give `0`.
 
+```plaintext frame="none"
+<sort>{{ record.sku | export.to_sorting_number }}</sort>
+```
+
 #### `export.sv_additional_information`
 
-Builds SmartView `additionalInformation` XML elements for an attribute. Specific to SmartView output — ignore it unless you are building that format.
+Builds SmartView `additionalInformation` XML elements for an attribute, one per channel language. Specific to SmartView output — ignore it unless you are building that format.
+
+```plaintext frame="none"
+{{ export.sv_additional_information 'color' 1 }}
+```
 
 ### Debugging
 
@@ -139,4 +154,4 @@ Prints all available template data as formatted JSON. The fastest way to find ou
 | | |
 | --- | --- |
 | Loop iterations | 100,000 per top-level loop, counted afresh per record |
-| File system access | Not available — no `include`, no `include_join` |
+| File system access | None — see the caution at the top of this page |

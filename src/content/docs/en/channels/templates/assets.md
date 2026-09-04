@@ -9,19 +9,11 @@ An asset attribute holds a **list** of assets, even when there is only one file,
 
 ## The asset attribute
 
-Loop over it, or index into it — but only loop when the attribute may be empty, because `[0]` on an absent attribute stops the run.
+Loop over it rather than indexing into it unless the attribute is required — `[0]` on an absent attribute stops the run (see [reading errors](/en/channels/templates/testing.html#reading-errors)).
 
 ```plaintext frame="none"
 {{ for a in record.my_images }}
   <image>{{ a | asset.url }}</image>
-{{ end }}
-```
-
-For a configured [image variant](/en/assets/asset-variants.html):
-
-```plaintext frame="none"
-{{ for a in record.my_images }}
-  <image>{{ a | asset.url 'example_thumbnail' }}</image>
 {{ end }}
 ```
 
@@ -44,8 +36,9 @@ The full public URL of an asset.
 {{ for a in record.my_images }}
   {{ a | asset.url }}
   {{ a | asset.url 'original' }}
-  {{ a | asset.url 'my-variant' }}
+  {{ a | asset.url 'shop-thumb' }}
   {{ a | asset.url 'shop-thumb' 'thumb.png' }}
+  {{ a | asset.url 'shop-thumb' 'thumb.png' true }}
 {{ end }}
 ```
 
@@ -55,7 +48,7 @@ With no variant, `asset.url` gives the **`default`** variant, not the uploaded o
 
 | Argument | Description |
 | --- | --- |
-| *variant* | An [image variant](/en/assets/asset-variants.html) key. **Omitting it gives the `default` variant, not the original** — pass `'original'` explicitly for the uploaded file. |
+| *variant* | An [image variant](/en/assets/asset-variants.html) key, or `'original'`; omit for `default`. |
 | *filename* | Force a file name in the URL instead of the stored one. |
 | *sanitize* | `true` replaces characters that are not safe in a file name with underscores. |
 
@@ -72,3 +65,11 @@ Takes an optional *variant*: with one, you get the later of the asset's own date
   {{ a | asset.updated | date.to_string '%F' }}
 {{ end }}
 ```
+
+`date.to_string` is a Scriban built-in — see the [function reference](/en/channels/templates/functions.html#scriban-built-ins).
+
+## What to read next
+
+- [The data in a template](/en/channels/templates/data.html) — `record`, `variants`, and plain attributes
+- [Template function reference](/en/channels/templates/functions.html) — everything callable
+- [Testing and debugging templates](/en/channels/templates/testing.html)
