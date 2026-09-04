@@ -64,10 +64,21 @@ An attribute that has no value is **absent** from the record, and an absent valu
 {{ end }}
 ```
 
-:::caution[Only an absent value is false]
-This is narrower than it looks. An **empty string, a zero and an empty list are all true** in a template — only a value that is absent or explicitly null is false. So `{{ if record.price }}` is true when the price is `0`, and `{{ if record.description }}` is true when the description is stored as an empty string.
+### What counts as false
 
-When the value has to be present *and* non-empty, test for that — one guard per type:
+Only two things are false in a condition: a value that is **absent** (or null), and the boolean **`false`**. Everything else is true — including the values other languages treat as empty.
+
+| Value | `{{ if x }}` |
+| --- | --- |
+| Absent attribute, `null` | false |
+| Boolean `false` | false |
+| Boolean `true` | true |
+| Number, **including `0`** | true |
+| Text, **including `''`** | true |
+| List, **including an empty one** | true |
+| Translatable attribute | true |
+
+So `{{ if record.price }}` is true when the price is `0`, and `{{ if record.description }}` is true when the description is stored as an empty string. When the value has to be present *and* non-empty, test for that — one guard per type:
 
 ```plaintext frame="none"
 {{# number — false when absent, false when 0 #}}
@@ -80,8 +91,20 @@ When the value has to be present *and* non-empty, test for that — one guard pe
 {{ if record.my_images && record.my_images.size > 0 }}
 ```
 
-Comparisons, on the other hand, are loose: `record.price == '0'` is **true** when the price is the number `0`, and `record.price > 0` is simply false when the price is absent — no error.
-:::
+### Comparing values of different types
+
+`==` compares by value within a type. Across types it converts where it can and is false where it cannot — except that a **list or a translatable attribute compared to a number stops the run**.
+
+| Comparison | Result |
+| --- | --- |
+| `0 == '0'`, `1 == '1'` | **true** — a numeric string compares as a number |
+| `0 == false`, `1 == true` | **true** — booleans compare as `0` and `1` |
+| `'' == 0`, `'' == false` | false |
+| `null == false`, `null == 0`, `null == ''` | false — an absent value equals only `null` |
+| `record.my_images == 0` | **error** — `Unable to convert type 'array' to int` |
+| `record.my_translatable_attr == 0` | **error** — same, for a translatable attribute |
+
+Ordering follows the same rules: `record.price > 0` is false when the price is absent, with no error, while `record.my_images > 0` stops the run. Text is converted too — `'a' > 0` is true — so compare numbers to numbers.
 
 Reading a member of a missing value — `record.my_images.size`, `record.manufacturer[0]` — stops the whole run; a bare `{{ record.missing }}` just renders nothing. See [reading errors](/en/channels/templates/testing.html#reading-errors).
 
