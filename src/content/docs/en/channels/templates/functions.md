@@ -10,7 +10,7 @@ There is no file system access from a template, and no template loader — so **
 :::
 
 :::note[Two places a template runs]
-This page describes a template used as a channel's **whole output** (`Format → Text`).
+This page describes a template used as a channel's **whole output** — a [template channel](/en/channels/templates.html#create-it-as-a-template-channel).
 
 A template can also be used on a **single field**, through the *Text template* node in a field processing pipeline. There, the channel context does not exist: `export.culture_codes`, `export.language_codes` and `export.attribute` come back empty, `export.attr_label` and `export.xml_attr_labels` return an empty string, and `export.custom_entity` raises *"custom entity data is not available in mapper field templates"*. The Scriban built-ins, `string`, `math` and the like all behave normally.
 :::

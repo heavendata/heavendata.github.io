@@ -7,20 +7,20 @@ You do not have to publish a channel to find out what it produces. This page cov
 
 ## Preview while you write
 
-The template editor has a **Preview** panel beside the template. It renders your template against real products from the channel and updates as you edit.
+Each template page has a **Preview** button in its toolbar. It is off by default; switch it on and a **Preview** panel opens beside the template, renders your template against real products from the channel, and re-renders about a second after each edit.
 
 The panel header shows:
 
 | | |
 | --- | --- |
 | The **file name** the channel would produce | |
-| The **content type** | The MIME type set on the channel |
-| **settings changed** | Something outside the template was edited, so the preview is stale — it refreshes on the next run |
+| The **content type** | Fixed when the channel was created — see [Template-based channels](/en/channels/templates.html#create-it-as-a-template-channel) |
+| **settings changed** | Appears briefly while an edit is waiting to be rendered, and disappears once the preview has caught up. If it stays, the preview is not running |
 
 This is the answer to "what will actually go out?" — check it before you activate a channel, not after.
 
 :::tip
-The preview renders a limited number of products, not the whole catalog. It is the right tool for *is my template correct*, not for *how long will this take*.
+The preview renders the first **50 records**, not the whole catalog — and a product with variants counts once per variant, so a catalog of variant-heavy products previews only a handful of them. It is the right tool for *is my template correct*, not for *how long will this take*.
 :::
 
 ## See everything that is available
@@ -37,7 +37,7 @@ That is usually faster than looking codes up in settings, and it is the only way
 
 ## Reading errors
 
-Errors from a template appear in the run's log — see [background tasks](/en/troubleshooting/background-jobs.html).
+Errors from a template appear in the run's log — see [background jobs](/en/troubleshooting/background-jobs.html).
 
 **`Cannot get the member ... for a null object`**
 The commonest one. Something in the chain does not exist for this product — usually an empty attribute, or a custom entity lookup that found nothing. Guard it:
@@ -51,7 +51,7 @@ The commonest one. Something in the chain does not exist for this product — us
 One product missing one attribute fails the whole run, so guard anything that is not required.
 
 **`Error parsing record template: ...`**
-The template could not be parsed at all, so nothing ran. Almost always an unclosed `{{`, or an `if`/`for` without its `end`.
+The template could not be parsed at all, so nothing ran. Almost always an unclosed `{{`, or an `if`/`for` without its `end`. The header template is parsed first and reports the same way, as `Error parsing header template: ...`.
 
 **The template renders, but a value is empty**
 Three usual causes, in order of likelihood:
@@ -61,7 +61,7 @@ Three usual causes, in order of likelihood:
 3. **The wrong attribute code.** Check under **Settings → Attributes & sections**, or use `debug.dump`.
 
 **Everything fails, and the syntax looks right**
-Check the channel's **Template language** — and note that a channel where it was never chosen runs as **Liquid**, so this can bite a channel that looks unconfigured rather than one set to Liquid deliberately. If it is Liquid, none of the examples in this documentation apply — see [Template-based channels](/en/channels/templates.html#which-template-language).
+Check **Options → Template language**. A channel where it was never chosen runs as **Liquid** and shows Liquid there, so this bites channels nobody set to Liquid deliberately — older ones, and any created from a **Template "‹entity›" feed** card. If it is Liquid, the examples in this documentation do not apply — see [Template-based channels](/en/channels/templates.html#which-template-language).
 
 ## Before you activate a channel
 

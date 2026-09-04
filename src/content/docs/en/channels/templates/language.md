@@ -8,7 +8,7 @@ Templates are written in **Scriban**. This page covers the syntax you need for a
 :::note
 Everything here is Scriban. If your channel's **Template language** is **Liquid** — legacy and only partially supported — none of this applies.
 
-**Check the setting rather than assuming.** A channel where the language was never chosen runs as **Liquid**, so an untouched older channel behaves as Liquid even though nothing looks selected. See [Template-based channels](/en/channels/templates.html#which-template-language).
+**Check the setting rather than assuming.** A channel where the language was never chosen runs as **Liquid** and shows Liquid under **Options → Template language** — an untouched older channel, or one created from a **Template "‹entity›" feed** card, is on Liquid without anyone having picked it. See [Template-based channels](/en/channels/templates.html#which-template-language).
 :::
 
 ## Output a value
