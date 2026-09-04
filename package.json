@@ -8,12 +8,16 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "verify": "astro build && node .github/scripts/smoke-check.mjs && node .github/scripts/check-links.mjs"
+    "verify": "node .github/scripts/check-try-fences.mjs && astro build && node .github/scripts/smoke-check.mjs && node .github/scripts/check-links.mjs",
+    "verify:external": "astro build && node .github/scripts/check-external-links.mjs"
   },
   "dependencies": {
-    "astro": "7.2.10",
     "@astrojs/starlight": "0.41.10",
+    "astro": "7.2.10",
     "lucode-starlight": "1.0.0",
     "sharp": "0.34.4"
+  },
+  "devDependencies": {
+    "@expressive-code/core": "0.44.2"
   }
 }
