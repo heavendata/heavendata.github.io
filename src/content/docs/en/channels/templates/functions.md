@@ -21,14 +21,14 @@ These namespaces are available in every template. They behave exactly as Scriban
 
 | Namespace | What it does | Reference |
 | --- | --- | --- |
-| `array` | Sort, filter, join, take, and other list operations | [array functions](https://scriban.github.io/doc#array-functions) |
-| `date` | Format and calculate with dates | [date functions](https://scriban.github.io/doc#date-functions) |
-| `html` | Escape, strip and encode HTML | [html functions](https://scriban.github.io/doc#html-functions) |
-| `math` | Round, format, and arithmetic helpers | [math functions](https://scriban.github.io/doc#math-functions) |
-| `object` | Inspect and convert values | [object functions](https://scriban.github.io/doc#object-functions) |
-| `regex` | Match, replace and split with regular expressions | [regex functions](https://scriban.github.io/doc#regex-functions) |
-| `string` | Trim, pad, case, truncate, split, replace | [string functions](https://scriban.github.io/doc#string-functions) |
-| `timespan` | Durations | [timespan functions](https://scriban.github.io/doc#timespan-functions) |
+| `array` | Sort, filter, join, take, and other list operations | [array functions](https://scriban.github.io/docs/builtins/array/) |
+| `date` | Format and calculate with dates | [date functions](https://scriban.github.io/docs/builtins/date/) |
+| `html` | Escape, strip and encode HTML | [html functions](https://scriban.github.io/docs/builtins/html/) |
+| `math` | Round, format, and arithmetic helpers | [math functions](https://scriban.github.io/docs/builtins/math/) |
+| `object` | Inspect and convert values | [object functions](https://scriban.github.io/docs/builtins/object/) |
+| `regex` | Match, replace and split with regular expressions | [regex functions](https://scriban.github.io/docs/builtins/regex/) |
+| `string` | Trim, pad, case, truncate, split, replace | [string functions](https://scriban.github.io/docs/builtins/string/) |
+| `timespan` | Durations | [timespan functions](https://scriban.github.io/docs/builtins/timespan/) |
 | `empty` / `blank` | The empty value, for comparisons | — |
 
 The ones that come up constantly in product templates:
@@ -40,7 +40,7 @@ The ones that come up constantly in product templates:
 {{ record.release_date | date.to_string '%F' }}
 ```
 
-`date.to_string` takes the same format strings as [Scriban's `date.to_string`](https://scriban.github.io/doc#dateto_string) — `%F` gives `2026-09-03`.
+`date.to_string` takes the same format strings as [Scriban's `date.to_string`](https://scriban.github.io/docs/builtins/date/#dateto_string) — `%F` gives `2026-09-03`.
 
 ## heavendata functions
 
