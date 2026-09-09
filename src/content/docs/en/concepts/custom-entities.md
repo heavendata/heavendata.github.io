@@ -43,3 +43,9 @@ Here you define which data will be stored. All attributes are supported except o
 
 Look at the app header navigation and click the arrow right beside "Products" to add or edit records. Next, select your entity in the dropdown and click "New" to add records manually or import existing records from Excel or CSV.
 
+### Reference columns in an import file
+
+A reference attribute is imported by the **identifier** of the record it points to — the value of that entity's identifier attribute, which is also what an export writes into the column. A multi-reference column holds several identifiers in one cell, separated by `|`. An empty cell removes the references from the record.
+
+If an identifier matches no record of the referenced entity, the row is **not imported** and the import log names the attribute and the value. Fix the value, or create the missing record first, and import the row again.
+
