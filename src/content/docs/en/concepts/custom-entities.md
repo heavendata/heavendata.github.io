@@ -45,7 +45,9 @@ Look at the app header navigation and click the arrow right beside "Products" to
 
 ### Reference columns in an import file
 
-A reference attribute is imported by the **identifier** of the record it points to — the value of that entity's identifier attribute, which is also what an export writes into the column. A multi-reference column holds several identifiers in one cell, separated by `|`. An empty cell removes the references from the record.
+A reference attribute is imported by the **identifier** of the record it points to — the value of that entity's identifier attribute, which is also what an export writes into the column. A multi-reference column holds several identifiers in one cell, separated by `|` (or by the list separator the channel is configured with). An empty cell removes the references from the record.
+
+A row may reference records of the same entity that appear **earlier in the same file**, so an export of an entity that references itself — categories with a parent, for example — imports again as it is, as long as each referenced row comes before the rows that point to it.
 
 If an identifier matches no record of the referenced entity, the row is **not imported** and the import log names the attribute and the value. Fix the value, or create the missing record first, and import the row again.
 
