@@ -52,16 +52,16 @@ Choose which records to export:
 |Option |Exports |
 --- | ---
 |All | Every record of the entity.
-|‹n› filtered | The records the list filter currently matches. Available once a filter is set and matches at least one record.
-|‹n› selected | The records you ticked in the list. Available once at least one row is selected.
+|‹n› filtered | The records the list filter currently matches. Available once a filter is set and matches at least one record; until then it reads `Filtered` with no count.
+|‹n› selected | The records you ticked in the list. Available once at least one row is selected; until then it reads `Selected` with no count.
 
 The dialog starts on the narrowest option that applies — your selection if you have one, otherwise your filter, otherwise all records — and follows the list while it is open, so you can change the filter or the selection behind the dialog without reopening it. An option that does not apply is shown greyed out with a note saying what to do to enable it, rather than hidden.
 
 Ticking rows works over any number of records: select all, then untick the few you do not want, and the export covers everything the filter matches except those.
 
-Choose **Excel** or **CSV** as the format, then select **Export**. The file is produced as a background job, so it is safe to close the dialog or leave the page — the job keeps running. The dialog shows the job's progress in place and offers **Download** when it finishes. You can also find the job later under [Background jobs](/en/troubleshooting/background-jobs.html), named `Export ‹entity name›`.
+Choose **Excel** or **CSV** as the format, then select **Export**. The file is produced as a background job, so it is safe to close the dialog or leave the page — the job keeps running. The dialog shows the job's progress in place and offers **Download** when it finishes. You can also find the job later under **Settings > Background tasks**, named `Export ‹entity name›` — see [Background jobs](/en/troubleshooting/background-jobs.html). That list needs its own permission, so you may be able to export without being able to open it; download from the dialog if you are not sure.
 
-The file is named `‹account key›_‹entity key›`, with the entity key lower-cased.
+The file is named `‹account key›_‹entity key›`. The entity key is lower-cased and any character that is not a letter or a digit becomes `-`, so the key `sales_channel` gives `…_sales-channel`. The account key is used as it is.
 
 #### What the file contains
 
@@ -71,11 +71,11 @@ Every attribute of the entity, one column each, whether or not the list shows it
 --- | ---
 |Plain | One column, named after the attribute's code.
 |Translatable | One column per language, named `code.culture` — for example `description.de-DE`.
-|Reference | One column holding the **identifier** of the referenced record. Several references are joined into one cell.
+|Reference | One column holding the **identifier** of the referenced record — its internal id when the referenced entity has no identifier attribute. Several references are joined into one cell.
 
 Column headers are the attribute **codes**, not the attribute names, so a file exports and imports again without renaming anything.
 
-The two formats differ on a translatable attribute that has no value in one language. **CSV** writes the value of the fallback language, so the cell is filled. **Excel** leaves the cell empty. If you need to see which languages are genuinely untranslated, export to Excel.
+The two formats differ on a translatable attribute that has no value in one language. **CSV** writes the value of that language's fallback language, so the cell is filled — unless the language has no fallback configured, in which case CSV leaves it empty too. **Excel** always leaves the cell empty. If you need to see which languages are genuinely untranslated, export to Excel.
 
 Reference columns hold the same identifiers the import reads, so an exported file can be corrected and imported again as it is — see [Reference columns in an import file](#reference-columns-in-an-import-file) for how those values are matched, and what happens when one of them matches nothing.
 
