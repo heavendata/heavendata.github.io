@@ -7,10 +7,13 @@ sidebar:
   label: "Overview"
 ---
 
-Two ways in. A **manual import** walks a file through upload, field mapping and
-options, and is right for a one-off change. A **data source** does the same thing
-on a schedule, from an FTP, SFTP or HTTP location, and is right for anything that
-repeats.
+Two ways in. A **manual import** walks one file through upload, mapping and options in
+the app, and is right for a one-off change. A **data source** is a standing
+configuration — a place to fetch from, the files to take, and the mapping to apply — and
+is right for anything that repeats. **This page is about data sources.**
+
+You do not have to wait for a schedule to use one: a data source can run on demand, and
+it can run a file you supply yourself.
 
 If you need somewhere to put the files, we host an
 [FTP server](/en/import/ftp-pull.html) you can use.
@@ -25,23 +28,31 @@ Data sources live under **Integrations → Data sources**.
 
 | Connector | Direction | What it is for |
 | --- | --- | --- |
-| **SFtp Pull** | We fetch | A supplier's SFTP server, or ours |
-| **Http Pull** | We fetch | A file served over HTTP or HTTPS |
-| **Ftp Push** | You send | You upload to our FTP server and we import what arrives |
+| **SFTP pull** | We fetch | A supplier's SFTP server, or ours |
+| **HTTP pull** | We fetch | A file served over HTTP or HTTPS |
+| **FTP push** | You send | You upload to our FTP server and we import what arrives |
 
-A push source has nothing for us to fetch, so it cannot be run on demand and has no
-server of ours to browse — the controls below that depend on reaching a server are
-simply not offered for it.
+*(The app still writes these as `SFtp Pull`, `Http Pull` and `Ftp Push`.)*
+
+What a source offers depends on what its connector can do. Everything that reaches a
+server is missing for a push source, because there is nothing of ours for it to reach —
+the files come to us.
+
+| | SFTP pull | HTTP pull | FTP push |
+| --- | --- | --- | --- |
+| **Test connection** | Yes | Yes, once a base URL is set | No |
+| **Browse** | Yes | No — a URL has no folders to list | No |
+| **Download file** | Yes | Yes | No |
+| **Load fields** | Yes | Yes | No |
+| **Run now**, **Run selected datasets** | Yes | Yes | No — there is nothing to fetch |
+| **Upload and import** | Yes | Yes | **Yes** — the one way to run a push source on demand |
+
+A control a source cannot support is not offered, rather than offered and then refused.
 
 ## Checking a source before you rely on it
 
 Everything in this section runs **on our servers, using the credentials the source
-already has**. Your browser never sees the password, and nothing here reaches outside
-the folder the source is configured for.
-
-**Save the data source first.** These controls act on the saved source, so on a source
-you have not saved yet they are inactive — beside the dataset's file name the screen
-says *"Save the data source before loading its fields."*
+already has** — which is why none of it asks you for a password.
 
 ### Test connection
 
@@ -50,12 +61,11 @@ be reached and that the credentials are accepted. The result appears on the same
 line: **Connection works**, or the reason it did not.
 
 It tests **what is on the screen**, not only what was saved — so you can change a host
-or a user name and check the new value before saving it. Leave the password field
-empty and it uses the stored password.
+or a user name and check the new value before saving it.
 
 ### If the server's certificate is not trusted
 
-An **Http Pull** source connects over HTTPS by verifying the server's certificate. If
+An **HTTP pull** source connects over HTTPS by verifying the server's certificate. If
 that certificate is expired, self-signed, or issued for a different host name, the
 connection fails.
 
@@ -70,12 +80,12 @@ Turn it on only for a server you already trust by other means, and treat it as
 temporary: it disables the check that would tell you the connection had been
 tampered with.
 
-The option is specific to HTTP sources. An SFTP server proves its identity by host
-key rather than by certificate, so the setting does not apply to **SFtp Pull**.
+The option is specific to HTTP sources. An SFTP server proves its identity by host key
+rather than by certificate, so the setting does not apply to **SFTP pull**.
 
 ### Changing an SFTP password
 
-On a saved **SFtp Pull** source the password field is **empty**, with the hint *"Leave
+On a saved **SFTP pull** source the password field is **empty**, with the hint *"Leave
 empty to keep the saved password."* The stored password is still in place — it is not
 shown back to you.
 
@@ -88,11 +98,16 @@ if a source should stop running, disable or delete the source instead.
 ## Choosing the file for a dataset
 
 Each dataset names the file it imports, relative to the source's base path. Three
-controls beside that field do the work for you.
+controls sit beside that field.
+
+**Save the data source first.** All three read the file using the saved source's
+credentials, so on a source you have not saved yet they are inactive. The hint beside
+them says *"Save the data source before loading its fields."* — it names loading fields,
+but the rule is the same for all three.
 
 | Control | What it does |
 | --- | --- |
-| **Load fields** | Reads the file's column names into the mapper, so you can map without typing them |
+| **Load fields** | Reads the file's column names, so you can map them without typing them |
 | **Download file** | Saves the file the dataset points at, without running an import |
 | **Browse** | Opens the source's folders so you can pick the file instead of typing its path |
 
@@ -106,11 +121,8 @@ Picking a file writes its path **relative to the source's base path**. A file ch
 two folders down is stored as `pub/example/products.csv`, not as `products.csv` — the
 folders are part of where the file is, so the import can find it again.
 
-Browsing never leaves the source's base path, so it shows you exactly what an import
-of this source could read.
-
-**Browse needs a server with folders**, which means it is offered for SFTP sources. An
-HTTP source addresses files by URL and has nothing to list.
+Browsing never leaves the source's base path, so it shows you exactly what an import of
+this source could read.
 
 ### Download file
 
@@ -123,8 +135,8 @@ left, without running an import to find out.
 
 ### Load fields
 
-**Load fields** reads the file and offers its column names to the mapper as source
-fields, so mapping a new dataset does not start with typing column names by hand.
+**Load fields** reads the file and offers its column names for mapping, so setting up a
+new dataset does not start with typing them by hand.
 
 The column names come from the file itself, so the file has to have them where the
 dataset's format settings say they are. When nothing usable is found, the result says:
@@ -137,8 +149,8 @@ read — the message says that instead:
 
 > Couldn't read the fields. Check that the file is on the server, then try again.
 
-Either way the mapping you have already done is left alone. Loading fields replaces the
-list of **source fields** offered by the file; it does not touch your mapped targets.
+Either way the mapping you have already done is left alone: loading fields replaces the
+list of columns the file offers, not what you have mapped them to.
 
 ## Running a data source
 
@@ -173,8 +185,8 @@ run. This is the way to correct a supplier file yourself — fix it locally, upl
 and it is imported with the same mapping and options as a scheduled run, without
 waiting for the supplier to send a new one.
 
-It is offered for **every** source, including **Ftp Push**, which makes it the one way
-to run a push source on demand.
+It is offered for **every** source, including **FTP push** — which is the only way to
+run a push source on demand.
 
 **Your file keeps its own name.** If you upload `preisliste-kw38.csv` for a dataset
 configured as `artikel.csv`, the run history names both — the dataset, so you can see
@@ -200,6 +212,10 @@ all, and a message stands in its place:
 
 > No files are stored for this import. Start a new run of the data source instead.
 
+A run keeps its files for a while and not for ever, so an old run will eventually reach
+this state —
+[how long runs are kept](/en/troubleshooting/background-jobs.html#how-long-runs-are-kept).
+
 ## Reading what a run did
 
 **Each dataset the run took on leaves a step**, and that step is where you find out what
@@ -218,9 +234,9 @@ reached carries only that.
 | Records that could not be imported | Those records were not written. The step's log file lists them |
 | Not imported, naming an earlier file | The run stopped at that earlier dataset, so this one never ran |
 
-That last one is why the steps are worth reading in order: a run that stops part-way
-still leaves a step for every dataset, so you can see **where** it stopped rather than
-finding the history simply ending.
+A run that stops part-way still leaves a step for every dataset **it took on**, so you
+can see where it stopped rather than finding the history simply ending. Datasets you
+left out of a partial run were never in it, and have no step.
 
 A step for a file you uploaded names both the dataset and your file — for example
 `artikel.csv (uploaded as preisliste-kw38.csv)` — so you can tell which mapping ran and
@@ -228,11 +244,7 @@ which file went through it.
 
 ### The files a run kept
 
-Every import stores the files it read, under the run that read them. That is what makes
-running a past import again possible, and it is what to download when you need the data
-an import actually worked from — not what is on the server now, which the supplier may
-have replaced since.
-
-The files hang off the run's steps.
-[Background jobs](/en/troubleshooting/background-jobs.html) covers finding a run and
-downloading what its steps kept.
+Every import stores the files it read, under the run that read them — which is what
+makes running it again possible, and what to download when you need the data an import
+actually worked from. The files hang off the run's steps:
+[downloading what a step read](/en/troubleshooting/background-jobs.html#downloading-what-a-step-read).

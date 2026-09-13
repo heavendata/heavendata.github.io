@@ -68,11 +68,7 @@ A run whose files have already been cleared lists none, and its downloads are no
 
 ### An import's steps
 
-**Each dataset an import takes on leaves a step**, so a data source with a product file and a price file leaves one for each — alongside the run's own steps for its final status and any error it hit. A dataset's step names its file, and where that file was read it carries the dataset's counts, its own log file, and a copy of the file itself.
-
-Datasets the run never reached get a step too, saying so — which is how you can tell where a run stopped rather than finding the history simply ending. Datasets left out of a partial run are not in the run at all, and have no step.
-
-What an import's step messages mean, and what to do about each, is in [importing data](/en/import.html).
+An import leaves a step for each dataset it took on, naming that dataset's file. What those steps say, and what to do about each, is in [importing data](/en/import.html).
 
 ## How long runs are kept
 
