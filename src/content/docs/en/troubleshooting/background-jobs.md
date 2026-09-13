@@ -56,4 +56,11 @@ If a run failed, the step that failed is the one to read first: its message name
 
 ## How long runs are kept
 
-Runs are kept for **30 days**, after which they are deleted automatically. A run older than that is gone from **Run history** and from **Background tasks**, along with its steps and log files.
+A run whose files have already been removed is expected, not a fault — the run record and the files it read are cleared separately.
+
+| What | How long it is kept |
+| --- | --- |
+| The run and its logs | 30 days |
+| The import files the run read | 30 days, or the most recent 5,000 imports — whichever comes first |
+
+After that the run no longer appears in **Run history** or in **Background tasks**, and its files can no longer be downloaded or used to start the run again. Because the two clean-ups run on their own schedules, a run's files can go a few hours before the run itself does.
