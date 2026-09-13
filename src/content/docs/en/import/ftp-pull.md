@@ -30,6 +30,33 @@ Now you can download files using a single command
 
 You'll find the details in your channels configuration or use a desktop client to manually explore available files.
 
+## Import folders and how long files are kept
+
+Each data source that receives files over FTP has a folder of its own at the root of
+the server, and two folders inside it. Browse the root in an FTP client to see the
+exact names — a data source appears under its key, or under its id if it has none.
+
+| Path | What is in it |
+|---|---|
+| `<data source>/import` | Where you drop files. |
+| `<data source>/archive/<timestamp>-<id>` | One folder per import, holding the files that import read. |
+
+When an import starts, the files it takes are moved out of `import` into a new folder
+under `archive`. That is why a file you uploaded is no longer in `import` — it has been
+read, not lost.
+
+**A file stays in `import`** until every file the data source expects has arrived, so a
+partial set waits there for the rest. A data source that is switched off never starts
+an import either, so its files wait until you enable it.
+
+**Archived imports are kept for 30 days, or the most recent 5,000 imports of that data
+source — whichever comes first.** After that the folder and its files are removed. The
+`import` folder is yours: nothing clears it automatically, so a file that never
+completed a set stays until you remove it.
+
+Runs themselves, with their logs, are listed in the app for the same 30 days — see
+[Background jobs](/en/troubleshooting/background-jobs.html).
+
 ## FAQs
 
 * Can I use the default Windows command line ftp client? No. This client does not support passive FTP and will not work in most environments. Active FTP means, that our ftp server would have to initiate data connections and this would be blocked by your firewall / router.

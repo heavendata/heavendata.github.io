@@ -68,3 +68,5 @@ A run whose files have already been removed is expected, not a fault — the run
 | The import files the run read | 30 days, or the most recent 5,000 runs **of that data source** — whichever comes first |
 
 After that the run no longer appears in **Run history** or in **Background tasks**, and its files can no longer be downloaded or used to start the run again. Because the two clean-ups run on their own schedules, a run's files can go a few hours before the run itself does.
+
+Files you dropped on the [hosted FTP server](/en/import/ftp-pull.html) are kept there under their own rule, which that page states.
