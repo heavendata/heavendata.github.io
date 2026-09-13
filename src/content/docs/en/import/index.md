@@ -177,21 +177,21 @@ imported.
 
 ### Running a past import again
 
-A past run can be started again with **the files it read**, from the run's details in
-the job history. See [background jobs](/en/troubleshooting/background-jobs.html) for
-where to find a run.
+Open a past run and it offers **Run stored files**, which imports **the files that run
+read** rather than fetching anything.
+[Background jobs](/en/troubleshooting/background-jobs.html) covers finding a run.
 
-This is for the case where the **mapping** was wrong, not the file. The run uses the
-files it originally read, together with the source's configuration **as it is now** —
+This is for the case where the **mapping** was wrong, not the file. The new run uses
+the files the old one read, together with the source's configuration **as it is now** —
 so you fix the mapping, run it again, and the same input goes through the corrected
 setup. Fetching the file again would be beside the point, and the supplier may have
 replaced it in the meantime.
 
-If the run has no stored files it cannot be started again, and the button says so:
+The new run stores its own copy of those files, so it can itself be run again.
+
+If a run has no stored files, it cannot be started this way and the button says so:
 
 > No files are stored for this import. Start a new run of the data source instead.
-
-Start a new run of the source instead, which fetches the current file.
 
 ## Reading what a run did
 
