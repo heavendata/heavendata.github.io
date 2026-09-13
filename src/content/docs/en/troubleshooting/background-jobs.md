@@ -58,6 +58,18 @@ A run is made of **steps**, one per unit of work it did. Each step carries its o
 
 If a run failed, the step that failed is the one to read first: its message names the reason, and its log files carry the detail.
 
+### Downloading what a step read
+
+A step's files sit under **Input and result files**, with a **Download** beside each one. A file listed as **Input** is the one that step actually read — the bytes the run worked from, kept as they were at the moment it read them.
+
+That is the point of keeping them: by the time anyone looks into a run that went wrong, the file on the supplier's server has often been replaced, so downloading it again answers a different question. The copy under the step does not change.
+
+A run whose files have already been cleared lists none, and its downloads are no longer offered. That is expected — see [how long runs are kept](#how-long-runs-are-kept).
+
+### An import's steps
+
+An import leaves a step for each dataset it took on, naming that dataset's file. What those steps say, and what to do about each, is in [importing data](/en/import.html).
+
 ## How long runs are kept
 
 A run whose files have already been removed is expected, not a fault — the run record and the files it read are cleared separately.
