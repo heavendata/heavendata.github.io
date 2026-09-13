@@ -17,9 +17,9 @@ There are several ways to a run, depending on what you already have in front of 
 | The latest run of one channel or data source | **Channels**, or **Integrations → Data sources**. The **Last run** column shows each entry's most recent run |
 | The details of that run | Select the status in the **Last run** cell — it opens **Run details** |
 | Older runs of one entry | The row menu (⋮) → **Run history** |
-| Runs of an asset inbox sync | **Settings → Assets → Inbox settings** → the row menu → **Run history** |
+| Runs of an asset inbox that syncs from a remote server | **Settings → Assets → Inboxes** → the row menu → **Executions**. An inbox that does not sync from a remote server has nothing to run, and the menu does not offer the item |
 | Everything this account has run | **Settings → Background tasks** |
-| The runs you started yourself, right now | The activity button in the header |
+| The runs you started yourself, right now | The **Active jobs** button in the header |
 
 The **Last run** column keeps itself up to date while you watch it. You do not need to reload the page to see a run start, progress or finish — and that applies to every run, not only the ones you started. A run begun by a schedule, by the API, or by a colleague appears in the column the same way.
 
@@ -27,7 +27,9 @@ A cell reading **Not run yet** means exactly that: this channel or data source h
 
 ### Starting a run yourself
 
-Hover over the **Last run** cell of a channel or data source and a play button appears beside the status. It starts a run of that entry immediately, after asking you to confirm. The same action is in the row menu as **Run now**.
+Hover over the **Last run** cell and a play button appears beside the status. It starts a run of that entry, after asking you to confirm. The same action is in the row menu as **Run now**.
+
+Not everything can be run on demand, and the control is simply absent where it cannot: a data source that **receives** pushed files has nothing to fetch, so neither the play button nor **Run now** appears on its row. The same is true of a channel whose connector does not support being run manually.
 
 Starting a run does not cancel one that is already going. If a run is already queued or in progress, the confirmation says so, and starting another adds a second run rather than replacing the first.
 
@@ -45,7 +47,9 @@ Starting a run does not cancel one that is already going. If a run is already qu
 
 ## Reading a run
 
-Open a run — from the **Last run** cell, from **Run history**, or from **Settings → Background tasks** — and you get its **Run details**.
+Selecting the status in a **Last run** cell opens the run in a window titled **Run details**. **Run history** lists an entry's earlier runs, in a window still titled *Latest Executions*; select one for the same details. On **Background tasks** the run opens in the panel beside the list rather than in a window.
+
+However you got there, what you are looking at is the same thing.
 
 A run is made of **steps**, one per unit of work it did. Each step carries its own message, and a step can attach:
 
@@ -61,6 +65,6 @@ A run whose files have already been removed is expected, not a fault — the run
 | What | How long it is kept |
 | --- | --- |
 | The run and its logs | 30 days |
-| The import files the run read | 30 days, or the most recent 5,000 imports — whichever comes first |
+| The import files the run read | 30 days, or the most recent 5,000 runs **of that data source** — whichever comes first |
 
 After that the run no longer appears in **Run history** or in **Background tasks**, and its files can no longer be downloaded or used to start the run again. Because the two clean-ups run on their own schedules, a run's files can go a few hours before the run itself does.
