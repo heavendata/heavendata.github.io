@@ -39,8 +39,9 @@ Everything in this section runs **on our servers, using the credentials the sour
 already has**. Your browser never sees the password, and nothing here reaches outside
 the folder the source is configured for.
 
-**Save the data source first.** These controls act on the saved source, so on a
-source you have not saved yet they are inactive and the screen says so.
+**Save the data source first.** These controls act on the saved source, so on a source
+you have not saved yet they are inactive — beside the dataset's file name the screen
+says *"Save the data source before loading its fields."*
 
 ### Test connection
 
@@ -91,9 +92,9 @@ controls beside that field do the work for you.
 
 | Control | What it does |
 | --- | --- |
-| **Browse** | Opens the source's folders so you can pick the file instead of typing its path |
-| **Download file** | Saves the file the dataset points at, without running an import |
 | **Load fields** | Reads the file's column names into the mapper, so you can map without typing them |
+| **Download file** | Saves the file the dataset points at, without running an import |
+| **Browse** | Opens the source's folders so you can pick the file instead of typing its path |
 
 ### Browse
 
@@ -125,14 +126,19 @@ left, without running an import to find out.
 **Load fields** reads the file and offers its column names to the mapper as source
 fields, so mapping a new dataset does not start with typing column names by hand.
 
-The file needs a header row — a first row of column names. If there is not one, the
-result says so:
+The column names come from the file itself, so the file has to have them where the
+dataset's format settings say they are. When nothing usable is found, the result says:
 
 > Couldn't read the fields. No column names were found — check that the file has a
 > header row, then try again.
 
-If the file cannot be read at all, the message names that instead, and the fields
-already mapped are left alone. Loading fields never discards mapping you have done.
+When the file cannot be read at all — it is not there, or it is not a format we can
+read — the message says that instead:
+
+> Couldn't read the fields. Check that the file is on the server, then try again.
+
+Either way the mapping you have already done is left alone. Loading fields replaces the
+list of **source fields** offered by the file; it does not touch your mapped targets.
 
 ## Running a data source
 
@@ -189,20 +195,26 @@ replaced it in the meantime.
 
 The new run stores its own copy of those files, so it can itself be run again.
 
-If a run has no stored files, it cannot be started this way and the button says so:
+If a run has no stored files, it cannot be started this way. The button is not there at
+all, and a message stands in its place:
 
 > No files are stored for this import. Start a new run of the data source instead.
 
 ## Reading what a run did
 
-An import leaves **one step per dataset**, and the step is where you find out what
-happened to that file. Each names its dataset and carries that dataset's counts, its
-own log file, and the file it read.
+**Each dataset the run took on leaves a step**, and that step is where you find out what
+happened to its file. A run also leaves steps of its own — a final status, and any error
+it hit — so a run of one dataset can still show more than one step.
+
+A dataset's step names its file. When that file was read, the step also carries the
+dataset's counts, its own log file, and a copy of the file itself; a step for a dataset
+whose file never arrived carries the reason instead, and one for a dataset the run never
+reached carries only that.
 
 | The step says | What it means |
 | --- | --- |
 | A count of records imported | The file was read and those records went in |
-| A count imported, and a count with values that could not be read | The records were imported; some individual values were rejected and left unset. A rejected value does not fail its record |
+| A count imported, and a count of records with values that could not be read | Some values in the file were not accepted. Read the step's log file before assuming the rest of those records went in — it names each one and what was wrong with it |
 | Records that could not be imported | Those records were not written. The step's log file lists them |
 | Not imported, naming an earlier file | The run stopped at that earlier dataset, so this one never ran |
 
