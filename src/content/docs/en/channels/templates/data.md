@@ -73,9 +73,9 @@ The categories a product is in are on the record as **`record._categories`**, an
 
 **The underscore is not a typo.** `record._categories` is the category tree heavendata maintains; `record.categories`, without it, is your own attribute if you have one with that code, and it is untouched. If you have no such attribute, `record.categories` is missing — a loop over it renders nothing, but `record.categories.size` stops the run, like [any missing value](/en/channels/templates/testing.html#reading-errors).
 
-**In a channel template the list is always there**, an empty list when the product is in no category — so a loop needs no guard, unlike an unset attribute. Test for emptiness with `.size`, never with `{{ if record._categories }}`: an empty list is still true.
+**In a channel template the list is always there on a product**, an empty list when the product is in no category — so a loop needs no guard, unlike an unset attribute. Test for emptiness with `{{ if record._categories.size > 0 }}` — both shorter forms lie, because an empty list is true in Scriban and so is a `size` of `0`. (A custom entity feed's record has no `_categories` at all.)
 
-**In a *Text template* node `_categories` does not exist at all.** A loop over it renders nothing and `record._categories.size` stops the run. The node is handed the record before the category list gets its name, so a product's categories are not readable there at all.
+**In a *Text template* node `_categories` does not exist at all.** A loop over it renders nothing and `record._categories.size` stops the run. The node is handed the record before the category list gets its name, so a product's categories are not available there.
 
 Each entry is one category:
 
@@ -121,7 +121,7 @@ Most receiving systems want a breadcrumb rather than a single name. Map the `pat
 {{ end }}
 ```
 
-A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `array.map "key"` instead for a path of keys, and any separator you like as the second argument of `array.join`.
+A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `array.map "key"` instead for a path of keys — a category with no key leaves an empty segment there — and any separator you like as the second argument of `array.join`.
 
 ### Order, and the sort index
 
