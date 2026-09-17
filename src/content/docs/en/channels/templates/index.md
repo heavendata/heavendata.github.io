@@ -78,7 +78,7 @@ If a template that looks correct produces nothing or fails, check this setting b
 | | |
 | --- | --- |
 | **[Template language basics](/en/channels/templates/language.html)** | The syntax: outputting values, conditions, loops, and filters |
-| **[The data in a template](/en/channels/templates/data.html)** | What `record` and `variants` contain, and how to read a plain attribute |
+| **[The data in a template](/en/channels/templates/data.html)** | What `record` and `variants` contain, how to read a plain attribute, and [a product's categories](/en/channels/templates/data.html#categories) |
 | **[Translatable attributes](/en/channels/templates/translations.html)** | Reading a value in one language, and looping over the channel's languages |
 | **[Assets](/en/channels/templates/assets.html)** | Image, PDF and file URLs, including image variants |
 | **[Custom entities](/en/channels/templates/custom-entities.html)** | Reading the records a reference attribute links to |

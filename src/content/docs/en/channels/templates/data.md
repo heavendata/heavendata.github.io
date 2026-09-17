@@ -22,7 +22,7 @@ Not sure what is available in your account? [`debug.dump`](/en/channels/template
 
 | Page | In a *Text template* node |
 | --- | --- |
-| This page | `record` and the Scriban built-ins work. `export.attribute` is empty, and `record._categories` is **not** available — a loop over it renders nothing, and `record._categories.size` stops the run. See [Categories](#categories). |
+| This page | `record` and the Scriban built-ins work. `export.attribute` is empty, and `record._categories` is not available. |
 | [Assets](/en/channels/templates/assets.html) | Works |
 | [Translatable attributes](/en/channels/templates/translations.html) | `i18n.t` always returns its fallback; `export.culture_codes` and `export.language_codes` are empty; `export.attr_label` and `export.xml_attr_labels` return an empty string |
 | [Custom entities](/en/channels/templates/custom-entities.html) | `export.custom_entity` and `export.load_custom_entities` **throw** — *"custom entity data is not available in mapper field templates"* |
@@ -71,9 +71,11 @@ The categories a product is in are on the record as **`record._categories`**, an
 {{ end }}
 ```
 
-**The underscore is not a typo.** `record._categories` is the category tree heavendata maintains; `record.categories`, without it, is your own attribute if you have one with that code, and it is untouched. If you have no such attribute, `record.categories` is missing — a loop over it renders nothing, but `record.categories.size` stops the run, the way [any missing value does](/en/channels/templates/language.html#what-counts-as-false).
+**The underscore is not a typo.** `record._categories` is the category tree heavendata maintains; `record.categories`, without it, is your own attribute if you have one with that code, and it is untouched. If you have no such attribute, `record.categories` is missing — a loop over it renders nothing, but `record.categories.size` stops the run, like [any missing value](/en/channels/templates/testing.html#reading-errors).
 
-**In a channel template the list is always there** — an empty list when the product is in no category, never a missing key — so `{{ for }}` and `.size` are both safe without a guard, unlike an unset attribute. Test it with `.size`: `{{ if record._categories }}` is always taken, because an empty list is true in Scriban. (In a *Text template* node `_categories` does not exist at all — see the caution at the top of this page.)
+**In a channel template the list is always there**, an empty list when the product is in no category — so a loop needs no guard, unlike an unset attribute. Test for emptiness with `.size`, never with `{{ if record._categories }}`: an empty list is still true.
+
+**In a *Text template* node `_categories` does not exist at all.** A loop over it renders nothing and `record._categories.size` stops the run. The node is handed the record before the category list gets its name, so a product's categories are not readable there at all.
 
 Each entry is one category:
 
@@ -87,13 +89,11 @@ Each entry is one category:
 
 `key` and `parent_key` are left out rather than set to an empty text, which is what makes `{{ if c.key }}` a reliable test — an empty text would be true. `{{ c.key }}` renders nothing either way.
 
-**Only the categories a product is actually assigned to are listed**, each once. A parent category the product is not itself assigned to is not an entry of its own; it appears in the assigned category's `path`. Entries arrive in the order the category tree reads: a category before its subcategories, sibling categories by `sort_index`.
+**Only the categories a product is actually assigned to are listed**, each once. A parent category the product is not itself assigned to is not an entry of its own; it appears in the assigned category's `path`.
 
 A category deleted after a product was assigned to it is simply absent from the list; it is not an error and not an empty entry.
 
-:::caution[Escape what you write into XML]
-A category can be called *Shoes & Boots*. The examples on this page are deliberately bare; in a real template pass every value through [`export.xmlize`](/en/channels/templates/functions.html) or `html.escape`, as [template language basics](/en/channels/templates/language.html#strings-and-escaping) explains.
-:::
+The examples below are deliberately bare, because the **Try it** links run them in Scriban's own playground, which has none of our functions. A category can be called *Shoes & Boots*, so in a real template pass every value through [`export.xmlize`](/en/channels/templates/functions.html#exportxmlize).
 
 ### A variant's own categories
 
@@ -126,6 +126,8 @@ A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `a
 ### Order, and the sort index
 
 The entries already come in the order the app shows: a category before its subcategories, sibling categories by their sort index. Writing `sort_index` out, as the first example does, is usually all a receiving system needs to reproduce that order.
+
+**The numbers are positions the PIM maintains, not the numbering a source system sent.** An import applies the order it is given and then keeps its own, so a category dragged in the app gets a new `sort_index` and an imported one will not match the number in the source.
 
 `sort_index` counts **within one parent**, so two categories under different parents can share a number, and sorting a whole list by it interleaves the levels rather than ordering them. When you want a different order, sort on something that means the same at every level — alphabetical, say:
 
@@ -174,3 +176,9 @@ Each needs a function to read, and each has its own page covering the attribute 
 ```
 
 For a translated label use [`export.attr_label`](/en/channels/templates/translations.html#exportattr_label).
+
+## What to read next
+
+- [Template language basics](/en/channels/templates/language.html) — the syntax, and what the **Try it** links on this page run
+- [Template function reference](/en/channels/templates/functions.html) — everything callable, including `export.xmlize`
+- [Testing and debugging templates](/en/channels/templates/testing.html) — the preview, `debug.dump`, and the errors a missing value raises
