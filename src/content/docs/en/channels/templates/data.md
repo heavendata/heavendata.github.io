@@ -65,7 +65,7 @@ To group variants — the usual case being color, with sizes underneath — use 
 
 The categories a product is in are on the record as **`record._categories`**, and per variant as **`variant._categories`**:
 
-```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":3,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":3}]},{"key":"sale","name":"Sale","sort_index":2,"path":[{"key":"sale","name":"Sale","sort_index":2}]}]}}'
+```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}}'
 {{ for c in record._categories }}
   <category key="{{ c.key }}" sort="{{ c.sort_index }}">{{ c.name }}</category>
 {{ end }}
@@ -83,7 +83,7 @@ Each entry is one category:
 | --- | --- |
 | `key` | The category key — the identifier the system that imported the category knows it by. **Missing** when the category has no key. |
 | `name` | The category name |
-| `sort_index` | The category's position among its sibling categories, counted from 1 |
+| `sort_index` | The category's place in the whole category tree, read from top to bottom, counted from 1. No two categories share a number. |
 | `parent_key` | The parent category's key. **Missing** for a top-level category, and when the parent has no key. |
 | `path` | The category and every category above it, top-level first — each with `key`, `name` and `sort_index`, and nothing else |
 
@@ -99,7 +99,7 @@ The examples below are deliberately bare, because the **Try it** links run them 
 
 `variant._categories` is the variant's own categories **plus** everything it inherits from the product and from any variant above it, in the same tree order. `record._categories` is the product's:
 
-```plaintext frame="none" try model='{"record":{"_categories":[{"key":"sale","name":"Sale","sort_index":2,"path":[{"key":"sale","name":"Sale","sort_index":2}]}]},"variants":[{"ean":"4006381333931","_categories":[{"key":"shirts","name":"Shirts","sort_index":3,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":3}]},{"key":"sale","name":"Sale","sort_index":2,"path":[{"key":"sale","name":"Sale","sort_index":2}]}]}]}'
+```plaintext frame="none" try model='{"record":{"_categories":[{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]},"variants":[{"ean":"4006381333931","_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}]}'
 {{ for variant in variants }}
   <variant ean="{{ variant.ean }}">
     {{- for c in variant._categories }}
@@ -115,7 +115,7 @@ The product is in *Sale*; the variant adds *Shirts*, and its list carries both.
 
 Most receiving systems want a breadcrumb rather than a single name. Map the `path` to its names and join them:
 
-```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":3,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":3}]},{"key":"sale","name":"Sale","sort_index":2,"path":[{"key":"sale","name":"Sale","sort_index":2}]}]}}'
+```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}}'
 {{ for c in record._categories }}
   <category>{{ c.path | array.map "name" | array.join "//" }}</category>
 {{ end }}
@@ -125,22 +125,17 @@ A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `a
 
 ### Order, and the sort index
 
-The entries already come in the order the app shows: a category before its subcategories, sibling categories by their sort index. Writing `sort_index` out, as the first example does, is usually all a receiving system needs to reproduce that order.
+The entries already come in the order the app shows: a category before its subcategories, sibling categories by their sort index. Writing `sort_index` out, as the first example does, is all a receiving system needs to reproduce that order.
+
+`sort_index` is the category's place in the **whole** category tree, read from top to bottom, counted from 1 — and no two categories share a number. So a receiving system that holds categories as a flat list can sort them by it and get the order the app shows back, nesting and all. In the example above *Clothing* is 1, *Shirts* — under it — is 2, and *Sale*, a top-level category that comes after *Clothing*, is 3.
 
 **The numbers are positions the PIM maintains, not the numbering a source system sent.** An import applies the order it is given and then keeps its own, so a category dragged in the app gets a new `sort_index` and an imported one will not match the number in the source.
 
-`sort_index` counts **within one parent**, so two categories under different parents can share a number, and sorting a whole list by it interleaves the levels rather than ordering them. When you want a different order, sort on something that means the same at every level — alphabetical, say:
-
-```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":3,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":3}]},{"key":"sale","name":"Sale","sort_index":2,"path":[{"key":"sale","name":"Sale","sort_index":2}]}]}}'
-{{ sorted = record._categories | array.sort "name" }}
-{{ for c in sorted }}
-  <category>{{ c.name }}</category>
-{{ end }}
-```
+**Sort indexes shift when the tree changes.** Inserting a category renumbers every category below it, because the numbers have to stay in reading order. They order categories; they do not identify them — that is what `key` is for.
 
 ### Is the product in one particular category?
 
-```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":3,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":3}]},{"key":"sale","name":"Sale","sort_index":2,"path":[{"key":"sale","name":"Sale","sort_index":2}]}]}}'
+```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}}'
 {{ if record._categories | array.map "key" | array.contains "sale" }}
   <sale>true</sale>
 {{ end }}
