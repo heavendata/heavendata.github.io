@@ -125,13 +125,13 @@ A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `a
 
 ### Order, and the sort index
 
-The entries already come in the order the app shows: a category before its subcategories, sibling categories by their sort index. Writing `sort_index` out, as the first example does, is all a receiving system needs to reproduce that order.
+The entries already come in the order the app shows: a category before its subcategories, sibling categories in the order they sit in. That is ascending `sort_index` order all the way down, so writing `sort_index` out, as the first example does, is all a receiving system needs to reproduce it.
 
-`sort_index` is the category's place in the **whole** category tree, read from top to bottom, counted from 1 — and no two categories share a number. So a receiving system that holds categories as a flat list can sort them by it and get the order the app shows back, nesting and all. In the example above *Clothing* is 1, *Shirts* — under it — is 2, and *Sale*, a top-level category that comes after *Clothing*, is 3.
+`sort_index` is the category's place in the **whole** category tree, read from top to bottom, counted from 1 — and no two categories share a number. So a receiving system that holds categories as a flat list can sort them by it and get the order the app shows back — a category before its subcategories. (To rebuild the nesting itself, rather than just the order, use `parent_key` or `path`.) In the example above *Clothing* is 1, *Shirts* — under it — is 2, and *Sale*, a top-level category that comes after *Clothing*, is 3.
 
 **The numbers are positions the PIM maintains, not the numbering a source system sent.** An import applies the order it is given and then keeps its own, so a category dragged in the app gets a new `sort_index` and an imported one will not match the number in the source.
 
-**Sort indexes shift when the tree changes.** Inserting a category renumbers every category below it, because the numbers have to stay in reading order. They order categories; they do not identify them — that is what `key` is for.
+**Sort indexes shift when the tree changes.** Inserting a category renumbers every category after it in reading order, because the numbers have to stay in that order. They order categories; they do not identify them — that is what `key` is for.
 
 ### Is the product in one particular category?
 
