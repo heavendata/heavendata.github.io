@@ -63,7 +63,7 @@ To group variants — the usual case being color, with sizes underneath — use 
 
 ## Categories
 
-The categories a product is in are on the record as **`record._categories`**, and per variant as **`variant._categories`**:
+Products and their variants can belong in categories. The categories a product is in are in a list on **`record._categories`**, and per variant as **`variant._categories`**. If the product has no categories, the list is empty.
 
 ```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}}'
 {{ for c in record._categories }}
@@ -71,11 +71,7 @@ The categories a product is in are on the record as **`record._categories`**, an
 {{ end }}
 ```
 
-**The underscore is not a typo.** `record._categories` is the category tree heavendata maintains; `record.categories`, without it, is your own attribute if you have one with that code, and it is untouched. If you have no such attribute, `record.categories` is missing — a loop over it renders nothing, but `record.categories.size` stops the run, like [any missing value](/en/channels/templates/testing.html#reading-errors).
-
-**In a channel template the list is always there on a product**, an empty list when the product is in no category — so a loop needs no guard, unlike an unset attribute. Test for emptiness with `{{ if record._categories.size > 0 }}` — both shorter forms lie, because an empty list is true in Scriban and so is a `size` of `0`. (A custom entity feed's record has no `_categories` at all.)
-
-**In a *Text template* node `_categories` does not exist at all.** A loop over it renders nothing and `record._categories.size` stops the run. The node is handed the record before the category list gets its name, so a product's categories are not available there.
+**The underscore is important,** it exists to differentiate the product's categories from a possible attribute named `categories`.
 
 Each entry is one category:
 
@@ -87,9 +83,9 @@ Each entry is one category:
 | `parent_key` | The parent category's key. **Missing** for a top-level category, and when the parent has no key. |
 | `path` | The category and every category above it, top-level first — each with `key`, `name` and `sort_index`, and nothing else |
 
-`key` and `parent_key` are left out rather than set to an empty text, which is what makes `{{ if c.key }}` a reliable test — an empty text would be true. `{{ c.key }}` renders nothing either way.
+`key` and `parent_key` are left out rather than set to an empty text, so you can test using `{{ if c.key }}`.
 
-**Only the categories a product is actually assigned to are listed**, each once. A parent category the product is not itself assigned to is not an entry of its own; it appears in the assigned category's `path`.
+**Only the categories a product is actually assigned to are listed**, each once. The parent categories don't appear unless the product is directly assigned to the parent categories as well. Use the `path` field to walk through a category's parents.
 
 A category deleted after a product was assigned to it is simply absent from the list; it is not an error and not an empty entry.
 
