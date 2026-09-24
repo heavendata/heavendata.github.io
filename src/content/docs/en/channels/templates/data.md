@@ -63,7 +63,7 @@ To group variants — the usual case being color, with sizes underneath — use 
 
 ## Categories
 
-Products and their variants can belong in categories. The categories a product is in are in a list on **`record._categories`**, and per variant as **`variant._categories`**. If the product has no categories, the list is empty.
+Products and their variants can belong in categories. The categories a product is in are in a list on **`record._categories`**, and per variant as **`variant._categories`**. If the product has no categories, the list is empty. What a category key and the sort index are, and how products get their categories: [Categories](/en/concepts/categories.html).
 
 ```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}}'
 {{ for c in record._categories }}
