@@ -26,7 +26,7 @@ Search | Search in products; see below for details.
 Row height | Set the height of the list rows.
 Views | Save and restore list views; see below for details.
 Columns | Manage which attributes to show in the list.
-Categories | Filter product list by product category.
+Categories | Filter product list by category.
 Action | Apply actions to multiple products.
 
 ## Searching and Filtering Products
