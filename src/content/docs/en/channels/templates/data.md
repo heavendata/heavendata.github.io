@@ -77,7 +77,7 @@ Each entry is one category:
 
 | Property | Description |
 | --- | --- |
-| `key` | The category key — the identifier the category is known by for data exchange. It's set in the category editor or by an import; see [Setting a category key](/en/concepts/categories.html#setting-a-category-key). **Missing** when the category has no key. |
+| `key` | The category key — the identifier the category is known by for data exchange. It's set under **Settings → Product categories** or by an import; see [Setting a category key](/en/concepts/categories.html#setting-a-category-key). **Missing** when the category has no key. |
 | `name` | The category name |
 | `sort_index` | The category's place in the whole category tree, read from top to bottom, counted from 1. No two categories share a number. |
 | `parent_key` | The parent category's key. **Missing** for a top-level category, and when the parent has no key. |

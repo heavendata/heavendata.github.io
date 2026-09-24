@@ -38,14 +38,14 @@ The sort index follows the order you set: a parent category comes before its sub
 
 ### Setting a category key
 
-Open a category with the pencil on its row in the tree, or open a root's page, and fill in **Category key**. On a root's page, the pencil edits the name and the key together, and the check mark saves both.
+Open a category with the pencil on its row in the tree, or open a root's page, and fill in **Category key**. The field is also there when you create a category with **New category** or **Add subcategory**, and when you create a root with **New category tree**. On a root's page, the pencil edits the name and the key together, and the check mark saves both.
 
 - **The key is optional.** Empty the field to remove a key.
-- **It's saved without spaces at the start or end.** Spaces inside a key are kept.
-- **It can't contain tabs, line breaks or other invisible characters.** The app says so under the field, and nothing is saved.
+- **It's saved without spaces, tabs or line breaks at the start or end.** Spaces inside a key are kept.
+- **Apart from that, it can't contain tabs, line breaks or other invisible characters.** The app says so under the field, and nothing is saved.
 - **Every key is unique in your account.** If another category already uses the key, the app names that category under the field, and nothing is saved.
 
-A key you set is the one an export shows and an import finds the category by. Before you change the key of a category an import maintains, read [Categories an import maintains](#categories-an-import-maintains).
+A key you set is the one an export shows and an import finds the category by. Before you change or remove the key of a category an import maintains, read [Categories an import maintains](#categories-an-import-maintains).
 
 ## How a product gets its categories
 
@@ -67,9 +67,9 @@ If an import maintains your categories, each of its runs sets them back to what 
 
 **Which categories.** An import finds its categories by their **Category key**: it maintains the categories whose key the source system sends. A key alone doesn't mean an import maintains a category, because you can [set keys yourself](#setting-a-category-key).
 
-**Changing the key of a category an import maintains disconnects it from the import.** The next run finds no category under the old key, so it creates a new category with that key and moves the subcategories the import sends under it. If the import also files products into categories, it files them into the new category and takes them out of the old one. The category whose key you changed keeps its name and parent category, and from then on the import treats it like any category it doesn't send (see the table below).
+**Changing or removing the key of a category an import maintains disconnects it from the import.** The next run finds no category under the old key, so it creates a new category with that key and moves the subcategories the import sends under it. If the import also files products into categories, it files them into the new category and takes them out of the old one. The category whose key you changed keeps its name and parent category, and from then on the import treats it like any category it doesn't send (see the table below).
 
-To undo it before the next run, set the old key back. After the run, the new category holds the old key, so the app refuses it as already used: remove the key from the new category first, give the old key back to the category you changed, and the next run moves the subcategories and products back. Then delete the new category, which an import never does.
+To undo it before the next run, set the old key back. After the run, the new category holds the old key, so the app refuses it as already used: remove the key from the new category first, then give the old key back to the category you changed. Do both before the next run, or it creates yet another category under the old key. The next run after that moves the subcategories and products back. Then delete the new category, which an import never does.
 
 **What each run changes.** For the categories the import sends, and for the ones it doesn't:
 
@@ -83,7 +83,7 @@ To undo it before the next run, set the old key back. After the run, the new cat
 | A category the import doesn't send — including every category without a key | Its name, parent category and settings are kept. Its place can change: where it has sibling categories the import sends, it moves after them, keeping its order among the others the import doesn't send. |
 | You delete the category | The next run creates it again, as a new category. Products are in it only if the import files them there. |
 
-**What it never does.** An import never deletes a category: one that no longer exists in the source system stays until you delete it. And it doesn't match categories by name: it takes over a category you created by hand only once you give it the key the source system uses for it. Otherwise it creates a new category, even when one with the same name exists. A root the import creates is primary; a category it moves to the top level isn't.
+**What it never does.** An import never deletes a category: one that no longer exists in the source system stays until you delete it. And it doesn't match categories by name: it takes over a category you created by hand only once you give it the key the source system uses for it. If a run already created a category under that key, the app refuses the key as already used until you remove it from that category. Otherwise it creates a new category, even when one with the same name exists. A root the import creates is primary; a category it moves to the top level isn't.
 
 **A product's categories.** If an import also files products into categories, each run sets a product's own categories to the list from the source system. A category you added to the product in the app is removed, and one you removed is added again; an empty list removes them all. Categories you assign to a variant are never changed by an import.
 
