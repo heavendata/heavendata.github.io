@@ -1,6 +1,6 @@
 ---
 title: "The data in a template"
-description: "What record and variants contain, how to read an attribute by its code, and which page covers each of the other value types."
+description: "What record and variants contain, how to read an attribute by its code, how to read a product's categories, and which page covers each of the other value types."
 ---
 
 What a template can read, and how to read a plain attribute. For the syntax see [template language basics](/en/channels/templates/language.html); for the functions, the [function reference](/en/channels/templates/functions.html).
@@ -22,7 +22,7 @@ Not sure what is available in your account? [`debug.dump`](/en/channels/template
 
 | Page | In a *Text template* node |
 | --- | --- |
-| This page | `record` and the Scriban built-ins work. `export.attribute` is empty. |
+| This page | `record` and the Scriban built-ins work. `export.attribute` is empty, and `record._categories` is not available. |
 | [Assets](/en/channels/templates/assets.html) | Works |
 | [Translatable attributes](/en/channels/templates/translations.html) | `i18n.t` always returns its fallback; `export.culture_codes` and `export.language_codes` are empty; `export.attr_label` and `export.xml_attr_labels` return an empty string |
 | [Custom entities](/en/channels/templates/custom-entities.html) | `export.custom_entity` and `export.load_custom_entities` **throw** — *"custom entity data is not available in mapper field templates"* |
@@ -61,6 +61,84 @@ Inside the loop, `variant` holds that variant's values while `record` still refe
 
 To group variants — the usual case being color, with sizes underneath — use [`export.variants_by`](/en/channels/templates/functions.html#exportvariants_by).
 
+## Categories
+
+Products and their variants can belong in categories. The categories a product is in are in a list on **`record._categories`**, and per variant as **`variant._categories`**. If the product has no categories, the list is empty.
+
+```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}}'
+{{ for c in record._categories }}
+  <category key="{{ c.key }}" sort="{{ c.sort_index }}">{{ c.name }}</category>
+{{ end }}
+```
+
+**The underscore is important,** it exists to differentiate the product's categories from a possible attribute named `categories`.
+
+Each entry is one category:
+
+| Property | Description |
+| --- | --- |
+| `key` | The category key — the identifier the system that imported the category knows it by. **Missing** when the category has no key. |
+| `name` | The category name |
+| `sort_index` | The category's place in the whole category tree, read from top to bottom, counted from 1. No two categories share a number. |
+| `parent_key` | The parent category's key. **Missing** for a top-level category, and when the parent has no key. |
+| `path` | The category and every category above it, top-level first — each with `key`, `name` and `sort_index`, and nothing else |
+
+`key` and `parent_key` are left out rather than set to an empty text, so you can test using `{{ if c.key }}`.
+
+**Only the categories a product is actually assigned to are listed**, each once. The parent categories don't appear unless the product is directly assigned to the parent categories as well. Use the `path` field to walk through a category's parents.
+
+A category deleted after a product was assigned to it is simply absent from the list; it is not an error and not an empty entry.
+
+The examples below are deliberately bare, because the **Try it** links run them in Scriban's own playground, which has none of our functions. A category can be called *Shoes & Boots*, so in a real template pass every value through [`export.xmlize`](/en/channels/templates/functions.html#exportxmlize).
+
+### A variant's own categories
+
+`variant._categories` is the variant's own categories **plus** everything it inherits from the product and from any variant above it, in the same tree order. `record._categories` is the product's:
+
+```plaintext frame="none" try model='{"record":{"_categories":[{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]},"variants":[{"ean":"4006381333931","_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}]}'
+{{ for variant in variants }}
+  <variant ean="{{ variant.ean }}">
+    {{- for c in variant._categories }}
+    <category key="{{ c.key }}">{{ c.name }}</category>
+    {{- end }}
+  </variant>
+{{ end }}
+```
+
+The product is in *Sale*; the variant adds *Shirts*, and its list carries both.
+
+### The full path, as one string
+
+Most receiving systems want a breadcrumb rather than a single name. Map the `path` to its names and join them:
+
+```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}}'
+{{ for c in record._categories }}
+  <category>{{ c.path | array.map "name" | array.join "//" }}</category>
+{{ end }}
+```
+
+A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `array.map "key"` instead for a path of keys — a category with no key leaves an empty segment there — and any separator you like as the second argument of `array.join`.
+
+### Order, and the sort index
+
+The entries already come in the order the app shows: a category before its subcategories, sibling categories in the order they sit in. That is ascending `sort_index` order all the way down, so writing `sort_index` out, as the first example does, is all a receiving system needs to reproduce it.
+
+`sort_index` is the category's place in the **whole** category tree, read from top to bottom, counted from 1 — and no two categories share a number. So a receiving system that holds categories as a flat list can sort them by it and get the order the app shows back — a category before its subcategories. (To rebuild the nesting itself, rather than just the order, use `parent_key` or `path`.) In the example above *Clothing* is 1, *Shirts* — under it — is 2, and *Sale*, a top-level category that comes after *Clothing*, is 3.
+
+**The numbers are positions the PIM maintains, not the numbering a source system sent.** An import applies the order it is given and then keeps its own, so a category dragged in the app gets a new `sort_index` and an imported one will not match the number in the source.
+
+**Sort indexes shift when the tree changes.** Inserting a category renumbers every category after it in reading order, because the numbers have to stay in that order. They order categories; they do not identify them — that is what `key` is for.
+
+### Is the product in one particular category?
+
+```plaintext frame="none" try model='{"record":{"_categories":[{"key":"shirts","name":"Shirts","sort_index":2,"parent_key":"clothing","path":[{"key":"clothing","name":"Clothing","sort_index":1},{"key":"shirts","name":"Shirts","sort_index":2}]},{"key":"sale","name":"Sale","sort_index":3,"path":[{"key":"sale","name":"Sale","sort_index":3}]}]}}'
+{{ if record._categories | array.map "key" | array.contains "sale" }}
+  <sale>true</sale>
+{{ end }}
+```
+
+This tests the categories the product is **assigned** to. To match a category anywhere above it as well, test the `path` of each entry instead.
+
 ## The other value types
 
 Each needs a function to read, and each has its own page covering the attribute and the functions together:
@@ -89,3 +167,9 @@ Each needs a function to read, and each has its own page covering the attribute 
 ```
 
 For a translated label use [`export.attr_label`](/en/channels/templates/translations.html#exportattr_label).
+
+## What to read next
+
+- [Template language basics](/en/channels/templates/language.html) — the syntax, and what the **Try it** links on this page run
+- [Template function reference](/en/channels/templates/functions.html) — everything callable, including `export.xmlize`
+- [Testing and debugging templates](/en/channels/templates/testing.html) — the preview, `debug.dump`, and the errors a missing value raises
