@@ -7,7 +7,7 @@ sidebar:
 
 Categories are how you file products: a tree you build once, with top-level categories and subcategories under them, in the order you drag them into. A product can be in any number of categories, in any of your trees. Attributes describe what a product is; categories say where it belongs.
 
-The app sometimes calls a top-level category a **catalog** or a **category tree**. There is no separate catalog object: both words mean a top-level category and everything under it.
+The app sometimes calls a top-level category a **catalog** or a **category tree**. There is no separate catalog object: in the category settings, both words mean a top-level category and everything under it.
 
 ## The parts of a category tree
 
@@ -26,14 +26,15 @@ Your trees are under **Settings → Product categories**, which lists your roots
 
 In a tree:
 
+- **New category**, below the tree, adds a category at its top level, directly under the root. In a tree that is still empty, the button is **Add category**.
 - **Add subcategory** on a category's row adds a category under it.
 - **Drag** a category to move it. Drop it onto another category to make it a subcategory there, or between two categories to put it at that place in the list.
 - **Rename** a category by clicking its name, or with the pencil on its row, which opens the category's settings.
-- **Delete** a category with the trash can on its row. A category that still has subcategories can't be deleted: delete its subcategories first.
+- **Delete** a category with the trash can on its row. A category that still has subcategories can't be deleted: delete its subcategories first. Its products aren't moved to another category; in an export, the deleted category no longer appears in their list.
 
-A root's own page has its name and the **Primary** toggle. A new root is primary.
+A root's own page has its name, the **Primary** toggle and the delete button; you can also delete a root with **Delete** in its row menu on the list. A new root is primary.
 
-The sort index follows the order you set: a parent category comes before its subcategories, and sibling categories come in the order you dragged them into. Roots can't be dragged; they come in the order they were created. The count runs across all your roots without starting again at each one. Moving a category changes it, and adding a category renumbers every category after it.
+The sort index follows the order you set: a parent category comes before its subcategories, and sibling categories come in the order you dragged them into. Roots can't be dragged; they come in the order they were created, except that roots an import maintains come first, in the source system's order. The list under **Settings → Product categories** sorts roots by name, so it doesn't show this order. The count runs across all your roots without starting again at each one. Moving a category changes it, and adding a category renumbers every category after it.
 
 ## How a product gets its categories
 
@@ -51,11 +52,11 @@ Categories reach an export through a template channel, which reads them as `_cat
 
 ## Categories an import maintains
 
-If an import maintains your categories, each of its runs sets them back to what the source system says. A rename or a drag you make in the app lasts only until the next run: then the category moves back.
+If an import maintains your categories, each of its runs sets them back to what the source system says. A rename or a drag you make in the app lasts only until the next run: then the category gets its old name back, or moves back.
 
 **Which categories.** An import finds its categories by their **Category key**, so only a category with a key can be maintained by an import. To see the key of a subcategory, open it with the pencil on its row in the tree.
 
-**What each run changes.** For every category the import sends:
+**What each run changes.** For the categories the import sends, and for the ones it doesn't:
 
 | You change this in the app | On the next run |
 | --- | --- |
@@ -69,6 +70,6 @@ If an import maintains your categories, each of its runs sets them back to what 
 
 **What it never does.** An import never deletes a category: one that no longer exists in the source system stays until you delete it. And it never takes over a category you created by hand, even one with the same name — it creates a new category instead. A root the import creates is primary; a category it moves to the top level isn't.
 
-**A product's categories.** If an import also files products into categories, each run sets a product's own categories to the list from the source system. A category you added to the product in the app is removed again, and one you removed is added again; an empty list removes them all. Categories you assign to a variant are never changed by an import.
+**A product's categories.** If an import also files products into categories, each run sets a product's own categories to the list from the source system. A category you added to the product in the app is removed, and one you removed is added again; an empty list removes them all. Categories you assign to a variant are never changed by an import.
 
 **To make a change that lasts, make it in the source system.** The next run brings it into the app.
