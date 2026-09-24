@@ -11,6 +11,6 @@ section once and the rest of the documentation gets shorter.
 
 The short version: **products** carry **attributes**, which are grouped into
 **sections**. Every product has a **product type**, which decides which
-attributes apply to it. Products can have **variants**. **Catalogs** hold the
-**categories** you file products under, and **custom entities** hold reusable
-data you reference from products.
+attributes apply to it. Products can have **variants**. You file products under
+**categories**, in trees you build, and **custom entities** hold reusable data
+you reference from products.

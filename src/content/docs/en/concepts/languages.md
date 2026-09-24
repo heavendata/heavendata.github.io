@@ -2,7 +2,7 @@
 title: "Languages"
 reviewed: false
 sidebar:
-  order: 7
+  order: 8
 ---
 Define all languages used in your product data here. Those will be the languages available for translatable product attributes.
 
