@@ -68,7 +68,7 @@ The field list is grouped. Besides **Attributes**, which holds your custom attri
 | Classification | Product type | The product's [product type](/en/concepts/product-types.html), picked from a list. |
 | Classification | Categories | One [category](/en/concepts/categories.html), picked from a list. **linked directly to** finds products assigned to that category itself; **linked to, including subcategories** also finds products in any category below it. |
 | Classification | Status | **Draft**, **Published**, **Modified** or **Partially published** — the same four values as the filter in the **Status** column header. |
-| Product variants | Variant space ID | The variant configuration the product uses — see [product variants](/en/concepts/product-variants.html). |
+| Product variants | Variant space ID | The product's variant configuration: which attributes split it into product variants, level by level — for example color, then size. Every product uses exactly one of its product type's variant configurations; see [product variants](/en/concepts/product-variants.html). |
 
 An ID is entered in full, in the form `3f2b91c4-7a10-4d8e-9c55-0b1e6a2d8f77`.
 

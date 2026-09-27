@@ -51,11 +51,11 @@ A product feed writes one row per product variant, and one row for a product tha
 | `meta.producttype.key` | Product type key | Classification | The key of the product's product type, for example `shirt`. |
 | `meta.producttype.name` | Product type name | Classification | The display name of the product's product type, for example `Shirt`. |
 | `categories` | *Not offered* | — | The categories the row is in, as a list of objects with `key`, `name`, `sort_index`, `parent_key` and `path`. Always present, and an empty list when there are none. How to read it in a template: [Categories](/en/channels/templates/data.html#categories). |
-| `meta.variantdimensions` | Variant dimensions | Product variants | The attribute codes that split the product into product variants, one list per level from the top, for example `[["color"], ["size"]]`. The same on every row of one product. |
-| `meta.dimensionpath` | Variant path | Product variants | This row's values for those attributes, one entry per level from the top, for example `["red", "M"]`. Where one level splits on several attributes, their values are joined with a comma. Only on rows that are a product variant. |
+| `meta.variantdimensions` | Variant dimensions | Product variants | The attribute codes that split the product into product variants, one list per level from the top, for example `[["color"], ["size"]]`. Taken from the product's variant configuration, so the same on every row of one product. |
+| `meta.dimensionpath` | Variant path | Product variants | This row's values for those attributes, one entry per level from the top, for example `["red", "M"]`. Where one level splits on several attributes, its values are joined by commas. Only on rows that are a product variant. |
 | `meta.isvirtual` | Has product variants | Product variants | `true` on a row that has product variants below it, `false` on the lowest level. A feed mapped on the Mapping step writes the lowest level only, so there it is always `false`. |
 | `prices` | Prices | Prices and availability | The row's prices, as a list. Only on rows that have prices. |
-| `deliverywindows` | Delivery windows | Prices and availability | The row's delivery windows, as a list. Each has a `name` and an optional `from` and `until` date. Only on rows that have delivery windows. |
+| `deliverywindows` | Delivery windows | Prices and availability | The row's delivery windows, as a list: named periods, each with an optional `from` and `until` date. An import sets them; the product editor does not. Only on rows that have delivery windows. |
 | `id.stage` | *Not offered* | — | `draft` or `live` — which version of the products the run exported. The same on every row of one run. |
 
 Where a row "only" carries a key, a column mapped from it is empty on the other rows.
