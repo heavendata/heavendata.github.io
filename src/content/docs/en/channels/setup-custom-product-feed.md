@@ -32,9 +32,9 @@ These are some general setting for your feed.
 
 ## Mapping
 
-This tab defines what fields to include in a feed. On the left side, you see "source attributes". That's the product data in your heavendata database. On the right side you see "output columns" that will be written to your feed.
+This tab defines what fields to include in a feed. On the left side, you see the source fields. That's the product data in your heavendata database. On the right side you see "output columns" that will be written to your feed.
 
-Option A: Select attributes first
+Option A: Select fields first
 1. Note the "add targets" panel and click "select". In the popup, select all fields you want to include in your feed.
 2. Click on the output column name if you need to rename the column
 
@@ -44,7 +44,7 @@ Option B: Define output columns first
 
 ### Which fields you can map
 
-A feed can write any **field** a product carries, not only your own attributes. Every entry in the source list is a field, and two kinds of field have names of their own:
+A feed can write a product's other **fields** as well as your own attributes. Every entry in the source list is a field, and two kinds of field have names of their own:
 
 | Kind | What it is | Examples |
 | --- | --- | --- |

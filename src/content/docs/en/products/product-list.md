@@ -53,7 +53,7 @@ The search field allows you to search for multiple values, e.g., multiple SKUs. 
 3. Choose an operator and enter or pick a value.
 4. To add another condition, click **Add condition**. To combine some conditions separately from the rest, click **Add group**.
 
-A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); click **AND** or **OR** at the top of the group to switch. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
+A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group that reads **AND** or **OR**. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
 
 **A filter reaches a field whether or not its column is shown.** To find products created last week, filter on **Created on**; there is no need to add a column for it first.
 
@@ -68,9 +68,9 @@ The field list is grouped. Besides **Attributes**, which holds your custom attri
 | Classification | Product type | The product's [product type](/en/concepts/product-types.html), picked from a list. |
 | Classification | Categories | One [category](/en/concepts/categories.html), picked from a list. **linked directly to** finds products assigned to that category itself; **linked to, including subcategories** also finds products in any category below it. |
 | Classification | Status | **Draft**, **Published**, **Modified** or **Partially published** — the same four values as the filter in the **Status** column header. |
-| Product variants | Variant space ID | The product's variant configuration: which attributes split it into product variants, level by level — for example color, then size. Every product uses exactly one of its product type's variant configurations; see [product variants](/en/concepts/product-variants.html). |
+| Product variants | Variant space ID | The product's variant configuration: which attributes split it into product variants, level by level (for example color, then size), picked from a list. Every product uses exactly one of its product type's variant configurations; see [product variants](/en/concepts/product-variants.html). |
 
-An ID is entered in full, in the form `3f2b91c4-7a10-4d8e-9c55-0b1e6a2d8f77`.
+A **Variant ID** or **Product ID** is entered in full, in the form `3f2b91c4-7a10-4d8e-9c55-0b1e6a2d8f77`.
 
 Prices and delivery windows cannot be filtered on.
 

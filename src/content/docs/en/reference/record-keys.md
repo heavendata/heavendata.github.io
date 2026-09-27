@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-Every record a channel exports carries a fixed set of keys next to your own custom attributes: **fourteen for a product row** and **six for a custom entity record**. The tables below list each key, the field name the Mapping step shows for it, and what it holds.
+Every record a channel exports carries keys of its own next to your custom attributes: up to **fourteen on a product row** and **six on a custom entity record**. A few product keys are only on some rows; the table says which. The tables below list each key, the field name the Mapping step shows for it, and what it holds.
 
 Three words are used on this page:
 
@@ -21,7 +21,7 @@ Categories, prices, delivery windows and the product type are neither a custom a
 
 The Mapping step and a template read the same record, but they spell its keys differently. The Mapping step shows the key as the record stores it. A template puts an underscore in front of it:
 
-| On the Mapping step | In a template |
+| In the record | In a template |
 | --- | --- |
 | `meta.created` | `_meta.created`, for example `record._meta.created` |
 | `id.entityid` | `_id.entityid` |
@@ -31,7 +31,7 @@ The Mapping step and a template read the same record, but they spell its keys di
 | `categories` | `_categories` |
 | `data.color` | `color` — a custom attribute loses its `data.` prefix instead |
 
-The rule: a key that starts with `id.` or `meta.`, and the three keys `prices`, `deliverywindows` and `categories`, get an underscore in a template. For categories the underscore also keeps the product's categories apart from a custom attribute you may have coded `categories`: the attribute stays `record.categories`, and the product's categories are `record._categories`. Don't give a custom attribute the code `prices` or `deliverywindows` — it takes the place of the product's own list in an export.
+The rule: a key that starts with `id.` or `meta.`, and the three keys `prices`, `deliverywindows` and `categories`, get an underscore in a template. For categories the underscore also keeps the product's categories apart from a custom attribute you may have coded `categories`: the attribute stays `record.categories`, and the product's categories are `record._categories`. Don't give a custom attribute the code `prices` or `deliverywindows` — in a template it takes the place of the product's own list.
 
 The dots in a key are levels in a template: `_meta.producttype.key` is read as `record._meta.producttype.key`.
 
@@ -39,11 +39,11 @@ In a *Text template* node of a field processing pipeline, `record._categories` i
 
 ## Product keys
 
-A product feed writes one row per product variant, and one row for a product that has no product variants. A template channel also sees the levels above the product variants. These fourteen keys are on the row as well as your custom attributes. **Two of them are in the record but not offered as a source field on the Mapping step**; a template can still read both.
+A product feed writes one row per product variant, and one row for a product that has no product variants. A template channel also sees the levels above the product variants. These fourteen keys can be on the row as well as your custom attributes. **Two of them are in the record but not offered as a source field on the Mapping step**; a template can still read both.
 
 | Key | Field on the Mapping step | Group | What it holds |
 | --- | --- | --- | --- |
-| `id.entityid` | Variant ID | Identifiers | The ID of the product variant this row is. |
+| `id.entityid` | Variant ID | Identifiers | The ID of the product variant this row is. On a product's top level — the only row of a product without product variants — it is the product's own ID, the same as `meta.rootid`. |
 | `meta.rootid` | Product ID | Identifiers | The ID of the product the row belongs to. The same on every row of one product. |
 | `meta.parentid` | Parent variant ID | Identifiers | The ID of the level above this row in the product's variants — the product itself, or an intermediate level for a product with several variant levels. Not on the product's top level. |
 | `meta.created` | Created on | Dates | When the product was created. The same on every row of one product. |
@@ -52,13 +52,13 @@ A product feed writes one row per product variant, and one row for a product tha
 | `meta.producttype.name` | Product type name | Classification | The display name of the product's product type, for example `Shirt`. |
 | `categories` | *Not offered* | — | The categories the row is in, as a list of objects with `key`, `name`, `sort_index`, `parent_key` and `path`. Always present, and an empty list when there are none. How to read it in a template: [Categories](/en/channels/templates/data.html#categories). |
 | `meta.variantdimensions` | Variant dimensions | Product variants | The attribute codes that split the product into product variants, one list per level from the top, for example `[["color"], ["size"]]`. Taken from the product's variant configuration, so the same on every row of one product. |
-| `meta.dimensionpath` | Variant path | Product variants | This row's values for those attributes, one entry per level from the top, for example `["red", "M"]`. Where one level splits on several attributes, its values are joined by commas. Only on rows that are a product variant. |
+| `meta.dimensionpath` | Variant path | Product variants | This row's values for those attributes, one entry per level from the top, for example `["red", "M"]`. Where one level splits on several attributes, its values are joined by commas. Not on the product's top level. |
 | `meta.isvirtual` | Has product variants | Product variants | `true` on a row that has product variants below it, `false` on the lowest level. A feed mapped on the Mapping step writes the lowest level only, so there it is always `false`. |
 | `prices` | Prices | Prices and availability | The row's prices, as a list. Only on rows that have prices. |
 | `deliverywindows` | Delivery windows | Prices and availability | The row's delivery windows, as a list: named periods, each with an optional `from` and `until` date. An import sets them; the product editor does not. Only on rows that have delivery windows. |
 | `id.stage` | *Not offered* | — | `draft` or `live` — which version of the products the run exported. The same on every row of one run. |
 
-Where a row "only" carries a key, a column mapped from it is empty on the other rows.
+A column mapped from a key a row does not carry is empty on that row.
 
 Two further fields appear on the Mapping step of an **import** but are not in an exported record: **Variant space ID** and **Language code**. See [which fields an import can set](/en/channels/setup-custom-product-feed.html#which-fields-an-import-can-set).
 
