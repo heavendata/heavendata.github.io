@@ -27,12 +27,12 @@ Row height | Set the height of the list rows.
 Views | Save and restore list views; see below for details.
 Columns | Manage which attributes to show in the list.
 Categories | Filter product list by category.
-Filter | Filter the list by any field, whether or not it is shown as a column; see below.
+Filter | Filter the list by your custom attributes and the product's other fields, whether or not they are shown as columns; see below.
 Action | Apply actions to multiple products.
 
 ## Searching and filtering products
 
-Three tools narrow the list, and they work together: the search box finds products by a value you type, **Filter** in the toolbar combines conditions on any field, and the filter in a column header filters on that one column.
+Three tools narrow the list, and they work together: the search box finds products by a value you type, **Filter** in the toolbar combines conditions on many fields, and the filter in a column header filters on that one column.
 
 ### Search text box
 
@@ -53,7 +53,7 @@ The search field allows you to search for multiple values, e.g., multiple SKUs. 
 3. Choose an operator and enter or pick a value.
 4. To add another condition, click **Add condition**. To combine some conditions separately from the rest, click **Add group**.
 
-A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); click the AND/OR switch to change it. The list updates as soon as a condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
+A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); click **AND** or **OR** at the top of the group to switch. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
 
 **A filter reaches a field whether or not its column is shown.** To find products created last week, filter on **Created on**; there is no need to add a column for it first.
 

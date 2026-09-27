@@ -31,19 +31,21 @@ The Mapping step and a template read the same record, but they spell its keys di
 | `categories` | `_categories` |
 | `data.color` | `color` — a custom attribute loses its `data.` prefix instead |
 
-The rule: a key that starts with `id.` or `meta.`, and the three keys `prices`, `deliverywindows` and `categories`, get an underscore in a template. The underscore keeps them apart from a custom attribute you may have given the same code — an attribute called `categories` stays `record.categories`, and the product's categories are `record._categories`.
+The rule: a key that starts with `id.` or `meta.`, and the three keys `prices`, `deliverywindows` and `categories`, get an underscore in a template. For categories the underscore also keeps the product's categories apart from a custom attribute you may have coded `categories`: the attribute stays `record.categories`, and the product's categories are `record._categories`. Don't give a custom attribute the code `prices` or `deliverywindows` — it takes the place of the product's own list in an export.
 
 The dots in a key are levels in a template: `_meta.producttype.key` is read as `record._meta.producttype.key`.
 
+In a *Text template* node of a field processing pipeline, `record._categories` is not available — see [the data in a template](/en/channels/templates/data.html).
+
 ## Product keys
 
-A product channel writes one row per product variant, and one row for a product that has no product variants. These fourteen keys are on the row as well as your custom attributes. **Two of them are in the record but not offered as a source field on the Mapping step**; a template can still read both.
+A product feed writes one row per product variant, and one row for a product that has no product variants. A template channel also sees the levels above the product variants. These fourteen keys are on the row as well as your custom attributes. **Two of them are in the record but not offered as a source field on the Mapping step**; a template can still read both.
 
 | Key | Field on the Mapping step | Group | What it holds |
 | --- | --- | --- | --- |
 | `id.entityid` | Variant ID | Identifiers | The ID of the product variant this row is. |
 | `meta.rootid` | Product ID | Identifiers | The ID of the product the row belongs to. The same on every row of one product. |
-| `meta.parentid` | Parent variant ID | Identifiers | The ID of the product variant one level up. Only on rows that have one. |
+| `meta.parentid` | Parent variant ID | Identifiers | The ID of the level above this row in the product's variants — the product itself, or an intermediate level for a product with several variant levels. Not on the product's top level. |
 | `meta.created` | Created on | Dates | When the product was created. The same on every row of one product. |
 | `meta.updated` | Last updated | Dates | When the product was last changed. The same on every row of one product. |
 | `meta.producttype.key` | Product type key | Classification | The key of the product's product type, for example `shirt`. |
@@ -51,7 +53,7 @@ A product channel writes one row per product variant, and one row for a product 
 | `categories` | *Not offered* | — | The categories the row is in, as a list of objects with `key`, `name`, `sort_index`, `parent_key` and `path`. Always present, and an empty list when there are none. How to read it in a template: [Categories](/en/channels/templates/data.html#categories). |
 | `meta.variantdimensions` | Variant dimensions | Product variants | The attribute codes that split the product into product variants, one list per level from the top, for example `[["color"], ["size"]]`. The same on every row of one product. |
 | `meta.dimensionpath` | Variant path | Product variants | This row's values for those attributes, one entry per level from the top, for example `["red", "M"]`. Where one level splits on several attributes, their values are joined with a comma. Only on rows that are a product variant. |
-| `meta.isvirtual` | Has product variants | Product variants | `true` if this row has product variants of its own below it, `false` if it is at the lowest level. |
+| `meta.isvirtual` | Has product variants | Product variants | `true` on a row that has product variants below it, `false` on the lowest level. A feed mapped on the Mapping step writes the lowest level only, so there it is always `false`. |
 | `prices` | Prices | Prices and availability | The row's prices, as a list. Only on rows that have prices. |
 | `deliverywindows` | Delivery windows | Prices and availability | The row's delivery windows, as a list. Each has a `name` and an optional `from` and `until` date. Only on rows that have delivery windows. |
 | `id.stage` | *Not offered* | — | `draft` or `live` — which version of the products the run exported. The same on every row of one run. |
