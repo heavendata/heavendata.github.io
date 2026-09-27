@@ -170,6 +170,7 @@ For a translated label use [`export.attr_label`](/en/channels/templates/translat
 
 ## What to read next
 
+- [Record keys](/en/reference/record-keys.html) — the keys a record carries besides its attributes, such as `_meta.created` and `_id.entityid`
 - [Template language basics](/en/channels/templates/language.html) — the syntax, and what the **Try it** links on this page run
 - [Template function reference](/en/channels/templates/functions.html) — everything callable, including `export.xmlize`
 - [Testing and debugging templates](/en/channels/templates/testing.html) — the preview, `debug.dump`, and the errors a missing value raises

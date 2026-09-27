@@ -32,10 +32,10 @@ These are some general setting for your feed.
 
 ## Mapping
 
-This tab defines what attributes to include in a feed. On the left side, you see "source attributes". That's the product data in your heavendata database. On the right side you see "output columns" that will be written to your feed.
+This tab defines what fields to include in a feed. On the left side, you see "source attributes". That's the product data in your heavendata database. On the right side you see "output columns" that will be written to your feed.
 
 Option A: Select attributes first
-1. Note the "add targets" panel and click "select". In the popup, select all attributes you want to include in your feed.
+1. Note the "add targets" panel and click "select". In the popup, select all fields you want to include in your feed.
 2. Click on the output column name if you need to rename the column
 
 Option B: Define output columns first
@@ -69,6 +69,8 @@ Besides **Attributes**, the source list offers these fields for a product feed. 
 | Product variants | Has product variants | `meta.isvirtual` |
 | Prices and availability | Prices | `prices` |
 | Prices and availability | Delivery windows | `deliverywindows` |
+
+What each key holds is in [record keys](/en/reference/record-keys.html#product-keys).
 
 A custom entity feed offers **Record ID**, **Custom entity key**, **Created on** and **Last updated** besides its attributes. What each key holds, including the keys a record carries that the source list does not offer, is in [record keys](/en/reference/record-keys.html).
 

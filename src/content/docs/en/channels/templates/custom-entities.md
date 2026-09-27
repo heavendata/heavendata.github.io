@@ -64,7 +64,7 @@ On a loaded record:
 | `cert.my_attribute_code` | Value of that attribute |
 | `cert._meta.name` | Name of the record |
 | `cert._meta.identifier` | Identifier of the record |
-| `cert._id.entityid` | Internal id of the record |
+| `cert._id.entityid` | ID of the record |
 
 `_meta.name` and `_meta.identifier` always match the reference's own `target_name` and `target_identifier`, so a loop over `export.load_custom_entities` does not need to carry the reference alongside it.
 
