@@ -30,9 +30,9 @@ A template channel has three templates, and they run at different times:
 
 | Template | Runs | What it can use |
 | --- | --- | --- |
-| **Header** | Once, before any products | Nothing — no product data and no functions |
+| **Header** | Once, before any products | The [Scriban built-ins](/en/channels/templates/functions.html#scriban-built-ins) only — no product data and no heavendata functions |
 | **Record** | **Once per product** (or per custom entity record) | [`record` and `variants`](/en/channels/templates/data.html), and [every function](/en/channels/templates/functions.html) |
-| **Footer** | Once, after all products | Nothing — no product data and no functions |
+| **Footer** | Once, after all products | The [Scriban built-ins](/en/channels/templates/functions.html#scriban-built-ins) only — no product data and no heavendata functions |
 
 A minimal XML feed, split across the three:
 
