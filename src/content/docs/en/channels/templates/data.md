@@ -117,7 +117,7 @@ Most receiving systems want a breadcrumb rather than a single name. Map the `pat
 {{ end }}
 ```
 
-A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `array.map "key"` instead for a path of keys — a category with no key leaves an empty segment there — and any separator you like as the second argument of `array.join`.
+A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `array.map "key"` instead for a path of keys, and any separator you like as the second argument of `array.join`. **A category with no key is left out of a path of keys, not left empty,** so the result has fewer levels than the path, and nothing in it shows which one is missing: *Shirts* with the key `shirts`, under a *Clothing* that has no key, gives just `shirts`.
 
 ### Order, and the sort index
 
