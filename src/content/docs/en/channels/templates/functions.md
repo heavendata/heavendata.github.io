@@ -101,10 +101,10 @@ Pass `true` as a second argument to flatten values that are themselves lists.
 
 #### `export.account_id`
 
-Your account's internal id — useful as a stable identifier in a feed header.
+Your account's internal id — useful as a stable identifier in each record. Like every heavendata function, it is not available in a header or footer template.
 
 ```xml frame="none"
-<feed account="{{ export.account_id }}">
+<product account="{{ export.account_id }}">
 ```
 
 ### Escaping and strings

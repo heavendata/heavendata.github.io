@@ -15,7 +15,7 @@ Not sure what is available in your account? [`debug.dump`](/en/channels/template
 | **`variants`** | Every variant of the current product. Only in the **record template**. |
 | **`sources`** | The inputs of a field processing pipeline. Only inside the *Text template* node, not in a channel template. |
 
-**Header and footer templates have none of these, and no functions either** — `export.*`, `asset.*`, `i18n.*` and `debug.*` are all unavailable there.
+**Header and footer templates can use only the [Scriban built-ins](/en/channels/templates/functions.html#scriban-built-ins).** The three variables above and the heavendata functions — `export.*`, `asset.*`, `i18n.*` and `debug.*` — are not available there.
 
 :::caution[A *Text template* node has no channel context]
 `record` and `sources` work in the node, but the channel data behind the `export.*` functions is not loaded there. What that means per page:
@@ -117,7 +117,7 @@ Most receiving systems want a breadcrumb rather than a single name. Map the `pat
 {{ end }}
 ```
 
-A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `array.map "key"` instead for a path of keys — a category with no key leaves an empty segment there — and any separator you like as the second argument of `array.join`.
+A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `array.map "key"` instead for a path of keys, and any separator you like as the second argument of `array.join`. **A category with no key is left out of a path of keys, not left empty,** so the result has fewer levels than the path, and nothing in it shows which one is missing: *Shirts* with the key `shirts`, under a *Clothing* that has no key, gives just `shirts`.
 
 ### Order, and the sort index
 
