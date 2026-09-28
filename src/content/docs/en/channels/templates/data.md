@@ -80,8 +80,8 @@ Each entry is one category:
 | `key` | The category key — the identifier the category is known by for data exchange. It's set under **Settings → Categories** or by an import; see [Setting a category key](/en/concepts/categories.html#setting-a-category-key). **Missing** when the category has no key. |
 | `name` | The category name |
 | `sort_index` | The category's place among all your categories, read from top to bottom, counted from 1. No two categories share a number. |
-| `parent_key` | The parent category's key. **Missing** for a category tree's own top category, and when the parent has no key. |
-| `path` | The category and every category above it, the category tree's top category first — each with `key`, `name` and `sort_index`, and nothing else |
+| `parent_key` | The parent category's key. **Missing** for a category tree's own top-level category, and when the parent has no key. |
+| `path` | The category and every category above it, the category tree's top-level category first — each with `key`, `name` and `sort_index`, and nothing else |
 
 `key` and `parent_key` are left out rather than set to an empty text, so you can test using `{{ if c.key }}`.
 
