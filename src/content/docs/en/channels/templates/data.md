@@ -77,11 +77,11 @@ Each entry is one category:
 
 | Property | Description |
 | --- | --- |
-| `key` | The category key — the identifier the category is known by for data exchange. It's set under **Settings → Product categories** or by an import; see [Setting a category key](/en/concepts/categories.html#setting-a-category-key). **Missing** when the category has no key. |
+| `key` | The category key — the identifier the category is known by for data exchange. It's set under **Settings → Categories** or by an import; see [Setting a category key](/en/concepts/categories.html#setting-a-category-key). **Missing** when the category has no key. |
 | `name` | The category name |
-| `sort_index` | The category's place in the whole category tree, read from top to bottom, counted from 1. No two categories share a number. |
-| `parent_key` | The parent category's key. **Missing** for a top-level category, and when the parent has no key. |
-| `path` | The category and every category above it, top-level first — each with `key`, `name` and `sort_index`, and nothing else |
+| `sort_index` | The category's place among all your categories, read from top to bottom, counted from 1. No two categories share a number. |
+| `parent_key` | The parent category's key. **Missing** for a category tree's own top category, and when the parent has no key. |
+| `path` | The category and every category above it, the category tree's top category first — each with `key`, `name` and `sort_index`, and nothing else |
 
 `key` and `parent_key` are left out rather than set to an empty text, so you can test using `{{ if c.key }}`.
 
@@ -123,11 +123,11 @@ A product assigned to *Shirts* under *Clothing* gives `Clothing//Shirts`. Use `a
 
 The entries already come in the order the app shows: a category before its subcategories, sibling categories in the order they sit in. That is ascending `sort_index` order all the way down, so writing `sort_index` out, as the first example does, is all a receiving system needs to reproduce it.
 
-`sort_index` is the category's place in the **whole** category tree, read from top to bottom, counted from 1 — and no two categories share a number. So a receiving system that holds categories as a flat list can sort them by it and get the order the app shows back — a category before its subcategories. (To rebuild the nesting itself, rather than just the order, use `parent_key` or `path`.) In the example above *Clothing* is 1, *Shirts* — under it — is 2, and *Sale*, a top-level category that comes after *Clothing*, is 3.
+`sort_index` is the category's place across **all** your category trees, read from top to bottom, counted from 1 — and no two categories share a number. So a receiving system that holds categories as a flat list can sort them by it and get the order the app shows back — a category before its subcategories. (To rebuild the nesting itself, rather than just the order, use `parent_key` or `path`.) In the example above *Clothing* is 1, *Shirts* — under it — is 2, and *Sale*, another category tree that comes after *Clothing*, is 3.
 
 **The numbers are positions the PIM maintains, not the numbering a source system sent.** An import applies the order it is given and then keeps its own, so a category dragged in the app gets a new `sort_index` and an imported one will not match the number in the source.
 
-**Sort indexes shift when the tree changes.** Inserting a category renumbers every category after it in reading order, because the numbers have to stay in that order. They order categories; they do not identify them — that is what `key` is for.
+**Sort indexes shift when a category tree changes.** Inserting a category renumbers every category after it in reading order, because the numbers have to stay in that order. They order categories; they do not identify them — that is what `key` is for.
 
 ### Is the product in one particular category?
 
