@@ -55,3 +55,7 @@ Close the screen when done and save the changes in product type.
 #### Test It
 
 Navigate to your product list and click "New product". Now you'll see a sidebar that lists all product types. Select the product type and you'll see the list of variant configurations that should include your new variant. Click on it to create the new product and check if the form looks as expected.
+
+## Variant fields in an export
+
+An exported product row carries its variant structure as fields — **Variant dimensions**, **Variant path**, **Parent variant ID** and **Has product variants**. What each holds: [record keys](/en/reference/record-keys.html#product-keys).
