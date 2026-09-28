@@ -15,7 +15,7 @@ Not sure what is available in your account? [`debug.dump`](/en/channels/template
 | **`variants`** | Every variant of the current product. Only in the **record template**. |
 | **`sources`** | The inputs of a field processing pipeline. Only inside the *Text template* node, not in a channel template. |
 
-**Header and footer templates have none of these, and none of the heavendata functions** — `export.*`, `asset.*`, `i18n.*` and `debug.*` are all unavailable there. The [Scriban built-ins](/en/channels/templates/functions.html#scriban-built-ins) work.
+**Header and footer templates can use only the [Scriban built-ins](/en/channels/templates/functions.html#scriban-built-ins).** The three variables above and the heavendata functions — `export.*`, `asset.*`, `i18n.*` and `debug.*` — are not available there.
 
 :::caution[A *Text template* node has no channel context]
 `record` and `sources` work in the node, but the channel data behind the `export.*` functions is not loaded there. What that means per page:
