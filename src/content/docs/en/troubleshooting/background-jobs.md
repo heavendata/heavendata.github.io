@@ -58,6 +58,26 @@ A run is made of **steps**, one per unit of work it did. Each step carries its o
 
 If a run failed, the step that failed is the one to read first: its message names the reason, and its log files carry the detail.
 
+### When a run can't reach a server
+
+A data source that fetches its files from a server, and a channel that delivers its files to one with **File transfer**, fail when they cannot get through. The step that failed then says which of the cases below it was. It names the server by its host, written as it is in the settings, and gives the port where one is set, so you can compare both with what the server actually uses. It ends with what to do next.
+
+| What the step says happened | What it means | Where the fix usually is |
+| --- | --- | --- |
+| **No server was found** at the host | The host name leads to no server at all | **The settings.** The host is mistyped, or the server has moved to a new name |
+| **The connection failed** on a port | A server was found, but the connection did not complete: nothing answered on that port in time, the port refused it, or the server answered in a different protocol — an FTP server on the SFTP port, for example | **Either end.** Compare the host, port, and protocol in the settings with what the server uses. If they match, the server may be down, or a firewall in front of it may not let us through — [our IP address](/en/reference/data-center.html) is the one to allow |
+| **The sign-in was refused** | The server answered and turned down the username and password, or the token | **The settings** first. If the credentials there are right, the account on the server may have changed or been locked — ask whoever runs the server |
+| **The file isn't there** — imports only | The connection and sign-in worked, but there is no file at the path the dataset names | **The dataset** — its file name, and the source's base path or base URL. Or the file has not been delivered yet |
+| **The settings are incomplete** — no host, for example | The settings leave out something the connection needs, so there is nothing to connect to | **The settings.** Add what the message names |
+| **An unexpected error**, a **download that failed**, or the server **reported an error** | Something other than the cases above went wrong on the way | **The step's log file.** It keeps the server's own words, which the step's message leaves out |
+| **An error on our side** | The fault is ours, not the server's or the settings' | **Contact support**, and quote the reference the step gives. It is the same id the run's details show as **Execution ID** |
+
+A data source's messages call its settings its *connection settings*: they are under **Config Source** in the data source's editor. A channel's are in its **Publishing** step. What each import message says word for word, and what to change, is in [reading what a run did](/en/import.html#reading-what-a-run-did).
+
+**A failed File transfer delivery leaves two failed steps.** The first says why the files could not be sent, as in the table. The second closes the export: it says the export couldn't finish, and at which stage it stopped — here, that the files couldn't be published. It does not repeat the reason, so read the step before it.
+
+**The email shows the same steps.** If you asked to be emailed when a run finishes — with **Notify me** while it was running — the email lists the same step messages, in the same words. A run nobody asked about sends no email, so a scheduled run's failure shows only here.
+
 ### Downloading what a step read
 
 A step's files sit under **Input and result files**, with a **Download** beside each one. A file listed as **Input** is the one that step actually read — the bytes the run worked from, kept as they were at the moment it read them.
