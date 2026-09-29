@@ -41,13 +41,13 @@ the files come to us.
 | | SFTP pull | HTTP pull | FTP push |
 | --- | --- | --- | --- |
 | **Test connection** | Yes, once a host name and username are set | Yes, once a base URL is set | No |
-| **Browse** | Yes, once a host name and username are set | No — a URL has no folders to list | No |
-| **Download file** | Yes | Yes | No |
-| **Load fields** | Yes | Yes | No |
+| **Browse** | Yes, once a host name and username are saved | No — a URL has no folders to list | No |
+| **Download file** | Yes, once a host name and username are saved | Yes | No |
+| **Load fields** | Yes, once a host name and username are saved | Yes | No |
 | **Run now**, **Run selected datasets** | Yes | Yes | No — there is nothing to fetch |
 | **Upload and import** | Yes | Yes | **Yes** — the one way to run a push source on demand |
 
-A control a source cannot support is not offered, rather than offered and then refused.
+A control a connector cannot support is not offered, rather than offered and then refused.
 
 You can save an **SFTP pull** source before you know its server details. Until it has
 a host name and a username, it is saved disabled: its schedule does not run it, and
@@ -62,8 +62,8 @@ both are entered under **Config Source**. Then tick **Enabled** and save.
 
 ## Checking a source before you rely on it
 
-Everything in this section runs **on our servers, using the credentials the source
-already has** — which is why none of it asks you for a password.
+**Test connection** runs **on our servers, using the credentials the source already
+has** — which is why it does not ask you for a password.
 
 ### Test connection
 
