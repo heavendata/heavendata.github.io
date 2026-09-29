@@ -62,7 +62,7 @@ line: **Connection works**, or the reason it did not.
 
 The reason names the cause the way a failed run does: no server found at the host, a
 connection that failed on a port, or a sign-in the server refused. An **HTTP pull** source
-with no sign-in whose server refuses the request is told so, and pointed at its
+with no sign-in whose server answers that it needs one is told so, and pointed at its
 authentication settings. The causes, and which end each points at, are in
 [when a run can't reach a server](/en/troubleshooting/background-jobs.html#when-a-run-cant-reach-a-server).
 
@@ -269,7 +269,7 @@ to run the data source again. For example:
 | The server at ‹host› didn't accept this data source's sign-in | The server turned down the token of an **HTTP pull** source | The source's authentication settings |
 | It isn't on the data source | The server has no file at that path | The dataset's file name, and the source's **base path** (SFTP) or **base URL** (HTTP) |
 | No host name is set, or no username is set | An **SFTP pull** source is missing one of the two | Enter it under **Config Source** |
-| This data source has no connection to fetch files from | An **HTTP pull** source has no base URL, and the dataset's file name is not a whole web address | Set the base URL, or give the file name as a whole web address |
+| This data source has no connection to fetch files from | An **HTTP pull** source has no usable base URL — none, or one without `https://` or `http://` — and the dataset's file name is not a whole web address | Set the base URL in full, or give the file name as a whole web address |
 | An unexpected error stopped the connection, the download failed, or the data source reported an error | Something else went wrong on the way | Read the step's log file first — it keeps the server's own words |
 | An error on our side stopped it | The fault is ours | Contact support, and quote the reference the step gives |
 
