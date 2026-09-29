@@ -14,3 +14,7 @@ Excel, JSON and others) when the receiving system will take a table, and shape
 each field with the per-field pipeline. Use a
 [**custom template**](/en/channels/templates.html) when the output has to match an exact
 document structure the other side specified.
+
+A channel that publishes by **File transfer** can be saved before its server details
+are entered under **Publishing**. It stays disabled — neither run on its schedule nor
+runnable by hand — until it has a host name, and for SFTP a username.
