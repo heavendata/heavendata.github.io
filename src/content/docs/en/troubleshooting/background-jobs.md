@@ -62,7 +62,7 @@ If a run failed, the step that failed is the one to read first: its message name
 
 ### When a run can't reach a server
 
-A data source that fetches its files from a server, and a channel that delivers its files to one with **File transfer**, fail when they cannot get through. The step that failed then says which of the cases below it was. It names the server by its host, written as it is in the settings, and gives the port where one is set, so you can compare both with what the server actually uses. It ends with what to do next.
+A data source that fetches its files from a server, and a channel that delivers its files to one with **File transfer**, fail when they cannot get through. The step that failed then says which of the cases below it was. It names the server by its host, written as it is in the settings, and — when the connection itself failed — the port it tried: the one set, or the protocol's default port where none is — so you can compare both with what the server actually uses. It ends with what to do next.
 
 | What the step says happened | What it means | Where the fix usually is |
 | --- | --- | --- |
@@ -76,7 +76,7 @@ A data source that fetches its files from a server, and a channel that delivers 
 
 A data source's messages call its settings its *connection settings*: they are under **Config Source** in the data source's editor. A channel's are in its **Publishing** step. What each import message says, and what to change, is in [when a file could not be fetched](/en/import.html#when-a-file-could-not-be-fetched).
 
-**A File transfer delivery that can't reach the server leaves two failed steps.** The first says why, as in the table. The second closes the export: it says the export couldn't finish, and at which stage it stopped — here, that the files couldn't be published. It does not repeat the reason, so read the step before it. A delivery that reached the server and then failed while sending says how many of the files were published; its log file says why the rest were not.
+**A File transfer delivery that can't reach the server leaves two failed steps.** The first says why, as in the table. The second closes the export: it says the export couldn't finish, and at which stage it stopped — here, that the files couldn't be published. It does not repeat the reason, so read the step before it. A delivery that reached the server and then failed while sending says how many of the files were published. That step has no log file of its own: why the rest were not is in `ftp-publisher.log`, under the run's **Log Files**.
 
 ### Downloading what a step read
 
