@@ -60,6 +60,12 @@ Under the source's endpoint settings, **Test connection** checks that the server
 be reached and that the credentials are accepted. The result appears on the same
 line: **Connection works**, or the reason it did not.
 
+The reason names the cause the way a failed run does: no server found at the host, a
+connection that failed on a port, or a sign-in the server refused. An **HTTP pull** source
+with no sign-in whose server refuses the request is told so, and pointed at its
+authentication settings. The causes, and which end each points at, are in
+[when a run can't reach a server](/en/troubleshooting/background-jobs.html#when-a-run-cant-reach-a-server).
+
 It tests **what is on the screen**, not only what was saved — so you can change a host
 or a user name and check the new value before saving it.
 
@@ -223,9 +229,10 @@ happened to its file. A run also leaves steps of its own — a final status, and
 it hit — so a run of one dataset can still show more than one step.
 
 A dataset's step names its file. When that file was read, the step also carries the
-dataset's counts, its own log file, and a copy of the file itself; a step for a dataset
-whose file never arrived carries the reason instead, and one for a dataset the run never
-reached carries only that.
+dataset's counts, its own log file, and a copy of the file itself. A step for a dataset
+whose file could not be fetched says why, and what to change — see
+[when a file could not be fetched](#when-a-file-could-not-be-fetched). One for a dataset
+the run never reached says only that.
 
 | The step says | What it means |
 | --- | --- |
@@ -241,6 +248,34 @@ left out of a partial run were never in it, and have no step.
 A step for a file you uploaded names both the dataset and your file — for example
 `artikel.csv (uploaded as preisliste-kw38.csv)` — so you can tell which mapping ran and
 which file went through it.
+
+### When a file could not be fetched
+
+A dataset whose file could not be fetched stops the run, and its step says why. The step
+opens with *Couldn't import* and the file name, and names the server by its host, as it is
+written in the source's settings under **Config Source** — the messages call them its
+*connection settings*. It ends with what to do next: for most causes, what to check, then
+to run the data source again. For example:
+
+> Couldn't import stock.csv. The connection to sftp.example.com on port 22 failed — check
+> that the host, port, and protocol in this data source's connection settings match the
+> server, then run the data source again.
+
+| The step goes on to say | What happened | What to change |
+| --- | --- | --- |
+| No server was found at ‹host› | The host leads to no server | The host |
+| The connection to ‹host› on port ‹port› failed | A server was found, but the connection did not complete — it timed out, the port refused it, or the server answered in another protocol. With no port set, it names the protocol's default port instead — *on the default SFTP port*, for example | The host, port, and protocol, so that they match the server |
+| The server at ‹host› refused the username and password | The server turned down the sign-in of an **SFTP pull** source | The username and password |
+| The server at ‹host› didn't accept this data source's sign-in | The server turned down the token of an **HTTP pull** source | The source's authentication settings |
+| It isn't on the data source | The server has no file at that path | The dataset's file name, and the source's **base path** (SFTP) or **base URL** (HTTP) |
+| No host name is set, or no username is set | An **SFTP pull** source is missing one of the two | Enter it under **Config Source** |
+| This data source has no connection to fetch files from | An **HTTP pull** source has no base URL, and the dataset's file name is not a whole web address | Set the base URL, or give the file name as a whole web address |
+| An unexpected error stopped the connection, the download failed, or the data source reported an error | Something else went wrong on the way | Read the step's log file first — it keeps the server's own words |
+| An error on our side stopped it | The fault is ours | Contact support, and quote the reference the step gives |
+
+What each case means for the server at the other end, and what to ask whoever runs it,
+is in
+[when a run can't reach a server](/en/troubleshooting/background-jobs.html#when-a-run-cant-reach-a-server).
 
 ### The files a run kept
 
