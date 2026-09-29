@@ -16,5 +16,6 @@ each field with the per-field pipeline. Use a
 document structure the other side specified.
 
 A channel that publishes by **File transfer** can be saved before its server details
-are entered under **Publishing**. It stays disabled — neither run on its schedule nor
-runnable by hand — until it has a host name, and for SFTP a username.
+are entered under **Publishing**. Until it has a host name, and for SFTP a username, it
+is saved disabled: it does not run on its schedule, and it can be neither enabled nor
+run by hand.
