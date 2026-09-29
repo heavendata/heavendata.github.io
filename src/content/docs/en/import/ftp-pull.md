@@ -46,8 +46,11 @@ under `archive`. That is why a file you uploaded is no longer in `import` — it
 read, not lost.
 
 **A file stays in `import`** until every file the data source expects has arrived, so a
-partial set waits there for the rest. A data source that is switched off never starts
-an import either, so its files wait until you enable it.
+partial set waits there for the rest.
+
+**Enable a new data source before you upload to it.** A data source is created with
+**Enabled** unchecked, and its FTP login works only once you have enabled it. Until then
+the server refuses the login.
 
 **Archived imports are kept for 30 days, or the most recent 5,000 imports of that data
 source — whichever comes first.** After that the folder and its files are removed. The
