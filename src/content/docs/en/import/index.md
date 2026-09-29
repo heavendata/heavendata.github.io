@@ -40,14 +40,25 @@ the files come to us.
 
 | | SFTP pull | HTTP pull | FTP push |
 | --- | --- | --- | --- |
-| **Test connection** | Yes | Yes, once a base URL is set | No |
-| **Browse** | Yes | No — a URL has no folders to list | No |
+| **Test connection** | Yes, once a host name and username are set | Yes, once a base URL is set | No |
+| **Browse** | Yes, once a host name and username are set | No — a URL has no folders to list | No |
 | **Download file** | Yes | Yes | No |
 | **Load fields** | Yes | Yes | No |
 | **Run now**, **Run selected datasets** | Yes | Yes | No — there is nothing to fetch |
 | **Upload and import** | Yes | Yes | **Yes** — the one way to run a push source on demand |
 
 A control a source cannot support is not offered, rather than offered and then refused.
+
+You can save an **SFTP pull** source before you know its server details. Until it has
+a host name and a username, it is saved disabled: its schedule does not run it, and
+**Run now** and **Run selected datasets** say what is missing instead of running.
+Saving it says so:
+
+> Data source saved as disabled. Enter a host name and a username under Config Source
+> to enable this data source.
+
+**Enabled** stays locked, with a sentence beside it saying what is still missing, until
+both are entered under **Config Source**. Then tick **Enabled** and save.
 
 ## Checking a source before you rely on it
 
@@ -61,7 +72,28 @@ be reached and that the credentials are accepted. The result appears on the same
 line: **Connection works**, or the reason it did not.
 
 It tests **what is on the screen**, not only what was saved — so you can change a host
-or a user name and check the new value before saving it.
+name or a username and check the new value before saving it.
+
+### The SFTP port
+
+Leave **Port (optional)** empty and an **SFTP pull** source connects on port 22, the
+SFTP default. Enter a port only when the server listens on a different one; the field
+takes a whole number from 1 to 65535.
+
+Port 21 belongs to FTP, and an FTP server cannot answer an SFTP request — so 21
+usually means the supplier gave you FTP details. The field warns about 21, and about
+989 and 990, the FTPS ports:
+
+> SFTP servers usually listen on port 22 — 21 is the FTP port.
+
+The warning still lets you save, because an SFTP server can listen on any port.
+
+A data source cannot fetch over FTP. When a supplier offers only FTP:
+
+- ask them for SFTP access instead;
+- if they can publish the file at a web address, use an **HTTP pull** source;
+- or have them upload the files to [our FTP server](/en/import/ftp-pull.html), with an
+  **FTP push** source.
 
 ### If the server's certificate is not trusted
 
