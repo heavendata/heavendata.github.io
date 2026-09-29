@@ -252,28 +252,27 @@ which file went through it.
 ### When a file could not be fetched
 
 A dataset whose file could not be fetched stops the run, and its step says why. The step
-opens with *Couldn't import* and the file name, and names the server by its host, as it is
-written in the source's settings under **Config Source** — the messages call them its
-*connection settings*. It ends with what to do next: for most causes, what to check, then
-to run the data source again. For example:
+opens with *Couldn't import* and the file name, and ends with what to do next — for most
+causes, what to check, then to run the data source again. What its message calls the
+source's *connection settings* are under **Config Source**. For example:
 
 > Couldn't import stock.csv. The connection to sftp.example.com on port 22 failed — check
 > that the host, port, and protocol in this data source's connection settings match the
 > server, then run the data source again.
 
-| The step goes on to say | What happened | What to change |
-| --- | --- | --- |
-| No server was found at ‹host› | The host leads to no server | The host |
-| The connection to ‹host› on port ‹port› failed | A server was found, but the connection did not complete — it timed out, the port refused it, or the server answered in another protocol. With no port set, it names the protocol's default port instead — *on the default SFTP port*, for example | The host, port, and protocol, so that they match the server |
-| The server at ‹host› refused the username and password | The server turned down the sign-in of an **SFTP pull** source | The username and password |
-| The server at ‹host› didn't accept this data source's sign-in | The server turned down the token of an **HTTP pull** source | The source's authentication settings |
-| It isn't on the data source | The server has no file at that path | The dataset's file name, and the source's **base path** (SFTP) or **base URL** (HTTP) |
-| No host name is set, or no username is set | An **SFTP pull** source is missing one of the two | Enter it under **Config Source** |
-| This data source has no connection to fetch files from | An **HTTP pull** source has no usable base URL — none, or one without `https://` or `http://` — and the dataset's file name is not a whole web address | Set the base URL in full, or give the file name as a whole web address |
-| An unexpected error stopped the connection, the download failed, or the data source reported an error | Something else went wrong on the way | Read the step's log file first — it keeps the server's own words |
-| An error on our side stopped it | The fault is ours | Contact support, and quote the reference the step gives |
+| The step goes on to say | What to change |
+| --- | --- |
+| No server was found at ‹host› | The host |
+| The connection to ‹host› on port ‹port› failed | The host, port, and protocol, so that they match the server. With no port set, the step names the protocol's default port instead — *on the default SFTP port*, for example |
+| The server at ‹host› refused the username and password | The username and password of an **SFTP pull** source |
+| The server at ‹host› didn't accept this data source's sign-in | The authentication settings of an **HTTP pull** source |
+| It isn't on the data source | The dataset's file name, and the source's **base path** (SFTP) or **base URL** (HTTP) |
+| No host name is set, or no username is set | The missing one, on an **SFTP pull** source |
+| This data source has no connection to fetch files from | The base URL of an **HTTP pull** source, written in full with `https://` or `http://` — or give the dataset's file name as a whole web address |
+| An unexpected error stopped the connection, the download failed, or the data source reported an error | Nothing yet — read the step's log file first, which keeps the server's own words |
+| An error on our side stopped it | Nothing — contact support, and quote the reference the step gives |
 
-What each case means for the server at the other end, and what to ask whoever runs it,
+What each case means, and when the fix is at the server's end rather than in the settings,
 is in
 [when a run can't reach a server](/en/troubleshooting/background-jobs.html#when-a-run-cant-reach-a-server).
 

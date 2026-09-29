@@ -58,6 +58,8 @@ A run is made of **steps**, one per unit of work it did. Each step carries its o
 
 If a run failed, the step that failed is the one to read first: its message names the reason, and its log files carry the detail.
 
+**The email shows the same steps.** If you asked, with **Notify me**, to be emailed when a run finishes, the email lists the same step messages, in the same words. A run nobody asked about sends no email, so a scheduled run's failure shows only in the app.
+
 ### When a run can't reach a server
 
 A data source that fetches its files from a server, and a channel that delivers its files to one with **File transfer**, fail when they cannot get through. The step that failed then says which of the cases below it was. It names the server by its host, written as it is in the settings, and gives the port where one is set, so you can compare both with what the server actually uses. It ends with what to do next.
@@ -72,11 +74,9 @@ A data source that fetches its files from a server, and a channel that delivers 
 | **An unexpected error**, a **download that failed**, or the server **reported an error** | Something other than the cases above went wrong on the way | **The step's log file.** It keeps the server's own words, which the step's message leaves out |
 | **An error on our side** | The fault is ours, not the server's or the settings' | **Contact support**, and quote the reference the step gives. It is the same id the run's details show as **Execution ID** |
 
-A data source's messages call its settings its *connection settings*: they are under **Config Source** in the data source's editor. A channel's are in its **Publishing** step. What each import message says, and what to change, is in [reading what a run did](/en/import.html#reading-what-a-run-did).
+A data source's messages call its settings its *connection settings*: they are under **Config Source** in the data source's editor. A channel's are in its **Publishing** step. What each import message says, and what to change, is in [when a file could not be fetched](/en/import.html#when-a-file-could-not-be-fetched).
 
 **A File transfer delivery that can't reach the server leaves two failed steps.** The first says why, as in the table. The second closes the export: it says the export couldn't finish, and at which stage it stopped — here, that the files couldn't be published. It does not repeat the reason, so read the step before it. A delivery that reached the server and then failed while sending says how many of the files were published; its log file says why the rest were not.
-
-**The email shows the same steps.** If you asked to be emailed when a run finishes — with **Notify me** before it finished — the email lists the same step messages, in the same words. A run nobody asked about sends no email, so a scheduled run's failure shows only here.
 
 ### Downloading what a step read
 
