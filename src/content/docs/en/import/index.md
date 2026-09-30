@@ -60,6 +60,12 @@ Under the source's endpoint settings, **Test connection** checks that the server
 be reached and that the credentials are accepted. The result appears on the same
 line: **Connection works**, or the reason it did not.
 
+The reason names the cause the way a failed run does: no server found at the host, a
+connection that failed on a port, or a sign-in the server refused. An **HTTP pull** source
+with no sign-in whose server answers that it needs one is told so, and pointed at its
+authentication settings. The causes, and which end each points at, are in
+[when a run can't reach a server](/en/troubleshooting/background-jobs.html#when-a-run-cant-reach-a-server).
+
 It tests **what is on the screen**, not only what was saved — so you can change a host
 or a user name and check the new value before saving it.
 
@@ -223,9 +229,10 @@ happened to its file. A run also leaves steps of its own — a final status, and
 it hit — so a run of one dataset can still show more than one step.
 
 A dataset's step names its file. When that file was read, the step also carries the
-dataset's counts, its own log file, and a copy of the file itself; a step for a dataset
-whose file never arrived carries the reason instead, and one for a dataset the run never
-reached carries only that.
+dataset's counts, its own log file, and a copy of the file itself. A step for a dataset
+whose file could not be fetched says why, and what to change — see
+[when a file could not be fetched](#when-a-file-could-not-be-fetched). One for a dataset
+the run never reached says only that.
 
 | The step says | What it means |
 | --- | --- |
@@ -241,6 +248,33 @@ left out of a partial run were never in it, and have no step.
 A step for a file you uploaded names both the dataset and your file — for example
 `artikel.csv (uploaded as preisliste-kw38.csv)` — so you can tell which mapping ran and
 which file went through it.
+
+### When a file could not be fetched
+
+A dataset whose file could not be fetched stops the run, and its step says why. The step
+opens with *Couldn't import* and the file name, and ends with what to do next — for most
+causes, what to check, then to run the data source again. What its message calls the
+source's *connection settings* are under **Config Source**. For example:
+
+> Couldn't import stock.csv. The connection to sftp.example.com on port 22 failed — check
+> that the host, port, and protocol in this data source's connection settings match the
+> server, then run the data source again.
+
+| The step goes on to say | What to change |
+| --- | --- |
+| No server was found at ‹host› | The host |
+| The connection to ‹host› on port ‹port› failed | The host, port, and protocol, so that they match the server. With no port set, the step names the protocol's default port instead — *on the default SFTP port*, for example |
+| The server at ‹host› refused the username and password | The username and password of an **SFTP pull** source |
+| The server at ‹host› didn't accept this data source's sign-in | The authentication settings of an **HTTP pull** source |
+| It isn't on the data source | The dataset's file name, and the source's **base path** (SFTP) or **base URL** (HTTP) |
+| No host name is set, or no username is set | The missing one, on an **SFTP pull** source |
+| This data source has no connection to fetch files from | The base URL of an **HTTP pull** source, written in full with `https://` or `http://` — or give the dataset's file name as a whole web address |
+| An unexpected error stopped the connection, the download failed, or the data source reported an error | Nothing yet — read the step's log file first, which keeps the server's own words |
+| An error on our side stopped it | Nothing — contact support, and quote the reference the step gives |
+
+What each case means, and when the fix is at the server's end rather than in the settings,
+is in
+[when a run can't reach a server](/en/troubleshooting/background-jobs.html#when-a-run-cant-reach-a-server).
 
 ### The files a run kept
 
