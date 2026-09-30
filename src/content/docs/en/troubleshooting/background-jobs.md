@@ -88,7 +88,7 @@ A run whose files have already been cleared lists none, and its downloads are no
 
 ### An import's steps
 
-An import leaves a step for each dataset it took on, naming that dataset's file. What those steps say, and what to do about each, is in [importing data](/en/import.html).
+An import has one step for each dataset in the run, naming that dataset's file. What those steps say, and what to do about each, is in [importing data](/en/import.html).
 
 ## How long runs are kept
 

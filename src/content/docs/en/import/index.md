@@ -224,9 +224,10 @@ this state —
 
 ## Reading what a run did
 
-**Each dataset the run took on leaves a step**, and that step is where you find out what
-happened to its file. A run also leaves steps of its own — a final status, and any error
-it hit — so a run of one dataset can still show more than one step.
+**Every dataset in the run gets its own step**: a panel under **Steps** in the run's details.
+That step is where you find out what happened to its file. A run also leaves steps of its
+own — a final status, and any error it hit — so a run of one dataset can still show more
+than one step.
 
 A dataset's step names its file. When that file was read, the step also carries the
 dataset's counts, its own log file, and a copy of the file itself. A step for a dataset
@@ -241,7 +242,7 @@ the run never reached says only that.
 | Records that could not be imported | Those records were not written. The step's log file lists them |
 | Not imported, naming an earlier file | The run stopped at that earlier dataset, so this one never ran |
 
-A run that stops part-way still leaves a step for every dataset **it took on**, so you
+A run that stops part-way still has a step for every dataset **in it**, so you
 can see where it stopped rather than finding the history simply ending. Datasets you
 left out of a partial run were never in it, and have no step.
 
