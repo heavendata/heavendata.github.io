@@ -99,14 +99,15 @@ again brings back the values you set.
 A dataset with settings of its own shows **Custom publish settings** on its card in
 **Datasets**.
 
-The data source's actions on products that **none** of its datasets included always use
-the data source's own settings, because those products belong to no dataset. A
+The data source's actions on products that **none** of its datasets included, set under
+**Options**, always use the data source's own settings, because those products belong to
+no dataset. A
 dataset's own **Untouched Products** actions use that dataset's settings.
 
 ### Which settings a run used
 
-Every product dataset's log file says which settings it ran with, directly under the
-line that starts the dataset:
+Every product dataset's log file says which settings it ran with, right after the
+*Importing dataset* line and the *Type:* line under it:
 
 ```text
 Info Publish settings configured on the data source — Publish new products: on; Apply changes to published products: on; Publish modified products: off
@@ -114,7 +115,8 @@ Info Publish settings configured on the data source — Publish new products: on
 
 The line says **configured on the dataset** when the dataset used its own, and
 **chosen for this import** for a manual import, which takes the options you pick while
-importing. [Background jobs](/en/troubleshooting/background-jobs.html) covers finding a
+importing. The line names the three options as they are named here, even where a manual
+import's own screen words its options differently. [Background jobs](/en/troubleshooting/background-jobs.html) covers finding a
 run and its log files.
 
 ## Checking a source before you rely on it
