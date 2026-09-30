@@ -49,6 +49,69 @@ the files come to us.
 
 A control a source cannot support is not offered, rather than offered and then refused.
 
+## Publish settings
+
+Publish settings decide what an import makes visible in the published catalog. A data
+source has three, under **Publish settings** in its editor, and each **product dataset**
+imports with them — unless the dataset sets its own.
+
+| Option | What it does |
+| --- | --- |
+| **Publish new products** | Publishes the products and product variants the import created. |
+| **Apply changes to published products** | Applies the imported change to product variants that are already published. Nothing new becomes visible. |
+| **Publish modified products** | Publishes each product variant a record in the file matches — including one that was never published before. |
+
+The last two are easy to confuse. **Apply changes to published products** only updates
+what is already live. **Publish modified products** also makes a product variant live
+for the first time when the file mentions it.
+
+The settings apply to product datasets only. A custom entity dataset is imported
+without them, and its window has no publish settings.
+
+### Giving a dataset its own settings
+
+A data source with several files often needs them to publish differently. Take a
+source with two product datasets:
+
+| Dataset | What the file carries | Settings it needs |
+| --- | --- | --- |
+| `variants.csv` | New and changed products, ready to go live | **Publish new products** and **Publish modified products** |
+| `prices.csv` | Price changes only | **Apply changes to published products** only — a price change should reach what is live, but must not publish a product nobody has finished |
+
+Set the data source's settings for the variant file, then give the price file its own:
+
+1. In the data source's **Datasets**, edit the dataset with the pencil button.
+2. On its **General** tab, under **Publish settings**, turn off **Use the data
+   source's publish settings**.
+3. Set the three options for this dataset, then save the data source.
+
+While **Use the data source's publish settings** is on, the three options below it are
+greyed out and show the data source's settings as they are on the page at that moment,
+saved or not. Turning it off starts the dataset from those values. Turning it back on
+drops the dataset's own settings when you save. While the window is open, turning it off
+again brings back the values you set.
+
+A dataset with settings of its own shows **Custom publish settings** on its card in
+**Datasets**.
+
+The data source's actions on products that **none** of its datasets included always use
+the data source's own settings, because those products belong to no dataset. A
+dataset's own **Untouched Products** actions use that dataset's settings.
+
+### Which settings a run used
+
+Every product dataset's log file says which settings it ran with, directly under the
+line that starts the dataset:
+
+```text
+Info Publish settings configured on the data source — Publish new products: on; Apply changes to published products: on; Publish modified products: off
+```
+
+The line says **configured on the dataset** when the dataset used its own, and
+**chosen for this import** for a manual import, which takes the options you pick while
+importing. [Background jobs](/en/troubleshooting/background-jobs.html) covers finding a
+run and its log files.
+
 ## Checking a source before you rely on it
 
 Everything in this section runs **on our servers, using the credentials the source
