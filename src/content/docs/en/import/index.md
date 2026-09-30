@@ -87,11 +87,11 @@ drops the dataset's own settings.
 A dataset with settings of its own shows **Custom publish settings** on its card in
 **Datasets**.
 
-Actions on products the file did not include follow the same split:
+Actions on untouched products, the products an import did not include, follow the same split:
 
 | Actions | Set under | Settings they use |
 | --- | --- | --- |
-| A dataset's own | the dataset's **Untouched Products** tab | that dataset's |
+| A dataset's own | the dataset's **Untouched Products** tab | the settings that dataset imports with |
 | The data source's, on products **none** of its datasets included | the data source's **Options** | always the data source's, because those products belong to no dataset |
 
 Each product dataset's log file names the settings it ran with —
@@ -300,7 +300,7 @@ which file went through it.
 
 ### Which publish settings a dataset used
 
-Every product dataset's log file says which
+The log file of every product dataset the run imports says which
 [publish settings](#publish-settings) it ran with, right after the *Importing dataset*
 line and the *Type:* line under it:
 
