@@ -65,6 +65,11 @@ The last two are easy to confuse. **Apply changes to published products** only u
 what is already live. **Publish modified products** also makes a product variant live
 for the first time when the file mentions it.
 
+A record that identifies only the product, by its base code, and no product variant
+publishes nothing new under **Publish modified products**. Its change reaches the
+product variants that are already published through **Apply changes to published
+products**.
+
 The settings apply to product datasets only. A custom entity dataset is imported
 without them, and its window has no publish settings.
 
