@@ -58,20 +58,10 @@ imports with them — unless the dataset sets its own.
 | Option | What it does |
 | --- | --- |
 | **Publish new products** | Publishes the products and product variants the import created. |
-| **Apply changes to published products** | Applies the imported change to product variants that are already published. Nothing new becomes visible. |
-| **Publish modified products** | Publishes each product variant a record in the file matches — including one that was never published before. |
+| **Apply changes to published products** | Updates product variants that are already published. Nothing new becomes visible. |
+| **Publish modified products** | Publishes each product variant a record in the file matches, including one that was never published before. A record keyed by base code addresses only the product, so it publishes no new product variant. |
 
-The last two are easy to confuse. **Apply changes to published products** only updates
-what is already live. **Publish modified products** also makes a product variant live
-for the first time when the file mentions it.
-
-A record that identifies only the product, by its base code, and no product variant
-publishes nothing new under **Publish modified products**. Its change reaches the
-product variants that are already published through **Apply changes to published
-products**.
-
-The settings apply to product datasets only. A custom entity dataset is imported
-without them, and its window has no publish settings.
+The settings apply to product datasets only; a custom entity dataset has none.
 
 ### Giving a dataset its own settings
 
@@ -87,37 +77,25 @@ Set the data source's settings for the variant file, then give the price file it
 
 1. In the data source's **Datasets**, edit the dataset with the pencil button.
 2. On its **General** tab, under **Publish settings**, turn off **Use the data
-   source's publish settings**.
+   source's publish settings**. The three options start from the data source's values.
 3. Set the three options for this dataset, then save the data source.
 
-While **Use the data source's publish settings** is on, the three options below it are
-greyed out and show the data source's settings as they are on the page at that moment,
-saved or not. Turning it off starts the dataset from those values. Turning it back on
-drops the dataset's own settings when you save. While the window is open, turning it off
-again brings back the values you set.
+While **Use the data source's publish settings** is on, the three options are grayed out
+and show the data source's current settings, saved or not. Turning it back on and saving
+drops the dataset's own settings.
 
 A dataset with settings of its own shows **Custom publish settings** on its card in
 **Datasets**.
 
-The data source's actions on products that **none** of its datasets included, set under
-**Options**, always use the data source's own settings, because those products belong to
-no dataset. A
-dataset's own **Untouched Products** actions use that dataset's settings.
+Actions on products the file did not include follow the same split:
 
-### Which settings a run used
+| Actions | Set under | Settings they use |
+| --- | --- | --- |
+| A dataset's own | the dataset's **Untouched Products** tab | that dataset's |
+| The data source's, on products **none** of its datasets included | the data source's **Options** | always the data source's, because those products belong to no dataset |
 
-Every product dataset's log file says which settings it ran with, right after the
-*Importing dataset* line and the *Type:* line under it:
-
-```text
-Info Publish settings configured on the data source — Publish new products: on; Apply changes to published products: on; Publish modified products: off
-```
-
-The line says **configured on the dataset** when the dataset used its own, and
-**chosen for this import** for a manual import, which takes the options you pick while
-importing. The line names the three options as they are named here, even where a manual
-import's own screen words its options differently. [Background jobs](/en/troubleshooting/background-jobs.html) covers finding a
-run and its log files.
+Each product dataset's log file names the settings it ran with —
+[which publish settings a dataset used](#which-publish-settings-a-dataset-used).
 
 ## Checking a source before you rely on it
 
@@ -319,6 +297,22 @@ left out of a partial run were never in it, and have no step.
 A step for a file you uploaded names both the dataset and your file — for example
 `artikel.csv (uploaded as preisliste-kw38.csv)` — so you can tell which mapping ran and
 which file went through it.
+
+### Which publish settings a dataset used
+
+Every product dataset's log file says which
+[publish settings](#publish-settings) it ran with, right after the *Importing dataset*
+line and the *Type:* line under it:
+
+```text
+Info Publish settings configured on the data source — Publish new products: on; Apply changes to published products: on; Publish modified products: off
+```
+
+| The line says | When |
+| --- | --- |
+| **configured on the data source** | The dataset used the data source's settings |
+| **configured on the dataset** | The dataset used settings of its own |
+| **chosen for this import** | A manual import, which takes the options you pick while importing |
 
 ### When a file could not be fetched
 
