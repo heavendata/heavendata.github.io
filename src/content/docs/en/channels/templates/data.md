@@ -166,7 +166,7 @@ Each needs a function to read, and each has its own page covering the attribute 
 {{ export.attribute['my-attribute'].name }}
 ```
 
-On a custom entity feed, a product attribute's code finds nothing — `export.attribute.product_name` is only there on a product feed.
+On a custom entity feed, use the custom entity's own attribute codes — a product attribute's code, such as `product_name` above, finds nothing.
 
 For a translated label use [`export.attr_label`](/en/channels/templates/translations.html#exportattr_label).
 
