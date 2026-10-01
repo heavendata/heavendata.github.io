@@ -59,7 +59,7 @@ Four namespaces we add. These are specific to product data and are not in Scriba
 | `export.xml_attr_labels` | An attribute's label in every channel language, as XML attributes | [Translatable attributes](/en/channels/templates/translations.html#exportxml_attr_labels) |
 | `export.load_custom_entities` | Every custom entity record a reference attribute links to | [Custom entities](/en/channels/templates/custom-entities.html#reading-every-linked-record--exportload_custom_entities) |
 | `export.custom_entity` | Look custom entity records up by any attribute — `.get`, `.find`, `.key` | [Custom entities](/en/channels/templates/custom-entities.html#exportcustom_entity--reference) |
-| `export.attribute` | Every configured attribute's metadata | [Data](/en/channels/templates/data.html#attribute-metadata) |
+| `export.attribute` | The metadata of the attributes the feed's records carry — product attributes, or the custom entity's own on a custom entity feed | [Data](/en/channels/templates/data.html#attribute-metadata) |
 | `export.variants_by` | Group the product's variants by an attribute | [below](#exportvariants_by) |
 | `export.collect_attribute_values` | Every distinct value of an attribute across variants | [below](#exportcollect_attribute_values) |
 | `export.account_id` | Your account's internal id | [below](#exportaccount_id) |

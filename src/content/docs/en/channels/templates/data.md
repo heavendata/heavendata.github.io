@@ -151,7 +151,7 @@ Each needs a function to read, and each has its own page covering the attribute 
 
 ## Attribute metadata
 
-`export.attribute` gives access to every configured attribute. (The channel's languages — `export.culture_codes` — are on the [translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) page.)
+`export.attribute` holds the attributes of the records the feed exports, looked up by code: every product attribute on a product feed, and only the custom entity's own attributes on a custom entity feed. (The channel's languages — `export.culture_codes` — are on the [translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) page.)
 
 | Property | Description |
 | --- | --- |
@@ -165,6 +165,8 @@ Each needs a function to read, and each has its own page covering the attribute 
 {{ export.attribute.product_name.name }}
 {{ export.attribute['my-attribute'].name }}
 ```
+
+On a custom entity feed, a product attribute's code finds nothing — `export.attribute.product_name` is only there on a product feed.
 
 For a translated label use [`export.attr_label`](/en/channels/templates/translations.html#exportattr_label).
 
