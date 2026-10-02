@@ -11,7 +11,7 @@ Typically creating attributes needs two steps: 1) create the attribute (in attri
 ## Manage Common Attributes
 
 1. Ensure all attributes are already created. If not, [create them first](./attributes.html)
-2. Go to header menu > settings > common attributes
+2. Go to sidebar > settings > common attributes
 3. Click "Manage sections" to add sections
 4. Enable the checkbox for all attributes that should be enabled for all products
 5. Click "Save"

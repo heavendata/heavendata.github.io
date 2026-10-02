@@ -7,7 +7,7 @@ You do not have to publish a channel to find out what it produces. This page cov
 
 ## Preview while you write
 
-Each template page has a **Preview** button in its toolbar. It is off by default; switch it on and a **Preview** panel opens beside the template, renders your template against real products from the channel, and re-renders about a second after each edit.
+Each template page has a **Preview** button in its toolbar. It is off by default; turn it on and a **Preview** panel opens beside the template, renders your template against real products from the channel, and re-renders about a second after each edit.
 
 The panel header shows:
 
@@ -29,7 +29,7 @@ Put that in the record template, look at the preview, and you get every value av
 
 ## Reading errors
 
-Errors from a template appear in the job log — see [background jobs](/en/troubleshooting/background-jobs.html).
+Errors from a template appear in the run's log files — see [background jobs](/en/troubleshooting/background-jobs.html).
 
 **`Cannot get the member ... for a null object`**
 The most common one. You read a member of something that does not exist for this product — usually an attribute that is not set. A bare `{{ record.my_images }}` never fails; the `.size` after it does. Guard the object, then read its members:
@@ -61,7 +61,7 @@ Three usual causes, in order of likelihood:
 **Everything fails, and the syntax looks right**
 Check **Options → Template language**. If it says **Liquid**, the examples in this documentation do not apply — see [Which template language?](/en/channels/templates.html#which-template-language).
 
-## Before you activate a channel
+## Before you enable a channel
 
 - The preview shows what you expect, for more than one product.
 - A product with **empty** optional attributes still renders — this is what breaks in production.

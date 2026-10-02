@@ -70,7 +70,7 @@ On a loaded record:
 
 Every key a custom entity record carries, and why a template writes `_meta.` where the Mapping step shows `meta.`, is listed in [record keys](/en/reference/record-keys.html).
 
-A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the job log — see [background jobs](/en/troubleshooting/background-jobs.html).
+A wrong attribute code, an attribute that is not a reference attribute, or a reference to something other than a custom entity (a product reference, for example) is reported in the run's log files — see [background jobs](/en/troubleshooting/background-jobs.html).
 
 ## Reading one linked record you already have a reference for
 
@@ -88,7 +88,7 @@ If a template loops `record.<attribute>` itself — to read `target_name`, or to
 `get(r)` is equivalent to `get('id.entityid', r.target_id)`, and it exists so a template never has to know that. The long form is a trap: `id.entityid` pairs with `r.target_id`, `meta.identifier` with `r.target_identifier.value` — and mixing them up, or dropping the `.value`, silently finds nothing.
 
 :::caution
-**`get` returns nothing for a reference whose target has since been deleted** — an account's data can always drift out of sync with what a product still links to. `get(r)` returns null in that case, same as any other unmatched lookup; the `if` above guards against it. Without it the template stops with `Cannot get the member ... for a null object` — see [reading errors](/en/channels/templates/testing.html#reading-errors). `export.load_custom_entities` (above) does not need this guard — it skips a deleted target and reports it in the job log instead of leaving a gap in the list.
+**`get` returns nothing for a reference whose target has since been deleted** — an account's data can always drift out of sync with what a product still links to. `get(r)` returns null in that case, same as any other unmatched lookup; the `if` above guards against it. Without it the template stops with `Cannot get the member ... for a null object` — see [reading errors](/en/channels/templates/testing.html#reading-errors). `export.load_custom_entities` (above) does not need this guard — it skips a deleted target and reports it in the run's log files instead of leaving a gap in the list.
 :::
 
 ## Looking up by any text attribute

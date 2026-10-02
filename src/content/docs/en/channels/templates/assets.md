@@ -43,7 +43,7 @@ The full public URL of an asset.
 ```
 
 :::caution[Only `'original'` keeps the file extension]
-With no variant, `asset.url` gives the **`default`** variant, not the uploaded original. Every variant other than `'original'` may be stored in a different format, so its URL is built without an extension — `picture.png` becomes `…/picture`. If the system consuming your feed requires an image URL ending in `.png` or `.jpg`, either pass `'original'` or set the *filename* argument yourself.
+With no image variant, `asset.url` gives the **`default`** image variant, not the uploaded original. Every image variant other than `'original'` may be stored in a different format, so its URL is built without an extension — `picture.png` becomes `…/picture`. If the system consuming your feed requires an image URL ending in `.png` or `.jpg`, either pass `'original'` or set the *filename* argument yourself.
 :::
 
 | Argument | Description |
@@ -56,7 +56,7 @@ With no variant, `asset.url` gives the **`default`** variant, not the uploaded o
 
 When the asset was last modified. Assets with no stored modification date — everything from before that field was introduced — return **27 September 2022**.
 
-Takes an optional *variant*: with one, you get the later of the asset's own date and that variant's last settings change, which is what you want for cache-busting a variant URL.
+Takes an optional *variant*: with one, you get the later of the asset's own date and that image variant's last settings change, which is what you want for cache-busting an image variant URL.
 
 ```plaintext frame="none"
 {{ for a in record.my_images }}

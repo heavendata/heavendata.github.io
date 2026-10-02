@@ -29,7 +29,7 @@ You configure variants as part of product types. So you'll need to create a [pro
 
 ## Create or Modify Product Variants
 
-* Click "Settings" in app header
+* Click "Settings" in the sidebar
 * Select "Product types" from menu
 * Click "New product type" button or select an existing product type
 * Scroll down to card "Variants"
@@ -54,7 +54,7 @@ Close the screen when done and save the changes in product type.
 
 #### Test It
 
-Navigate to your product list and click "New product". Now you'll see a sidebar that lists all product types. Select the product type and you'll see the list of variant configurations that should include your new variant. Click on it to create the new product and check if the form looks as expected.
+Navigate to your product list and click "New product". Now you'll see a panel that lists all product types. Select the product type and you'll see the list of variant configurations that should include your new variant. Click on it to create the new product and check if the form looks as expected.
 
 ## Variant fields in an export
 

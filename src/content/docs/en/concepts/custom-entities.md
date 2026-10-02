@@ -41,7 +41,7 @@ Here you define which data will be stored. All attributes are supported except o
 
 ## Edit Records
 
-Look at the app header navigation and click the arrow right beside "Products" to add or edit records. Next, select your entity in the dropdown and click "New" to add records manually or import existing records from Excel or CSV.
+Look at the sidebar and click the arrow right beside "Products" to add or edit records. Next, select your entity in the dropdown and click "New" to add records manually or import existing records from Excel or CSV.
 
 ### Export records
 

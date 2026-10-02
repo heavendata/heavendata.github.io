@@ -9,11 +9,11 @@ this feed and import your products from. This article describes how to create yo
 
 ## Preconditions
 
-We'll read all product data from our product database. If you can see the products under "Products" in header navigation, it's alright. If not, please import your products first.
+We'll read all product data from our product database. If you can see the products under "Products" in the sidebar, it's alright. If not, please import your products first.
 
 ## Create a new feed
 
-* Click "Channels" in the header navigation
+* Click "Channels" in the sidebar
 * Click "New channel" on the right
 * Configure the channel as described below
 * Click "Save" to save your channel

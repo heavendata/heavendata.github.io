@@ -14,7 +14,7 @@ Before starting to configure product types, ensure all product attributes are cr
 
 ## Create or Modify Product Types
 
-* Click "Settings" in app header
+* Click "Settings" in the sidebar
 * Select "Product types" from menu
 * Click "New product type" button or select an existing product type
 * Click "Manage sections" and mark all sections you want to use

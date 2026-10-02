@@ -54,7 +54,7 @@ Four namespaces we add. These are specific to product data and are not in Scriba
 | `i18n.t` | A translatable attribute's value in one language, with a fallback | [Translatable attributes](/en/channels/templates/translations.html#read-one-language--i18nt) |
 | `i18n.has` | Whether a translatable attribute has an entry for exactly that language | [Translatable attributes](/en/channels/templates/translations.html#check-whether-a-language-has-a-value--i18nhas) |
 | `export.culture_codes` · `export.language_codes` | The languages in this channel | [Translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) |
-| `export.culture_code_uc` | A culture code with an underscore: `en-US` → `en_US` | [Translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) |
+| `export.culture_code_uc` | A language code with an underscore: `en-US` → `en_US` | [Translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) |
 | `export.attr_label` | An attribute's label in one language | [Translatable attributes](/en/channels/templates/translations.html#exportattr_label) |
 | `export.xml_attr_labels` | An attribute's label in every channel language, as XML attributes | [Translatable attributes](/en/channels/templates/translations.html#exportxml_attr_labels) |
 | `export.load_custom_entities` | Every custom entity record a reference attribute links to | [Custom entities](/en/channels/templates/custom-entities.html#reading-every-linked-record--exportload_custom_entities) |

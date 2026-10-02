@@ -26,7 +26,7 @@ source with a product file and a price file has two datasets.
 
 Data sources live under **Integrations → Data sources**.
 
-| Connector | Direction | What it is for |
+| Connection | Direction | What it is for |
 | --- | --- | --- |
 | **SFTP pull** | We fetch | A supplier's SFTP server, or ours |
 | **HTTP pull** | We fetch | A file served over HTTP or HTTPS |
@@ -34,7 +34,7 @@ Data sources live under **Integrations → Data sources**.
 
 *(The app still writes these as `SFtp Pull`, `Http Pull` and `Ftp Push`.)*
 
-What a source offers depends on what its connector can do. Everything that reaches a
+What a source offers depends on what its connection can do. Everything that reaches a
 server is missing for a push source, because there is nothing of ours for it to reach —
 the files come to us.
 
@@ -47,7 +47,7 @@ the files come to us.
 | **Run now**, **Run selected datasets** | Yes | Yes | No — there is nothing to fetch |
 | **Upload and import** | Yes | Yes | **Yes** — the one way to run a push source on demand |
 
-A control a connector cannot support is not offered, rather than offered and then refused.
+A control a connection cannot support is not offered, rather than offered and then refused.
 
 You can save an **SFTP pull** source before you know its server details. Until it has
 a host name and a username, it is saved disabled: its schedule does not run it, and
@@ -115,7 +115,7 @@ has** — which is why it does not ask you for a password.
 
 ### Test connection
 
-Under the source's endpoint settings, **Test connection** checks that the server can
+Under the source's connection settings, **Test connection** checks that the server can
 be reached and that the credentials are accepted. The result appears on the same
 line: **Connection works**, or the reason it did not.
 
