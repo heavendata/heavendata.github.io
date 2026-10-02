@@ -27,7 +27,7 @@ A value stored as an empty string is an entry, so the fallback does not replace 
 
 ### Which code finds what
 
-The codes are the ones configured under **Settings → Languages**. A code with a region also answers to its bare language code; the reverse is not true.
+The codes are the ones configured under **Settings → Languages**. A code with a region also answers to its language part; the reverse is not true.
 
 | Configured in the account | `i18n.t 'en-US'` | `i18n.t 'en'` |
 | --- | --- | --- |
@@ -91,7 +91,7 @@ en_US fr_FR
 ```
 
 :::note
-**"Culture" and "language" mean the same thing here.** The template functions use *culture* — the technical term for a language as spoken in a particular region — while the app says *language*. If a language is configured without a region, `culture_codes` contains just the language code.
+**"Culture" and "language" mean the same thing here.** The template functions use *culture* — the technical term for a language as spoken in a particular region — while the app says *language*. If a language is configured without a region, `culture_codes` contains just the language part.
 :::
 
 ## Attribute labels in each language

@@ -77,11 +77,11 @@ Column headers are the attribute **codes**, not the attribute names, so a file e
 
 The two formats differ on a translatable attribute that has no value in one language. **CSV** writes the value of that language's fallback language, so the cell is filled — unless the language has no fallback configured, in which case CSV leaves it empty too. **Excel** always leaves the cell empty. If you need to see which languages are genuinely untranslated, export to Excel.
 
-Reference columns hold the same identifiers the import reads, so an exported file can be corrected and imported again as it is — see [Reference columns in an import file](#reference-columns-in-an-import-file) for how those values are matched, and what happens when one of them matches nothing.
+Reference attribute columns hold the same identifiers the import reads, so an exported file can be corrected and imported again as it is — see [Reference attribute columns in an import file](#reference-attribute-columns-in-an-import-file) for how those values are matched, and what happens when one of them matches nothing.
 
 Exporting needs the same permission as exporting products. If you cannot see the **Export** button, ask an administrator for it.
 
-### Reference columns in an import file
+### Reference attribute columns in an import file
 
 A reference attribute is imported by the **identifier** of the record it points to — the value of that entity's identifier attribute, which is also what an export writes into the column. A multi-reference column holds several identifiers in one cell, separated by `|` (or by the list separator the channel is configured with). An empty cell removes the references from the record.
 

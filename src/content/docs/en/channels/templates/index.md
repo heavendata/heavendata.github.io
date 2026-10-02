@@ -14,7 +14,7 @@ Under **Channels → Create New Channel**, pick one of the template cards and cl
 | Card | One record per | Content type of the output |
 | --- | --- | --- |
 | **Template product feed** | product | `application/xml` |
-| **Template "‹entity›" feed** — one card per custom entity type | record of that custom entity | `text/plain` |
+| **Template "‹entity›" feed** — one card per custom entity | record of that custom entity | `text/plain` |
 
 The editor of a template channel has no **Feeds** step — a template channel always has exactly **one feed** — and no **Format** step. In their place it shows **Header template**, **Record template**, **Footer template** and **Options**.
 

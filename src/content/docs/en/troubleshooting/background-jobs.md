@@ -31,7 +31,7 @@ Hover over the **Last run** cell and a play button appears beside the status. It
 
 Not everything can be run on demand, and the control is simply absent where it cannot: a data source that **receives** pushed files has nothing to fetch, so neither the play button nor **Run now** appears on its row. The same is true of a channel whose connector does not support being run manually.
 
-Starting a run does not cancel one that is already going. If a run is already queued or in progress, the confirmation says so, and starting another adds a second run rather than replacing the first.
+Starting a run does not cancel one that is already going. If a run is already queued or running, the confirmation says so, and starting another adds a second run rather than replacing the first.
 
 ## What a status means
 
