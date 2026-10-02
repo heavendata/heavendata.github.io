@@ -23,12 +23,12 @@ Install Curl:
 
 Now you can download files using a single command
 
-     curl ftp://eu.ftp.40three.net/CHANNEL_ID/products.csv --user USERNAME:PASSWORD -o products.csv
+     curl ftp://ftp.eu.40three.net/CHANNEL_ID/products.csv --user USERNAME:PASSWORD -o products.csv
 
      # example
-     bin/curl.exe ftp://eu.ftp.40three.net/a28ca68c-bbb8-4753-ab35-30e83980ab7e/products.csv --user myuser@myaccount:secretpassword -o products.csv
+     bin/curl.exe ftp://ftp.eu.40three.net/a28ca68c-bbb8-4753-ab35-30e83980ab7e/products.csv --user myuser:secretpassword -o products.csv
 
-You'll find the details in your channels configuration or use a desktop client to manually explore available files.
+The username and password are the ones set in the channel's **Publishing** step. The folder is named after the channel's id, and it is the only folder you see after you log in, so a desktop client shows it.
 
 ## Import folders and how long files are kept
 
