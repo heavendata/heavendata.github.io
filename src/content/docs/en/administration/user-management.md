@@ -4,9 +4,9 @@ sidebar:
   order: 2
 ---
 ## Users
-Each user represents a single person with access to the heavendata platform. You can invite users to join your organization and give them all or some permissions on your account(s), but you cannot edit or delete the user itself, e.g., the username or email address. To edit a user's profile or delete the user, verify their [email domain](#email-domains) first; the email address itself can never be changed.
+Each user represents a single person with access to the heavendata platform. You can invite users to join your organization and give them all or some permissions on your account(s), but you cannot edit or delete the user itself, e.g., the username or email address. The exception is a user your organization created itself, which takes a verified [email domain](#email-domains): you can edit that user's profile and delete the user, though never change the email address.
 
-## Inviting Users
+## Adding users
 Follow this procedure to add users to your organization:
 
 * [Start the account administration app](../administration.html)
@@ -20,10 +20,10 @@ What happens next depends on whether the user's email domain is verified:
 |The user's email domain|The button reads|What happens|
 |---|---|---|
 |Not verified|**Invite User**|We send the user an email inviting them to join your organization. In the menu bar, **Team** > **Pending Invitations** shows your invitations and whether each has been accepted. After the user accepted your invitation, you'll see the user in the user list (**Team** > **Users**).|
-|Verified|**Create**|You can also set the user's languages. The user is added at once, without an invitation, and we send them no email, so tell them about their account yourself: they sign in for the first time through **Forgot your password?** on the login page.|
+|Verified|**Create**|You can also set the user's languages. The user is added at once, without an invitation, and we send them no email, so tell them about their account yourself: they sign in for the first time through **Forgot your password?** on the login page. If the address already has a heavendata login, it is only added to your organization, as an accepted invitation would be.|
 
 ## Email domains
-Verify an email domain to fully manage the users whose addresses end in it: you can then add them without an invitation, edit their profiles and delete them. You typically don't need one — without it, you can still invite users and permit them access to your account(s).
+Verify an email domain to create users whose addresses end in it, without an invitation. A user created this way belongs to your organization: you can edit their profile and delete them. A user who joined by invitation, or who already had a heavendata login, you can only remove from your organization — verifying their domain later does not change that. You typically don't need one — without it, you can still invite users and permit them access to your account(s).
 
 |Email domain|Manageable users|
 |---|---|
