@@ -29,7 +29,7 @@ Put that in the record template, look at the preview, and you get every value av
 
 ## Reading errors
 
-Errors from a template appear in the run's log files — see [background jobs](/en/troubleshooting/background-jobs.html).
+Errors from a template appear in the run's steps and their log files — see [background jobs](/en/troubleshooting/background-jobs.html).
 
 **`Cannot get the member ... for a null object`**
 The most common one. You read a member of something that does not exist for this product — usually an attribute that is not set. A bare `{{ record.my_images }}` never fails; the `.size` after it does. Guard the object, then read its members:
