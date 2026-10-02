@@ -41,7 +41,7 @@ Here you define which data will be stored. All attributes are supported except o
 
 ## Edit Records
 
-To add or edit records, select your custom entity in the sidebar, under **Catalog**: each one has its own entry below **Products**, named after the entity. Select **New ‹entity name›** — **New Manufacturer** in the example above — to add a record, or **Import** to import records from an Excel or CSV file.
+Each custom entity has its own entry in the sidebar, under **Catalog** below **Products**. Select it to see the entity's records. To add a record, select **New ‹entity name›** — **New Manufacturer** for the Manufacturer entity; to import records from an Excel or CSV file, select **Import**.
 
 ### Export records
 
