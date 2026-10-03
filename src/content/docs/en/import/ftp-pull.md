@@ -8,11 +8,11 @@ This article describes how to connect to our ftp server to access import and exp
 
 ## Connect with encryption (FTPS)
 
-The server accepts plain FTP and encrypted FTP (FTPS, explicit TLS on port 21). Use FTPS:
+The server accepts plain FTP and encrypted FTP (FTPS). Use FTPS:
 over plain FTP, your password and your files cross the internet unencrypted. Connect to
 `ftp.eu.40three.net`, the name the server's certificate is issued for, so that a client
-checking the certificate accepts it. The encryption is explicit, not implicit: nothing
-answers on port 990, so do not use `ftps://` addresses or implicit encryption.
+checking the certificate accepts it. The encryption is explicit, on port 21, not implicit:
+nothing answers on port 990, so do not use `ftps://` addresses or implicit encryption.
 
 ## Windows Desktop - WinSCP
 
