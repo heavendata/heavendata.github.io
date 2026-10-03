@@ -6,11 +6,21 @@ sidebar:
 ---
 This article describes how to connect to our ftp server to access import and export files. 
 
+## Connect with encryption (FTPS)
+
+The server accepts plain FTP and encrypted FTP (FTPS, explicit TLS on port 21). Use FTPS:
+over plain FTP, your password and your files cross the internet unencrypted. Connect to
+`ftp.eu.40three.net`, the name the server's certificate is issued for, so that a client
+checking the certificate accepts it. The encryption is explicit, not implicit: nothing
+answers on port 990, so do not use `ftps://` addresses or implicit encryption.
+
 ## Windows Desktop - WinSCP
 
 WinSCP is a Windows application that allows you to manually connect to our ftp server and browse available files.
 
 You can download it here: https://winscp.net/
+
+In the login dialog, choose **FTP** as the file protocol and **TLS/SSL Explicit encryption** as the encryption.
 
 ## Windows Command Line - Curl
 
@@ -23,10 +33,12 @@ Install Curl:
 
 Now you can download files using a single command
 
-     curl ftp://ftp.eu.40three.net/CHANNEL_ID/products.csv --user USERNAME:PASSWORD -o products.csv
+     curl --ssl-reqd ftp://ftp.eu.40three.net/CHANNEL_ID/products.csv --user USERNAME:PASSWORD -o products.csv
 
      # example
-     bin/curl.exe ftp://ftp.eu.40three.net/a28ca68c-bbb8-4753-ab35-30e83980ab7e/products.csv --user myuser:secretpassword -o products.csv
+     bin/curl.exe --ssl-reqd ftp://ftp.eu.40three.net/a28ca68c-bbb8-4753-ab35-30e83980ab7e/products.csv --user myuser:secretpassword -o products.csv
+
+`--ssl-reqd` makes curl encrypt the login and the file transfer, and stop with an error rather than fall back to plain FTP. Do not use `--ssl` instead: it falls back to plain FTP without telling you.
 
 The username and password are the ones set in the channel's **Publishing** step. The folder is named after the channel's id. It is the only folder there after you log in, so a desktop client shows you its name.
 
