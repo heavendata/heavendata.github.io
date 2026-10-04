@@ -168,7 +168,8 @@ the channel's latest run and a `history` folder with the earlier ones:
 
 You do not have to work out the address. The channel's **Feeds** list and its dashboard show
 each feed as an `ftp://` address with the folder and file name in it; use it with the channel's
-FTP credentials.
+FTP credentials. A feed whose output name contains a date pattern gets a new file name every
+run, and the address shows the pattern rather than the name — list the folder to find the file.
 
 **A file's name** is the feed's output name, or the feed's type — `products.csv` for a product
 feed in CSV — when it has none.
