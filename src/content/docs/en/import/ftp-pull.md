@@ -144,6 +144,10 @@ read, not lost.
 **A file stays in `import`** until every file the data source expects has arrived, so a
 partial set waits there for the rest.
 
+**A data source that is switched off still accepts uploads, and imports none of them.** Its
+FTP credentials keep working and the files arrive in `import`, but no import starts. Enabling
+the data source does not start one either: once it is enabled again, upload the set again.
+
 **Archived imports are kept for 30 days, or the most recent 5,000 imports of that data
 source — whichever comes first.** After that the folder and its files are removed. The
 `import` folder is yours: nothing clears it automatically, so a file that never
@@ -181,11 +185,12 @@ The folder is read-only: you cannot upload, rename or delete files in it.
 | --- | --- | --- |
 | The login is refused (`530`) | The data source is not enabled yet, the inbox has no **Secret**, the username or password is wrong, or another data source or channel already uses the username | Enable the data source, or set the inbox's **Secret**, and check both values in the app. If they are right, choose another username |
 | An upload is refused with *This data source only accepts files named …* | The file's name is not one of the data source's dataset files | Rename the file to the name the message lists |
+| An upload is refused with *This data source has no dataset with a file name yet* | None of the data source's datasets has a file name | Give the dataset a file name in the app |
 | curl stops with error `60`, or your client warns that the certificate does not match | You connected to a different host name — the certificate names only `ftp.eu.40three.net` | Connect to `ftp.eu.40three.net` |
 | Connecting on port 990 hangs until it times out | Implicit encryption — the server uses explicit encryption on port 21 | Choose explicit encryption, port 21 |
 | You log in, but listing a folder or transferring a file hangs | The client is in active mode, or a firewall blocks the data connection | Switch to passive mode. If it still hangs, ask whoever runs your firewall to allow outbound FTP to `ftp.eu.40three.net` |
 | PowerShell says *the parameter name 'T' is ambiguous*, or *A parameter cannot be found that matches parameter name 'K'* | `curl` in Windows PowerShell is another command | Type `curl.exe` |
 | A file you uploaded is gone from `import` | An import read it and moved it to `archive` | Nothing — see [Import folders](#import-folders-and-how-long-files-are-kept) |
-| A file waits in `import` and nothing runs | Not every file the data source expects has arrived | Upload the rest of the set |
+| A file waits in `import` and nothing runs | Not every file the data source expects has arrived, or the data source is switched off | Upload the rest of the set. If the data source is switched off, enable it and upload the set again |
 | An inbox's folder is empty | An inbox's FTP credentials can upload only — they list nothing, even after an upload | Check the inbox in the app |
 | An idle connection closes | The server closes a connection after about five minutes without activity | Connect, transfer and disconnect in one go; reconnect in a long-running client |
