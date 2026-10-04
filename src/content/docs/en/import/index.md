@@ -28,7 +28,7 @@ Data sources live under **Integrations → Data sources**.
 
 | Connection | Direction | What it is for |
 | --- | --- | --- |
-| **SFTP pull** | We fetch | A supplier's SFTP server, or ours |
+| **SFTP pull** | We fetch | A supplier's SFTP server |
 | **HTTP pull** | We fetch | A file served over HTTP or HTTPS |
 | **FTP push** | You send | You upload to our FTP server and we import what arrives |
 
