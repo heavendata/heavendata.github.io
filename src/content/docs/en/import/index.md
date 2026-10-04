@@ -15,8 +15,8 @@ is right for anything that repeats. **This page is about data sources.**
 You do not have to wait for a schedule to use one: a data source can run on demand, and
 it can run a file you supply yourself.
 
-If you need somewhere to put the files, we host an
-[FTP server](/en/import/ftp-pull.html) you can use.
+If you need somewhere to put the files, you can upload them to the
+[heavendata FTP server](/en/import/ftp-pull.html).
 
 ## Data sources
 
@@ -30,7 +30,7 @@ Data sources live under **Integrations → Data sources**.
 | --- | --- | --- |
 | **SFTP pull** | We fetch | A supplier's SFTP server |
 | **HTTP pull** | We fetch | A file served over HTTP or HTTPS |
-| **FTP push** | You send | You upload to our FTP server and we import what arrives |
+| **FTP push** | You send | You upload to the heavendata FTP server and we import what arrives |
 
 *(The app still writes these as `SFtp Pull`, `Http Pull` and `Ftp Push`.)*
 
@@ -146,7 +146,7 @@ A data source cannot fetch over FTP. When a supplier offers only FTP:
 
 - ask them for SFTP access instead;
 - if they can publish the file at a web address, use an **HTTP pull** source;
-- or have them upload the files to [our FTP server](/en/import/ftp-pull.html), with an
+- or have them upload the files to the [heavendata FTP server](/en/import/ftp-pull.html), with an
   **FTP push** source.
 
 ### If the server's certificate is not trusted

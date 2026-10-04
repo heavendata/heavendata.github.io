@@ -101,4 +101,4 @@ A run whose files have already been removed is expected, not a fault — the run
 
 After that the run no longer appears in **Run history** or in **Background tasks**, and its files can no longer be downloaded or used to start the run again. Because the two clean-ups run on their own schedules, a run's files can go a few hours before the run itself does.
 
-Files you dropped on the [hosted FTP server](/en/import/ftp-pull.html) are kept there under their own rule, which that page states.
+Files you dropped on the [heavendata FTP server](/en/import/ftp-pull.html) are kept there under their own rule, which that page states.
