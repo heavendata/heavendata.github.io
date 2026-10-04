@@ -35,9 +35,11 @@ Each data source, channel or inbox has FTP credentials of its own, and they see 
 
 | You want to… | Set the FTP credentials in | Username and password | After you log in you see | You can |
 | --- | --- | --- | --- | --- |
-| **Upload files for an import** | A data source: **Config Source** → **Endpoint** **Ftp Push** → **Authentication** | Your choice | A folder named after the data source, with `import` and `archive` inside | Upload to `import`, download from `archive` |
-| **Collect a channel's files** | A channel: **Publishing** → **Ftp server** | Your choice | A folder named after the channel's id | Download only |
+| **Upload files for an import** | A data source: **Config Source** → **Endpoint** **FTP push** → **Authentication** | Your choice | A folder named after the data source's key, or its id if it has no key, with `import` and `archive` inside | Upload to `import`, download from `archive` |
+| **Collect a channel's files** | A channel: **Publishing** → **FTP server** | Your choice | A folder named after the channel's id | Download only |
 | **Drop assets into an inbox** | **Settings → Assets → Inboxes** → the inbox's **⋮** → **Edit** → **FTP Access** | The username shown there; the password is the inbox's **Secret** | An empty folder | Upload only |
+
+*(The app still writes these as `Ftp Push` and `Ftp server`.)*
 
 **A username is unique across heavendata**, not only within your account, so choose one
 nobody else is likely to use — your company's name in it helps. If FTP credentials you have
@@ -81,7 +83,7 @@ it fails on the options below. On macOS and Linux, write `curl` wherever this pa
 `curl.exe`.
 
 **Put the username and password in a file**, so that no shell has to read them and they stay
-out of your command history. Create `ftp.cfg` next to your script:
+out of your command history. Create a file `ftp.cfg`:
 
 ```text
 user = "USERNAME:PASSWORD"
@@ -92,7 +94,13 @@ Inside the quotes, write a `\` in the password as `\\` and a `"` as `\"`. `ssl-r
 encrypt the login and the file transfer, and stop with an error rather than fall back to plain
 FTP. Do not use `ssl` instead: it falls back to plain FTP without telling you.
 
-Then `-K ftp.cfg` gives curl the file. Replace the capitals with your own values.
+Then `-K ftp.cfg` gives curl the file. curl looks for it in the folder you run the command
+from, so a script that runs on a schedule should give its full path, such as
+`-K C:\scripts\ftp.cfg`. The file holds a password: keep it where only the account that runs
+the script can read it.
+
+Replace the capitals with your own values. A URL that ends in `/` keeps the local file's name on
+the server, without its folder: `-T "C:\export\products.csv"` arrives as `products.csv`.
 
 **Upload files for an import** — to the `import` folder of the data source's folder:
 
@@ -100,8 +108,7 @@ Then `-K ftp.cfg` gives curl the file. Replace the capitals with your own values
 curl.exe -K ftp.cfg -T "products.csv" ftp://ftp.eu.40three.net/DATA_SOURCE_FOLDER/import/
 ```
 
-A data source that expects several files takes them in one command — the import starts once the
-last one has arrived:
+A data source that expects several files takes them in one command:
 
 ```sh
 curl.exe -K ftp.cfg -T "{products.csv,prices.csv}" ftp://ftp.eu.40three.net/DATA_SOURCE_FOLDER/import/
@@ -120,14 +127,10 @@ no folders. Put the inbox's username and **Secret** in the `ftp.cfg`:
 curl.exe -K ftp.cfg -T "4006381333931-front.jpg" ftp://ftp.eu.40three.net/
 ```
 
-A URL that ends in `/` keeps the local file's name on the server, without its folder: `-T
-"C:\export\products.csv"` arrives as `products.csv`.
-
 ## Import folders and how long files are kept
 
-Each data source that receives files over FTP has a folder of its own at the root of
-the server, and two folders inside it. Browse the root in an FTP client to see the
-exact names — a data source appears under its key, or under its id if it has none.
+A data source's FTP credentials see one folder, named after the data source's key, or its id
+if it has no key, and two folders inside it.
 
 | Path | What is in it |
 |---|---|
@@ -176,12 +179,12 @@ The folder is read-only: you cannot upload, rename or delete files in it.
 
 | What you see | Why | What to do |
 | --- | --- | --- |
-| The login is refused (`530`) | The data source is not enabled yet, the inbox has no **Secret**, or the username or password is wrong | Enable the data source, or set the inbox's **Secret**, then check both values in the app |
+| The login is refused (`530`) | The data source is not enabled yet, the inbox has no **Secret**, the username or password is wrong, or another data source or channel already uses the username | Enable the data source, or set the inbox's **Secret**, and check both values in the app. If they are right, choose another username |
 | An upload is refused with *This data source only accepts files named …* | The file's name is not one of the data source's dataset files | Rename the file to the name the message lists |
 | curl stops with error `60`, or your client warns that the certificate does not match | You connected to a different host name — the certificate names only `ftp.eu.40three.net` | Connect to `ftp.eu.40three.net` |
 | Connecting on port 990 hangs until it times out | Implicit encryption — the server uses explicit encryption on port 21 | Choose explicit encryption, port 21 |
 | You log in, but listing a folder or transferring a file hangs | The client is in active mode, or a firewall blocks the data connection | Switch to passive mode. If it still hangs, ask whoever runs your firewall to allow outbound FTP to `ftp.eu.40three.net` |
-| PowerShell says a parameter name is *ambiguous*, or that *a positional parameter cannot be found* | `curl` in Windows PowerShell is another command | Type `curl.exe` |
+| PowerShell says *the parameter name 'T' is ambiguous*, or *A parameter cannot be found that matches parameter name 'K'* | `curl` in Windows PowerShell is another command | Type `curl.exe` |
 | A file you uploaded is gone from `import` | An import read it and moved it to `archive` | Nothing — see [Import folders](#import-folders-and-how-long-files-are-kept) |
 | A file waits in `import` and nothing runs | Not every file the data source expects has arrived | Upload the rest of the set |
 | An inbox's folder is empty | An inbox's FTP credentials can upload only — they list nothing, even after an upload | Check the inbox in the app |
