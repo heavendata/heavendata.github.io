@@ -51,7 +51,7 @@ Choose a corner when your images come in both shapes and the subject sits in the
 
 Changing the crop position of an image variant changes the images served under its key, including images that were already made. Saving clears the stored images in the background, and each image is made again with the new crop position on its next request. Clearing takes longer the more assets your account has, so for a while some requests still return the old image. A shop or marketplace that has already copied an image keeps its copy.
 
-To try a change first, create a second image variant with a new key and the crop position you want to compare. Then look at a few of your images under that key: select them in the cloud drive and download them as that image variant from the actions menu. Only when the result looks right, change the crop position of the image variant your channels use, or switch your channels to the new key.
+To try a change first, create a second image variant with a new key and the crop position you want to compare. Then look at a few of your images under that key: select them in the Cloud drive and download them as that image variant from the actions menu. Only when the result looks right, change the crop position of the image variant your channels use, or switch your channels to the new key.
 
 ### Transformations
 Transformations change the look of the image after it is resized and converted to the file format. They run in the order they are listed.
