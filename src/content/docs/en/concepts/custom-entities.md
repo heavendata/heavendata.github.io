@@ -32,8 +32,10 @@ Navigate to "Settings" > "Custom entities". Click "New custom entity" or select 
 --- | ---
 |Name | Name of custom entity as used inside of app.
 |Key  | Key to use as in URLs or technical export formats.
-|Label attribute | We'll use the value of the selected attribute when generating links inside the app.
-|Identifier attribute | Value of this attribute will be used as the unique identifier.
+|Label attribute | The attribute whose value is shown as the record's name in lists, links and references. Every record needs a value for it, so its **Required** setting is always on.
+|Identifier attribute | The attribute an import matches existing records on, unless a data source's **Match By** names another. Optional for the custom entity: without one, **Import** on the list creates a new record from every row. When it has one, every record needs a value for it, so its **Required** setting is always on.
+
+While an attribute is the label attribute or the identifier attribute, its **Required** toggle cannot be switched off, and a hint under it says why. Choose a different attribute for the role and the toggle returns to the setting you gave it.
 
 ### Attributes
 
@@ -41,7 +43,7 @@ Here you define which data will be stored. All attributes are supported except o
 
 ## Edit Records
 
-Look at the sidebar and click the arrow right beside "Products" to add or edit records. Next, select your entity in the dropdown and click "New" to add records manually or import existing records from Excel or CSV.
+Look at the sidebar and click the arrow right beside "Products" to add or edit records. Next, select your entity in the dropdown and click "New" to add records manually. **Import** and **Export** in the page header bring records in from, and write them out to, an Excel or a CSV file — see [Import records](#import-records) and [Export records](#export-records).
 
 ### Export records
 
@@ -81,11 +83,25 @@ Reference attribute columns hold the same identifiers the import reads, so an ex
 
 Exporting needs the same permission as exporting products. If you cannot see the **Export** button, ask an administrator for it.
 
-### Reference attribute columns in an import file
+### Import records
+
+#### Columns an import file needs
+
+Which columns the file must have, and which rows are refused, depends on the custom entity's [General](#general) settings:
+
+|The custom entity has… |The file needs a column for… |These rows are not imported |
+--- | --- | ---
+|An identifier attribute | The identifier attribute, always. The label attribute, for rows that create a record. | A row whose identifier is empty — it is never matched to an existing record. A row that creates a record and has no value for the label attribute.
+|No identifier attribute | The label attribute. Every row creates a new record. | A row that has no value for the label attribute.
+
+A row that updates an existing record keeps the record's name when the file has no column for the label attribute.
+
+The Mapping step warns while a column the file needs is not mapped. If no row could be imported — the identifier attribute is not mapped, or the label attribute is not mapped and the custom entity has no identifier attribute — **Import now** does not start the import and says which attribute to map a column to. Each row that is refused for a missing value is listed in the import log with the attribute and what to add.
+
+#### Reference attribute columns in an import file
 
 A reference attribute is imported by the **identifier** of the record it points to — the value of that entity's identifier attribute, which is also what an export writes into the column. A multi-reference column holds several identifiers in one cell, separated by `|` (or by the list separator the channel is configured with). An empty cell removes the references from the record.
 
 A row may reference records of the same entity that appear **earlier in the same file**, so an export of an entity that references itself — categories with a parent, for example — imports again as it is, as long as each referenced row comes before the rows that point to it.
 
 If an identifier matches no record of the referenced entity, the row is **not imported** and the import log names the attribute and the value. Fix the value, or create the missing record first, and import the row again.
-
