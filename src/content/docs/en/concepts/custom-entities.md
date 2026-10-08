@@ -43,7 +43,7 @@ Here you define which data will be stored. All attributes are supported except o
 
 ## Edit Records
 
-Look at the sidebar and click the arrow right beside "Products" to add or edit records. Next, select your entity in the dropdown and click "New" to add records manually. **Import** and **Export** in the page header bring records in from, and write them out to, an Excel or a CSV file — see [Import records](#import-records) and [Export records](#export-records).
+Look at the sidebar and click the arrow right beside "Products" to add or edit records. Next, select your entity in the dropdown and click "New" to add records manually. **Import** in the page header reads records from a file, and **Export** beside it writes them to an Excel or a CSV file — see [Import records](#import-records) and [Export records](#export-records).
 
 ### Export records
 
@@ -96,7 +96,7 @@ Which columns the file must have, and which rows are refused, depends on the cus
 
 A row that updates an existing record keeps the record's name when the file has no column for the label attribute.
 
-The Mapping step warns while a column the file needs is not mapped. If no row could be imported — the identifier attribute is not mapped, or the label attribute is not mapped and the custom entity has no identifier attribute — **Import now** does not start the import and says which attribute to map a column to. Each row that is refused for a missing value is listed in the import log with the attribute and what to add.
+The **Map columns** step of the import warns while a column the file needs is not mapped. If no row could be imported — the identifier attribute is not mapped, or the label attribute is not mapped and the custom entity has no identifier attribute — **Import now** does not start the import and says which attribute to map a column to. Each row that is refused for a missing value is listed in the import log with the attribute and what to add.
 
 #### Reference attribute columns in an import file
 
