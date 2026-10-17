@@ -15,7 +15,7 @@ The panel header shows:
 - the **content type**, fixed when the channel was created — see [Template channels](/en/channels/templates.html#create-it-as-a-template-channel),
 - **settings changed**, briefly, while an edit is waiting to be rendered. It disappears once the preview has caught up; if it stays, the preview is not running.
 
-The preview renders the first **50 records**, not the whole catalog — and a product with variants counts once per variant, so a catalog of variant-heavy products previews only a handful of them.
+The preview renders up to **five products**, not the whole catalog: taken from those the **Filter** under **Options** selects, each with the variants the channel would export for it. On a custom entity feed it renders up to five records.
 
 ## See everything that is available
 
