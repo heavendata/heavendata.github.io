@@ -38,7 +38,7 @@ Drop your file on the upload area, or select **Upload files** and choose it. One
 
 The file's format is detected for you. Once it is, **Format Settings** shows what was detected — for a CSV file, for example, the character encoding, the field separator and which row holds the column names. Correct anything that is wrong and select **Apply** to read the file again.
 
-**Check the preview before you go on.** Under **Preview**, the step shows the first 200 records as they were read, before anything is imported. If columns are shifted or a value runs across two columns, the format settings are wrong — fix them here. If some rows cannot be read at all, the step shows **Errors** instead of the preview, with the record number, line number and the row as it is in the file.
+**Check the preview before you go on.** Under **Preview**, the step shows about the first 200 rows of the file as they were read, before anything is imported. If columns are shifted or a value runs across two columns, the format settings are wrong — fix them here. If some rows cannot be read at all, the step shows **Errors** instead of the preview, with the record number, line number and the row as it is in the file.
 
 If the file cannot be read, the step says *Couldn't read the file* and why, and keeps your format settings so you can change them and try again.
 
@@ -48,7 +48,7 @@ To start over with another file, remove this one with the **×** beside its name
 
 Each row of this step is one column of your file. Choose the product attribute it fills under **Target Attribute**.
 
-**The step opens already filled in.** Every column gets a suggested attribute, and where its values need it, a conversion. Each suggestion carries a tag that says where it came from:
+**The step opens already filled in.** Most columns get a suggested attribute, and where its values need it, a conversion; a column nothing fits is left for you to map. Each suggestion carries a tag that says where it came from:
 
 | Tag | Where the suggestion comes from |
 | --- | --- |
@@ -82,8 +82,9 @@ A column you do not map is not imported, so **leave a column unmapped to leave t
 
 | Option | What it sets | Default |
 | --- | --- | --- |
-| **Date format** | How dates in the file are written | ISO 8601 with a time zone offset |
-| **Number format** | The decimal and thousands separators | `.` and `,` — the decimal separator is set from the file when the step opens |
+| **Date format** | How dates in the file are written | **Date and time with offset**, such as `2011-12-03T10:15:30+01:00` |
+| **Decimal Separator**, **Group Separator** | How numbers in the file are written: the decimal point, and what groups thousands | `.` and `,` — the decimal separator is set from the file when the step opens |
+| **Currency Decimal Separator**, **Currency Group Separator** | The same, for prices | `.` and `,` |
 | **Value separator** | What separates several values in one cell | `\|` |
 | **Timezone** | The time zone of dates and times that carry none | none |
 
@@ -130,9 +131,9 @@ Select **Import now** to start the import. It starts at once — there is no fur
 
 The step follows the import as it runs. **The import runs in the background**: you can leave the page or close your browser, and it carries on. When it has finished, **Continue to product list** takes you back.
 
-What an import did to each product is in its log, row by row. To find the run again later, and read its steps and log files, see [background jobs](/en/troubleshooting/background-jobs.html).
+What an import did to each product is in its log, row by row. To find the run again later, and read its steps and log files, see [background jobs](/en/troubleshooting/background-jobs.html). **The run is listed as *Import default*** — for every import and deletion from this menu — and its step names your file, as in *default (uploaded as products.csv)*.
 
-**Finished does not mean every row changed a product.** Skipped rows are in the log — with **Create New Products** off, every new product in the file is one of them.
+**Finished does not mean every row changed a product.** The **Done** step's summary counts every row it read as imported — skipped rows too. Select **View details** for what each row did: **Created**, **Updated**, **Skipped** and the other counts, and the log that names each skipped row. With **Create New Products** off, every new product in the file is skipped.
 
 ## Delete products
 
@@ -141,14 +142,14 @@ What an import did to each product is in its log, row by row. To find the run ag
 Your file needs one column: the identifier of each product to delete. Any other columns are ignored.
 
 1. On the product list, select **Import** → **Products to delete**.
-2. **Upload** your file. Format detection, **Format Settings** and the preview work as they do [for an import](#1--upload).
-3. On **Map columns**, map the column that holds the identifiers to the identifier attribute. It is the only attribute this step offers, and a column of the same name is mapped for you.
+2. **Upload** your file. Format detection, **Format Settings** and the preview work as they do [for an import](#1--upload). This step shows no **Errors** list: check the preview before you go on.
+3. On **Map columns**, map the column that holds the identifiers to the identifier attribute: select **Select product** beside it and choose the one entry offered. The entry is the attribute's key — `data.` followed by its code, for example `data.product_sku` — rather than its name. A column headed with the code itself is mapped for you. **Delete now** stays disabled until the column is mapped.
 4. Select **Delete now**. The deletion starts and the **Done** step follows it. It runs in the background, so you can leave the page.
 
 | The row's identifier matches | What is deleted |
 | --- | --- |
 | A product | The product with all its product variants |
-| One product variant | That product variant, and nothing else of the product |
+| One product variant | That product variant, with any product variants below it. The rest of the product stays |
 | Nothing | Nothing — the row is skipped and the log says so |
 
 What happens to a deleted product:
