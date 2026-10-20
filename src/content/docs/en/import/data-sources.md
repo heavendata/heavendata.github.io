@@ -117,9 +117,9 @@ Each product dataset's log file names the settings it ran with —
 ### Test connection
 
 Under the source's connection settings, **Test connection** checks, from our servers,
-that the server can be reached and that the credentials are accepted. It uses the
-credentials the source already has, so it does not ask for a password. The result appears on the same
-line: **Connection works**, or the reason it did not.
+that the server can be reached and that the credentials are accepted. It does not ask for
+a password: leave the password field empty and it uses the saved one. The result appears
+on the same line: **Connection works**, or the reason it did not.
 
 The reason names the cause the way a failed run does: no server found at the host, a
 connection that failed on a port, or a sign-in the server refused. An **HTTP pull** source
