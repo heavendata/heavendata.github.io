@@ -15,7 +15,7 @@ arrive again and again — from a supplier, or every night — set up a **data s
 | --- | --- | --- |
 | **Use it for** | A one-off file | Files that arrive again and again |
 | **What it does** | Creates or updates products, or deletes the products a file lists | Imports each file through the mapping its dataset keeps |
-| **How it runs** | Once, when you finish the steps | On a schedule, or, for **FTP push**, when the files arrive — and whenever you start it |
+| **How it runs** | Once, when you finish the steps | On a schedule, or when its files arrive (**FTP push**); you can also start it yourself |
 | **Where the file comes from** | You upload it | Fetched from a server, or uploaded to the heavendata FTP server |
 | **Read** | [Import or delete products from a file](/en/import/import-products.html) | [Data sources](/en/import/data-sources.html) |
 

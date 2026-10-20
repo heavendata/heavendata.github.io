@@ -6,8 +6,8 @@ sidebar:
 ---
 
 heavendata runs an FTP server at `ftp.eu.40three.net`. Other systems use it in three
-ways, and each way has its own **FTP credentials** — a username and a password you set
-in the app:
+ways, and each has its own **FTP credentials** — a username and a password, which the
+app shows you or you set there:
 
 | You want to | Use the FTP credentials of | Set them in | After you connect you see |
 | --- | --- | --- | --- |
