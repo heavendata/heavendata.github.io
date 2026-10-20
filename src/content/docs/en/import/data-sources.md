@@ -1,43 +1,36 @@
 ---
-title: "Importing data"
-description: "Get product data in, once or on a schedule — set up a data source, check it can reach the server, and run all of it or part of it."
+title: "Data sources"
+description: "Import files that arrive again and again — set up a data source, check it can reach the server, run all of it or part of it, and read what a run did."
 reviewed: true
 sidebar:
-  order: 0
-  label: "Overview"
+  order: 2
 ---
 
-Two ways in. A **manual import** walks one file through upload, mapping and options in
-the app, and is right for a one-off change. A **data source** is a standing
-configuration — a place to fetch from, the files to take, and the mapping to apply — and
-is right for anything that repeats. **This page is about data sources**; a manual import is
+A data source imports the same kind of file again and again: it knows where to fetch
+the files, which files to take, and how to map their columns, and it runs on a schedule.
+Set one up under **Integrations → Data sources**. You can also run it whenever you like,
+and run it on a file you upload yourself.
+
+A data source has one or more **datasets**. A dataset is one file and the mapping that
+turns its columns into product data, so a source with a product file and a price file has
+two datasets.
+
+For a one-off file, use the product list's **Import** menu instead —
 [Import or delete products from a file](/en/import/import-products.html).
 
-You do not have to wait for a schedule to use one: a data source can run on demand, and
-it can run a file you supply yourself.
+## Connections
 
-If you need somewhere to put the files, we host an
-[FTP server](/en/import/ftp-pull.html) you can use.
-
-## Data sources
-
-A data source is one place we fetch from, plus the **datasets** it supplies. A
-dataset is one file and the mapping that turns its columns into product data, so a
-source with a product file and a price file has two datasets.
-
-Data sources live under **Integrations → Data sources**.
+A data source's connection says how its files arrive:
 
 | Connection | Direction | What it is for |
 | --- | --- | --- |
-| **SFTP pull** | We fetch | A supplier's SFTP server, or ours |
+| **SFTP pull** | We fetch | A file on an SFTP server, such as a supplier's |
 | **HTTP pull** | We fetch | A file served over HTTP or HTTPS |
-| **FTP push** | You send | You upload to our FTP server and we import what arrives |
+| **FTP push** | You send | You upload to the [heavendata FTP server](/en/import/ftp-pull.html) and we import what arrives |
 
-*(The app still writes these as `SFtp Pull`, `Http Pull` and `Ftp Push`.)*
-
-What a source offers depends on what its connection can do. Everything that reaches a
-server is missing for a push source, because there is nothing of ours for it to reach —
-the files come to us.
+The controls a source offers depend on its connection. An **FTP push** source has no
+server of yours for us to reach, because the files come to us, so it offers only
+**Upload and import**:
 
 | | SFTP pull | HTTP pull | FTP push |
 | --- | --- | --- | --- |
@@ -47,8 +40,6 @@ the files come to us.
 | **Load fields** | Yes, once a host name and username are saved | Yes | No |
 | **Run now**, **Run selected datasets** | Yes | Yes | No — there is nothing to fetch |
 | **Upload and import** | Yes | Yes | **Yes** — the one way to run a push source on demand |
-
-A control a connection cannot support is not offered, rather than offered and then refused.
 
 You can save an **SFTP pull** source before you know its server details. Until it has
 a host name and a username, it is saved disabled: its schedule does not run it, and
@@ -147,8 +138,8 @@ A data source cannot fetch over FTP. When a supplier offers only FTP:
 
 - ask them for SFTP access instead;
 - if they can publish the file at a web address, use an **HTTP pull** source;
-- or have them upload the files to [our FTP server](/en/import/ftp-pull.html), with an
-  **FTP push** source.
+- or have them upload the files to the [heavendata FTP server](/en/import/ftp-pull.html),
+  with an **FTP push** source.
 
 ### If the server's certificate is not trusted
 
@@ -257,8 +248,8 @@ import:
 
 > Choose the datasets to import. The others are not imported.
 
-A dataset you leave out is not part of the run at all — it is not skipped with an
-error, it simply is not in this run. Use it when one supplier file is late, or when a
+The run imports only the datasets you tick. The others are left out of it, with no error
+and no step of their own. Use it when one supplier file is late, or when a
 single file needs re-importing and the others are fine.
 
 ### Running files you have to hand
@@ -292,13 +283,11 @@ read** rather than fetching anything.
 This is for the case where the **mapping** was wrong, not the file. The new run uses
 the files the old one read, together with the source's configuration **as it is now** —
 so you fix the mapping, run it again, and the same input goes through the corrected
-setup. Fetching the file again would be beside the point, and the supplier may have
-replaced it in the meantime.
+setup, even if the supplier has replaced the file since.
 
 The new run stores its own copy of those files, so it can itself be run again.
 
-If a run has no stored files, it cannot be started this way. The button is not there at
-all, and a message stands in its place:
+A run with no stored files shows this message where **Run stored files** would be:
 
 > No files are stored for this import. Start a new run of the data source instead.
 

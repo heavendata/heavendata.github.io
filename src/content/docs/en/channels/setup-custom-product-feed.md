@@ -80,7 +80,7 @@ A custom entity feed offers **Record ID**, **Custom entity key**, **Created on**
 
 ### Which fields an import can set
 
-When you [import](/en/import.html) through a data source, the mapping works the other way round: the fields are targets rather than sources. **An import can set your custom attributes and the fields below; everything else is read-only.**
+When you import through a [data source](/en/import/data-sources.html), the mapping works the other way round: the fields are targets rather than sources. **An import can set your custom attributes and the fields below; everything else is read-only.**
 
 | Field | Key | What the import does with it |
 | --- | --- | --- |

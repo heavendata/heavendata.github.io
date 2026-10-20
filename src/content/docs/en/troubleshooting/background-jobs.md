@@ -74,7 +74,7 @@ A data source that fetches its files from a server, and a channel that delivers 
 | **An unexpected error**, a **download that failed**, or the server **reported an error** | Something other than the cases above went wrong on the way | **The step's log file.** It keeps the server's own words, which the step's message leaves out |
 | **An error on our side** | The fault is ours, not the server's or the settings' | **Contact support**, and quote the reference the step gives. It is the same id the run's details show as **Execution ID** |
 
-A data source's messages call its settings its *connection settings*: they are under **Config Source** in the data source's editor. A channel's are in its **Publishing** step. What each import message says, and what to change, is in [when a file could not be fetched](/en/import.html#when-a-file-could-not-be-fetched).
+A data source's messages call its settings its *connection settings*: they are under **Config Source** in the data source's editor. A channel's are in its **Publishing** step. What each import message says, and what to change, is in [when a file could not be fetched](/en/import/data-sources.html#when-a-file-could-not-be-fetched).
 
 **A File transfer delivery that can't reach the server leaves two failed steps.** The first says why, as in the table. The second closes the export: it says the export couldn't finish, and at which stage it stopped — here, that the files couldn't be published. It does not repeat the reason, so read the step before it. A delivery that reached the server and then failed while sending says how many of the files were published. That step has no log file of its own: why the rest were not is in `ftp-publisher.log`, under the run's **Log Files**.
 
@@ -88,7 +88,7 @@ A run whose files have already been cleared lists none, and its downloads are no
 
 ### An import's steps
 
-An import has one step for each dataset in the run, naming that dataset's file. What those steps say, and what to do about each, is in [importing data](/en/import.html).
+An import has one step for each dataset in the run, naming that dataset's file. What those steps say, and what to do about each, is in [reading what a run did](/en/import/data-sources.html#reading-what-a-run-did).
 
 ## How long runs are kept
 
@@ -101,4 +101,4 @@ A run whose files have already been removed is expected, not a fault — the run
 
 After that the run no longer appears in **Run history** or in **Background tasks**, and its files can no longer be downloaded or used to start the run again. Because the two clean-ups run on their own schedules, a run's files can go a few hours before the run itself does.
 
-Files you dropped on the [hosted FTP server](/en/import/ftp-pull.html) are kept there under their own rule, which that page states.
+Files you dropped on the [heavendata FTP server](/en/import/ftp-pull.html) are kept there under their own rule, which that page states.

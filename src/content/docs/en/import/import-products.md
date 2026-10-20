@@ -7,7 +7,7 @@ sidebar:
 
 To import products from a file, open the [product list](/en/products/product-list.html) and select **Import** → **Products**. To delete the products a file lists, select **Import** → **Products to delete** instead. Both walk one file through a few steps and then run in the background.
 
-Use these for a one-off file. For a file that arrives again and again — from a supplier, or every night — set up a [data source](/en/import.html), which keeps its mapping and runs on a schedule; a supplier can drop the files on [our FTP server](/en/import/ftp-pull.html). To run a file through a data source's existing mapping instead, use **Upload and import** on the data source — see [running files you have to hand](/en/import.html#running-files-you-have-to-hand).
+Use these for a one-off file. For a file that arrives again and again — from a supplier, or every night — set up a [data source](/en/import/data-sources.html), which keeps its mapping and runs on a schedule; a supplier can upload the files to the [heavendata FTP server](/en/import/ftp-pull.html). To run a file through a data source's existing mapping instead, use **Upload and import** on the data source — see [running files you have to hand](/en/import/data-sources.html#running-files-you-have-to-hand).
 
 | You want to | Select | Steps |
 | --- | --- | --- |
@@ -119,7 +119,7 @@ Under **Existing products**, choose one of three:
 | **Re-publish products** | Publishes each product variant a row addresses, including one never published before. A row found by its article number rather than its identifier addresses only the product, so it publishes no new product variant. |
 | **Update drafts but do not modify published products** | Changes only the draft. What is published stays as it was until someone publishes it. Selected by default. |
 
-These are the same three [publish settings](/en/import.html#publish-settings) a data source has, worded differently, and here you choose one or the other where a data source lets you combine them:
+These are the same three [publish settings](/en/import/data-sources.html#publish-settings) a data source has, worded differently, and here you choose one or the other where a data source lets you combine them:
 
 | Here | On a data source |
 | --- | --- |

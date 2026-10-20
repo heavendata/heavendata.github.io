@@ -1,68 +1,124 @@
 ---
-title: "FTP Server (hosted by heavendata)"
-reviewed: false
+title: "The heavendata FTP server"
+description: "Connect to the heavendata FTP server to download a channel's files, upload files for a data source to import, or upload assets to an inbox — which credentials to use, and what you find there."
 sidebar:
-  order: 2
+  order: 3
 ---
-This article describes how to connect to our ftp server to access import and export files. 
+
+heavendata runs an FTP server at `ftp.eu.40three.net`. Other systems use it in three
+ways, and each way has its own **FTP credentials** — a username and a password you set
+in the app:
+
+| You want to | Use the FTP credentials of | Set them in | After you connect you see |
+| --- | --- | --- | --- |
+| **Download** a channel's files (export) | the channel | the channel's **Publishing** step, publisher **Ftp server** | the channel's folder — [download a channel's files](#download-a-channels-files) |
+| **Upload** files for a data source to import (import) | the data source | the data source's connection, **FTP push** | the data source's folder — [upload files for a data source](#upload-files-for-a-data-source) |
+| **Upload** asset files to an asset inbox | the asset inbox | **Settings → Assets → Inboxes**, the inbox's **FTP Access** | an empty folder — [upload files to an asset inbox](#upload-files-to-an-asset-inbox) |
+
+One set of credentials reaches one channel, one data source or one inbox, and nothing
+else. To do two of these things, use two sets.
+
+A username belongs to one channel or data source across all of heavendata, so choose
+one nobody else is likely to have picked.
 
 ## Connect with encryption (FTPS)
 
-The server accepts plain FTP and encrypted FTP (FTPS). Use FTPS:
-over plain FTP, your password and your files cross the internet unencrypted. Connect to
-`ftp.eu.40three.net`, the name the server's certificate is issued for, so that a client
-checking the certificate accepts it. The encryption is explicit, on port 21, not implicit:
-nothing answers on port 990, so do not use `ftps://` addresses or implicit encryption.
+The server accepts plain FTP and encrypted FTP (FTPS). Use FTPS: over plain FTP, your
+password and your files cross the internet unencrypted.
 
-## Windows Desktop - WinSCP
+| Setting | Value |
+| --- | --- |
+| Host | `ftp.eu.40three.net` — the name the server's certificate is issued for, so a client that checks the certificate accepts it |
+| Port | 21 |
+| Encryption | Explicit TLS on port 21. Do not use `ftps://` addresses or implicit encryption: nothing answers on port 990 |
+| Mode | Passive |
 
-WinSCP is a Windows application that allows you to manually connect to our ftp server and browse available files.
+There is no heavendata SFTP server. An **SFTP pull** data source cannot fetch from this
+server.
 
-You can download it here: https://winscp.net/
+### WinSCP (Windows)
 
-In the login dialog, choose **FTP** as the file protocol and **TLS/SSL Explicit encryption** as the encryption.
+[WinSCP](https://winscp.net/) is a Windows application for connecting to an FTP server
+and browsing its files. In the login dialog, choose **FTP** as the file protocol and
+**TLS/SSL Explicit encryption** as the encryption.
 
-## Windows Command Line - Curl
+### curl (command line)
 
-Curl allows you to download files from ftp servers on command line. This is perfect if you want to write a script to automatically download and import data.
+curl downloads and uploads files from the command line, so it suits a script that runs
+on its own. Windows 10 and 11 include it as `curl.exe`; for other systems, see
+[curl downloads](https://curl.se/download.html).
 
-Install Curl:
+To download a channel's file:
 
-* Download and unzip Curl for Windows from https://curl.haxx.se/windows/
-* Copy contents of */bin* folder to the folder where you saved your script
+```sh
+curl --ssl-reqd --user USERNAME:PASSWORD -o products.csv ftp://ftp.eu.40three.net/CHANNEL_ID/products.csv
+```
 
-Now you can download files using a single command
+To upload a file for a data source:
 
-     curl --ssl-reqd ftp://ftp.eu.40three.net/CHANNEL_ID/products.csv --user USERNAME:PASSWORD -o products.csv
+```sh
+curl --ssl-reqd --user USERNAME:PASSWORD -T products.csv ftp://ftp.eu.40three.net/DATA_SOURCE/import/
+```
 
-     # example
-     bin/curl.exe --ssl-reqd ftp://ftp.eu.40three.net/a28ca68c-bbb8-4753-ab35-30e83980ab7e/products.csv --user myuser:secretpassword -o products.csv
+Replace `USERNAME` and `PASSWORD` with the FTP credentials, and `CHANNEL_ID` or
+`DATA_SOURCE` with the folder you see after you connect.
 
-`--ssl-reqd` makes curl encrypt the login and the file transfer, and stop with an error rather than fall back to plain FTP. Do not use `--ssl` instead: it falls back to plain FTP without telling you.
+`--ssl-reqd` makes curl encrypt the login and the file transfer, and stop with an error
+rather than fall back to plain FTP. Do not use `--ssl` instead: it falls back to plain FTP
+without telling you.
 
-The username and password are the ones set in the channel's **Publishing** step. The folder is named after the channel's id. It is the only folder there after you log in, so a desktop client shows you its name.
+### The Windows `ftp` command
 
-## Import folders and how long files are kept
+It does not work with this server. It supports only active FTP, in which the server
+opens the data connection to your computer — and your firewall or router blocks that.
+Use WinSCP or curl.
 
-Each data source that receives files over FTP has a folder of its own at the root of
-the server, and two folders inside it. Browse the root in an FTP client to see the
-exact names — a data source appears under its key, or under its id if it has none.
+## Download a channel's files
+
+This is the export direction: a channel whose publisher is **Ftp server** puts its files
+on the server, and another system downloads them. Set the channel's FTP credentials in
+its **Publishing** step — see [File transfer](/en/channels/setup-custom-product-feed.html#file-transfer).
+
+After you connect you see one folder, named after the channel's id:
 
 | Path | What is in it |
-|---|---|
-| `<data source>/import` | Where you drop files. |
-| `<data source>/archive/<timestamp>-<id>` | One folder per import, holding the files that import read. |
+| --- | --- |
+| `<channel id>/<file>` | One file for each of the channel's feeds, from the channel's latest run |
+| `<channel id>/history/<run id>/` | One folder per run, with the files of that run |
 
-When an import starts, the files it takes are moved out of `import` into a new folder
-under `archive`. That is why a file you uploaded is no longer in `import` — it has been
-read, not lost.
+The channel's **Feeds** list and its dashboard show each feed's address on the server,
+in the form `ftp://ftp.eu.40three.net/<channel id>/<file name>` — the quickest way to the
+exact path.
 
-**A file stays in `import`** until every file the data source expects has arrived, so a
-partial set waits there for the rest.
+The folder is read-only: you can list and download, but not upload, rename or delete.
+
+The files at the top change when a run has written all of the channel's feeds. Until
+then you download the previous run's files.
+
+## Upload files for a data source
+
+This is the import direction: you, or a supplier, upload files, and a data source
+imports them. Set up an **FTP push** data source with its FTP credentials first — see
+[Data sources](/en/import/data-sources.html#connections).
 
 **Enable a new data source before you upload to it.** A data source is created with
-**Enabled** unchecked, and its FTP login works only once you have enabled it. Until then
-the server refuses the login.
+**Enabled** unchecked, and its FTP credentials work only once you have enabled it.
+Until then the server refuses the login.
+
+After you connect you see one folder for the data source, and two folders inside it.
+The data source's folder is named after its key, or its id if it has none — browse the
+root in an FTP client to see it.
+
+| Path | What is in it |
+| --- | --- |
+| `<data source>/import` | Where you upload files |
+| `<data source>/archive/<timestamp>-<id>` | One folder per import, holding the files that import read |
+
+**An import starts when every file the data source expects has arrived** — one for
+each of its datasets. A partial set waits in `import` for the rest.
+
+When an import starts, the files it takes are moved out of `import` into a new folder
+under `archive`. A file that has left `import` has been read.
 
 **Archived imports are kept for 30 days, or the most recent 5,000 imports of that data
 source — whichever comes first.** After that the folder and its files are removed. The
@@ -72,6 +128,12 @@ completed a set stays until you remove it.
 Runs themselves, with their logs, are listed in the app for the same 30 days — see
 [Background jobs](/en/troubleshooting/background-jobs.html).
 
-## FAQs
+## Upload files to an asset inbox
 
-* Can I use the default Windows command line ftp client? No. This client does not support passive FTP and will not work in most environments. Active FTP means, that our ftp server would have to initiate data connections and this would be blocked by your firewall / router.
+An asset inbox takes new asset files. Its **FTP Access** block, under **Settings →
+Assets → Inboxes**, shows the host, the port and the username to use. The password is
+the inbox's **Secret**: an inbox without one has no FTP access. The default inbox has no
+**FTP Access** block — create another inbox to upload over FTP.
+
+After you connect you see an empty folder. Upload files into it; you cannot list,
+download or delete them, or create folders.
