@@ -27,11 +27,9 @@ A data source's connection says how its files arrive:
 | --- | --- | --- |
 | **SFTP pull** | We fetch | A file on an SFTP server, such as a supplier's |
 | **HTTP pull** | We fetch | A file served over HTTP or HTTPS |
-| **FTP push** | You send | You upload to the [heavendata FTP server](/en/import/ftp-pull.html) and we import what arrives |
+| **FTP push** | You send | You upload to the [heavendata FTP server](/en/import/ftp-pull.html#upload-files-for-a-data-source) and we import what arrives |
 
-The controls a source offers depend on its connection. An **FTP push** source has no
-server of yours for us to reach, because the files come to us, so it offers only
-**Upload and import**:
+The controls a source offers depend on its connection:
 
 | | SFTP pull | HTTP pull | FTP push |
 | --- | --- | --- | --- |
@@ -53,6 +51,19 @@ Saving it says so:
 **Enabled** stays locked, with a sentence beside it saying what is still missing, until
 both are entered under **Config Source**. Then tick **Enabled** and save.
 
+### Setting up an FTP push source
+
+Choose **FTP push** under **Config Source**, enter a **Username** and a **Password**, and
+give each dataset the file name the uploaded file will have. These are the data source's
+FTP credentials on the [heavendata FTP server](/en/import/ftp-pull.html#upload-files-for-a-data-source).
+The username must not be in use anywhere else on heavendata.
+
+**Enable the source before anyone uploads to it.** A data source is created with
+**Enabled** unchecked, and the server refuses its FTP credentials until it is enabled. In
+the save that enables it, type the password again: a source enabled without its password
+being entered in the same save has FTP credentials with no password, and the server keeps
+refusing them.
+
 ## Publish settings
 
 Publish settings decide what an import makes visible in the published catalog. A data
@@ -63,7 +74,7 @@ imports with them — unless the dataset sets its own.
 | --- | --- |
 | **Publish new products** | Publishes the products and product variants the import created. |
 | **Apply changes to published products** | Updates product variants that are already published. Nothing new becomes visible. |
-| **Publish modified products** | Publishes each product variant a record in the file matches, including one that was never published before. A record keyed by base code addresses only the product, so it publishes no new product variant. |
+| **Publish modified products** | Publishes each product variant a record in the file matches, including one that was never published before. A record keyed by article number addresses only the product, so it publishes no new product variant. |
 
 The settings apply to product datasets only; a custom entity dataset has none.
 
@@ -101,15 +112,13 @@ Actions on untouched products, the products an import did not include, follow th
 Each product dataset's log file names the settings it ran with —
 [which publish settings a dataset used](#which-publish-settings-a-dataset-used).
 
-## Checking a source before you rely on it
-
-**Test connection** runs **on our servers, using the credentials the source already
-has** — which is why it does not ask you for a password.
+## Connection settings
 
 ### Test connection
 
-Under the source's connection settings, **Test connection** checks that the server can
-be reached and that the credentials are accepted. The result appears on the same
+Under the source's connection settings, **Test connection** checks, from our servers,
+that the server can be reached and that the credentials are accepted. It uses the
+credentials the source already has, so it does not ask for a password. The result appears on the same
 line: **Connection works**, or the reason it did not.
 
 The reason names the cause the way a failed run does: no server found at the host, a
@@ -148,8 +157,8 @@ An **HTTP pull** source connects over HTTPS by verifying the server's certificat
 that certificate is expired, self-signed, or issued for a different host name, the
 connection fails.
 
-**Fixing the certificate on the server is the right answer.** Where that is not in
-your hands, the source has an **Accept untrusted certificates** option, which connects
+Fix the certificate on the server where you can. Where that is not in your hands, the
+source has an **Accept untrusted certificates** option, which connects
 anyway:
 
 > Connects even when the server's certificate is expired, self-signed, or does not
@@ -265,9 +274,6 @@ Give a file to one dataset or to several; datasets you leave empty are not part 
 run. This is the way to correct a supplier file yourself — fix it locally, upload it,
 and it is imported with the same mapping and options as a scheduled run, without
 waiting for the supplier to send a new one.
-
-It is offered for **every** source, including **FTP push** — which is the only way to
-run a push source on demand.
 
 To import a file with a mapping you set up just for it, without a data source, use the product
 list's **Import** menu instead — [Import or delete products from a file](/en/import/import-products.html).

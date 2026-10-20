@@ -27,7 +27,7 @@ Each data source has one **connection**:
 | --- | --- | --- |
 | **SFTP pull** | We fetch the files | The files are on an SFTP server, such as a supplier's |
 | **HTTP pull** | We fetch the files | The files are at a web address |
-| **FTP push** | Someone uploads the files | You or a supplier can upload to the [heavendata FTP server](/en/import/ftp-pull.html) |
+| **FTP push** | Someone uploads the files | You or a supplier can upload to the [heavendata FTP server](/en/import/ftp-pull.html#upload-files-for-a-data-source) |
 
 Setting a connection up, testing it, and choosing each dataset's file are on
 [Data sources](/en/import/data-sources.html).

@@ -16,10 +16,8 @@ in the app:
 | **Upload** asset files to an asset inbox | the asset inbox | **Settings → Assets → Inboxes**, the inbox's **FTP Access** | an empty folder — [upload files to an asset inbox](#upload-files-to-an-asset-inbox) |
 
 One set of credentials reaches one channel, one data source or one inbox, and nothing
-else. To do two of these things, use two sets.
-
-A username belongs to one channel or data source across all of heavendata, so choose
-one nobody else is likely to have picked.
+else. To do two of these things, use two sets. A channel's or a data source's username
+must not be in use anywhere else on heavendata; an inbox's username is given to you.
 
 ## Connect with encryption (FTPS)
 
@@ -33,8 +31,7 @@ password and your files cross the internet unencrypted.
 | Encryption | Explicit TLS on port 21. Do not use `ftps://` addresses or implicit encryption: nothing answers on port 990 |
 | Mode | Passive |
 
-There is no heavendata SFTP server. An **SFTP pull** data source cannot fetch from this
-server.
+There is no heavendata SFTP server, so an **SFTP pull** data source cannot fetch from this one.
 
 ### WinSCP (Windows)
 
@@ -105,14 +102,9 @@ then you download the previous run's files.
 ## Upload files for a data source
 
 This is the import direction: you, or a supplier, upload files, and a data source
-imports them. Set up an **FTP push** data source with its FTP credentials first — see
-[Data sources](/en/import/data-sources.html#connections).
-
-**Enable a new data source before you upload to it.** A data source is created with
-**Enabled** unchecked, and the server refuses its FTP credentials until you have enabled
-it. In the save that enables it, type the password again: a data source enabled without
-its password being entered in the same save has FTP credentials with no password, and
-the server keeps refusing them.
+imports them. First set up and enable an **FTP push** data source — see
+[setting up an FTP push source](/en/import/data-sources.html#setting-up-an-ftp-push-source).
+Until it is enabled, the server refuses its FTP credentials.
 
 Give each file the file name its dataset is set up with. The server refuses a file whose
 name matches none of the data source's datasets.
@@ -137,8 +129,8 @@ source — whichever comes first.** After that the folder and its files are remo
 `import` folder is yours: nothing clears it automatically, so a file that never
 completed a set stays until you remove it.
 
-Runs themselves, with their logs, are listed in the app for the same 30 days — see
-[Background jobs](/en/troubleshooting/background-jobs.html).
+How long the runs themselves are kept is in
+[Background jobs](/en/troubleshooting/background-jobs.html#how-long-runs-are-kept).
 
 ## Upload files to an asset inbox
 
