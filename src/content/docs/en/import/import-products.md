@@ -30,7 +30,7 @@ Select **Fix it** beside the message and choose which of your attributes is the 
 
 ### 1 · Upload
 
-Drop your file on the upload area, or select **Upload files** and choose it. One file per import; a second file replaces the first.
+Drop your file on the upload area, or select **Upload files** and choose it. One file per import; a second file replaces the first, and the mapping starts again from the new file.
 
 | Accepted | Not accepted |
 | --- | --- |
@@ -38,7 +38,7 @@ Drop your file on the upload area, or select **Upload files** and choose it. One
 
 The file's format is detected for you. Once it is, **Format Settings** shows what was detected — for a CSV file, for example, the character encoding, the field separator and which row holds the column names. Correct anything that is wrong and select **Apply** to read the file again.
 
-**Check the preview before you go on.** Under **Preview**, the step shows about the first 200 rows of the file as they were read, before anything is imported. If columns are shifted or a value runs across two columns, the format settings are wrong — fix them here. If some rows cannot be read at all, the step shows **Errors** instead of the preview, with the record number, line number and the row as it is in the file.
+**Check the preview before you go on.** Under **Preview**, the step shows about the first 200 rows of the file as they were read, before anything is imported. If columns are shifted or a value runs across two columns, the format settings are wrong — fix them here. If a row cannot be read at all, the step shows **Errors** instead of the preview, with that row's record number, line number and the row as it is in the file. Reading stops at that row, so fix it and upload the file again to find any further ones.
 
 If the file cannot be read, the step says *Couldn't read the file* and why, and keeps your format settings so you can change them and try again.
 
@@ -65,7 +65,7 @@ If the values of a column do not fit the attribute it is mapped to, the row says
 
 The warning does not stop the import. Change the conversion with the button at the left of the row, or map the column elsewhere.
 
-Suggestions take a moment on a large file. The step shows *Getting mapping suggestions…* while it waits, and **Next** waits too. If the language model could not answer in time, a note above the rows says how many columns it could not suggest for — map those yourself, or select **Auto map** to ask again.
+Suggestions take a moment on a large file. The step shows *Getting mapping suggestions…* while it waits, and **Next** waits too. If the language model failed or could not answer in time, a note above the rows says how many columns it could not suggest for — map those yourself, or select **Auto map** to ask again.
 
 | Control | What it does |
 | --- | --- |
@@ -85,10 +85,10 @@ A column you do not map is not imported, so **leave a column unmapped to leave t
 | **Date format** | How dates in the file are written | **Date and time with offset**, such as `2011-12-03T10:15:30+01:00` |
 | **Decimal Separator**, **Group Separator** | How numbers in the file are written: the decimal point, and what groups thousands | `.` and `,` |
 | **Currency Decimal Separator**, **Currency Group Separator** | The same, for prices | `.` and `,` |
-
-When the step opens, both decimal separators are set to the one your file uses, and the group separators to the other character — a file that writes `12,50` opens with `,` and `.`.
 | **Value separator** | What separates several values in one cell | `\|` |
 | **Timezone** | The time zone of dates and times that carry none | none |
+
+When the step opens, both decimal separators are set to the one your file uses, and the group separators to the other character — a file that writes `12,50` opens with `,` and `.`.
 
 **Next** stays disabled until a column is mapped to the identifier attribute. The step says which attribute it means.
 
@@ -108,7 +108,7 @@ The options decide whether the import may create products, and what it publishes
 | --- | --- |
 | **Create New Products** | Lets a row whose identifier matches no product create one. |
 | **Default product type** | The [product type](/en/concepts/product-types.html) a new product is created with when its row names none. Required while **Create New Products** is on — **Import now** stays disabled until you choose one. |
-| **Publish new products** | Publishes the products the import creates. |
+| **Publish new products** | Publishes the products and product variants the import creates. |
 | **Create drafts, but not publish products** | Creates new products as drafts. Selected by default. |
 
 Under **Existing products**, choose one of three:
