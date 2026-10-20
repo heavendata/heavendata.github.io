@@ -6,12 +6,13 @@ sidebar:
   order: 2
 ---
 
-A data source imports the same kind of file again and again: it knows where to fetch
-the files, which files to take, and how to map their columns, and it runs on a schedule.
-Set one up under **Integrations → Data sources**. You can also run it whenever you like,
-and run it on a file you upload yourself.
+A data source imports the same kind of file again and again: it knows where the files
+come from, which files to take, and how to map their columns. A source that fetches its
+files runs on a schedule; an **FTP push** source runs when its files arrive. Set one up
+under **Integrations → Data sources**. You can also start one yourself, or run it on a
+file you upload — see [running a data source](#running-a-data-source).
 
-A data source has one or more **datasets**. A dataset is one file and the mapping that
+Each file a data source imports is a **dataset**: one file and the mapping that
 turns its columns into product data, so a source with a product file and a price file has
 two datasets.
 
@@ -232,8 +233,10 @@ list of columns the file offers, not what you have mapped them to.
 
 ## Running a data source
 
-A source runs on its schedule. You can also start one yourself from the row menu (⋮)
-in **Integrations → Data sources**.
+An **SFTP pull** or **HTTP pull** source runs on its schedule, and an **FTP push** source
+when the last file it expects arrives on the
+[heavendata FTP server](/en/import/ftp-pull.html#upload-files-for-a-data-source). You can
+also start one yourself from the row menu (⋮) in **Integrations → Data sources**.
 
 | Action | What runs |
 | --- | --- |

@@ -11,7 +11,7 @@ in the app:
 
 | You want to | Use the FTP credentials of | Set them in | After you connect you see |
 | --- | --- | --- | --- |
-| **Download** a channel's files (export) | the channel | the channel's **Publishing** step, publisher **Ftp server** | the channel's folder — [download a channel's files](#download-a-channels-files) |
+| **Download** a channel's files (export) | the channel | the channel's **Publishing** step, publishing method **FTP server** | the channel's folder — [download a channel's files](#download-a-channels-files) |
 | **Upload** files for a data source to import (import) | the data source | the data source's connection, **FTP push** | the data source's folder — [upload files for a data source](#upload-files-for-a-data-source) |
 | **Upload** asset files to an asset inbox | the asset inbox | **Settings → Assets → Inboxes**, the inbox's **FTP Access** | an empty folder — [upload files to an asset inbox](#upload-files-to-an-asset-inbox) |
 
@@ -39,8 +39,8 @@ server.
 ### WinSCP (Windows)
 
 [WinSCP](https://winscp.net/) is a Windows application for connecting to an FTP server
-and browsing its files. In the login dialog, choose **FTP** as the file protocol and
-**TLS/SSL Explicit encryption** as the encryption.
+and browsing its files. In the login dialog, choose FTP as the file protocol and explicit
+TLS/SSL as the encryption.
 
 ### curl (command line)
 
@@ -61,11 +61,18 @@ curl --ssl-reqd --user USERNAME:PASSWORD -T products.csv ftp://ftp.eu.40three.ne
 ```
 
 Replace `USERNAME` and `PASSWORD` with the FTP credentials, and `CHANNEL_ID` or
-`DATA_SOURCE` with the folder you see after you connect.
+`DATA_SOURCE` with the folder you see after you connect. An upload's file name must
+match one of the data source's datasets — see
+[upload files for a data source](#upload-files-for-a-data-source).
 
 `--ssl-reqd` makes curl encrypt the login and the file transfer, and stop with an error
 rather than fall back to plain FTP. Do not use `--ssl` instead: it falls back to plain FTP
 without telling you.
+
+curl on Windows can end an upload with error 56 even though the server accepted the
+file — on the upload that completes a data source's set of files, and on an upload to
+an asset inbox. A script that checks curl's exit code reports those uploads as failed;
+check the [run](/en/troubleshooting/background-jobs.html) or the inbox instead.
 
 ### The Windows `ftp` command
 
@@ -75,7 +82,7 @@ Use WinSCP or curl.
 
 ## Download a channel's files
 
-This is the export direction: a channel whose publisher is **Ftp server** puts its files
+This is the export direction: a channel whose publishing method is **FTP server** puts its files
 on the server, and another system downloads them. Set the channel's FTP credentials in
 its **Publishing** step — see [File transfer](/en/channels/setup-custom-product-feed.html#file-transfer).
 
@@ -102,8 +109,13 @@ imports them. Set up an **FTP push** data source with its FTP credentials first 
 [Data sources](/en/import/data-sources.html#connections).
 
 **Enable a new data source before you upload to it.** A data source is created with
-**Enabled** unchecked, and its FTP credentials work only once you have enabled it.
-Until then the server refuses the login.
+**Enabled** unchecked, and the server refuses its FTP credentials until you have enabled
+it. In the save that enables it, type the password again: a data source enabled without
+its password being entered in the same save has FTP credentials with no password, and
+the server keeps refusing them.
+
+Give each file the file name its dataset is set up with. The server refuses a file whose
+name matches none of the data source's datasets.
 
 After you connect you see one folder for the data source, and two folders inside it.
 The data source's folder is named after its key, or its id if it has none — browse the
