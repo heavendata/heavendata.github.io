@@ -7,14 +7,14 @@ sidebar:
 
 To import products from a file, open the [product list](/en/products/product-list.html) and select **Import** → **Products**. To delete the products a file lists, select **Import** → **Products to delete** instead. Both walk one file through a few steps and then run in the background.
 
-Use these for a one-off file. For a file that arrives again and again — from a supplier, or every night — set up a [data source](/en/import.html), which keeps its mapping and runs on a schedule.
+Use these for a one-off file. For a file that arrives again and again — from a supplier, or every night — set up a [data source](/en/import.html), which keeps its mapping and runs on a schedule; a supplier can drop the files on [our FTP server](/en/import/ftp-pull.html). To run a file through a data source's existing mapping instead, use **Upload and import** on the data source — see [running files you have to hand](/en/import.html#running-files-you-have-to-hand).
 
 | You want to | Select | Steps |
 | --- | --- | --- |
 | Create products, or change products you already have | **Import** → **Products** | **Upload** · **Map columns** · **Import options** · **Done** |
 | Delete products | **Import** → **Products to delete** | **Upload** · **Map columns** · **Done** |
 
-**Import** is not in the sidebar; it is a button in the product list's header, between **Export** and **New product**. If you cannot see it, you lack the permission to import products — ask an administrator for it.
+**Import** is a button in the product list's header, between **Export** and **New product**. If you cannot see it, you lack the permission to import products — ask an administrator for it. That one permission covers both menu items, deleting included.
 
 ## Before you start: the identifier attribute
 
@@ -52,7 +52,7 @@ Each row of this step is one column of your file. Choose the product attribute i
 
 | Tag | Where the suggestion comes from |
 | --- | --- |
-| **Earlier import** | The last import your account started with a column of this name. It brings back that column's attribute and its conversion. |
+| **Earlier import** | The last import your account started with a column of this name — see [what is remembered](#what-is-remembered-for-the-next-file). |
 | **Name match** | The column's name matches an attribute's code or name. |
 | **Value match** | The column's values fit one attribute — every value is a GTIN, for example, or every value is one of an attribute's list values. It does not mean the values already exist in your catalog. |
 | **AI suggestion** | A language model, for the columns the other three leave open. It sees the column names, up to 10 sample values of each, and your attributes — none of your stored products. |
@@ -83,8 +83,10 @@ A column you do not map is not imported, so **leave a column unmapped to leave t
 | Option | What it sets | Default |
 | --- | --- | --- |
 | **Date format** | How dates in the file are written | **Date and time with offset**, such as `2011-12-03T10:15:30+01:00` |
-| **Decimal Separator**, **Group Separator** | How numbers in the file are written: the decimal point, and what groups thousands | `.` and `,` — the decimal separator is set from the file when the step opens |
+| **Decimal Separator**, **Group Separator** | How numbers in the file are written: the decimal point, and what groups thousands | `.` and `,` |
 | **Currency Decimal Separator**, **Currency Group Separator** | The same, for prices | `.` and `,` |
+
+When the step opens, both decimal separators are set to the one your file uses, and the group separators to the other character — a file that writes `12,50` opens with `,` and `.`.
 | **Value separator** | What separates several values in one cell | `\|` |
 | **Timezone** | The time zone of dates and times that carry none | none |
 
@@ -104,7 +106,7 @@ The options decide whether the import may create products, and what it publishes
 
 | Option | What it does |
 | --- | --- |
-| **Create New Products** | On: a row whose identifier matches no product creates one. Off: the row is skipped. |
+| **Create New Products** | Lets a row whose identifier matches no product create one. |
 | **Default product type** | The [product type](/en/concepts/product-types.html) a new product is created with when its row names none. Required while **Create New Products** is on — **Import now** stays disabled until you choose one. |
 | **Publish new products** | Publishes the products the import creates. |
 | **Create drafts, but not publish products** | Creates new products as drafts. Selected by default. |
@@ -114,7 +116,7 @@ Under **Existing products**, choose one of three:
 | Option | What it does |
 | --- | --- |
 | **Update published products** | Applies the changes to the products and product variants that are already published, so channels get them. Nothing that was not published becomes published. |
-| **Re-publish products** | Publishes each product variant a row addresses, including one never published before. |
+| **Re-publish products** | Publishes each product variant a row addresses, including one never published before. A row found by its article number rather than its identifier addresses only the product, so it publishes no new product variant. |
 | **Update drafts but do not modify published products** | Changes only the draft. What is published stays as it was until someone publishes it. Selected by default. |
 
 These are the same three [publish settings](/en/import.html#publish-settings) a data source has, worded differently, and here you choose one or the other where a data source lets you combine them:
@@ -133,7 +135,7 @@ The step follows the import as it runs. **The import runs in the background**: y
 
 What an import did to each product is in its log, row by row. To find the run again later, and read its steps and log files, see [background jobs](/en/troubleshooting/background-jobs.html). **The run is listed as *Import default*** — for every import and deletion from this menu — and its step names your file, as in *default (uploaded as products.csv)*.
 
-**Finished does not mean every row changed a product.** The **Done** step's summary counts every row it read as imported — skipped rows too. Select **View details** for what each row did: **Created**, **Updated**, **Skipped** and the other counts, and the log that names each skipped row. With **Create New Products** off, every new product in the file is skipped.
+The **Done** step's summary counts every row it read as imported — skipped rows too, so a finished import may have changed nothing. Select **View details** for what each row did: **Created**, **Updated**, **Skipped** and the other counts, and the log that names each skipped row. With **Create New Products** off, every new product in the file is skipped. The log also names the publish options the import ran with, as *chosen for this import*.
 
 ## Delete products
 
@@ -157,8 +159,6 @@ What happens to a deleted product:
 - It is **unpublished first**, so channels stop receiving it.
 - **References to it from other products are removed.**
 - If a published product or record still requires it, it is **not deleted**: the row is skipped with a warning in the log, and the other rows go on.
-
-Deleting from a file needs only the permission to import products.
 
 ## If the import does not start
 

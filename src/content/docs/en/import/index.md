@@ -275,6 +275,9 @@ waiting for the supplier to send a new one.
 It is offered for **every** source, including **FTP push** — which is the only way to
 run a push source on demand.
 
+To import a file with a mapping you set up just for it, without a data source, use the product
+list's **Import** menu instead — [Import or delete products from a file](/en/import/import-products.html).
+
 **Your file keeps its own name.** If you upload `preisliste-kw38.csv` for a dataset
 configured as `artikel.csv`, the run history names both — the dataset, so you can see
 which mapping it went through, and your file, so you can see what was actually
