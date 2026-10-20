@@ -14,7 +14,7 @@ Element | Description
 --- | ---
 Number of products | Number of visible products (filter applied)
 Export | Opens the product export dialog
-Import | Navigates to product import. Use this for manual one-time imports. See data sources for automated import jobs.
+Import | Opens a menu: **Products** imports products from a file, **Products to delete** deletes the products a file lists. See [Import or delete products from a file](/en/import/import-products.html); for files that arrive regularly, use a [data source](/en/import.html) instead.
 New product | Create a new product
 
 ## List Toolbar

@@ -2,7 +2,7 @@
 title: "FTP Server (hosted by heavendata)"
 reviewed: false
 sidebar:
-  order: 1
+  order: 2
 ---
 This article describes how to connect to our ftp server to access import and export files. 
 

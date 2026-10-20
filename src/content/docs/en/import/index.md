@@ -10,7 +10,8 @@ sidebar:
 Two ways in. A **manual import** walks one file through upload, mapping and options in
 the app, and is right for a one-off change. A **data source** is a standing
 configuration — a place to fetch from, the files to take, and the mapping to apply — and
-is right for anything that repeats. **This page is about data sources.**
+is right for anything that repeats. **This page is about data sources**; a manual import is
+[Import or delete products from a file](/en/import/import-products.html).
 
 You do not have to wait for a schedule to use one: a data source can run on demand, and
 it can run a file you supply yourself.
