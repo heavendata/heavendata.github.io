@@ -10,10 +10,10 @@ Variants allow you to manage all versions of one product together. A typical exa
 --- | --- | --- | ---
 |Shirt with logo |S |Cotton |shirt1-s
 |Shirt with logo |M |Cotton |shirt1-m
-|Shirt with logo |L |Cotton |shirt1-m
+|Shirt with logo |L |Cotton |shirt1-l
 |Shirt uni |S |Linen |shirt2-s
 |Shirt uni |M |Linen |shirt2-m
-|Shirt uni |L |Linen |shirt2-m
+|Shirt uni |L |Linen |shirt2-l
 
 We have two products here, and each has three variants (sizes). Without variants, we would have six independent products. If we change text or upload product images, we have to do this for each size.
 
