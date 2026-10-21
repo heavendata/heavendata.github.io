@@ -11,7 +11,7 @@ After sign-up, heavendata asks how to set up your account and offers three optio
 | --- | --- | --- |
 | **Empty setup** | Creates nothing. You create every attribute, section and product type yourself. | You have a clear picture of your attributes and how they should be organized. |
 | **Standard setup** | Creates the product type *General products* with 14 attributes, then opens **New product type** so you can add ready-made product types for the kinds of product you sell. | You want to add or import products right away and grow the structure as you go. |
-| **Managed setup** | Opens a contact page. Our team sets the account up with you. | You want us to do the setup. |
+| **Managed setup** | Opens a contact page. You send us an email and our team sets the account up for you. | You want us to do the setup. |
 
 ## Empty setup
 
@@ -31,4 +31,4 @@ Accounts set up before 21 October 2026 got the product type *Simple product* ins
 
 ## Managed setup
 
-With Managed setup our team does the setup with you: we talk about what you need and configure the account together.
+With Managed setup you send us an email, we contact you, and we set the account up for you. That typically takes about 24 hours.

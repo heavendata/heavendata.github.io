@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-A new account looks empty until it has a product type. This guide takes you from there to your first product: you create one product type from the ready-made list, look at what it created, add a product by hand and show its data in the product list. It takes about ten minutes. If you chose [Standard setup](./setup-options.html#standard-setup), your account already has the product type *General products* and you can start at [Add your first product](#add-your-first-product).
+A new account looks empty until it has a product type. This guide takes you from there to your first product: you create one product type from the ready-made list, look at what it created, add a product by hand and show its data in the product list. If you chose [Standard setup](./setup-options.html#standard-setup), your account already has the product type *General products* and you can start at [Add your first product](#add-your-first-product).
 
 ## How product data is structured
 
@@ -37,7 +37,7 @@ Most accounts import product data from an existing system and enhance it in heav
 
 1. Open **Products** in the sidebar.
 2. Choose **New product**. A panel asks you to select the product type.
-3. Select the product type you created. If it has more than one variant configuration, select one next; for a single product without variants, choose **No product variants**.
+3. Select the product type you created, or *General products* after Standard setup. If it has more than one variant configuration, select one next; for a single product without variants, choose **No product variants**.
 4. The product editor opens. Fill in some attributes, at least the product name.
 5. Choose **Done**.
 
@@ -45,7 +45,7 @@ You have created your first product. To import many at once, see [Importing data
 
 ### Show product data in the product list
 
-The product list shows no attribute columns when you open it for the first time. To add some:
+The product list starts with few columns. To choose the ones you want to see:
 
 1. Open **Products**.
 2. Choose **Columns**.

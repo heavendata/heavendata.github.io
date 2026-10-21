@@ -15,7 +15,7 @@ The app relies on these five roles. Assign each to one attribute.
 
 | Role | What it marks |
 | --- | --- |
-| `system.identifier` | The attribute that identifies a product variant, in most cases the SKU. An import uses it to decide whether a row updates an existing product or creates a new one. The API uses it to address a single product. |
+| `system.identifier` | The attribute that identifies a product variant, in most cases the SKU. An import uses it to decide whether a row updates an existing product or creates a new one. |
 | `system.basecode` | The code a product's variants share. Imported rows with the same base code are merged into one product with variants. |
 | `product.name` | The product's name. The app shows it wherever it names a product. |
 | `product.sku` | The stock keeping unit, the code that is unique for each product variant. |
@@ -38,4 +38,4 @@ Every attribute a ready-made product type creates carries a role of its own, suc
 
 ## Other roles
 
-Other roles are not required. They help the app map your data to the formats target systems expect, such as which attribute holds the GTIN or the brand. You can ignore them during setup; the app asks for one when it needs it.
+Other roles are not required. They help the app map your data to the formats target systems expect, such as which attribute holds the GTIN or the brand. You can ignore them during setup.
