@@ -5,7 +5,7 @@ sidebar:
   order: 1.5
 ---
 
-A money attribute holds an amount of money, such as `129.95`, in a currency you set once on the attribute, such as euros. Every product's amount in that attribute is in that currency. The amount is stored as a number. The currency is stored with the attribute, not with each amount.
+A money attribute holds an amount of money, such as `129.95`, in the currency set on the attribute, such as euros. Every product's amount in that attribute is in that currency. The amount is stored as a number. The currency is stored with the attribute, not with each amount.
 
 Use it for a fixed amount that describes a product, such as a deposit, a recycling fee or a declared customs value. For the amount a product is sold for — retail, wholesale, in several currencies, with validity dates — use prices instead: see [Money attributes and prices](#money-attributes-and-prices).
 
@@ -33,7 +33,7 @@ The type can't be changed after the attribute is created. To turn an existing at
 
 ## Set the currency
 
-**Currency** comes after **Default value**. Choose the currency from the list; it lists every currency by its ISO 4217 code and English name.
+**Currency** is on the attribute's **Settings** tab, after **Default value**. Choose the currency from the list; it lists every currency by its ISO 4217 code and English name.
 
 Set it when you create the attribute. A money attribute without a currency shows its amounts in the product editor as US dollars.
 
@@ -50,7 +50,7 @@ You can change **Currency** at any time. The amounts stay exactly as they are: a
 
 ## Import and export
 
-**An import reads the amount as a number.** Map the column onto the money attribute as you would a number. The currency comes from the attribute, so the column needs only the amount:
+**An import reads the amount as a number.** Map the column onto the money attribute as you would a number. The currency comes from the attribute, so the column needs only the amount. With the default **Data Format**, where the decimal separator is `.`:
 
 | In the file | Stored |
 | --- | --- |
@@ -70,7 +70,7 @@ A product variant's selling prices are its **prices**, which an import fills; ea
 | --- | --- | --- |
 | Currency | One per attribute, optional | One per price list, required |
 | Validity dates, sale price | No | Yes |
-| In an export | A number, without currency | `prices`, each price with its price list's currency — see [Record keys](/en/reference/record-keys.html) |
+| In an export | A number, without currency | `prices`, each price with its price list's currency — the key is listed in [Record keys](/en/reference/record-keys.html) |
 
 ## Related articles
 
