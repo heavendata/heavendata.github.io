@@ -45,5 +45,6 @@ The attribute type and translatable settings affect how data is stored in databa
 
 * [Product types](./product-types.html) - enable attributes for product types
 * [Common attributes](./common-attributes.html) - enable attributes for all products
+* [Money attributes](./money-attributes.html) - amounts with a currency
 * [Optimize catalog structure](../initial-setup/optimize-catalog-structure.html)
 Guide covering attributes and product types management.
