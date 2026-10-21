@@ -7,7 +7,7 @@ sidebar:
 
 A ready-made product type is a product type we have already set up for one kind of product. It comes with the attributes that kind is described by, values to pick from where a list makes sense, and the variant configurations it is sold in, such as *Color, then size*. Creating one copies it into your account. From then on it is your own product type: rename it, change its attributes or delete it like any other, and a later change to the list changes nothing in your account.
 
-There are 149 ready-made product types in 18 groups, listed below. Every one of them starts with the same 13 attributes, then adds the attributes its kind of product needs. Names, values and search are in English, or in German when your account's languages include German and not English ([how the language is chosen](/en/concepts/product-types.html#which-language-a-ready-made-product-type-is-created-in)).
+There are 149 ready-made product types in 18 groups, listed below. Every one of them starts with the same 13 attributes, then adds the attributes its kind of product needs. Names, values and search are in English or German, depending on your account's languages ([which language](/en/concepts/product-types.html#which-language-a-ready-made-product-type-is-created-in)).
 
 To create one, go to **Settings → Product types → New product type**, search or scroll to the card, select it and choose **Create**. The steps, what you can untick and what a second product type reuses are on [Product types](/en/concepts/product-types.html#create-a-product-type-from-a-ready-made-one). After [Standard setup](/en/start/setup-options.html#standard-setup) your account already has one of them, *General products*.
 
@@ -15,25 +15,25 @@ To create one, go to **Settings → Product types → New product type**, search
 
 Every ready-made product type creates these 13 attributes in three sections, unless your account already has them. An attribute your account already has is reused, not created twice.
 
-| Section | Attribute | Kind | Note |
+| Section | Attribute | Type | Note |
 | --- | --- | --- | --- |
-| General | SKU | Text | Identifies one product variant. Carries the identifier and SKU roles. |
-| General | Article number | Text | The code a product's variants share. Carries the base code role. |
-| General | Name | Text | Carries the product name role. |
+| General | SKU | Text | Identifies one product variant. |
+| General | Article number | Text | The code a product's variants share. |
+| General | Name | Text | |
 | General | Description | Text | |
 | General | Brand | Text | |
 | General | GTIN | Text | |
-| General | Color | Text with 19 values to pick from, such as Beige, Black, Blue and Multicolor; any other value can be typed | Half of the product types split their product variants by it. |
-| Media and links | Images | Asset | Carries the image role. |
+| General | Color | Text with 19 values to pick from, such as Beige, Black, Blue and Multicolor | Half of the product types split their product variants by it. |
+| Media and links | Images | Assets | |
 | Media and links | URL | Text | |
-| Weight and dimensions | Net weight | Number | Measured in kilograms. The unit is stated in the attribute's description only. |
+| Weight and dimensions | Net weight | Number | A number in kilograms; there is no unit field. |
 | Weight and dimensions | Length | Number | The length of the product, in centimeters. |
 | Weight and dimensions | Width | Number | The width of the product, in centimeters. |
 | Weight and dimensions | Height | Number | The height of the product, in centimeters. |
 
 Three more things hold for every ready-made product type:
 
-- **The roles are assigned.** SKU, Article number, Name and Images carry the roles the app needs to identify products, unless an attribute of yours already holds one. See [Attribute roles](/en/concepts/attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles).
+- **The roles are assigned.** SKU, Article number, Name and Images get the roles the app needs to identify products ([Attribute roles](/en/concepts/attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles)).
 - **Every one has the variant configuration *No product variants***, for products sold in one version. The *Variant configurations* column below lists the others; all but ten product types have at least one, and half of them split by Color first, then by size or another attribute. See [Product variants](/en/concepts/product-variants.html).
 - **No price.** Prices live in price lists, not in an attribute. See [Money attributes and prices](/en/concepts/money-attributes.html#money-attributes-and-prices).
 
@@ -41,7 +41,8 @@ Most of a product type's own attributes, listed below, offer values to pick from
 
 ## The 18 groups
 
-Each table lists the product types of one group in the order the app shows them. **Covers** is the line under the card's name; **Its own attributes** are the ones it brings besides the 13 above; **Variant configurations** leaves out *No product variants*, which every product type has.
+Each table lists the product types of one group in the order the app shows them. **Covers** is the line under the card's name; **Its own attributes** are the ones it brings besides the 13 above; **Variant configurations** leaves out *No product variants*.
+
 ### Fashion
 
 | Product type | Covers | Its own attributes | Variant configurations |

@@ -7,6 +7,10 @@ sidebar:
 
 A product type describes what data is stored for one kind of product and how it is organized: which attributes a product of that kind has, and which variant configurations it can be split into product variants by. Every product has exactly one product type. You create one either from a [ready-made product type](#create-a-product-type-from-a-ready-made-one), which brings its attributes with it, or from a [blank one](#create-a-product-type-from-a-blank-one), choosing from attributes you have already created.
 
+## Why product types
+
+Most catalogs hold different kinds of products, and many attributes make no sense for some of them. A retailer who sells shoes and televisions needs *Shoe size* for the shoes and *Screen size* and *Operating system* for the televisions. Without product types every shoe would have an operating system. With a product type *Shoes* that includes *Shoe size* and a product type *Televisions* that includes *Screen size* and *Operating system*, each product shows only what describes it.
+
 ## Create a product type from a ready-made one
 
 heavendata offers 149 ready-made product types in 18 groups, each with the attributes and variant configurations its kind of product needs. The full list is on [Ready-made product types](/en/start/ready-made-product-types.html). Creating one creates its attributes and sections in your account and reuses the ones you already have.
@@ -35,7 +39,7 @@ The create page shows the product type the way the product type editor will: its
 | **Already in your account** in a section's header | Every attribute in that section is already yours. Nothing in it is created. |
 | *Your account already has every attribute this product type needs. Create adds only the product type.* | Nothing new is created; **Create** adds the product type alone. |
 
-An attribute you built by hand is not recognized as the same attribute, even with the same name: the ready-made product type creates its own beside it and leaves yours as it is. You can untick the new one if no variant configuration splits by it. Reuse works by the attribute's [role](./attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles), so an attribute an earlier ready-made product type created is reused even after you renamed it.
+Reuse works by the attribute's [role](./attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles), not its name: an attribute an earlier ready-made product type created is reused even after you renamed it, and an attribute you built by hand is not recognized, even with the same name, so the ready-made product type creates its own beside it.
 
 <!-- Screenshot: the create page for Tops & shirts in an account that already has General products: the General, Media and links, and Weight and dimensions sections marked Already in your account, the Fashion section with its New badge and Select all, and Size locked with its hint. -->
 
@@ -62,7 +66,7 @@ Creating a ready-made product type your account already has creates a second pro
 
 The ready-made product types exist in English and German. The app shows and creates them in German when your account's languages include German and not English, and in English in every other case, including an account with both. The rule applies to the product type's name, its sections, its attributes and their values. Attribute codes and the product type's key are English in every account, so an import mapping works the same way in a German account. The app's own text on these pages stays English.
 
-A ready-made product type's attributes are created as not translatable, so Name and Description hold one value per product. If your products need names in several languages, create a translatable Name attribute yourself and give it the `product.name` role before you create ready-made product types; they then reuse yours.
+Because the attributes are created not translatable, Name and Description hold one value per product. If your products need names in several languages, create a translatable Name attribute yourself and give it the `product.name` role before you create ready-made product types; they then reuse yours.
 
 ## Create a product type from a blank one
 
@@ -83,11 +87,11 @@ Open **Settings → Product types** and select the product type. The same editor
 | Form field | What it is |
 | --- | --- |
 | Name | The product type's name as the app shows it. |
-| Key | What an import uses to name the product type. A ready-made product type gets it from its English name, `tops-and-shirts`; a blank one has none until you type it. |
+| Key | What an import uses to name the product type ([how a ready-made product type gets its key](#create-it)). |
 
 ### Attribute sections
 
-This is where you define which attributes a product of this type has. Choose **Add / remove sections** and tick the sections that should be visible, then tick each attribute that should be available. **Select/Deselect all** in a section's header ticks or unticks the whole section; **New section** creates a section without leaving the page.
+This is where you define which attributes a product of this type has. Choose **Add / remove sections** and tick the sections that should be visible, then tick each attribute that should be available. **Select/Deselect all** in a section's header ticks or unticks the whole section, as **Select all** does on the create page; **New section** creates a section without leaving the page.
 
 | Status | Meaning |
 | --- | --- |
@@ -97,11 +101,7 @@ This is where you define which attributes a product of this type has. Choose **A
 
 ### Variants
 
-A product type's variant configurations are listed under **Variants**: whether products of this type have product variants and which attributes split them, level by level. **New variant** adds a variant configuration. A ready-made product type comes with its configurations, *Color, then size* and *No product variants* for most fashion types. See [Product variants](./product-variants.html).
-
-## Why product types
-
-Most catalogs hold different kinds of products, and many attributes make no sense for some of them. A retailer who sells shoes and televisions needs *Shoe size* for the shoes and *Screen size* and *Operating system* for the televisions. Without product types every shoe would have an operating system. With a product type *Shoes* that includes *Shoe size* and a product type *Televisions* that includes *Screen size* and *Operating system*, each product shows only what describes it.
+A product type's variant configurations are listed under **Variants**: whether products of this type have product variants and which attributes split them, level by level. **New variant** adds a variant configuration. A ready-made product type comes with its variant configurations, for example *Color, then size* and *No product variants*; the [list](/en/start/ready-made-product-types.html) names them. See [Product variants](./product-variants.html).
 
 ## Related articles
 

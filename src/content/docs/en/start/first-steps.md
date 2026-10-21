@@ -9,26 +9,24 @@ A new account looks empty until it has a product type. This guide takes you from
 
 ## How product data is structured
 
-heavendata stores product data in a structure you define, so the first step is to decide which fields exist.
+heavendata stores product data in a structure you define. Two things make it up:
 
-- **Attributes** are the fields that hold product data: *Name*, *Color*, *Description*, *Size*. Create as many as your products need. Every attribute belongs to one **section**, a named group that becomes a heading in the product editor, such as *General* or *Weight and dimensions*.
+- **Attributes** are the fields that hold product data: *Name*, *Color*, *Description*, *Size*. Every attribute belongs to one **section**, a named group that becomes a heading in the product editor, such as *General* or *Weight and dimensions*.
 - **Product types** say which attributes a kind of product has, and how its product variants are organized. Every product has exactly one product type. *Name* belongs to every kind of product; *Screen size* belongs to televisions and not to shoes, so it goes on the product type for televisions only.
 
-You can build attributes and product types one by one under **Settings → Attributes & sections** and **Settings → Product types**. The faster way is a ready-made product type: heavendata offers 149 of them, in 18 groups from fashion to vehicle accessories, each with the attributes its kind of product needs. Creating one creates the attributes and sections for you. The list is on [Ready-made product types](./ready-made-product-types.html).
+You can build attributes and product types one by one under **Settings → Attributes & sections** and **Settings → Product types**. The faster way is a ready-made product type, which brings its attributes and sections with it. The list, in groups from fashion to vehicle accessories, is on [Ready-made product types](./ready-made-product-types.html).
 
 ## Create a product type from the ready-made list
 
 1. In the sidebar, open **Settings → Product types** and choose **New product type**.
 2. The **New product type** page lists the ready-made product types as cards, in groups. Type what you sell into **Search product types**, for example `shoes`, or scroll to the group.
 3. Select the card. The create page opens, titled with the product type's name, and lists its variant configurations and every attribute it brings, all ticked.
-4. Untick any attribute you don't need. An attribute that splits products into product variants, such as *Color* or *Size*, stays ticked.
+4. Untick any attribute you don't need ([what each tick, badge and lock means](/en/concepts/product-types.html#choose-its-attributes)).
 5. Choose **Create**. The product type is created with its attributes and sections, and the **Product types** list opens.
-
-What each tick, badge and lock on the create page means is on [Product types](/en/concepts/product-types.html#create-a-product-type-from-a-ready-made-one).
 
 Now look at what was created:
 
-- **Settings → Attributes & sections** shows the new sections and attributes. The SKU, Article number, Name and Images attributes already carry the [roles](/en/concepts/attribute-roles.html) the app needs to identify products.
+- **Settings → Attributes & sections** shows the new sections and attributes, with the [roles](/en/concepts/attribute-roles.html) the app needs already assigned.
 - **Settings → Product types** shows the new product type. Open it to see which attributes it includes and which variant configurations it has.
 
 Repeat the steps for each kind of product you sell. A second ready-made product type reuses the attributes the first one created and adds only its own. To shape the structure further, read [Optimize catalog structure](./optimize-catalog-structure.html).

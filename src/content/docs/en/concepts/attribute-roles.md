@@ -27,15 +27,15 @@ When you create a [ready-made product type](/en/start/ready-made-product-types.h
 
 | Attribute | Roles it gets |
 | --- | --- |
-| SKU | `product.sku`, and `system.identifier` |
+| SKU | `product.sku`, its own role, and `system.identifier` |
 | Article number | `system.basecode` |
 | Name | `product.name` |
-| Images | `product.images`, and `product.image` |
+| Images | `product.images`, its own role, and `product.image` |
 
 The roles `system.identifier`, `system.basecode` and `product.image` are added only when no attribute in your account holds them yet. If your own attribute already has `system.identifier`, the ready-made SKU attribute is created without it, and yours stays the identifier. `product.name` works the other way around: it is the Name attribute's own role, so an attribute of yours that holds it is reused as Name and no second Name is created.
 
-Every attribute a ready-made product type creates also carries a role that identifies it to heavendata, such as `heavendata.net-weight`. That role is how a second ready-made product type knows which of your attributes it can reuse: it looks for the role, not for the name. A *Shoes* product type created after *Tops & shirts* finds the *Care instructions* attribute by its role and reuses it, even if you have renamed it to *Washing*. An attribute you built by hand has no such role, so a ready-made product type creates its own beside it. Reusing never changes your attribute: not its name, its values or its settings. The Roles field shows these roles by their id and keeps them when you save the attribute.
+Every attribute a ready-made product type creates carries a role of its own, such as `heavendata.net-weight` or `product.images`. That role is how a later ready-made product type finds the attributes it can reuse: it looks for the role, not for the name. A *Shoes* product type created after *Tops & shirts* finds the *Care instructions* attribute by its role and reuses it, even if you have renamed it to *Washing*. The Roles field shows these roles by their id and keeps them when you save the attribute. What reuse means on the create page is on [Product types](./product-types.html#choose-its-attributes).
 
-## Semantic roles
+## Other roles
 
 Other roles are not required. They help the app map your data to the formats target systems expect, such as which attribute holds the GTIN or the brand. You can ignore them during setup; the app asks for one when it needs it.
