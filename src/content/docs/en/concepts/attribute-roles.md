@@ -1,26 +1,41 @@
 ---
 title: "Attribute roles"
-reviewed: false
+description: "Roles tell heavendata which attribute holds the SKU, the base code, the name and the images. The five required roles, and how a ready-made product type assigns them for you."
 sidebar:
   order: 2
 ---
-Roles assign semantic meaning or technical roles to attributes. The platform catalog structure is 100% flexible and customizable to your needs. Now the system needs to learn which information is stored in which attributes.
 
-* Which attributes stores the product name? (or gtin, ...)
-* Which attributes should be used to decide if we have to create a new product or update an existing one during imports?
+A role tells heavendata what an attribute holds. Your catalog structure is yours to define, so the app has to learn which of your attributes holds the product name, which one holds the SKU it should match imports on, and which one holds the images. You tell it by giving the attribute a role: the attribute that holds the name gets the role `product.name`.
 
-We solve this, by assigning roles, e.g. the attribute "name of product" need the role "product.name". Please ensure, that required roles are assigned correctly.
+Roles are set on the attribute, under **Settings → Attributes & sections → the attribute → Roles**. A [ready-made product type](#a-ready-made-product-type-assigns-the-required-roles) assigns the required roles for you.
 
-## Required Roles
+## Required roles
 
-|Role |Description |
---- | ---
-|system.identifier | Identifier, in most cases the attribute that holds the SKU. Used in imports to decide if an existing product must be updated or new product will be created. Used in API to access single products.
-|system.basecode | Identifier for main product. All product variants must share the same base code. All variants with same base code will be merged to one product (with variants).
-|product.name | Primary product name. Will be used inside of app whenever we need to show the name.
-|product.sku | Product stock keeping unit. Article number that must be unique for each product variants.
-|product.image | Asset attribute that stores your product images.
+Every account needs these five roles assigned, one attribute each.
 
-## Semantic Roles
+| Role | What it marks |
+| --- | --- |
+| `system.identifier` | The attribute that identifies a product variant, in most cases the SKU. An import uses it to decide whether a row updates an existing product or creates a new one. The API uses it to address a single product. |
+| `system.basecode` | The code a product's variants share. Imported rows with the same base code are merged into one product with variants. |
+| `product.name` | The product's name. The app shows it wherever it names a product. |
+| `product.sku` | The stock keeping unit, the code that is unique for each product variant. |
+| `product.image` | The asset attribute that holds the product's images. |
 
-These roles are not strictly required but help the system map your data to formats as expected by target systems. You can ignore them during setup; we will ask you as soon as needed.
+## A ready-made product type assigns the required roles
+
+When you create a [ready-made product type](/en/start/ready-made-product-types.html), its attributes get the required roles without you doing anything:
+
+| Attribute | Roles it gets |
+| --- | --- |
+| SKU | `system.identifier` and `product.sku` |
+| Article number | `system.basecode` |
+| Name | `product.name` |
+| Images | `product.image` |
+
+A required role is added only when no attribute in your account holds it yet. If your own attribute already has `product.name`, the ready-made product type's Name attribute is created without it, and your attribute stays the name.
+
+Every attribute a ready-made product type creates also carries a role that identifies it to heavendata, such as `heavendata.net-weight`. That role is how a second ready-made product type knows which of your attributes it can reuse: it looks for the role, not for the name. A *Shoes* product type created after *Tops & shirts* finds the *Size type* attribute by its role and reuses it, even if you have renamed it to *Sizing*. An attribute you built by hand has no such role, so a ready-made product type creates its own beside it. Reusing never changes your attribute: not its name, its values or its settings. The Roles field shows these roles by their id and keeps them when you save the attribute.
+
+## Semantic roles
+
+Other roles are not required. They help the app map your data to the formats target systems expect, such as which attribute holds the GTIN or the brand. You can ignore them during setup; the app asks for one when it needs it.

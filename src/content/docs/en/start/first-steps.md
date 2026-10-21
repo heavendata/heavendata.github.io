@@ -1,71 +1,71 @@
 ---
 title: "First steps"
-reviewed: false
+description: "From an empty account to your first product: create a product type from the ready-made list, review what it created, add a product and show its data in the product list."
 sidebar:
   order: 2
 ---
-When you start your new PIM instance for the first time, it will look quite empty. This guide will lead you to your first working product information management system setup and show you how to optimize this setup.
 
-## Prepare Your Catalog Structure
-The heavendata platform uses a flexible database, which means you can adjust everything to your specific needs. In this first step, we configure what fields are available to store product data.
+A new account looks empty until it has a product type. This guide takes you from there to your first product: you create one product type from the ready-made list, look at what it created, add a product by hand and show its data in the product list. It takes about ten minutes. If you chose [Standard setup](./setup-options.html#standard-setup), your account already has the product type *General products* and you can start at [Add your first product](#add-your-first-product).
 
-### Product Attributes
-We call fields that store product data "product attributes". Most setups will have product attributes like "product name", "color", "description". You can define as many product attributes as you need to describe your products with all details.
-We group those attributes in so-called "sections". Each section has a name that is used inside the user interface as a headline.
+## How product data is structured
 
-### Product Types
-All products must have one "product type". Product types define which attributes are enabled for this type of product. Some attributes like "product name" will be used for all products, but many attributes will be related to products of a specific type only. As an example: The product attribute "screen size (inch)" is used for televisions but makes no sense for shoes.
+heavendata stores product data in a structure you define, so the first step is to decide which fields exist.
 
-### Add Attributes and Product Types
-There are two options to add attributes and product types:
+- **Attributes** are the fields that hold product data: *Name*, *Color*, *Description*, *Size*. Create as many as your products need. Every attribute belongs to one **section**, a named group that becomes a heading in the product editor, such as *General* or *Weight and dimensions*.
+- **Product types** say which attributes a kind of product has, and how its product variants are organized. Every product has exactly one product type. *Name* belongs to every kind of product; *Screen size* belongs to televisions and not to shoes, so it goes on the product type for televisions only.
 
-* Manually: Create attributes first, then create product types and enable required attributes.
-* From template: Create a new product type from a template. This step will automatically add all required attributes.
+You can build attributes and product types one by one under **Settings → Attributes & sections** and **Settings → Product types**. The faster way is a ready-made product type: heavendata offers 149 of them, in 18 groups from fashion to vehicle accessories, each with the attributes its kind of product needs. Creating one creates the attributes and sections for you. The list is on [Ready-made product types](./ready-made-product-types.html).
 
-For this guide, we'll create a product type from a template:
+## Create a product type from the ready-made list
 
-1. Go to Settings > Product types
-2. Click "New product type"
-3. Select template "Simple product"
-4. Click "Install" and follow the procedure
+1. In the sidebar, open **Settings → Product types** and choose **New product type**.
+2. The **New product type** page lists the ready-made product types as cards, in groups. Type what you sell into **Search product types**, for example `shoes`, or scroll to the group.
+3. Select the card. The create page opens, titled with the product type's name, and lists its variant configurations and every attribute it brings, all ticked.
+4. Untick any attribute you don't need. An attribute that splits products into product variants, such as *Color* or *Size*, stays ticked.
+5. Choose **Create**. The product type is created with its attributes and sections, and the **Product types** list opens.
 
-Let's review what we've created:
-* Go to Settings > Attributes and sections and review your product attributes.
-* Go to Settings > Product types - you'll see the product type "Simple product".
+What each tick, badge and lock on the create page means is on [Product types](/en/concepts/product-types.html#create-a-product-type-from-a-ready-made-one).
 
-To enhance your catalog structure, please read [Optimize catalog structure](./optimize-catalog-structure.html).
+Now look at what was created:
 
-## Add Your First Product
-Let's add the first product manually. In most cases, you'll import product data from an existing system and enhance it in our app, but let' start simple.
+- **Settings → Attributes & sections** shows the new sections and attributes. The SKU, Article number, Name and Images attributes already carry the [roles](/en/concepts/attribute-roles.html) the app needs to identify products.
+- **Settings → Product types** shows the new product type. Open it to see which attributes it includes and which variant configurations it has.
 
-1. Navigate to "Products"
-2. Click "New product"
-3. Select "Simple product" and continue
-4. Fill some attributes, at least the product name
-5. Click "Done"
+Repeat the steps for each kind of product you sell. A second ready-made product type reuses the attributes the first one created and adds only its own. To shape the structure further, read [Optimize catalog structure](./optimize-catalog-structure.html).
 
-You've created your first product.
+## Add your first product
 
-### Show Product Data in Product List
-The product list will not show any columns when you open it the first time. Let's add some columns:
+Most accounts import product data from an existing system and enhance it in heavendata. To see the structure work, add one product by hand first.
 
-1. Navigate to "Products"
-2. Click "Columns"
-3. Select all columns you want to see in product list and close dialog
+1. Open **Products** in the sidebar.
+2. Choose **New product**. A panel asks you to select the product type.
+3. Select the product type you created, then one of its variant configurations. For a single product without variants, choose **No product variants**.
+4. The product editor opens. Fill in some attributes, at least the product name.
+5. Choose **Done**.
 
-The list will remember all your settings in your browser so this is a one-time procedure.
+You have created your first product. To import many at once, see [Importing data](/en/import.html).
 
-### Published and Internal Version
-There are two versions for each product.
+### Show product data in the product list
 
-* An internal version that's visible inside of user interface
-* A published version that will be used in channels
+The product list shows no attribute columns when you open it for the first time. To add some:
 
-This allows you to prepare products without pushing incomplete data to channels. You can see the current status of products in the product list:
+1. Open **Products**.
+2. Choose **Columns**.
+3. Select the columns you want to see and close the dialog.
 
-Status | Description
---- | ---
-Draft | There is no published version available. This product is not visible in channels.
-Published | Product is visible in channels and all changes are published.
-Modified | An older version of this product is published but there's a new internal version.
+The list remembers your columns in your browser, so this is a one-time step. More on the list is on [Product list](/en/products/product-list.html).
 
+### Published and internal version
+
+Every product has two versions:
+
+- an **internal** version, the one you see and edit in the app;
+- a **published** version, the one channels read.
+
+This lets you prepare a product without pushing incomplete data to your channels. The product list shows each product's status:
+
+| Status | Meaning |
+| --- | --- |
+| Draft | Not visible to channels. No published version exists yet. |
+| Published | Visible to channels, with the latest saved changes. |
+| Modified | Visible to channels, without the latest saved changes. An older version is published and there is a newer internal version. |
