@@ -23,7 +23,7 @@ Every ready-made product type creates these 13 attributes in three sections, unl
 | General | Description | Text | |
 | General | Brand | Text | |
 | General | GTIN | Text | |
-| General | Color | Text with 19 values to pick from, such as Beige, Black, Blue and Multicolor; any other value can be typed | Most product types split their product variants by it. |
+| General | Color | Text with 19 values to pick from, such as Beige, Black, Blue and Multicolor; any other value can be typed | Half of the product types split their product variants by it. |
 | Media and links | Images | Asset | Carries the image role. |
 | Media and links | URL | Text | |
 | Weight and dimensions | Net weight | Number | Measured in kilograms. The unit is stated in the attribute's description only. |
@@ -34,7 +34,7 @@ Every ready-made product type creates these 13 attributes in three sections, unl
 Three more things hold for every ready-made product type:
 
 - **The roles are assigned.** SKU, Article number, Name and Images carry the roles the app needs to identify products, unless an attribute of yours already holds one. See [Attribute roles](/en/concepts/attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles).
-- **Every one has the variant configuration *No product variants***, for products sold in one version. The *Variant configurations* column below lists the others. Most split by Color first, then by the attribute that sizes the product. See [Product variants](/en/concepts/product-variants.html).
+- **Every one has the variant configuration *No product variants***, for products sold in one version. The *Variant configurations* column below lists the others; all but ten product types have at least one, and half of them split by Color first, then by size or another attribute. See [Product variants](/en/concepts/product-variants.html).
 - **No price.** Prices live in price lists, not in an attribute. See [Money attributes and prices](/en/concepts/money-attributes.html#money-attributes-and-prices).
 
 Most of a product type's own attributes, listed below, offer values to pick from and accept any other value you type. A value list is created in the language the product type is created in. Every attribute is created as not required and not translatable.

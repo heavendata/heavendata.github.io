@@ -15,19 +15,19 @@ After sign-up, heavendata asks how to set up your account and offers three optio
 
 ## Empty setup
 
-heavendata's catalog structure is fully customizable. With Empty setup you build it yourself: first the attributes and sections under **Settings → Attributes & sections**, then the product types under **Settings → Product types**. Until a product type exists you cannot add or import products. See [First steps](./first-steps.html) for the order to do it in.
+heavendata's catalog structure is fully customizable. With Empty setup you build it yourself: first the attributes and sections under **Settings → Attributes & sections**, then the product types under **Settings → Product types**. Every product has a product type, so you need at least one before you can add a product. See [First steps](./first-steps.html) for the order to do it in.
 
 ## Standard setup
 
 Standard setup creates one product type, **General products**, and opens the **New product type** page with the note *Your account starts with one product type, "General products". Create a product type for each kind of product you sell, with the attributes that kind needs.*
 
-General products fits any kind of product. It brings the 13 attributes every [ready-made product type](./ready-made-product-types.html#what-every-ready-made-product-type-brings) brings (SKU, Article number, Name, Description, Brand, GTIN, Color, Images, URL, Net weight, Length, Width, Height) plus *Target gender*, in three sections: General, Media and links, and Weight and dimensions. Its SKU, Article number, Name and Images attributes already carry the [roles](/en/concepts/attribute-roles.html) the app needs, so you can import products into it straight away. It has one variant configuration, *No product variants*.
+General products fits any kind of product. It brings the 13 attributes every [ready-made product type](./ready-made-product-types.html#what-every-ready-made-product-type-brings) brings (SKU, Article number, Name, Description, Brand, GTIN, Color, Images, URL, Net weight, Length, Width, Height) plus *Target gender*, in three sections: General, Media and links, and Weight and dimensions. Its SKU, Article number, Name and Images attributes already carry the [roles](/en/concepts/attribute-roles.html) the app needs, so an import can tell new products from existing ones straight away. It has one variant configuration, *No product variants*.
 
-From the **New product type** page, create a ready-made product type for each kind of product you sell: *Tops & shirts*, *Sofas & couches*, *Smartphones* and so on. Each one reuses the attributes General products already created and adds the ones its kind of product needs. The full list is on [Ready-made product types](./ready-made-product-types.html); the steps are on [Product types](/en/concepts/product-types.html#create-a-product-type-from-a-ready-made-one).
+From the **New product type** page, create a ready-made product type for each kind of product you sell: *Tops & shirts*, *Sofas & armchairs*, *Smartphones* and so on. Each one reuses the attributes General products already created and adds the ones its kind of product needs. The full list is on [Ready-made product types](./ready-made-product-types.html); the steps are on [Product types](/en/concepts/product-types.html#create-a-product-type-from-a-ready-made-one).
 
 The attributes are created in English, or in German when your account's languages include German and not English ([which language](/en/concepts/product-types.html#which-language-a-ready-made-product-type-is-created-in)). Standard setup is refused with *Your catalog already has data. Delete product types and attributes first.* when the account already has an attribute or a section.
 
-Accounts set up before October 2026 got the product type *Simple product* instead. Its attributes are reused by the ready-made product types in the same way.
+Accounts set up before 21 October 2026 got the product type *Simple product* instead. Its attributes are reused by the ready-made product types in the same way.
 
 ## Managed setup
 

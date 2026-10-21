@@ -39,7 +39,7 @@ Most accounts import product data from an existing system and enhance it in heav
 
 1. Open **Products** in the sidebar.
 2. Choose **New product**. A panel asks you to select the product type.
-3. Select the product type you created, then one of its variant configurations. For a single product without variants, choose **No product variants**.
+3. Select the product type you created. If it has more than one variant configuration, select one next; for a single product without variants, choose **No product variants**.
 4. The product editor opens. Fill in some attributes, at least the product name.
 5. Choose **Done**.
 
@@ -69,3 +69,4 @@ This lets you prepare a product without pushing incomplete data to your channels
 | Draft | Not visible to channels. No published version exists yet. |
 | Published | Visible to channels, with the latest saved changes. |
 | Modified | Visible to channels, without the latest saved changes. An older version is published and there is a newer internal version. |
+| Partially published | Only some of the product's variants are visible to channels. |

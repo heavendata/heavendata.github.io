@@ -11,7 +11,7 @@ Roles are set on the attribute, under **Settings → Attributes & sections → t
 
 ## Required roles
 
-Every account needs these five roles assigned, one attribute each.
+The app relies on these five roles. Assign each to one attribute.
 
 | Role | What it marks |
 | --- | --- |
@@ -27,14 +27,14 @@ When you create a [ready-made product type](/en/start/ready-made-product-types.h
 
 | Attribute | Roles it gets |
 | --- | --- |
-| SKU | `system.identifier` and `product.sku` |
+| SKU | `product.sku`, and `system.identifier` |
 | Article number | `system.basecode` |
 | Name | `product.name` |
-| Images | `product.image` |
+| Images | `product.images`, and `product.image` |
 
-A required role is added only when no attribute in your account holds it yet. If your own attribute already has `product.name`, the ready-made product type's Name attribute is created without it, and your attribute stays the name.
+The roles `system.identifier`, `system.basecode` and `product.image` are added only when no attribute in your account holds them yet. If your own attribute already has `system.identifier`, the ready-made SKU attribute is created without it, and yours stays the identifier. `product.name` works the other way around: it is the Name attribute's own role, so an attribute of yours that holds it is reused as Name and no second Name is created.
 
-Every attribute a ready-made product type creates also carries a role that identifies it to heavendata, such as `heavendata.net-weight`. That role is how a second ready-made product type knows which of your attributes it can reuse: it looks for the role, not for the name. A *Shoes* product type created after *Tops & shirts* finds the *Size type* attribute by its role and reuses it, even if you have renamed it to *Sizing*. An attribute you built by hand has no such role, so a ready-made product type creates its own beside it. Reusing never changes your attribute: not its name, its values or its settings. The Roles field shows these roles by their id and keeps them when you save the attribute.
+Every attribute a ready-made product type creates also carries a role that identifies it to heavendata, such as `heavendata.net-weight`. That role is how a second ready-made product type knows which of your attributes it can reuse: it looks for the role, not for the name. A *Shoes* product type created after *Tops & shirts* finds the *Care instructions* attribute by its role and reuses it, even if you have renamed it to *Washing*. An attribute you built by hand has no such role, so a ready-made product type creates its own beside it. Reusing never changes your attribute: not its name, its values or its settings. The Roles field shows these roles by their id and keeps them when you save the attribute.
 
 ## Semantic roles
 

@@ -35,7 +35,7 @@ The create page shows the product type the way the product type editor will: its
 | **Already in your account** in a section's header | Every attribute in that section is already yours. Nothing in it is created. |
 | *Your account already has every attribute this product type needs. Create adds only the product type.* | Nothing new is created; **Create** adds the product type alone. |
 
-An attribute you built by hand is not recognized as the same attribute, even with the same name: the ready-made product type creates its own beside it, and yours is shown unticked in the product type editor afterwards. You can untick the new one if no variant configuration splits by it. Reuse works by the attribute's [role](./attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles), so an attribute an earlier ready-made product type created is reused even after you renamed it.
+An attribute you built by hand is not recognized as the same attribute, even with the same name: the ready-made product type creates its own beside it and leaves yours as it is. You can untick the new one if no variant configuration splits by it. Reuse works by the attribute's [role](./attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles), so an attribute an earlier ready-made product type created is reused even after you renamed it.
 
 <!-- Screenshot: the create page for Tops & shirts in an account that already has General products: the General, Media and links, and Weight and dimensions sections marked Already in your account, the Fashion section with its New badge and Select all, and Size locked with its hint. -->
 
@@ -69,7 +69,7 @@ A ready-made product type's attributes are created as not translatable, so Name 
 **Blank product type**, the first card on the **New product type** page, opens the product type editor empty. Create its attributes first under **Settings → Attributes & sections**; a blank product type includes attributes, it does not create them. See [Attributes & sections](./attributes.html).
 
 1. In the sidebar, open **Settings → Product types** and choose **New product type**, then **Blank product type**.
-2. Give it a **Name**. The **Key** is filled in for you and can be changed.
+2. Give it a **Name**, and a **Key** if an import will name it; a blank product type starts without one.
 3. Under **Attribute Sections**, choose **Add / remove sections** and tick the sections whose attributes it should have.
 4. Tick every attribute that should be available for this kind of product.
 5. Choose **Save**.
@@ -83,7 +83,7 @@ Open **Settings → Product types** and select the product type. The same editor
 | Form field | What it is |
 | --- | --- |
 | Name | The product type's name as the app shows it. |
-| Key | What an import uses to name the product type. A ready-made product type gets it from its English name, `tops-and-shirts`. |
+| Key | What an import uses to name the product type. A ready-made product type gets it from its English name, `tops-and-shirts`; a blank one has none until you type it. |
 
 ### Attribute sections
 
