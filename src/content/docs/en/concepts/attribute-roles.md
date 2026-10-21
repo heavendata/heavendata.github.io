@@ -6,7 +6,7 @@ sidebar:
 ---
 Roles assign semantic meaning or technical roles to attributes. The platform catalog structure is 100% flexible and customizable to your needs. Now the system needs to learn which information is stored in which attributes.
 
-* Which attributes stores the product name? (or gtin, price, ...)
+* Which attributes stores the product name? (or gtin, ...)
 * Which attributes should be used to decide if we have to create a new product or update an existing one during imports?
 
 We solve this, by assigning roles, e.g. the attribute "name of product" need the role "product.name". Please ensure, that required roles are assigned correctly.

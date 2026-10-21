@@ -6,21 +6,21 @@ sidebar:
 ---
 Variants allow you to manage all versions of one product together. A typical example is fashion products where you have multiple sizes.
 
-|Product name |Size code |Price|SKU |
+|Product name |Size code |Material|SKU |
 --- | --- | --- | ---
-|Shirt with logo |S |10 |shirt1-s
-|Shirt with logo |M |10 |shirt1-m
-|Shirt with logo |L |10 |shirt1-m
-|Shirt uni |S |12 |shirt2-s
-|Shirt uni |M |12 |shirt2-m
-|Shirt uni |L |12 |shirt2-m
+|Shirt with logo |S |Cotton |shirt1-s
+|Shirt with logo |M |Cotton |shirt1-m
+|Shirt with logo |L |Cotton |shirt1-m
+|Shirt uni |S |Linen |shirt2-s
+|Shirt uni |M |Linen |shirt2-m
+|Shirt uni |L |Linen |shirt2-m
 
 We have two products here, and each has three variants (sizes). Without variants, we would have six independent products. If we change text or upload product images, we have to do this for each size.
 
 To simplify this, we use variants and tell the system to use the same values for some attributes for all sizes. To do that we need to configure...
 
 * Based on which attribute(s) separate variants must be created. In our example: Attribute "Size code."
-* Which attributes are the same for all variants (in our example "Product name" and "Price") and which attributes need a different value for each ("SKU").
+* Which attributes are the same for all variants (in our example "Product name" and "Material") and which attributes need a different value for each ("SKU").
 
 With this setup, our example would result in two products and each of them has three variants.
 

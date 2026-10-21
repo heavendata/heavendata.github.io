@@ -10,7 +10,7 @@ When you start your new PIM instance for the first time, it will look quite empt
 The heavendata platform uses a flexible database, which means you can adjust everything to your specific needs. In this first step, we configure what fields are available to store product data.
 
 ### Product Attributes
-We call fields that store product data "product attributes". Most setups will have product attributes like "product name", "price", "description". You can define as many product attributes as you need to describe your products with all details.
+We call fields that store product data "product attributes". Most setups will have product attributes like "product name", "color", "description". You can define as many product attributes as you need to describe your products with all details.
 We group those attributes in so-called "sections". Each section has a name that is used inside the user interface as a headline.
 
 ### Product Types

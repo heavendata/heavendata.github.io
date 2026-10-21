@@ -9,9 +9,11 @@ The goal of a product information management system is to be the single source o
 This document describes what attributes are and how to manage them.
 
 ## Concept
-It's crucial to have all pieces of information in dedicated fields. We call these fields "product attributes." Typical examples for attributes are "product name", "width", "price", "color", ... If you're working with Excel or databases, one product attribute will store the data of one column in a worksheet.
+It's crucial to have all pieces of information in dedicated fields. We call these fields "product attributes." Typical examples for attributes are "product name", "width", "material", "color", ... If you're working with Excel or databases, one product attribute will store the data of one column in a worksheet.
 
 Note: Do not add all those data in one single text attribute. Prefer one attribute for each fact.
+
+A selling price is not an attribute: a product variant has its own prices, in price lists — see [Money attributes and prices](./money-attributes.html#money-attributes-and-prices).
 
 ### Attribute Sections
 An attribute is always part of one attribute section — just a group for better readability.
@@ -19,7 +21,7 @@ An attribute is always part of one attribute section — just a group for better
 Example:
 
 * Section "Technical details" with attributes "power consumption", "voltage", ...
-* Section "Common" with "name", "long description", "short description", "price", ...
+* Section "Common" with "name", "long description", "short description", "brand", ...
 
 ## Edit attributes
 

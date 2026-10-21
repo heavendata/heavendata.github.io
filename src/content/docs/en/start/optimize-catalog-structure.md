@@ -14,9 +14,10 @@ Go to settings > attributes and define which attributes you need. A minimal list
 
 * name (text)
 * description (text)
-* price (money)
 * gtin (text)
 * article_number (text)
+
+A selling price is not an attribute: a product variant has its own prices, in price lists — see [Money attributes and prices](../concepts/money-attributes.html#money-attributes-and-prices).
 
 The article [Attribute Settings](../settings/attributes.html) describes how to configure attributes and sections.
 
