@@ -193,6 +193,9 @@ dataset of the source. These are the settings a one-off import offers on its
 thing here. The choices of [Date format](/en/import/import-products.html#date-format), and
 how to write a custom pattern, are explained there.
 
+Unlike that step, a data source does not set its separators from a file: set them to what
+the source's files use.
+
 ### A custom Date format needs a pattern
 
 With **Date format** set to **Custom format** and **Pattern** left empty, the source cannot
