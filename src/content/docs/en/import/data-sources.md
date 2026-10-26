@@ -183,6 +183,36 @@ shown back to you.
 There is no way to empty a stored password. A source without one cannot connect, so
 if a source should stop running, disable or delete the source instead.
 
+## Data Format
+
+**Data Format**, under **Config Source**, says how the source's files write dates,
+numbers and several values in one cell: **Date format**, the decimal and group separators
+for numbers and for prices, **Value separator** and **Timezone**. It applies to every
+dataset of the source. These are the settings a one-off import offers on its
+[Map columns](/en/import/import-products.html#2--map-columns) step, and they mean the same
+thing here. The choices of [Date format](/en/import/import-products.html#date-format), and
+how to write a custom pattern, are explained there.
+
+### A custom Date format needs a pattern
+
+With **Date format** set to **Custom format** and **Pattern** left empty, the source cannot
+be saved. The field turns red and says:
+
+> Enter a pattern.
+
+**Save** is refused, with the fields that need fixing marked in red:
+
+> Couldn't save. Fix the fields marked in red and try again.
+
+Enter the pattern the files use — `dd.MM.yyyy` for dates such as `03.04.2026` — or choose
+one of the other formats, then save again.
+
+### Timezone
+
+The Data Format's **Timezone** is not used: a saved data source shows `UTC` there, and
+the source reads its dates as [an import does](/en/import/import-products.html#date-format).
+The schedule's **Timezone** is a separate setting.
+
 ## Choosing the file for a dataset
 
 Each dataset names the file it imports, relative to the source's base path. Three
