@@ -122,9 +122,8 @@ A custom format needs a pattern: until you enter one, **Next** stays disabled an
 
 | In the file | What happens |
 | --- | --- |
-| A date that matches the format | It is read. |
-| A date that does not match | It is not read: the product is imported without that value, and the import's log names the value as not recognized as a date. |
-| A date written another way, under the default | It is still read where it can be, month before day — so choose a format whenever your file writes the day first. |
+| A date that does not match the format you chose | It is not read: the product is imported without that value, and the import's log names the value as not recognized as a date. |
+| A date written another way, while the Date format is still the default | It is still read where it can be, month before day — so choose a format whenever your file writes the day first. |
 | An Excel cell formatted as a date | It is read as the date it is, whatever the Date format says. |
 
 #### What is remembered for the next file
