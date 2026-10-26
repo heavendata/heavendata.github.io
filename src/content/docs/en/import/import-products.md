@@ -82,13 +82,44 @@ A column you do not map is not imported, so **leave a column unmapped to leave t
 
 | Option | What it sets | Default |
 | --- | --- | --- |
-| **Date format** | How dates in the file are written | **Date and time with offset**, such as `2011-12-03T10:15:30+01:00` |
+| **Date format** | How dates written as text in the file are read — see [Date format](#date-format) | **Date and time with offset**, such as `2011-12-03T10:15:30+01:00` |
 | **Decimal Separator**, **Group Separator** | How numbers in the file are written: the decimal point, and what groups thousands | `.` and `,` |
 | **Currency Decimal Separator**, **Currency Group Separator** | The same, for prices | `.` and `,` |
 | **Value separator** | What separates several values in one cell | `\|` |
-| **Timezone** | The time zone of dates and times that carry none | none |
+| **Timezone** | Nothing, on an import: a date with an offset is converted to UTC, and one without keeps the time as written | none |
 
 When the step opens, both decimal separators are set to the one your file uses, and the group separators to the other character — a file that writes `12,50` opens with `,` and `.`.
+
+#### Date format
+
+**Date format** says how the dates the file writes as text are read. Choose the one your file uses:
+
+| Choice | Reads dates written like |
+| --- | --- |
+| **Date with offset** | `2011-12-03+01:00` |
+| **Date and time with offset** — the default | `2011-12-03T10:15:30+01:00` |
+| **RFC 1123 date and time** | `Tue, 3 Jun 2008 11:05:30 GMT` |
+| **Custom format** | the pattern you enter in **Pattern** |
+
+A **Pattern** spells a date out with these letters; every other character must appear in the file as written:
+
+| Letters | Stand for | Example |
+| --- | --- | --- |
+| `d`, `dd` | day, `dd` with a leading zero | `3`, `03` |
+| `M`, `MM` | month, `MM` with a leading zero | `4`, `04` |
+| `yy`, `yyyy` | year, in two or four digits | `26`, `2026` |
+| `H`, `HH` | hour, 0 to 23 | `9`, `09` |
+| `h`, `hh` | hour, 1 to 12 | `9`, `09` |
+| `m`, `mm` | minutes | `5`, `05` |
+| `ss` | seconds | `07` |
+
+So `dd.MM.yyyy` reads `03.04.2026`, `MM/dd/yyyy` reads `04/03/2026`, and `yyyy-MM-dd HH:mm` reads `2026-04-03 09:05`.
+
+**A custom format needs a pattern.** Until you enter one, the field says `Enter a pattern.`, **Next** stays disabled, and the step says `Enter a pattern for the date format first.`
+
+**A date that does not match the format is not read.** The product is imported without that value, and the import's log names the value as not recognized as a date. The default is the exception: under **Date and time with offset**, a date written another way is still read where it can be, month before day — so choose a format whenever your file writes the day first.
+
+**Dates the file itself marks as dates are read as they are**, whatever the Date format says: in an Excel file, a cell formatted as a date. The Date format applies to dates written as text.
 
 **Next** stays disabled until a column is mapped to the identifier attribute. The step says which attribute it means.
 
