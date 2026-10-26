@@ -98,10 +98,10 @@ When the step opens, both decimal separators are set to the one your file uses, 
 | --- | --- |
 | **Date with offset** | `2011-12-03+01:00` |
 | **Date and time with offset** — the default | `2011-12-03T10:15:30+01:00` |
-| **RFC 1123 date and time** | `Tue, 3 Jun 2008 11:05:30 GMT` |
+| **RFC 1123 date and time** | `Tue, 03 Jun 2008 11:05:30 GMT` — the day always in two digits |
 | **Custom format** | the pattern you enter in **Pattern** |
 
-A **Pattern** spells a date out with these letters; every other character must appear in the file as written:
+A **Pattern** spells a date out with these letters, and with the `.`, `/`, `-`, `:` or space between them that the file writes:
 
 | Letters | Stand for | Example |
 | --- | --- | --- |
@@ -109,7 +109,6 @@ A **Pattern** spells a date out with these letters; every other character must a
 | `M`, `MM` | month, `MM` with a leading zero | `4`, `04` |
 | `yy`, `yyyy` | year, in two or four digits | `26`, `2026` |
 | `H`, `HH` | hour, 0 to 23 | `9`, `09` |
-| `h`, `hh` | hour, 1 to 12 | `9`, `09` |
 | `m`, `mm` | minutes | `5`, `05` |
 | `ss` | seconds | `07` |
 
