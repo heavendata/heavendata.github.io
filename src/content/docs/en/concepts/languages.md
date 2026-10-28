@@ -6,6 +6,8 @@ sidebar:
 ---
 Define all languages used in your product data here. Those will be the languages available for translatable product attributes.
 
+Your working language — the one you choose with the language picker on the products list or in the product editor — also decides which [attribute labels](./attributes.html#name-and-labels) the app shows, in **Settings** too.
+
 ## Settings
 
 |Form field |Description |

@@ -23,6 +23,22 @@ Example:
 * Section "Technical details" with attributes "power consumption", "voltage", ...
 * Section "Common" with "name", "long description", "short description", "brand", ...
 
+## Name and labels
+
+An attribute has one **name**, the same in every language, and can have a **label** in each of your languages. Wherever the app shows an attribute — in the product editor, on the products list, and in every list, tile and picker under **Settings** — it shows the attribute's label in your working language, or its name where it has no label in that language.
+
+| Field | Where you set it | What it is for |
+| --- | --- | --- |
+| **Name** | The attribute's **General** tab | Shown wherever the attribute has no label in your working language. |
+| **Label translations** | The attribute's **Label translations** tab, one field per language | What the attribute is called in each language. Optional. |
+| **Code** | The attribute's **General** tab, when you create it | Identifies the attribute in imports, exports and templates. The same in every language, and locked once the attribute is saved. |
+
+Your **working language** is the language you see and edit product data in. It is your own choice, kept in your browser, and it is not the language of the app itself. Choose it with the language picker — the globe button showing a code such as `en-US` — on the products list or in the product editor. **Settings** has no language picker of its own and follows your working language. Until you choose one, the app uses the first language in the language picker's list. Labels do not use [fallback languages](./languages.html#fallback-languages): an attribute with no label in your working language shows its name. Two people with different working languages therefore see different words for the same attribute, in **Settings** too.
+
+Labels are separate from **Translatable**. Every attribute can have labels; **Translatable** decides whether the attribute's *values* differ per language.
+
+Searches match an attribute's label, its name and its code: the column filter on the **Attributes list** and every attribute picker find the attribute, and the search box on **Attributes & sections** finds the section that holds it. The **Attributes list** heads its first column **Label**, and its export writes what the list shows. When you process that export, match attributes on the **Code** column — the **Label** column changes with the language.
+
 ## Edit attributes
 
 1. Go to Settings > Attributes & Sections

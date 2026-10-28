@@ -24,7 +24,7 @@ A money attribute can be **translatable**. It then holds one amount per language
 
 1. Go to **Settings > Attributes & sections** and select a section.
 2. Click **New attribute** and choose **Money**.
-3. On the **General** tab, enter its **Label** — the **Code** is filled in from it — and decide whether it is **Translatable**.
+3. On the **General** tab, enter its **Name** — the **Code** is filled in from it — and decide whether it is **Translatable**.
 4. On the **Settings** tab, choose the **Currency** — see [Set the currency](#set-the-currency).
 5. Click **Ok**, then **Save** the section.
 6. Enable the attribute in **Settings > Product types** where you need it.
