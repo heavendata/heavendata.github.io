@@ -91,7 +91,7 @@ Open **Settings → Product types** and select the product type. The same editor
 
 ### Attribute sections
 
-This is where you define which attributes a product of this type has. Choose **Add / remove sections** and tick the sections that should be visible, then tick each attribute that should be available. **Select/Deselect all** in a section's header ticks or unticks the whole section, as **Select all** does on the create page; **New section** adds a section.
+This is where you define which attributes a product of this type has. Attributes are listed by their label in your working language ([Name and labels](./attributes.html#name-and-labels)). Choose **Add / remove sections** and tick the sections that should be visible, then tick each attribute that should be available. **Select/Deselect all** in a section's header ticks or unticks the whole section, as **Select all** does on the create page; **New section** adds a section.
 
 | Status | Meaning |
 | --- | --- |

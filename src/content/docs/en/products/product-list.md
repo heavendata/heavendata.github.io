@@ -21,7 +21,7 @@ New product | Create a new product
 
 Element | Description
 --- | ---
-Language | Select data language. Translatable attribute values will respect this setting. Note that it does not affect the general UI language.
+Language | The language picker: choose your [working language](/en/concepts/languages.html#working-language). It decides which value of a translatable attribute you see and which label each attribute is shown by. It does not change the language of the app itself.
 Search | Search in products; see below for details.
 Row height | Set the height of the list rows.
 Views | Save and restore list views; see below for details.

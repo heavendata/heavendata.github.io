@@ -23,6 +23,30 @@ Example:
 * Section "Technical details" with attributes "power consumption", "voltage", ...
 * Section "Common" with "name", "long description", "short description", "brand", ...
 
+## Name and labels
+
+An attribute has one **name**, the same in every language, and can have a **label** in each of your languages. Wherever the app shows an attribute — in the product editor, on the products list, and in every list, tile and picker under **Settings** — it shows the attribute's label in your [working language](./languages.html#working-language), or its name where it has no label in that language. Two people with different working languages therefore see different words for the same attribute.
+
+Labels do not use [fallback languages](./languages.html#fallback-languages). An attribute with no label in your working language shows its name, even when its fallback language has a label.
+
+| Field | Where you set it | What it is |
+| --- | --- | --- |
+| **Name** | The attribute's **General** tab | The attribute's one name, the same in every language. Shown wherever the attribute has no label in your working language. |
+| **Label translations** | The attribute's **Label translations** tab, one field per language | What the attribute is called in each language. Optional. |
+| **Code** | The attribute's **General** tab, when you create it | Identifies the attribute in imports, exports and templates. The same in every language, and locked once the attribute is saved. To match attributes in a file you exported, use the code: a label changes with the working language. |
+
+Labels are separate from **Translatable**: every attribute can have labels, while **Translatable** decides whether the attribute's *values* differ per language.
+
+### Finding an attribute
+
+| Where | What it matches | What it finds |
+| --- | --- | --- |
+| The **Label** column filter on the **Attributes list** | The label, the name and the code | The attribute |
+| An attribute picker, as you type | The label, the name and the code | The attribute |
+| The search box on **Attributes & sections** | A section's name, and each attribute's label, name and code | The section that holds the attribute |
+
+The **Attributes list** heads its first column **Label**, and its export writes what the list shows under that header.
+
 ## Edit attributes
 
 1. Go to Settings > Attributes & Sections
@@ -49,4 +73,3 @@ The attribute type and translatable settings affect how data is stored in databa
 * [Common attributes](./common-attributes.html) - enable attributes for all products
 * [Money attributes](./money-attributes.html) - amounts with a currency
 * [Optimize catalog structure](../initial-setup/optimize-catalog-structure.html)
-Guide covering attributes and product types management.
