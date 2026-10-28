@@ -10,7 +10,7 @@ Define all languages used in your product data here. Those will be the languages
 
 |Form field |Description |
 --- | ---
-|Language |A language your product data is kept in 
+|Language |A language your account keeps product data in 
 |Fallback language |If no data is provided, we'll use this fallback language
 
 ### Fallback Languages
