@@ -25,19 +25,27 @@ Example:
 
 ## Name and labels
 
-An attribute has one **name**, the same in every language, and can have a **label** in each of your languages. Wherever the app shows an attribute — in the product editor, on the products list, and in every list, tile and picker under **Settings** — it shows the attribute's label in your working language, or its name where it has no label in that language.
+An attribute has one **name**, the same in every language, and can have a **label** in each of your languages. Wherever the app shows an attribute — in the product editor, on the products list, and in every list, tile and picker under **Settings** — it shows the attribute's label in your [working language](./languages.html#working-language), or its name where it has no label in that language. Two people with different working languages therefore see different words for the same attribute.
 
-| Field | Where you set it | What it is for |
+Labels do not use [fallback languages](./languages.html#fallback-languages). An attribute with no label in your working language shows its name, even when its fallback language has a label.
+
+| Field | Where you set it | What it is |
 | --- | --- | --- |
-| **Name** | The attribute's **General** tab | Shown wherever the attribute has no label in your working language. |
+| **Name** | The attribute's **General** tab | The attribute's one name, the same in every language. Shown wherever the attribute has no label in your working language. |
 | **Label translations** | The attribute's **Label translations** tab, one field per language | What the attribute is called in each language. Optional. |
-| **Code** | The attribute's **General** tab, when you create it | Identifies the attribute in imports, exports and templates. The same in every language, and locked once the attribute is saved. |
+| **Code** | The attribute's **General** tab, when you create it | Identifies the attribute in imports, exports and templates. The same in every language, and locked once the attribute is saved. To match attributes in a file you exported, use the code: a label changes with the working language. |
 
-Your **working language** is the language you see and edit product data in. It is your own choice, kept in your browser, and it is not the language of the app itself. Choose it with the language picker — the globe button showing a code such as `en-US` — on the products list or in the product editor. **Settings** has no language picker of its own and follows your working language. Until you choose one, the app uses the first language in the language picker's list. Labels do not use [fallback languages](./languages.html#fallback-languages): an attribute with no label in your working language shows its name. Two people with different working languages therefore see different words for the same attribute, in **Settings** too.
+Labels are separate from **Translatable**: every attribute can have labels, while **Translatable** decides whether the attribute's *values* differ per language.
 
-Labels are separate from **Translatable**. Every attribute can have labels; **Translatable** decides whether the attribute's *values* differ per language.
+### Finding an attribute
 
-Searches match an attribute's label, its name and its code: the column filter on the **Attributes list** and every attribute picker find the attribute, and the search box on **Attributes & sections** finds the section that holds it. The **Attributes list** heads its first column **Label**, and its export writes what the list shows. When you process that export, match attributes on the **Code** column — the **Label** column changes with the language.
+| Where | What it matches | What it finds |
+| --- | --- | --- |
+| The **Label** column filter on the **Attributes list** | The label, the name and the code | The attribute |
+| An attribute picker, as you type | The label, the name and the code | The attribute |
+| The search box on **Attributes & sections** | A section's name, and each attribute's label, name and code | The section that holds the attribute |
+
+The **Attributes list** heads its first column **Label**, and its export writes what the list shows under that header.
 
 ## Edit attributes
 
@@ -65,4 +73,3 @@ The attribute type and translatable settings affect how data is stored in databa
 * [Common attributes](./common-attributes.html) - enable attributes for all products
 * [Money attributes](./money-attributes.html) - amounts with a currency
 * [Optimize catalog structure](../initial-setup/optimize-catalog-structure.html)
-Guide covering attributes and product types management.
