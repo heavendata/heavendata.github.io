@@ -99,7 +99,7 @@ Each section lists its attributes as rows, as [A section's attributes](./attribu
 | --- | --- |
 | Ticked | The attribute is available, and shown when editing or importing products of this type. |
 | Unticked | The attribute is not available for this product type, and not shown when editing a product of this type. |
-| Ticked and locked, the row marked **Common** | A common attribute, which every product type includes. You cannot untick it here. The line under its row says *Every product type includes this attribute. Change that on Common attributes.*, and links to [Common attributes](./common-attributes.html), where you change it. |
+| Ticked and locked, the row marked **Common** | A common attribute, which every product type includes. You cannot untick it here. The line under its row, *Every product type includes this attribute. Change that on Common attributes.*, links to [Common attributes](./common-attributes.html), where you change it. |
 
 To change a section's attributes from here, choose the section's pencil, **Edit section**. The section opens in a window that lists its attributes as [Attributes & sections](./attributes.html#a-sections-attributes) does. Its **Save** saves the section at once, not when you save the product type, and a change reaches every product type that includes the attribute. Where the window creates a new section, the button is **Create**. While the section or one of its attributes is marked **New** or **Changed**, the pencil is not available and the line *Save the product type first.* is shown under the section's title.
 

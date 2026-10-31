@@ -39,7 +39,7 @@ While an attribute is the label attribute or the identifier attribute, its **Req
 
 ### Attributes
 
-Here you define which data a record of the custom entity holds. Every attribute type is supported except **Assets**.
+Here you define which data a record of the custom entity holds. **New attribute** offers the same attributes as it does in a section of [Attributes & sections](./attributes.html), except **Assets**.
 
 **New attribute** adds an attribute, and ✎ **Edit attribute** on its row opens it again. The attributes are listed in their order, one row per attribute, as a section's attributes are on [Attributes & sections](./attributes.html#a-sections-attributes). Two things differ here:
 
