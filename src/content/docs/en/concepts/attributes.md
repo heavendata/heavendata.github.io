@@ -52,8 +52,8 @@ The **Attributes list** heads its first column **Label**, and its export writes 
 1. In the sidebar, open **Settings → Attributes & sections**.
 2. Select the section that holds the attributes, or create a new section.
 3. Add attributes with **New attribute**, change them, or change their order, as [A section's attributes](#a-sections-attributes) describes.
-4. Choose **Save**. Nothing you changed in the section's attributes is saved before that, and leaving the page without saving loses it. A change to an attribute reaches every product type that includes it.
-5. Open **Settings → Product types** and tick each new attribute in the product types that need it.
+4. Choose **Save**. Nothing you changed in the section's attributes is saved before that, and leaving the page without saving loses it. A change to an attribute reaches every product type that includes it. A section you open from a product type is saved by its own window's **Save** instead — see [Product types](./product-types.html#attribute-sections).
+5. Open **Settings → Product types** and tick each new attribute in the product types that need it ([Attribute sections](./product-types.html#attribute-sections)).
 
 ### A section's attributes
 
@@ -63,7 +63,7 @@ A section lists its attributes in their order, one row per attribute. Each row s
 | --- | --- |
 | The handle | Drag the row by it to move the attribute. |
 | The type | The attribute type's icon and its name, such as **Text**, **Yes/no**, **Integer number** or **Number with decimals**. |
-| The name and the code | The attribute's label in your working language, or its name, followed by its code. Both are shown in full, however long they are. |
+| The name and the code | The attribute's label in your working language, or its name, followed by its code. |
 | The properties | One word for each of these properties the attribute has, in this order: **Common**, **Translatable**, **Internal**, **Required**. A property the attribute does not have shows nothing. |
 | ✎ **Edit attribute** | Opens the attribute's window. |
 | ⋯ **More actions** | **Duplicate**, **Delete**, **Move up** and **Move down**. |
@@ -79,9 +79,9 @@ One line above the rows says what each property word on the page means:
 
 The line names only the words that rows on the page show, and there is no line while no row shows one.
 
-To move an attribute, drag its row by the handle; a line shows where the row will land, and Escape puts it back where it was. Without a mouse, choose **Move up** or **Move down** under ⋯: each moves the row one place. **Move up** is not available on the first row, **Move down** not on the last. A move, like every other change to the section's attributes, is saved with **Save**.
+To move an attribute, drag its row by the handle; a line shows where the row will land, and Escape puts it back where it was. Without a mouse, choose **Move up** or **Move down** under ⋯: each moves the row one place. **Move up** is not available on the first row, **Move down** not on the last.
 
-The section has no search of its own. Because every name and code is shown in full, your browser's find in page (Ctrl+F, or ⌘F on a Mac) finds an attribute in a long section by either.
+The section has no search of its own. Every name and code is shown in full, however long, so your browser's find in page (Ctrl+F, or ⌘F on a Mac) finds an attribute in a long section by either.
 
 ## How To...
 
@@ -99,5 +99,6 @@ The attribute type and translatable settings affect how data is stored in databa
 
 * [Product types](./product-types.html) - enable attributes for product types
 * [Common attributes](./common-attributes.html) - enable attributes for all products
+* [Custom entities](./custom-entities.html) - the attributes of a custom entity, listed the same way
 * [Money attributes](./money-attributes.html) - amounts with a currency
 * [Optimize catalog structure](../initial-setup/optimize-catalog-structure.html)

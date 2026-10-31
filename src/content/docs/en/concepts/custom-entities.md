@@ -20,7 +20,7 @@ We could create product attributes for those data, but then we'd have to type it
 1. Create custom entity "Manufacturer"
 2. Add the "name", "url", "phone number", "repair contact" attributes in custom entity settings
 3. Go to product attributes and add an attribute "manufacturer" with **New attribute → Custom entity reference**, which creates an **Object reference** attribute, and select "Manufacturers" as source.
-4. Enable the "manufacturer" attribute in relevant product types.
+4. Enable the "manufacturer" attribute in relevant [product types](./product-types.html#attribute-sections).
 
 ## Custom Entity Settings
 
@@ -41,11 +41,11 @@ While an attribute is the label attribute or the identifier attribute, its **Req
 
 Here you define which data a record of the custom entity holds. Every attribute type is supported except **Assets**.
 
-The attributes are listed in their order, one row per attribute, as a section's attributes are on [Attributes & sections](./attributes.html#a-sections-attributes): the handle, the attribute type's icon and name, the attribute's label or name and its code, a word for each property it has, then ✎ **Edit attribute** and ⋯ **More actions**. Two things differ here:
+**New attribute** adds an attribute, and ✎ **Edit attribute** on its row opens it again. The attributes are listed in their order, one row per attribute, as a section's attributes are on [Attributes & sections](./attributes.html#a-sections-attributes). Two things differ here:
 
 | | On a custom entity |
 | --- | --- |
-| The property words | **Translatable** and **Required** only. **Required** shows while the attribute's **Required** toggle is on, and so always on the label attribute and the identifier attribute. The line above the rows reads *Translatable — one value per language · Required — needed to save a record*, naming only the words the rows show. |
+| The property words | **Translatable** and **Required** only. **Required** shows while the attribute's **Required** toggle is on, and so always on the label attribute and the identifier attribute. Here **Required** means a record needs a value for the attribute to be saved, as the line above the rows says. |
 | ⋯ **More actions** | **Delete**, **Move up** and **Move down**. |
 
 Move an attribute by dragging its row by the handle, or with **Move up** and **Move down**. Every change to the attributes, a move included, is saved only when you choose **Save**, and lost if you leave the page without saving.
