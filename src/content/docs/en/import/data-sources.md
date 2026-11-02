@@ -373,7 +373,7 @@ the run never reached says only that.
 | Couldn't be imported — a value for an attribute is already in use by another product | The run stopped at this dataset: the attribute, named by its code, holds unique values, and another product already has the one quoted. Records already imported are kept. Change the value in the file or in the other product, and import again |
 | Not imported, naming an earlier file | The run stopped at that earlier dataset, so this one never ran |
 
-A run from before these counts existed reads differently: `products.csv: 1180 records
+A run from before these counts existed reads differently: `products.csv: 1,180 records
 imported` counts every row the file had, skipped ones too, and
 `products.csv: 3 of 20 records couldn't be imported` says only how many were refused.
 
