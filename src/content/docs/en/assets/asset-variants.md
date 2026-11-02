@@ -8,7 +8,7 @@ An image variant is an image made from an asset to set its dimensions, file form
 
 Image variants are made for PNG, JPEG, GIF, TIFF, WebP, BMP, PSD, AVIF and JXL images, and for PDF and Illustrator files. A PDF or Illustrator file is rendered to an image from its first page. Any other file, such as an SVG image, has no image variant. The images can come from asset attributes or from the cloud drive.
 
-To create one, go to **Settings** > **Assets** > **Image variants** and select **New image variant**. Enter a **Name** and a **Key**, then fill in the settings below.
+To create one, go to **Settings** > **Assets** > **Image variants** and select **New image variant**. Enter a **Name** and a **Key**, then fill in the [image variant settings](#image-variant-settings).
 
 ## The key in the asset URL
 
