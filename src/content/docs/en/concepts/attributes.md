@@ -106,7 +106,7 @@ This applies wherever a filter or a sort selects products or custom entity recor
 
 - a channel's feed — see [the feed's filter](/en/channels/setup-custom-product-feed.html#filter);
 - a [product view](/en/products/product-list.html#product-views), which is also sorted by its other sort columns only;
-- a brand portal [collection](/en/brand-portal/overview.html#collections).
+- a brand portal [collection](/en/brand-portal/overview.html#product-data-downloads).
 
 **An action that changes every product a filter selects is refused instead.** A bulk edit of products selected through such a filter — changing values, publishing, unpublishing or deleting — stops before it changes anything. The job still finishes, with no product changed and a message such as *Couldn't run the bulk edit. Open the job's log file to see why.* Its log file, `bulk-edit-log.txt`, names the deleted attribute by its code, as `Data.‹code›`. The list behind it, and the number of products the bulk edit window counts, already leave the condition out; the refusal keeps the edit from reaching products the filter was never meant to select.
 
