@@ -7,6 +7,8 @@ sidebar:
 
 A **template channel** renders its output with a template you write, instead of a fixed table format. Use one when the receiving system specifies an exact document shape — an XML file to a schema, a JSON structure, or a text layout that has to match character for character.
 
+Saving a template change keeps the version it replaces, so a change you regret can be undone by restoring an earlier version of the channel — see [Versions](/en/channels.html#versions).
+
 ## Create it as a template channel
 
 In **Channels**, select **New channel**, then select **Create** on one of the template cards:
