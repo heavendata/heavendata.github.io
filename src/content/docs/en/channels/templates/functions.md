@@ -111,15 +111,21 @@ Converts a number from one unit to another — a measurement of a [measurement s
 {{ export.convert_unit(record.weight, 'kg', 'lb') }}
 ```
 
-With a `height` of 5.5 cm and a `weight` of 1.25 kg, these give `2.1654`, `2.1654` and `2.7558`.
+With a `height` of 5.5 cm and a `weight` of 1.25 kg, these give `2.1654`, `2.1654` and `2.7558`. The first line is right only while the attribute's unit is cm; the second reads the unit from the attribute, so it stays right if that unit changes.
 
 | Argument | Description |
 | --- | --- |
-| *value* | The number to convert, or a text that is a number written with a decimal point. Empty gives nothing, so a measurement left empty stays empty. |
+| *value* | One number: a measurement such as `record.package_size.height`, a number attribute, or a text that is a number written with a decimal point (`'5.5'`, not `'5,5'`). Empty gives nothing, so a measurement left empty stays empty. A whole measurement set is not a number — convert [each measurement](/en/channels/templates/data.html#measurement-sets). |
 | *from* | The unit the number is in: a unit symbol such as `cm`, `in`, `kg`, `lb` or `fl oz`, or an attribute's `configuration.unit`, which is always the unit its values are in |
 | *to* | The unit to convert to, written the same way |
 
-The result is rounded to four decimals, and trailing zeros are dropped. The two units must measure the same thing — two lengths, two weights; `export.convert_unit(record.weight, 'kg', 'cm')` stops the run with *export.convert_unit can't convert from kg to cm*. So do a unit it cannot read and a value that is not a number. To write the number with a fixed number of decimals, pass the result to Scriban's `math.format`.
+The result is rounded to four decimals, and trailing zeros are dropped. The two units must measure the same thing — two lengths, two weights; `export.convert_unit(record.weight, 'kg', 'cm')` stops the run with *export.convert_unit can't convert from kg to cm*. So do a value that is not a number and a unit it cannot read — the unit is checked even on a product whose value is empty, so a misspelled unit stops every run. For a fixed number of decimals, pass the result to Scriban's `math.format`:
+
+```plaintext frame="none"
+{{ export.convert_unit(record.package_size.height, export.attribute.package_size.configuration.unit, 'in') | math.format '0.00' }}
+```
+
+That gives `2.17`, and still nothing for an empty measurement.
 
 ### The channel run
 

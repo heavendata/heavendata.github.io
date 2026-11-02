@@ -81,7 +81,7 @@ Check **Options → Template language**. If it says **Liquid**, the examples in 
 ## Before you enable a channel
 
 - The preview shows what you expect, for more than one product.
-- A product with **empty** optional attributes still renders — this is what breaks in production. To find one, [choose it in the preview](#choosing-what-the-preview-renders) with a filter that the attribute is empty.
+- A product with **empty** optional attributes still renders — this is what breaks in production. To find one, [choose it in the preview](#choosing-what-the-preview-renders) with a filter on that attribute and the condition **is empty**.
 - A product **without variants** renders; looping over `variants` handles both. Search the preview for the SKU of one.
 - Every value going into XML is escaped with `export.xmlize`.
 - `debug.dump` has been removed.

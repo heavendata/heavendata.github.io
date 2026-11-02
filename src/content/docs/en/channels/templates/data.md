@@ -141,7 +141,7 @@ This tests the categories the product is **assigned** to. To match a category an
 
 ## Measurement sets
 
-A **Measurement set** attribute holds two to four measurements in one unit — a product's or a package's dimensions, for example length, width and height in cm. In a template it is an object with **one member per measurement code**, each a number in the attribute's unit. Printed whole, it gives the text every table format writes, the unit once at the end: `20 x 10 x 5 cm`.
+A **Measurement set** attribute holds two to four measurements in one unit — a product's or a package's dimensions, for example length, width and height in cm. In a template it is an object with **one member per measurement code**, each a number in the attribute's unit. Printed whole, `record.‹code›` gives the text the CSV and Excel formats write, the unit once at the end: `20 x 10 x 5 cm`.
 
 ```plaintext frame="none"
 {{ if record.package_size }}
@@ -161,15 +161,17 @@ The `if` matters: on a product with no value, `record.package_size` does not exi
 | `export.attribute.package_size.configuration.unit` | The unit every measurement is in, by its name in the unit list — `Length.Centimeter`, not `cm`. [`export.convert_unit`](/en/channels/templates/functions.html#exportconvert_unit) accepts it as a unit. |
 | `export.attribute.package_size.configuration.measurements` | The measurements, in the attribute's order, each with a `code` and the `label` the app shows |
 
-The measurements' labels, with each number:
+`configuration.unit` is a name, not a symbol, so it is not what a receiving system wants to read. To write a unit, convert to that unit and write its symbol yourself — the output stays right even if the attribute's unit is changed later. Each measurement with its label, in millimeters:
 
 ```plaintext frame="none"
 {{ if record.package_size }}
   {{ for m in export.attribute.package_size.configuration.measurements }}
-    <dimension name="{{ m.label | export.xmlize }}">{{ record.package_size[m.code] }}</dimension>
+    <dimension name="{{ m.label | export.xmlize }}" unit="mm">{{ export.convert_unit(record.package_size[m.code], export.attribute.package_size.configuration.unit, 'mm') }}</dimension>
   {{ end }}
 {{ end }}
 ```
+
+For a set of 20 x – x 5.5 cm this gives `200` for *Length*, an empty *Width* and `55` for *Height*.
 
 An **Integer number** or **Number with decimals** attribute with a unit is still a plain number in a template, in that unit, and its unit is read the same way: `export.attribute.weight.configuration.unit`. To write a measurement in another unit, use [`export.convert_unit`](/en/channels/templates/functions.html#exportconvert_unit).
 
