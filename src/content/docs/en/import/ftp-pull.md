@@ -28,7 +28,7 @@ A channel's or a data source's username:
 - cannot start with `inbox.`, which is kept for asset inboxes;
 - must not be in use by any other channel or data source on heavendata. A channel's
   username is checked on every save; a data source's only when it is saved with
-  **Enabled** ticked, because that is when its login is created.
+  **Enabled** ticked, because that is when its login is created or changed.
 
 Spaces before or after it are ignored. A save that breaks one of these rules is refused,
 and says which. A username already in use, for example, reads:
@@ -121,8 +121,8 @@ then you download the previous run's files.
 This is the import direction: you, or a supplier, upload files, and a data source
 imports them. First set up and enable an **FTP push** data source — see
 [setting up an FTP push source](/en/import/data-sources.html#setting-up-an-ftp-push-source).
-A source that has never been saved enabled has no login on the server yet, so the server
-refuses its FTP credentials.
+A source that has not been saved enabled since its connection was set to **FTP push** has
+no login on the server yet, so the server refuses its FTP credentials.
 
 Give each file the file name its dataset is set up with. The server refuses a file whose
 name matches none of the data source's datasets.
@@ -142,10 +142,11 @@ each of its datasets. A partial set waits in `import` for the rest.
 When an import starts, the files it takes are moved out of `import` into a new folder
 under `archive`. A file that has left `import` has been read.
 
-`archive` lists its runs newest first, and holds the runs you started in the app too, such
-as **Upload and import** or **Run stored files**. Each folder is named by the run's **Reference**, which
-the run's details show in [Background jobs](/en/troubleshooting/background-jobs.html), so
-you can match a folder to its run.
+`archive` holds the runs you started in the app too, such as **Upload and import** or
+**Run stored files**. Each folder is named by the run's **Reference**, which the run's
+details show in [Background jobs](/en/troubleshooting/background-jobs.html), so you can
+match a folder to its run. The names do not sort by time: sort by date in your FTP client
+to see the newest run first.
 
 **Archived imports are kept for 30 days, or the most recent 5,000 imports of that data
 source — whichever comes first.** After that the folder and its files are removed. The
@@ -158,14 +159,16 @@ How long the runs themselves are kept is in
 ### When the data source is disabled
 
 Once a source has been saved enabled, disabling it does not take its FTP credentials
-away. From the save that disables it, an upload is still accepted into `import`, but
-it is not imported: the file is neither refused nor deleted, and waits there. A new
-username or password saved while the source is disabled takes effect only at the
-save that enables it again; until then the old ones still log in.
+away — changing its connection to anything but **FTP push** does. From the save that
+disables it, an upload is still accepted into `import`, but it is not imported: the file
+is neither refused nor deleted, and waits there. A new username or password saved while
+the source is disabled takes effect only at the save that enables it again; until then
+the old ones still log in.
 
 Enabling the source again does not import what is waiting. Uploads after that are
 handled as usual, and a file already waiting in `import` counts towards the set that
-starts the next import.
+starts the next import. To import a complete set that is waiting, upload one of its
+files again.
 
 ## Upload files to an asset inbox
 

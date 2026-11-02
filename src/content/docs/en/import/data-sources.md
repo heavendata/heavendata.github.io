@@ -38,7 +38,7 @@ The controls a source offers depend on its connection:
 | **Download file** | Yes, once a host name and username are saved | Yes | No |
 | **Load fields** | Yes, once a host name and username are saved | Yes | No |
 | **Run now**, **Run selected datasets** | Yes | Yes | No — there is nothing to fetch |
-| **Upload and import** | Yes | Yes | **Yes** — the one way to run a push source on demand |
+| **Upload and import** | Yes | Yes | **Yes** — besides **Run stored files** on a past run, the one way to run a push source on demand |
 
 You can save an **SFTP pull** source before you know its server details. Until it has
 a host name and a username, it is saved disabled: its schedule does not run it, and
@@ -293,9 +293,10 @@ also start one yourself from the row menu (⋮) in **Integrations → Data sourc
 | **Upload and import** | Only the datasets you give a file to, using the file you upload |
 
 A disabled data source doesn't run on its schedule or when a file arrives by FTP push, but
-you can still run it by hand — with the actions its connection offers, or with **Run
-stored files** on a past run. You can use that to try a new data source before you enable it — but it is not a
-trial run: it imports for real, with the source's publish settings.
+you can still run it by hand — with the actions its connection offers, once it has the
+details they need, or with **Run stored files** on a past run. You can use that to try a
+new data source before you enable it — but it is not a trial run: it imports for real,
+with the source's publish settings.
 
 ### Running only some datasets
 
@@ -365,13 +366,14 @@ the run never reached says only that.
 | --- | --- |
 | *imported*, with counts of records created, updated, deleted and skipped — `products.csv: imported — 57 records created, 1,180 updated, and 3 skipped` | The file was read, and the counts say what became of its records. A count of none is left out. The step's log file names each skipped record |
 | *imported — the file has no rows* | The file was read, but had no records in it |
+| *imported — no records created, updated, deleted, or skipped — see the log file* | The file had rows, but none of them became a record, so nothing from it went in. The step's log file says why |
 | The counts, and a count of records with values that couldn't be read | Some values in the file were not accepted. Read the step's log file before assuming the rest of those records went in — it names each one and what was wrong with it |
 | *imported*, with the counts, then how many records couldn't be imported — `products.csv: imported — 57 records created; 3 couldn't be imported — see the log file` | Part of the file went in, as counted; the records that couldn't be imported were not written. The step's log file lists them |
 | *couldn't be imported — its 20 records couldn't be imported — see the log file* | Every record in the file was refused, so nothing from it went in. The step's log file lists them |
 | Couldn't be imported — a value for an attribute is already in use by another product | The run stopped at this dataset: the attribute, named by its code, holds unique values, and another product already has the one quoted. Records already imported are kept. Change the value in the file or in the other product, and import again |
 | Not imported, naming an earlier file | The run stopped at that earlier dataset, so this one never ran |
 
-A run from before these counts existed reads differently: `products.csv: 1,180 records
+A run from before these counts existed reads differently: `products.csv: 1180 records
 imported` counts every row the file had, skipped ones too, and
 `products.csv: 3 of 20 records couldn't be imported` says only how many were refused.
 
