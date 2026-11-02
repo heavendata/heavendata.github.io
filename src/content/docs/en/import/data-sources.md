@@ -355,6 +355,7 @@ the run never reached says only that.
 | A count of records imported | The file was read and those records went in |
 | A count imported, and a count of records with values that could not be read | Some values in the file were not accepted. Read the step's log file before assuming the rest of those records went in — it names each one and what was wrong with it |
 | Records that could not be imported | Those records were not written. The step's log file lists them |
+| Couldn't be imported — a value for an attribute is already in use by another product | The run stopped at this dataset: the attribute, named by its code, holds unique values, and another product already has the one quoted. Records already imported are kept. Change the value in the file or in the other product, and import again |
 | Not imported, naming an earlier file | The run stopped at that earlier dataset, so this one never ran |
 
 A run that stops part-way still has a step for every dataset **in it**, so you
@@ -386,7 +387,7 @@ Info Publish settings configured on the data source — Publish new products: on
 A dataset whose file could not be fetched stops the run, and its step says why. The step
 opens with *Couldn't import* and the file name, and ends with what to do next — for most
 causes, what to check, then to run the data source again. What its message calls the
-source's *connection settings* are under **Config Source**. For example:
+source's *connection settings* are under **Connection and format**. For example:
 
 > Couldn't import stock.csv. The connection to sftp.example.com on port 22 failed — check
 > that the host, port, and protocol in this data source's connection settings match the
@@ -401,7 +402,7 @@ source's *connection settings* are under **Config Source**. For example:
 | It isn't on the data source | The dataset's file name, and the source's **base path** (SFTP) or **base URL** (HTTP) |
 | No host name is set, or no username is set | The missing one, on an **SFTP pull** source |
 | This data source has no connection to fetch files from | The base URL of an **HTTP pull** source, written in full with `https://` or `http://` — or give the dataset's file name as a whole web address |
-| An unexpected error stopped the connection, the download failed, or the data source reported an error | Nothing yet — read the step's log file first, which keeps the server's own words |
+| An unexpected error stopped the connection, the download failed, or the data source reported an error | Nothing yet — read the step's log file first: its error entry quotes what the connection or the server reported |
 | An error on our side stopped it | Nothing — contact support, and quote the reference the step gives |
 
 What each case means, and when the fix is at the server's end rather than in the settings,
@@ -413,4 +414,4 @@ is in
 Every import stores the files it read, under the run that read them — which is what
 makes running it again possible, and what to download when you need the data an import
 actually worked from. The files hang off the run's steps:
-[downloading what a step read](/en/troubleshooting/background-jobs.html#downloading-what-a-step-read).
+[downloading what a step read](/en/troubleshooting/background-jobs.html#downloading-what-a-step-read-or-created).

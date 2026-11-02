@@ -17,8 +17,8 @@ There are several ways to a run, depending on what you already have in front of 
 | The latest run of one channel or data source | **Channels**, or **Integrations → Data sources**. The **Last run** column shows each entry's most recent run |
 | The details of that run | Select the status in the **Last run** cell — it opens **Run details** |
 | Older runs of one entry | The row menu (⋮) → **Run history** |
-| Runs of an asset inbox that syncs from a remote server | **Settings → Assets → Inboxes** → the row menu → **Executions**. An inbox that does not sync from a remote server has nothing to run, and the menu does not offer the item |
-| Everything this account has run | **Settings → Background tasks** |
+| Runs of an asset inbox that syncs from a remote server | **Settings → Assets → Inboxes** → the row menu → **Run history**. An inbox that does not sync from a remote server has nothing to run, and the menu does not offer the item |
+| Everything this account has run | **Settings → Background jobs** |
 | The runs you started yourself, right now | The **Active jobs** button in the header |
 
 The **Last run** column keeps itself up to date while you watch it. You do not need to reload the page to see a run start, progress or finish — and that applies to every run, not only the ones you started. A run begun by a schedule, by the API, or by a colleague appears in the column the same way.
@@ -45,9 +45,20 @@ Starting a run does not cancel one that is already going. If a run is already qu
 
 **Finished does not mean every record was updated.** A run can finish having skipped records it could not match, or having written warnings. To see what actually happened, open the run and read its steps.
 
+### A run that failed without getting started, or without finishing
+
+Two failures are not about your data at all. The run's step says which it was:
+
+| The step says | What happened | What to do |
+| --- | --- | --- |
+| *Couldn't start the run. Another import into this account is still running. Try again once it has finished.* | Only one import into an account runs at a time. This one waited 60 minutes for the import ahead of it, which was still running | Import again once the other import has finished |
+| *Couldn't finish the run. It stopped responding and was ended automatically. Run it again.* | The run was still **Queued** or **Running** 6 hours after it was created, so it was ended and marked **Failed** rather than left showing as in progress | Run it again |
+
+If you asked, with **Notify me**, to be emailed about the run, the email says the same.
+
 ## Reading a run
 
-Selecting the status in a **Last run** cell opens the run in a window titled **Run details**. **Run history** lists an entry's earlier runs, in a window still titled *Latest Executions*; select one for the same details. On **Background tasks** the run opens in the panel beside the list rather than in a window.
+Selecting the status in a **Last run** cell opens the run in a window titled **Run details**. **Run history** lists an entry's earlier runs, in a window of that name; select one for the same details. On **Background jobs** the run opens in the panel beside the list rather than in a window.
 
 However you got there, what you are looking at is the same thing.
 
@@ -60,6 +71,40 @@ If a run failed, the step that failed is the one to read first: its message name
 
 **The email shows the same steps.** If you asked, with **Notify me**, to be emailed when a run finishes, the email lists the same step messages, in the same words. A run nobody asked about sends no email, so a scheduled run's failure shows only in the app.
 
+### Reading a log file
+
+A step's log files are listed under **Log files** inside the step, and files that belong to the run as a whole under **Log files** below the steps. Select a file, or its **View**, and it opens in a window titled *Log file "‹name›"*, one entry per row:
+
+| Column | What it shows |
+| --- | --- |
+| *(icon)* | How severe the entry is: **Error**, **Warning** or **Info** |
+| **Row** | The row of the imported file the entry is about |
+| **Record** | The record it is about |
+| **Field** | The field it is about |
+| **File** | The file it is about — shown only when the entries name more than one |
+| **Message** | What happened, and what to do about it |
+| **Time** | When it was written |
+
+A column no entry fills is left out. An export's log has no **Row**, for example: the records an export writes come from your catalog, not from a file.
+
+- **Errors**, **Warnings** and **Info**, above the grid, each show how many entries the file has of that severity. Clear one to hide those entries.
+- **Search** keeps only the entries whose message, row, record or field contains what you type.
+- Select a column's header to sort by it. The window opens in the order the entries were written.
+- **Download** saves the file as a **Text file (.txt)**, one line per entry, ready to paste into a ticket — or as a **JSON file (.json)** for a script: one entry per line, each a JSON object in the compact log event format (CLEF).
+
+What an import's entries mean for your data:
+
+| The entry | What it means |
+| --- | --- |
+| A warning on a field — *The record was imported without this field's value.* | The record went in, but without this one value. The rest of the message says what was wrong with it |
+| A warning on a record — *The record was skipped.* | The record was left out, and the rest of the file went on |
+| An error on a record — *Couldn't import the record.* | That record was not written |
+| An error on a row — *Couldn't import the row.* | The row could not be read, and the dataset stopped there: its step names the row. Correct the row in the file and import again |
+
+**Which file is which.** An import's step has one log file per dataset, named after the dataset's file with `.log.json` added — `products.csv.log.json`. An export has one per data set, named after the file that data set writes, also ending in `.log.json`. A delivery by **File transfer** writes `ftp-publisher.log.json`, listed with the run's own files.
+
+**A file ending in `.log` instead is plain text.** It opens as its lines, with no columns, and **Download** saves it as it is.
+
 ### When a run can't reach a server
 
 A data source that fetches its files from a server, and a channel that delivers its files to one with **File transfer**, fail when they cannot get through. The step that failed then says which of the cases below it was. It names the server by its host, written as it is in the settings, and — when the connection itself failed — the port it tried: the one set, or the protocol's default port where none is — so you can compare both with what the server actually uses. It ends with what to do next.
@@ -71,18 +116,20 @@ A data source that fetches its files from a server, and a channel that delivers 
 | **The sign-in was refused** | The server answered and turned down the username and password, or the token | **The settings** first. If the credentials there are right, the account on the server may have changed or been locked — ask whoever runs the server |
 | **The file isn't there** — imports only | The connection and sign-in worked, but there is no file at the path the dataset names | **The dataset** — its file name, and the source's base path or base URL. Or the file has not been delivered yet |
 | **The settings are incomplete** — no host, for example | The settings leave out something the connection needs, so there is nothing to connect to | **The settings.** Add what the message names |
-| **An unexpected error**, a **download that failed**, or the server **reported an error** | Something other than the cases above went wrong on the way | **The step's log file.** It keeps the server's own words, which the step's message leaves out |
-| **An error on our side** | The fault is ours, not the server's or the settings' | **Contact support**, and quote the reference the step gives. It is the same id the run's details show as **Execution ID** |
+| **An unexpected error**, a **download that failed**, or the server **reported an error** | Something other than the cases above went wrong on the way | **The step's log file.** Its error entry quotes what the connection or the server reported, which the step's message leaves out |
+| **An error on our side** | The fault is ours, not the server's or the settings' | **Contact support**, and quote the reference the step gives. It is the same id the run's details show as **Reference** |
 
-A data source's messages call its settings its *connection settings*: they are under **Config Source** in the data source's editor. A channel's are in its **Publishing** step. What each import message says, and what to change, is in [when a file could not be fetched](/en/import/data-sources.html#when-a-file-could-not-be-fetched).
+A data source's messages call its settings its *connection settings*: they are under **Connection and format** in the data source's editor. A channel's are in its **Publishing** step. What each import message says, and what to change, is in [when a file could not be fetched](/en/import/data-sources.html#when-a-file-could-not-be-fetched).
 
-**A File transfer delivery that can't reach the server leaves two failed steps.** The first says why, as in the table. The second closes the export: it says the export couldn't finish, and at which stage it stopped — here, that the files couldn't be published. It does not repeat the reason, so read the step before it. A delivery that reached the server and then failed while sending says how many of the files were published. That step has no log file of its own: why the rest were not is in `ftp-publisher.log`, under the run's **Log Files**.
+**A File transfer delivery that can't reach the server leaves two failed steps.** The first says why, as in the table. The second closes the export: it says the export couldn't finish, and at which stage it stopped — here, that the files couldn't be published. It does not repeat the reason, so read the step before it. A delivery that reached the server and then failed while sending says how many of the files were published. That step has no log file of its own: why the rest were not is in `ftp-publisher.log.json`, under the run's **Log files**.
 
-### Downloading what a step read
+### Downloading what a step read or created
 
 A step's files sit under **Input and result files**, with a **Download** beside each one. A file listed as **Input** is the one that step actually read — the bytes the run worked from, kept as they were at the moment it read them.
 
 That is the point of keeping them: by the time anyone looks into a run that went wrong, the file on the supplier's server has often been replaced, so downloading it again answers a different question. The copy under the step does not change.
+
+**A channel run offers the file it created.** Its feed step — the one that says it created the feed, one for each data set — has a **Download** button with the file's name. It saves the file exactly as that run wrote it, whatever has happened since to the copy it delivered. Runs from before 20 October 2026 have no such button.
 
 A run whose files have already been cleared lists none, and its downloads are no longer offered. That is expected — see [how long runs are kept](#how-long-runs-are-kept).
 
@@ -98,7 +145,8 @@ A run whose files have already been removed is expected, not a fault — the run
 | --- | --- |
 | The run and its logs | 30 days |
 | The import files the run read | 30 days, or the most recent 5,000 runs **of that data source** — whichever comes first |
+| The download of the file a channel run created | As long as the run: 30 days |
 
-After that the run no longer appears in **Run history** or in **Background tasks**, and its files can no longer be downloaded or used to start the run again. Because the two clean-ups run on their own schedules, a run's files can go a few hours before the run itself does.
+After that the run no longer appears in **Run history** or in **Background jobs**, and its files can no longer be downloaded or used to start the run again. Because the two clean-ups run on their own schedules, a run's files can go a few hours before the run itself does.
 
 Files you dropped on the [heavendata FTP server](/en/import/ftp-pull.html) are kept there under their own rule, which that page states.
