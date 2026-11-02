@@ -70,7 +70,7 @@ The dialog starts on the narrowest option that applies — your selection if you
 
 Ticking rows works over any number of records: select all, then untick the few you do not want, and the export covers everything the filter matches except those.
 
-Choose **Excel** or **CSV** as the format, then select **Export**. The file is produced as a background job, so it is safe to close the dialog or leave the page — the job keeps running. The dialog shows the job's progress in place and offers **Download** when it finishes. You can also find the job later under **Settings > Background tasks**, named `Export ‹entity name›` — see [Background jobs](/en/troubleshooting/background-jobs.html). That list needs its own permission, so you may be able to export without being able to open it; download from the dialog if you are not sure.
+Choose **Excel** or **CSV** as the format, then select **Export**. The file is produced as a background job, so it is safe to close the dialog or leave the page — the job keeps running. The dialog shows the job's progress in place and offers **Download** when it finishes. You can also find the job later under **Settings > Background jobs**, named `Export ‹entity name›` — see [Background jobs](/en/troubleshooting/background-jobs.html). That list needs its own permission, so you may be able to export without being able to open it; download from the dialog if you are not sure.
 
 The file is named `‹account key›_‹entity key›`. The entity key is lower-cased and any character that is not a letter or a digit becomes `-`, so the key `sales_channel` gives `…_sales-channel`. The account key is used as it is.
 

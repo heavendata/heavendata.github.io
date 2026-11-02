@@ -37,7 +37,7 @@ Starting a run does not cancel one that is already going. If a run is already qu
 
 | Status | What it means |
 | --- | --- |
-| **Queued** | Created, but not started yet — it is waiting for a free worker |
+| **Queued** | Created, but not started yet — it is waiting for a free worker, or, for an import, for another import into the account to finish |
 | **Running** | In progress now |
 | **Finished** | Ended without an error |
 | **Failed** | Stopped because of an error. The details will say what went wrong |
@@ -98,12 +98,12 @@ What an import's entries mean for your data:
 | --- | --- |
 | A warning on a field — *The record was imported without this field's value.* | The record went in, but without this one value. The rest of the message says what was wrong with it |
 | A warning on a record — *The record was skipped.* | The record was left out, and the rest of the file went on |
-| An error on a record — *Couldn't import the record.* | That record was not written |
+| An error on a record or a field — *Couldn't import the record.* | That record was not written |
 | An error on a row — *Couldn't import the row.* | That row was not imported, and the rest of the message says why — it has no value for the identifier, for example |
 
 **A row that cannot be read at all stops the dataset.** Its log file has an error on that row, the dataset's step names the row, and the datasets after it in the run are not imported. Correct the row in the file and import again.
 
-**Which file is which.** An import's step has one log file per dataset, named after the dataset's file with `.log.json` added — `products.csv.log.json`. An export has one per feed, named after the file that feed writes, also ending in `.log.json`. A delivery by **File transfer** writes `ftp-publisher.log.json`, listed with the run's own files.
+**Which file is which.** An import's step has one log file per dataset, named after the dataset's file with `.log.json` added — `products.csv.log.json`. The import's own steps, which belong to no dataset, share `run.log.json`. An export has one per feed, named after the file that feed writes, also ending in `.log.json`. A delivery by **File transfer** writes `ftp-publisher.log.json`, listed with the run's own files.
 
 **A file ending in `.log` instead is plain text.** It opens as its lines, with no columns; the severity filters and **Search** still work on it, and **Download** saves it as it is.
 
@@ -131,7 +131,7 @@ A step's files sit under **Input and result files**, with a **Download** beside 
 
 That is the point of keeping them: by the time anyone looks into a run that went wrong, the file on the supplier's server has often been replaced, so downloading it again answers a different question. The copy under the step does not change.
 
-**A channel run offers the file it created.** Each feed of the run has a step that says it created the feed, and that step has a **Download** button with the file's name. It saves the file exactly as that run wrote it, whatever has happened since to the copy it delivered. Runs from before 20 October 2026 have no such button.
+**A channel run offers the file it created.** Each feed of the run has a step that says it created the feed, and that step has a **Download** button with the file's name. It saves the file exactly as that run wrote it, whatever has happened since to the copy it delivered. Runs from before 20 October 2026, and some from that day, have no such button.
 
 A run whose files have already been cleared lists none, and its downloads are no longer offered. That is expected — see [how long runs are kept](#how-long-runs-are-kept).
 

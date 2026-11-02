@@ -45,15 +45,15 @@ a host name and a username, it is saved disabled: its schedule does not run it, 
 **Run now** and **Run selected datasets** say what is missing instead of running.
 Saving it says so:
 
-> Data source saved as disabled. Enter a host name and a username under Config Source
-> to enable this data source.
+> Data source saved as disabled. Enter a host name and a username under Connection and
+> format to enable this data source.
 
 **Enabled** stays locked, with a sentence beside it saying what is still missing, until
-both are entered under **Config Source**. Then tick **Enabled** and save.
+both are entered under **Connection and format**. Then tick **Enabled** and save.
 
 ### Setting up an FTP push source
 
-Choose **FTP push** under **Config Source**, enter a **Username** and a **Password**, and
+Choose **FTP push** under **Connection and format**, enter a **Username** and a **Password**, and
 give each dataset the file name the uploaded file will have. These are the data source's
 FTP credentials on the [heavendata FTP server](/en/import/ftp-pull.html#upload-files-for-a-data-source).
 The username must not be in use anywhere else on heavendata.
@@ -185,7 +185,7 @@ if a source should stop running, disable or delete the source instead.
 
 ## Data Format
 
-**Data Format**, under **Config Source**, says how the source's files write dates,
+**Data format**, under **Connection and format**, says how the source's files write dates,
 numbers and several values in one cell: **Date format**, the decimal and group separators
 for numbers and for prices, **Value separator** and **Timezone**. It applies to every
 dataset of the source. These are the settings a one-off import offers on its
