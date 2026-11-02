@@ -114,8 +114,8 @@ Used if this channel is intended for manual processing. E.g. combine it with fil
 #### Json
 This will create a JSON array with one json object for each product.
 
-#### Text
-Allows you to create custom templates, e.g. XML or HTML for your feed. It's a very powerful way to format your output using Liquid template syntax. The following article is a good starting point: https://scriban.github.io/docs/liquid-support/
+#### Custom template
+A format of your own, such as XML or HTML, is not chosen here. Create a [template channel](/en/channels/templates.html) instead: under **New channel**, select **Create** on the **Template product feed** card. Its own templates write the output.
 
 ### File Transfer
 Defines how other systems can access this feed.
