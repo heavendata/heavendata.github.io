@@ -84,7 +84,7 @@ A custom entity feed offers **Record ID**, **Custom entity key**, **Created on**
 
 **Categories** are not offered as a source; a template reads them as `_categories` — see [categories in a template](/en/channels/templates/data.html#categories).
 
-**Variant space ID** and **Language code** are not offered as sources. No exported record contains them, so a column mapped from either was always empty. A feed that still maps one keeps the column, and its mapping row shows *This field is no longer available, so this column stays empty. Remove the row or map another field.*
+**Variant configuration ID** and **Language code** are not offered as sources. No exported record contains them, so a column mapped from either was always empty. A feed that still maps one keeps the column, and its mapping row shows *This field is no longer available, so this column stays empty. Remove the row or map another field.*
 
 ### Which fields an import can set
 
@@ -95,7 +95,7 @@ When you import through a [data source](/en/import/data-sources.html), the mappi
 | Categories | `categories` | Sets the categories the product is in, given as [category keys](/en/concepts/categories.html). |
 | Prices | `prices` | Sets the product variant's prices. |
 | Delivery windows | `deliverywindows` | Sets the product variant's delivery windows. |
-| Variant space ID | `variantspaceid` | Chooses the variant configuration a **new** product is created with — either its ID, or a product type key, in which case the best-matching variant configuration of that product type is used. |
+| Variant configuration ID | `variantspaceid` | Chooses the variant configuration a **new** product is created with — either its ID, or a product type key, in which case the best-matching variant configuration of that product type is used. |
 | Language code | `meta.languagecode` | Names the language the row's values are in, for translatable attributes. |
 
 The IDs, **Created on**, **Last updated** and the product type fields are read-only: the platform sets them, so they are never offered as import targets. A custom entity import can set its custom attributes only.

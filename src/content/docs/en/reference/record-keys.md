@@ -60,7 +60,7 @@ A product feed writes one row per product variant, and one row for a product tha
 
 A column mapped from a key a row does not carry is empty on that row.
 
-Two further fields appear on the Mapping step of an **import** but are not in an exported record: **Variant space ID** and **Language code**. See [which fields an import can set](/en/channels/setup-custom-product-feed.html#which-fields-an-import-can-set).
+Two further fields appear on the Mapping step of an **import** but are not in an exported record: **Variant configuration ID** and **Language code**. See [which fields an import can set](/en/channels/setup-custom-product-feed.html#which-fields-an-import-can-set).
 
 ## Custom entity keys
 
