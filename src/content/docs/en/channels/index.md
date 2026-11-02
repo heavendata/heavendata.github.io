@@ -44,7 +44,7 @@ permission see it, because a version holds the channel's whole configuration.
 | **A save** | Keeps the channel as it was before the save. Only a save that changes a setting keeps a version, so choosing **Save** without an edit adds none. |
 | **Creating a channel** | Keeps nothing: there is no earlier version yet. Versions are kept from October 2026 on, so a channel last saved before then has only its current version until its next save. |
 | **How many** | Up to 500 earlier versions per channel, besides the current one. The save that would keep a 501st deletes the oldest. |
-| **Passwords** | Never kept: a version holds no password, and the page never shows one. |
+| **Passwords** | Never kept: a version holds no password, and the page never shows one. So a save that changes only a password keeps no version. |
 | **Deleting the channel** | Deletes its versions with it. A deleted channel cannot be brought back from them. |
 
 ### The list
@@ -92,8 +92,9 @@ in the channel editor, and the channel runs on the restored version's schedule.
 | What happens to… | When you restore |
 |---|---|
 | **Passwords** | They stay as they are now. A restore never brings back an old password, so it cannot undo a password change. |
-| **A version with a different publishing method** | If the version delivers by another publishing method than the channel does now — **File transfer** where the channel now uses **FTP server**, say — that method has no password after the restore. The dialog says so; enter the password under **Publishing** before the channel runs. |
-| **An HTTP pull version with a different authentication method** | If the version and the channel both use **HTTP pull** but with different authentication methods — a username and password in one, an access key in the other, or none now — the version comes back without its password or access key. The dialog does not warn about this case. Enter it again under **Publishing**. |
+| **A version with a different publishing method** | If the version delivers by another publishing method than the channel does now — **File transfer** where the channel now uses **FTP server**, say — that method has no password after the restore. The dialog says so; if the method uses a password, enter it under **Publishing** before the channel runs. |
+| **An HTTP pull version with a different authentication method** | If the version and the channel both use **HTTP pull** but with different authentication methods — a username and password in one, an access key in the other, or none now — the version comes back without its password or access key — an enabled version with a username and password is refused instead (next row). The dialog does not warn about this case. Enter it again under **Publishing**. |
+| **An enabled HTTP pull version that signs in with a username and password** | If the channel has no password for it now — because it uses another publishing method or another authentication method — the restore is refused: an enabled channel is never saved without that password. The channel stays as it is; edit it by hand, and enter the password under **Publishing**. |
 | **A version that cannot run** | It is restored as disabled — see [Saving a channel before Publishing is complete](#saving-a-channel-before-publishing-is-complete). A message says what to fill in, for example *Version restored as disabled. Enter a host name under Publishing to enable this channel.* |
 
 If a restore fails, the channel is unchanged, and the message says why:
@@ -103,6 +104,7 @@ If a restore fails, the channel is unchanged, and the message says why:
 | *Couldn't restore the version. Some of its settings are no longer valid, so the channel is unchanged. Edit the channel to set them by hand.* | The version no longer passes today's checks — for example, a filter condition in it is incomplete. You can still compare it; copy the settings you need into the channel by hand. |
 | *Couldn't restore the version. Its username for the heavendata FTP server is already in use. …* | The version publishes by **FTP server** with a username another channel uses now. Edit the channel by hand, with another username. |
 | *Couldn't restore the version. It no longer exists. Reload the page.* | The version, or the channel, was deleted in the meantime. |
+| Any other message starting *Couldn't restore the version.* | For example, the version is enabled and signs in to **HTTP pull** with a username and password the channel has no password for (above). Edit the channel by hand. |
 
 If two people save the same channel at once, the last save wins, a restore included. Both
 earlier states are kept as versions.
