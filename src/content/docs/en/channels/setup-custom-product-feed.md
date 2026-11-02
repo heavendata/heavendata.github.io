@@ -111,8 +111,8 @@ That's the most common format. It's just a text file where the first row contain
 #### Excel
 Used if this channel is intended for manual processing. E.g. combine it with file transfer "e-mail" to send updates to other departments.
 
-#### Json
-This will create a JSON array with one json object for each product.
+#### JSON
+This will create a JSON array with one JSON object for each product.
 
 #### Custom template
 A format of your own, such as XML or HTML, is not chosen here. Create a [template channel](/en/channels/templates.html) instead: under **New channel**, select **Create** on the **Template product feed** card. Its own templates write the output.
