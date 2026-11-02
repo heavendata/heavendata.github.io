@@ -38,7 +38,7 @@ Select rows with the checkbox at the start of each row, then choose an action fr
 - **Select all:** tick the checkbox in the header of that column. This selects every row the list matches with its search and filter applied, including rows not yet loaded on screen. To leave some out, untick them afterwards.
 - **To clear the selection,** click the header checkbox again while any row is selected.
 
-**With List product variants on, the rows are product variants, and so is the selection.** Select all then selects every product variant the list shows, and an action applies to those product variants rather than to the whole products they belong to.
+**With List product variants on, the rows are product variants, and so is the selection.** Select all then selects every product variant the list shows, and **Publish**, **Unpublish**, **Delete** and **Bulk edit** apply to those product variants rather than to the whole products they belong to.
 
 ### Acting on a selection
 
@@ -60,7 +60,9 @@ Three tools narrow the list, and they work together: the search box finds produc
 
 ### Search text box
 
-This textbox is to search for products by their name, sku or gtin. First, select which attributes to search using the dropdown left beside the search input. 
+The search box finds products by their SKU, article number, GTIN or product name. By default it searches all of them; to search only one, choose it in the dropdown to the left of the search box.
+
+Search needs to know which of your attributes holds each of these. Until that is set, the search box is replaced by *Search needs to know which attribute holds the SKU, article number, GTIN, or product name.* and an **Assign attribute roles** button.
 
 The search field allows you to search for multiple values, e.g., multiple SKUs. To search for multiple values
 
@@ -73,11 +75,12 @@ The search field allows you to search for multiple values, e.g., multiple SKUs. 
 **Filter** in the list toolbar builds a filter from the fields a product has: your own custom attributes, and the fields the platform keeps for every product, such as when it was created, its product type, its categories and its status.
 
 1. Click **Filter**.
-2. Choose a field. **Search fields** finds one by name.
-3. Choose an operator and enter or pick a value.
-4. To add another condition, click **Add condition**. To combine some conditions separately from the rest, click **Add group**.
+2. Click **Add condition**.
+3. Choose a field. **Search fields** finds one by name.
+4. Choose an operator and enter or pick a value.
+5. To add another condition, click **Add condition** again. To combine some conditions separately from the rest, click **Add group**.
 
-A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group that reads **AND** or **OR**. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
+A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group that shows **AND** or **OR**. Beside it the group says *All conditions must match* or *At least one condition must match*. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
 
 **A filter reaches a field whether or not its column is shown.** To find products created last week, filter on **Created on**; there is no need to add a column for it first.
 
@@ -100,15 +103,16 @@ Prices and delivery windows cannot be filtered on.
 
 ### Column header filters
 
-Move the mouse pointer over any column header and click the filter icon. Now define your filter inside of the dropdown. A column header filter applies to that one column; to combine conditions, or to filter on a field that is not shown as a column, use **Filter** instead.
+Click the filter icon in a column header and define the filter in the menu that opens. A column header filter applies to that one column; to combine conditions, or to filter on a field that is not shown as a column, use **Filter** instead.
 
-## Product Views
+## Product views
 
-Product views store all list settings so you can quickly restore views. This includes
+Product views save your list settings so you can restore them quickly. A view saves
 
-* Visible columns
-* List sorting
-* List filters
+* the visible columns
+* the sorting
+* the filters, the category and the search
+* the row height, and whether **List product variants** is on
 
 ## Exporting products
 
