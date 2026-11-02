@@ -98,7 +98,7 @@ A feed contains every product unless you give it a filter. To set one, open the 
 
 A filter is built the same way as the product list's: conditions on fields, combined into groups by AND or OR — see [Filter](/en/products/product-list.html#filter).
 
-**A condition on an attribute that has since been deleted is ignored.** The feed then contains the products the rest of the filter matches, which can be more than before, and it keeps running. See [Filters and sorts that named the attribute](/en/concepts/attributes.html#filters-and-sorts-that-named-the-attribute).
+**A condition on an attribute that has since been deleted is ignored.** The feed then contains the products the rest of the filter matches, which can be more or fewer than before, and it keeps running. See [Filters and sorts that named the attribute](/en/concepts/attributes.html#filters-and-sorts-that-named-the-attribute).
 
 ## Output
 

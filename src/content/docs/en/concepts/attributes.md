@@ -93,22 +93,22 @@ Deleting an attribute deletes its values on every product and removes it from ev
 
 ### Filters and sorts that named the attribute
 
-A filter can still hold a condition on an attribute that has since been deleted, and a list can still be sorted by it. **That condition, or that sort, is ignored**: the filter works as if the condition had never been written. So whatever the filter selects grows, and nothing fails.
+A filter can still hold a condition on an attribute that has since been deleted, and a list can still be sorted by it. **That condition, or that sort, is ignored**: the filter works as if the condition had never been written, and whatever reads it keeps working. Usually that selects more than before; where the condition sat in an OR group, it selects less.
 
 | The filter was | It now works as |
 | --- | --- |
 | Only a condition on the deleted attribute | No filter: everything matches |
 | *Color is red* **AND** *Brand is Acme*, with **Color** deleted | *Brand is Acme* |
-| *Color is red* **OR** *Brand is Acme*, with **Color** deleted | *Brand is Acme* — not everything |
+| *Color is red* **OR** *Brand is Acme*, with **Color** deleted | *Brand is Acme* — red products of other brands drop out |
 | A group whose only conditions were on deleted attributes | As if the group were not there |
 
 This applies wherever a filter or a sort selects products or custom entity records to read:
 
-- a channel's feed exports the products its filter now matches, so it can contain more products than before — see [the feed's filter](/en/channels/setup-custom-product-feed.html#filter);
+- a channel's feed exports the products its filter now matches, which can be more or fewer than before — see [the feed's filter](/en/channels/setup-custom-product-feed.html#filter);
 - a [product view](/en/products/product-list.html#product-views) shows the products its filter now matches, sorted by its other sort columns;
 - a brand portal collection offers the products its filter now matches.
 
-**An action that changes every product a filter selects is refused instead.** A bulk edit of products selected through such a filter — changing values, publishing or deleting — stops before it changes anything, and its error names the deleted attribute. The list behind it, and the number of products the bulk edit window counts, include the products the ignored condition used to leave out; the refusal is what keeps the edit from reaching them.
+**An action that changes every product a filter selects is refused instead.** A bulk edit of products selected through such a filter — changing values, publishing or deleting — stops before it changes anything. The job still finishes, with the products counted as not updated, and its log file, `bulk-edit-log.txt`, names the deleted attribute by its code, as `Data.‹code›`. The list behind it, and the number of products the bulk edit window counts, include the products the ignored condition used to leave out; the refusal is what keeps the edit from reaching them.
 
 Before you delete an attribute, check which channels, product views and collections filter or sort on it, and change those filters first.
 
@@ -119,8 +119,8 @@ The attribute type and translatable settings affect how data is stored in databa
 
 1. Export products (product list > export) and select the product identifier column and the column you need to change
 2. Verify your export and ensure it contains the proper data
-3. [Delete the attribute](#delete-an-attribute). Until step 4, a filter condition on it is ignored, so channels that filter on it export more products.
-4. Create a new attribute with the same name and code. Filter conditions on that code apply again from then on.
+3. [Delete the attribute](#delete-an-attribute). Until step 4, a filter condition on it is ignored, so a channel that filters on it exports a different set of products.
+4. Create a new attribute with the same name and code. Filter conditions on that code apply to it again; check that each still fits the new type.
 5. Enable the new attribute in product types
 6. Re-import products from step 2 (product list > import)
 

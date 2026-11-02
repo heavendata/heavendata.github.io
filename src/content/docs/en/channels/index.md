@@ -50,11 +50,11 @@ permission see it, because a version holds the channel's whole configuration.
 ### The list
 
 The list starts with the channel as it is now, marked **Current**, followed by the earlier
-versions, newest first, 50 to a page.
+versions, newest first. Each page holds 50 earlier versions.
 
 | Column | What it shows |
 |---|---|
-| **Saved on** | When the save that made this version happened, in your browser's date and time format. |
+| **Saved on** | When the save that made this version happened, in your time zone, written as month/day/year and time — `10/20/26, 6:24 PM`. |
 | **Saved by** | The name of the user who made that save. **Unknown** where none was recorded — always so on the oldest version kept. |
 | *(actions)* | **Current** on the first row; **Restore** on every other row. |
 
