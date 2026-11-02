@@ -9,12 +9,12 @@ A **template channel** renders its output with a template you write, instead of 
 
 ## Create it as a template channel
 
-Under **Channels → Create New Channel**, pick one of the template cards and click **Create**:
+In **Channels**, select **New channel**, then select **Create** on one of the template cards:
 
 | Card | One record per | Content type of the output |
 | --- | --- | --- |
 | **Template product feed** | product | `application/xml` |
-| **Template "‹entity›" feed** — one card per custom entity | record of that custom entity | `text/plain` |
+| **Template "‹entity›" feed** — one card per custom entity | record of that custom entity | `application/xml` — `text/plain` for a channel created from this card before 4 September 2026 |
 
 The editor of a template channel has no **Feeds** step — a template channel always has exactly **one feed** — and no **Format** step. In their place it shows **Header template**, **Record template**, **Footer template** and **Options**.
 
@@ -22,7 +22,7 @@ The editor of a template channel has no **Feeds** step — a template channel al
 **An existing CSV, JSON or Excel channel cannot be turned into a template channel** — its **Format** step offers only those three. Create a new channel from a template card instead. In the channels list a template channel shows **Text** in the *Format* column; that is a label, not a choice you can make.
 :::
 
-**The content type is fixed by the card**, and the editor has no field to change it. The file is named with a `.txt` extension unless you set **Filename** under **Options**.
+**The content type is fixed by the card**, and the editor has no field to change it. The file is named with a `.txt` extension unless you set **File name** under **Options**.
 
 ## The three templates
 
@@ -33,6 +33,8 @@ A template channel has three templates, and they run at different times:
 | **Header** | Once, before any products | The [Scriban built-ins](/en/channels/templates/functions.html#scriban-built-ins) only — no product data and no heavendata functions |
 | **Record** | **Once per product** (or per custom entity record) | [`record` and `variants`](/en/channels/templates/data.html), and [every function](/en/channels/templates/functions.html) |
 | **Footer** | Once, after all products | The [Scriban built-ins](/en/channels/templates/functions.html#scriban-built-ins) only — no product data and no heavendata functions |
+
+**The record template's editor helps you find a field.** On a Scriban channel its toolbar has **Insert field**: search the feed's fields and choose one, and it is inserted at the cursor as `{{ record.‹code› }}`. Typing inside `{{ }}` also completes the feed's fields and every heavendata function. Both insert the plain field, so a translatable, asset or reference field still needs the function its page describes — [the data in a template](/en/channels/templates/data.html#the-other-value-types) lists them. The header and footer templates complete only Scriban's keywords and an `if`/`else` block, and a Liquid channel has neither help.
 
 A minimal XML feed, split across the three:
 
@@ -61,13 +63,14 @@ Templates are written in **[Scriban](https://scriban.github.io)**. Everything in
 
 Under **Options**, the channel has a **Template language** setting with two values, **Scriban (recommended)** and **Liquid**. **Liquid is legacy and only partially supported.** We do not document it, and the examples on this site are written and tested for Scriban only — Liquid's control flow (`{% if %}`) is different, so do not expect them to work unchanged.
 
-A channel can be on Liquid without anyone having chosen it:
+**A new channel is Scriban**, from either card — the cards say *Scriban template formatted*. The setting's hint says the same: *Liquid is kept for older templates, so choose Scriban for a new one.* The toolbar above each template shows the language the template runs as, for example **Template language: Scriban**.
+
+An older channel can be on Liquid without anyone having chosen it:
 
 | Channel | What **Options → Template language** shows | What to do |
 | --- | --- | --- |
 | Created before the setting existed | **Liquid** | Switching means rewriting its templates — **Duplicate** the channel from the channels list and convert the copy |
-| Created from a **Template "‹entity›" feed** card | Created without a language, which runs as Liquid | Set **Scriban (recommended)** and save before you write anything |
-| Created from the **Template product feed** card | **Scriban** — the card's subtitle still says *Liquid template formatted*; the subtitle is out of date, not the channel | Nothing |
+| Created from a **Template "‹entity›" feed** card before 4 September 2026 | **Liquid** | If its templates are still empty, set **Scriban (recommended)** and save before you write anything; otherwise convert a copy, as above |
 
 :::caution
 If a template that looks correct produces nothing or fails, check this setting before anything else — then [reading errors](/en/channels/templates/testing.html#reading-errors).

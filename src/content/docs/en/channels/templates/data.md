@@ -1,6 +1,6 @@
 ---
 title: "The data in a template"
-description: "What record and variants contain, how to read an attribute by its code, how to read a product's categories, and which page covers each of the other value types."
+description: "What record and variants contain, how to read an attribute by its code, a measurement set and its unit, a product's categories, and which page covers each of the other value types."
 ---
 
 What a template can read, and how to read a plain attribute. For the syntax see [template language basics](/en/channels/templates/language.html); for the functions, the [function reference](/en/channels/templates/functions.html).
@@ -36,7 +36,7 @@ Read any attribute by its **code**:
 {{ record.product_name }}
 ```
 
-Find the codes under **Settings → Attributes & sections**. A code containing a hyphen needs index syntax:
+On a Scriban channel, **Insert field** in the record template's toolbar inserts a field by its code, and the editor completes codes as you type — see [the three templates](/en/channels/templates.html#the-three-templates). The codes are also under **Settings → Attributes & sections**. A code containing a hyphen needs index syntax:
 
 ```plaintext frame="none"
 {{ record['my-attribute'] }}
@@ -53,7 +53,7 @@ Find the codes under **Settings → Attributes & sections**. A code containing a
 {{ end }}
 ```
 
-Inside the loop, `variant` holds that variant's values while `record` still refers to the product.
+Inside the loop, `variant` holds that variant's values while `record` still refers to the product. In the record template's editor, inside a `{{ for v in variants }}` loop, typing `v.` completes the feed's fields, and **Insert field** inserts `v.‹code›` there instead of `record.‹code›`.
 
 :::tip
 **For a product with no variants, `variants` contains one item — the product itself.** So a template written as a loop over `variants` works for both, and you never need to handle the two cases separately.
@@ -139,6 +139,40 @@ The entries already come in the order the app shows: a category before its subca
 
 This tests the categories the product is **assigned** to. To match a category anywhere above it as well, test the `path` of each entry instead.
 
+## Measurement sets
+
+A **Measurement set** attribute holds two to four measurements in one unit — a product's or a package's dimensions, for example length, width and height in cm. In a template it is an object with **one member per measurement code**, each a number in the attribute's unit. Printed whole, it gives the text every table format writes, the unit once at the end: `20 x 10 x 5 cm`.
+
+```plaintext frame="none"
+{{ if record.package_size }}
+  <dimensions>{{ record.package_size }}</dimensions>
+  <length>{{ record.package_size.length }}</length>
+  <width>{{ record.package_size.width }}</width>
+  <height>{{ record.package_size.height }}</height>
+{{ end }}
+```
+
+The `if` matters: on a product with no value, `record.package_size` does not exist and reading `.length` from it stops the run (see [reading errors](/en/channels/templates/testing.html#reading-errors)). A measurement left empty is simply missing from the object, so its member renders nothing, and printed whole the set keeps its place empty — `20 x  x 5 cm`.
+
+**The unit and the measurements are on the attribute, not on the value.** Read them from [`export.attribute`](#attribute-metadata):
+
+| Expression | Gives |
+| --- | --- |
+| `export.attribute.package_size.configuration.unit` | The unit every measurement is in, by its name in the unit list — `Length.Centimeter`, not `cm`. [`export.convert_unit`](/en/channels/templates/functions.html#exportconvert_unit) accepts it as a unit. |
+| `export.attribute.package_size.configuration.measurements` | The measurements, in the attribute's order, each with a `code` and the `label` the app shows |
+
+The measurements' labels, with each number:
+
+```plaintext frame="none"
+{{ if record.package_size }}
+  {{ for m in export.attribute.package_size.configuration.measurements }}
+    <dimension name="{{ m.label | export.xmlize }}">{{ record.package_size[m.code] }}</dimension>
+  {{ end }}
+{{ end }}
+```
+
+An **Integer number** or **Number with decimals** attribute with a unit is still a plain number in a template, in that unit, and its unit is read the same way: `export.attribute.weight.configuration.unit`. To write a measurement in another unit, use [`export.convert_unit`](/en/channels/templates/functions.html#exportconvert_unit).
+
 ## The other value types
 
 Each needs a function to read, and each has its own page covering the attribute and the functions together:
@@ -160,6 +194,7 @@ Each needs a function to read, and each has its own page covering the attribute 
 | `required` | True if a value is required |
 | `translatable` | True if the value is language-specific |
 | `labels` | Label translations, keyed by language code |
+| `configuration` | The settings of the attribute's type. For a measurement set, `unit` and `measurements`; for a number with a unit, `unit` — see [Measurement sets](#measurement-sets) |
 
 ```plaintext frame="none"
 {{ export.attribute.product_name.name }}

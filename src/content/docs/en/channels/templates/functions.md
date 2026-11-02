@@ -43,14 +43,15 @@ The ones that come up constantly in product templates:
 
 ## heavendata functions
 
-Four namespaces we add. These are specific to product data and are not in Scriban's documentation.
+Four namespaces we add. These are specific to product data and are not in Scriban's documentation. On a Scriban channel, the record template's editor completes each of them as you type inside `{{ }}`.
 
 ### Every heavendata function
 
 | Function | What it does | Documented |
 | --- | --- | --- |
 | `asset.url` | The public URL of an asset, optionally for an image variant | [Assets](/en/channels/templates/assets.html#asseturl) |
-| `asset.updated` | When an asset was last modified | [Assets](/en/channels/templates/assets.html#assetupdated) |
+| `asset.updated` | When an asset's file last changed | [Assets](/en/channels/templates/assets.html#assetupdated) |
+| `asset.metadata_updated` | When an asset's name or file name last changed | [Assets](/en/channels/templates/assets.html#assetmetadata_updated) |
 | `i18n.t` | A translatable attribute's value in one language, with a fallback | [Translatable attributes](/en/channels/templates/translations.html#read-one-language--i18nt) |
 | `i18n.has` | Whether a translatable attribute has an entry for exactly that language | [Translatable attributes](/en/channels/templates/translations.html#check-whether-a-language-has-a-value--i18nhas) |
 | `export.culture_codes` · `export.language_codes` | The languages in this channel | [Translatable attributes](/en/channels/templates/translations.html#the-channels-languages--exportculture_codes) |
@@ -62,6 +63,7 @@ Four namespaces we add. These are specific to product data and are not in Scriba
 | `export.attribute` | Every configured attribute's metadata | [Data](/en/channels/templates/data.html#attribute-metadata) |
 | `export.variants_by` | Group the product's variants by an attribute | [below](#exportvariants_by) |
 | `export.collect_attribute_values` | Every distinct value of an attribute across variants | [below](#exportcollect_attribute_values) |
+| `export.convert_unit` | Convert a number from one unit to another | [below](#exportconvert_unit) |
 | `export.account_id` | Your account's internal id | [below](#exportaccount_id) |
 | `export.xmlize` | Escape a value for XML | [below](#exportxmlize) |
 | `export.sanitize_filename` | Make a string safe as a file name | [below](#exportsanitize_filename) |
@@ -96,6 +98,28 @@ Every distinct value of an attribute across a list of variants — for a summary
 ```
 
 Pass `true` as a second argument to flatten values that are themselves lists.
+
+### Units
+
+#### `export.convert_unit`
+
+Converts a number from one unit to another — a measurement of a [measurement set](/en/channels/templates/data.html#measurement-sets), or a number attribute that has a unit — for a receiving system that wants a different unit than your attributes use.
+
+```plaintext frame="none"
+{{ export.convert_unit(record.package_size.height, 'cm', 'in') }}
+{{ export.convert_unit(record.package_size.height, export.attribute.package_size.configuration.unit, 'in') }}
+{{ export.convert_unit(record.weight, 'kg', 'lb') }}
+```
+
+With a `height` of 5.5 cm and a `weight` of 1.25 kg, these give `2.1654`, `2.1654` and `2.7558`.
+
+| Argument | Description |
+| --- | --- |
+| *value* | The number to convert, or a text that is a number written with a decimal point. Empty gives nothing, so a measurement left empty stays empty. |
+| *from* | The unit the number is in: a unit symbol such as `cm`, `in`, `kg`, `lb` or `fl oz`, or an attribute's `configuration.unit`, which is always the unit its values are in |
+| *to* | The unit to convert to, written the same way |
+
+The result is rounded to four decimals, and trailing zeros are dropped. The two units must measure the same thing — two lengths, two weights; `export.convert_unit(record.weight, 'kg', 'cm')` stops the run with *export.convert_unit can't convert from kg to cm*. So do a unit it cannot read and a value that is not a number. To write the number with a fixed number of decimals, pass the result to Scriban's `math.format`.
 
 ### The channel run
 

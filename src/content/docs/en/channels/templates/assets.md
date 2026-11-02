@@ -1,11 +1,11 @@
 ---
 title: "Assets in a template"
-description: "Output an image, PDF or file from an asset attribute — its public URL, an image variant, and its modification date."
+description: "Output an image, PDF or file from an asset attribute — its public URL, an image variant, and when its file and its name last changed."
 sidebar:
   label: "Assets"
 ---
 
-An asset attribute holds a **list** of assets, even when there is only one file, and an asset becomes a URL through **`asset.url`**. This page covers the attribute itself, `asset.url`, and `asset.updated` for cache-busting.
+An asset attribute holds a **list** of assets, even when there is only one file, and an asset becomes a URL through **`asset.url`**. This page covers the attribute itself, `asset.url`, `asset.updated` for cache-busting, and `asset.metadata_updated` for a renamed asset.
 
 ## The asset attribute
 
@@ -26,7 +26,9 @@ Each asset carries:
 | `mime_type` | Content type of the file, for example `image/png` |
 | `name` | The asset's name, which is not its file name |
 | `description` | The asset's description |
-| `updated` · `stored` | When it was last modified, and when it was first stored |
+| `updated` | When the asset's file last changed. Empty when no date is recorded — [`asset.updated`](#assetupdated) gives a date for every asset |
+| `metadata_updated` | When the asset's name or file name last changed. Empty until such a change is recorded — [`asset.metadata_updated`](#assetmetadata_updated) gives a date for every asset |
+| `stored` | `true` when the asset's file is stored, otherwise `false` |
 
 ## `asset.url`
 
@@ -54,7 +56,7 @@ With no image variant, `asset.url` gives the **`default`** image variant, not th
 
 ## `asset.updated`
 
-When the asset was last modified. Assets with no stored modification date — everything from before that field was introduced — return **27 September 2022**.
+When the asset's file last changed. **Replacing the file in the asset library moves the date** to that upload, on every product and custom entity record that uses the asset — published products included, without publishing them again. Renaming the asset does not move it; that is [`asset.metadata_updated`](#assetmetadata_updated). Assets with no recorded date — everything from before that field was introduced — return **27 September 2022**.
 
 Takes an optional *variant*: with one, you get the later of the asset's own date and that image variant's last settings change, which is what you want for cache-busting an image variant URL.
 
@@ -67,6 +69,20 @@ Takes an optional *variant*: with one, you get the later of the asset's own date
 ```
 
 `date.to_string` is a Scriban built-in — see the [function reference](/en/channels/templates/functions.html#scriban-built-ins).
+
+## `asset.metadata_updated`
+
+When the asset's name or file name last changed — so a receiving system can tell it has to read the asset's name again, not only its file. Takes no image variant.
+
+```plaintext frame="none"
+{{ for a in record.my_images }}
+  <image changed="{{ a | asset.updated | date.to_string '%F' }}" renamed="{{ a | asset.metadata_updated | date.to_string '%F' }}">{{ a | asset.url 'original' }}</image>
+{{ end }}
+```
+
+**Until the asset is renamed, it returns the same date as `asset.updated`**, and 27 September 2022 when neither date is recorded. So it never renders empty, and comparing it with the date you last sent is enough to know whether anything changed.
+
+The members `a.updated` and `a.metadata_updated` are the recorded dates as they are, with neither fallback: empty when none is recorded. A JSON channel writes the same two dates on each asset as `updated` and `metadataUpdated`, `null` when none is recorded.
 
 ## What to read next
 
