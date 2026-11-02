@@ -115,7 +115,7 @@ Used if this channel is intended for manual processing. E.g. combine it with fil
 This will create a JSON array with one JSON object for each product.
 
 #### Custom template
-A format of your own, such as XML or HTML, is not chosen here. Create a [template channel](/en/channels/templates.html) instead: under **New channel**, select **Create** on the **Template product feed** card. Its own templates write the output.
+A format of your own, such as XML or HTML, is not chosen here. Create a [template channel](/en/channels/templates.html) from the **Template product feed** card instead. Its own templates write the output.
 
 ### File Transfer
 Defines how other systems can access this feed.

@@ -21,13 +21,13 @@ New product | Create a new product.
 Element | Description
 --- | ---
 Actions | The button with the list icon at the start of the toolbar. It opens the actions for the rows you selected; see [Acting on a selection](#acting-on-a-selection).
-Search | Search in products; see below for details.
+Search | Search in products; see [Search text box](#search-text-box).
 List product variants | Shows one row for each product variant instead of one row for each product. Click it again to go back to product rows.
 Row height | Set the height of the list rows: **x0.5**, **x1** or **x1.5**.
-Views | Save and restore list views; see below for details.
+Views | Save and restore list views; see [Product views](#product-views).
 Columns | Opens **Manage columns**, where you choose which attributes the list shows as columns.
 Categories | Filter product list by category.
-Filter | Filter the list by your custom attributes and the product's other fields, whether or not they are shown as columns; see below.
+Filter | Filter the list by your custom attributes and the product's other fields, whether or not they are shown as columns; see [Filter](#filter).
 Language | The language picker: choose your [working language](/en/concepts/languages.html#working-language). It decides which value of a translatable attribute you see and which label each attribute is shown by. It does not change the language of the app itself.
 
 ## Selecting products
@@ -64,11 +64,11 @@ The search box finds products by their SKU, article number, GTIN or product name
 
 Search needs to know which of your attributes holds each of these. Until that is set, the search box is replaced by *Search needs to know which attribute holds the SKU, article number, GTIN, or product name.* and an **Assign attribute roles** button.
 
-The search field allows you to search for multiple values, e.g., multiple SKUs. To search for multiple values
+The search box also finds several values at once, such as several SKUs. To search for several values:
 
-* Type all values separated by a semicolon (";") or
-* Copy and paste comma, tab or line separated lists or
-* Copy and past columns or rows from Excel documents
+* type all values separated by a semicolon (";")
+* paste a list separated by commas, tabs or line breaks
+* paste a column or a row from an Excel document
 
 ### Filter
 
@@ -80,7 +80,7 @@ The search field allows you to search for multiple values, e.g., multiple SKUs. 
 4. Choose an operator and enter or pick a value.
 5. To add another condition, click **Add condition** again. To combine some conditions separately from the rest, click **Add group**.
 
-A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group that shows **AND** or **OR**. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
+A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group that shows **AND** or **OR**. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied.
 
 **A filter reaches a field whether or not its column is shown.** To find products created last week, filter on **Created on**; there is no need to add a column for it first.
 
@@ -125,6 +125,6 @@ Products | **All products**; **Filtered products (n)** — the products the list
 Data | **Published data** — only published products, with the values that are published; or **Latest saved data** — every product with its saved changes, including those that aren't published yet.
 Format | **Excel workbook** or **CSV file**.
 
-To export the asset files your products use, select **Include asset files** on the **Assets** tab. The export is then a ZIP file with every asset the exported products use; otherwise each asset is exported as the URL it can be downloaded from.
+To export the asset files your products use, select **Include asset files** on the **Assets** tab. The export is then a ZIP file with every asset the exported products use; otherwise each asset is exported as a download URL.
 
 Click **Export** to start it. The export runs in the background.
