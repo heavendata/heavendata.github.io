@@ -54,8 +54,6 @@ Two failures are not about your data at all. The run's step says which it was:
 | *Couldn't start the run. Another import into this account is still running. Try again once it has finished.* | Only one import into an account runs at a time. This one waited 60 minutes for the import ahead of it, which was still running | Import again once the other import has finished |
 | *Couldn't finish the run. It stopped responding and was ended automatically. Run it again.* | The run was still **Queued** or **Running** 6 hours after it was created, so it was ended and marked **Failed** rather than left showing as in progress | Run it again |
 
-If you asked, with **Notify me**, to be emailed about the run, the email says the same.
-
 ## Reading a run
 
 Selecting the status in a **Last run** cell opens the run in a window titled **Run details**. **Run history** lists an entry's earlier runs, in a window of that name; select one for the same details. On **Background jobs** the run opens in the panel beside the list rather than in a window.
@@ -133,6 +131,8 @@ That is the point of keeping them: by the time anyone looks into a run that went
 
 **A channel run offers the file it created.** Each feed of the run has a step that says it created the feed, and that step has a **Download** button with the file's name. It saves the file exactly as that run wrote it, whatever has happened since to the copy it delivered. Runs from before 20 October 2026, and some from that day, have no such button.
 
+That makes a run the way to check a channel's whole output before you rely on it. Start one with **Run now**: a channel does not have to be enabled to be run by hand, only its **Publishing** complete. The run delivers its file as **Publishing** says, like any other run, so make sure the other side expects it.
+
 A run whose files have already been cleared lists none, and its downloads are no longer offered. That is expected — see [how long runs are kept](#how-long-runs-are-kept).
 
 ### An import's steps
@@ -141,13 +141,10 @@ An import has one step for each dataset in the run, naming that dataset's file. 
 
 ## How long runs are kept
 
-A run whose files have already been removed is expected, not a fault — the run record and the files it read are cleared separately.
-
 | What | How long it is kept |
 | --- | --- |
-| The run and its logs | 30 days |
+| The run, its logs, and the download of the file a channel run created | 30 days |
 | The import files the run read | 30 days, or the most recent 5,000 runs **of that data source** — whichever comes first |
-| The download of the file a channel run created | As long as the run: 30 days |
 
 After that the run no longer appears in **Run history** or in **Background jobs**, and its files can no longer be downloaded or used to start the run again. Because the two clean-ups run on their own schedules, a run's files can go a few hours before the run itself does.
 

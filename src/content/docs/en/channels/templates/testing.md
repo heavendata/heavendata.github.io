@@ -68,4 +68,4 @@ Check **Options → Template language**. If it says **Liquid**, the examples in 
 - A product **without variants** renders; looping over `variants` handles both.
 - Every value going into XML is escaped with `export.xmlize`.
 - `debug.dump` has been removed.
-- A whole run produces what the preview promised. The preview renders up to five products; a run renders them all. Run the channel with **Run now** — it does not have to be enabled, only its **Publishing** complete — and download the file from the run's feed step, as in [downloading what a step read or created](/en/troubleshooting/background-jobs.html#downloading-what-a-step-read-or-created). The run delivers the file as the channel's **Publishing** says, like any other run, so make sure the other side expects it.
+- A whole run produces what the preview promised — the preview renders up to five products, a run renders them all. Run the channel and download the file it created: see [downloading what a step read or created](/en/troubleshooting/background-jobs.html#downloading-what-a-step-read-or-created).
