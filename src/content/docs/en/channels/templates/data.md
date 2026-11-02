@@ -36,7 +36,7 @@ Read any attribute by its **code**:
 {{ record.product_name }}
 ```
 
-On a Scriban channel, **Insert field** in the record template's toolbar inserts a field by its code, and the editor completes codes as you type — see [the three templates](/en/channels/templates.html#the-three-templates). The codes are also under **Settings → Attributes & sections**. A code containing a hyphen needs index syntax:
+The codes are under **Settings → Attributes & sections**, or use **Insert field** in the record template's toolbar ([the three templates](/en/channels/templates.html#the-three-templates)). A code containing a hyphen needs index syntax:
 
 ```plaintext frame="none"
 {{ record['my-attribute'] }}
@@ -173,7 +173,7 @@ The `if` matters: on a product with no value, `record.package_size` does not exi
 
 For a set of 20 x – x 5.5 cm this gives `200` for *Length*, an empty *Width* and `55` for *Height*.
 
-An **Integer number** or **Number with decimals** attribute with a unit is still a plain number in a template, in that unit, and its unit is read the same way: `export.attribute.weight.configuration.unit`. To write a measurement in another unit, use [`export.convert_unit`](/en/channels/templates/functions.html#exportconvert_unit).
+An **Integer number** or **Number with decimals** attribute with a unit is still a plain number in a template, in that unit, and its unit is read the same way: `export.attribute.weight.configuration.unit`.
 
 ## The other value types
 

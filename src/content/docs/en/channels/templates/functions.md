@@ -43,7 +43,7 @@ The ones that come up constantly in product templates:
 
 ## heavendata functions
 
-Four namespaces we add. These are specific to product data and are not in Scriban's documentation. On a Scriban channel, the record template's editor completes each of them as you type inside `{{ }}`.
+Four namespaces we add. These are specific to product data and are not in Scriban's documentation.
 
 ### Every heavendata function
 
@@ -119,7 +119,7 @@ With a `height` of 5.5 cm and a `weight` of 1.25 kg, these give `2.1654`, `2.165
 | *from* | The unit the number is in: a unit symbol such as `cm`, `in`, `kg`, `lb` or `fl oz`, or an attribute's `configuration.unit`, which is always the unit its values are in |
 | *to* | The unit to convert to, written the same way |
 
-The result is rounded to four decimals, and trailing zeros are dropped. The two units must measure the same thing — two lengths, two weights; `export.convert_unit(record.weight, 'kg', 'cm')` stops the run with *export.convert_unit can't convert from kg to cm*. So do a value that is not a number and a unit it cannot read — the unit is checked even on a product whose value is empty, so a misspelled unit stops every run. For a fixed number of decimals, pass the result to Scriban's `math.format`:
+The result is rounded to four decimals, and trailing zeros are dropped. The two units must measure the same thing — two lengths, two weights; `export.convert_unit(record.weight, 'kg', 'cm')` stops the run with *export.convert_unit can't convert from kg to cm*. A value that is not a number, or a unit it cannot read, also stops the run — and the unit is checked even on a product whose value is empty, so a misspelled unit stops every run. For a fixed number of decimals, pass the result to Scriban's `math.format`:
 
 ```plaintext frame="none"
 {{ export.convert_unit(record.package_size.height, export.attribute.package_size.configuration.unit, 'in') | math.format '0.00' }}

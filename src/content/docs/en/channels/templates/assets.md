@@ -80,9 +80,9 @@ When the asset's name or file name last changed — so a receiving system can te
 {{ end }}
 ```
 
-**Until the asset is renamed, it returns the same date as `asset.updated`**, and 27 September 2022 when neither date is recorded. So it never renders empty — but until the first rename it moves with every replaced file, so a receiving system that compares it with the date it last read may read an unchanged name again. It does not miss a rename.
+**Until the asset is renamed, it returns the same date as `asset.updated`**, including that function's fallback date. Until that first rename it also moves with every replaced file: a receiving system that compares it with the date it last read may read an unchanged name again. It does not miss a rename.
 
-The members `a.updated` and `a.metadata_updated` are the recorded dates as they are, with neither fallback: empty when none is recorded. A JSON channel writes the same two dates on each asset as `updated` and `metadataUpdated`, `null` when none is recorded.
+The members `a.updated` and `a.metadata_updated` have no fallback — see the table [above](#the-asset-attribute). A JSON channel writes the same two dates on each asset as `updated` and `metadataUpdated`, `null` when none is recorded.
 
 ## What to read next
 

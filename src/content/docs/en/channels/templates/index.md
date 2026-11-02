@@ -63,7 +63,7 @@ Templates are written in **[Scriban](https://scriban.github.io)**. Everything in
 
 Under **Options**, the channel has a **Template language** setting with two values, **Scriban (recommended)** and **Liquid**. **Liquid is legacy and only partially supported.** We do not document it, and the examples on this site are written and tested for Scriban only — Liquid's control flow (`{% if %}`) is different, so do not expect them to work unchanged.
 
-**A new channel is Scriban**, from either card — the cards say *Scriban template formatted*. The setting's hint says the same: *Liquid is kept for older templates, so choose Scriban for a new one.* The toolbar above each template shows the language the template runs as, for example **Template language: Scriban**.
+**A new channel is Scriban**, from either card — the cards say *Scriban template formatted*. The toolbar above each template shows the language the template runs as, for example **Template language: Scriban**.
 
 An older channel can be on Liquid without anyone having chosen it:
 
