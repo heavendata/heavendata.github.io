@@ -92,6 +92,14 @@ When you import through a [data source](/en/import/data-sources.html), the mappi
 
 The IDs, **Created on**, **Last updated** and the product type fields are read-only: the platform sets them, so they are never offered as import targets. A custom entity import can set its custom attributes only.
 
+## Filter
+
+A feed contains every product unless you give it a filter. To set one, open the feed under **Feeds** and choose **Add filter** in its header, beside **Edit file settings** and **Transpose**; once the filter has conditions, the button reads **Filter (‹n›)**. A template channel has its **Filter** under **Options** instead.
+
+A filter is built the same way as the product list's: conditions on fields, combined into groups by AND or OR — see [Filter](/en/products/product-list.html#filter).
+
+**A condition on an attribute that has since been deleted is ignored.** The feed then contains the products the rest of the filter matches, which can be more than before, and it keeps running. See [Filters and sorts that named the attribute](/en/concepts/attributes.html#filters-and-sorts-that-named-the-attribute).
+
 ## Output
 
 ### File Content

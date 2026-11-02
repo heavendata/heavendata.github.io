@@ -83,6 +83,35 @@ To move an attribute, drag its row by the handle; a line shows where the row wil
 
 The section has no search of its own. Every name and code is shown in full, however long, so your browser's find in page (Ctrl+F, or ⌘F on a Mac) finds an attribute in a long section by either.
 
+## Delete an attribute
+
+Deleting an attribute deletes its values on every product and removes it from every product type that includes it. It cannot be undone.
+
+1. In the sidebar, open **Settings → Attributes & sections**, and select the section that holds the attribute.
+2. On the attribute's row, choose ⋯ **More actions** → **Delete**, and confirm with **Delete attribute**.
+3. Choose **Save**. The attribute is deleted only when the section is saved.
+
+### Filters and sorts that named the attribute
+
+A filter can still hold a condition on an attribute that has since been deleted, and a list can still be sorted by it. **That condition, or that sort, is ignored**: the filter works as if the condition had never been written. So whatever the filter selects grows, and nothing fails.
+
+| The filter was | It now works as |
+| --- | --- |
+| Only a condition on the deleted attribute | No filter: everything matches |
+| *Color is red* **AND** *Brand is Acme*, with **Color** deleted | *Brand is Acme* |
+| *Color is red* **OR** *Brand is Acme*, with **Color** deleted | *Brand is Acme* — not everything |
+| A group whose only conditions were on deleted attributes | As if the group were not there |
+
+This applies wherever a filter or a sort selects products or custom entity records to read:
+
+- a channel's feed exports the products its filter now matches, so it can contain more products than before — see [the feed's filter](/en/channels/setup-custom-product-feed.html#filter);
+- a [product view](/en/products/product-list.html#product-views) shows the products its filter now matches, sorted by its other sort columns;
+- a brand portal collection offers the products its filter now matches.
+
+**An action that changes every product a filter selects is refused instead.** A bulk edit of products selected through such a filter — changing values, publishing or deleting — stops before it changes anything, and its error names the deleted attribute. The list behind it, and the number of products the bulk edit window counts, include the products the ignored condition used to leave out; the refusal is what keeps the edit from reaching them.
+
+Before you delete an attribute, check which channels, product views and collections filter or sort on it, and change those filters first.
+
 ## How To...
 
 ### Change Attribute Type or Translatable Settings Later?
@@ -90,8 +119,8 @@ The attribute type and translatable settings affect how data is stored in databa
 
 1. Export products (product list > export) and select the product identifier column and the column you need to change
 2. Verify your export and ensure it contains the proper data
-3. Delete the attribute
-4. Create a new attribute with the same name and code
+3. [Delete the attribute](#delete-an-attribute). Until step 4, a filter condition on it is ignored, so channels that filter on it export more products.
+4. Create a new attribute with the same name and code. Filter conditions on that code apply again from then on.
 5. Enable the new attribute in product types
 6. Re-import products from step 2 (product list > import)
 
