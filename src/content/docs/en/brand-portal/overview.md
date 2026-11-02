@@ -37,8 +37,9 @@ minute, and a portal page that is already open changes when it is reloaded.
 
 A file that is not internal stays downloadable to anyone who already has its link
 while **Share product data** is on — also after you turn **Share cloud drive files**
-off, which removes only the **Files** page. To keep a file away from visitors for
-certain, make it internal.
+off, which removes only the **Files** page. To keep a file away from visitors, make
+it internal — and if it belongs to a product, remove it from the product too: a
+product data download is the one download that still includes it (below).
 
 Marking a folder internal hides the folder, not the files in it: each file keeps its
 own setting, so make the files internal too.
@@ -49,7 +50,7 @@ A file marked internal is left out of every download but one:
 |---|---|
 | A ZIP from a product's page | Left out; the ZIP holds the product's other files. If every file asked for is internal, the download is refused. |
 | A ZIP from the **Files** page | Left out. |
-| **Download product data** with **Include files and download as ZIP** | **Included.** The ZIP holds the files of the exported products, internal ones too. To keep such a file out, remove it from the product. |
+| **Download product data** with **Include files and download as ZIP** | **Included.** The ZIP holds the files in the downloaded attributes of the exported products, internal ones too. The option is offered only when those attributes include one that holds files. To keep such a file out, remove it from the product. |
 
 ## Settings
 
@@ -82,8 +83,7 @@ section, give them something to choose from; a visitor can pick one or more of e
 | **Collections** | A named selection of products, defined by a filter — typically a season or a product line. It presets which products a download holds; it does not hide any product from visitors. **New collection** creates one. | **Name**, which visitors see; **Description**; and under **Filter settings**, the conditions that decide which products belong to it. |
 | **Attribute sets** | A named selection of attributes, so a download holds only the attributes a visitor needs — for example "operational data", "media data" or "technical details". **New attribute set** creates one. | **Name**, which visitors see; **Description**; and under **Attributes**, the attributes the download holds. |
 
-Every published product stays visible on the portal's **Products** page, whatever
-collections you define. A visitor who picks no collection downloads all products, or
+A visitor who picks no collection downloads all products, or
 the products they filtered or selected on the **Products** page; a visitor who picks
 no attribute set downloads all attributes that are not internal.
 
@@ -92,16 +92,23 @@ no attribute set downloads all attributes that are not internal.
 A visitor chooses the portal's language from the menu at the top right, which shows
 the current language as its code, for example `en-US`. It lists **English**,
 **Deutsch (German)** and **Български (Bulgarian)**. The language changes the portal's
-own texts — its menus, buttons and messages.
+own texts — its menus, buttons and messages — and how it writes numbers and dates.
 
 The portal opens in the first of these that applies:
 
 1. The `lang` parameter in the address: `en-US`, `de-DE` or `bg-BG`. To send a
    partner a link that opens in Bulgarian, add `?lang=bg-BG` to the portal's **URL**.
+   Any other value is ignored, and so is the language the portal remembered: the
+   portal goes straight to the browser's languages (3).
 2. The language the portal remembered in that browser.
-3. On a first visit, the first language the visitor's browser asks for that the
-   portal has — a browser that asks for Bulgarian gets Bulgarian. Otherwise, English.
+3. The first language in the visitor's browser settings that the portal has, as
+   `en-US`, `de-DE` or `bg-BG`, or as just `en`, `de` or `bg` — a browser that asks
+   for Bulgarian gets Bulgarian. A regional variant such as `en-GB` or `de-AT` counts
+   only when the browser also lists the language on its own. Otherwise, English.
 
 The portal remembers the language in the visitor's browser for a year: the one from
 the first visit, from a link with `?lang=`, or the one last chosen from the menu. A
-later change to the browser's language settings does not change it; the menu does.
+later change to the browser's language settings does not change it; the menu does —
+except on a page whose address still holds `?lang=`, where that language wins again
+when the page reloads. Open another page of the portal first, then choose from the
+menu.
