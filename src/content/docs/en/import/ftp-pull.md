@@ -16,8 +16,25 @@ app shows you or you set there:
 | **Upload** asset files to an asset inbox | the asset inbox | **Settings → Assets → Inboxes**, the inbox's **FTP Access** | an empty folder — [upload files to an asset inbox](#upload-files-to-an-asset-inbox) |
 
 One set of credentials reaches one channel, one data source or one inbox, and nothing
-else. To do two of these things, use two sets. A channel's or a data source's username
-must not be in use anywhere else on heavendata; an inbox's username is given to you.
+else. To do two of these things, use two sets. An inbox's username is given to you; a
+channel's or a data source's you choose yourself.
+
+## Choosing a username
+
+A channel's or a data source's username:
+
+- is required, even on a channel or data source you save disabled;
+- cannot be `anonymous`, in capitals or not — the server keeps that name for itself;
+- cannot start with `inbox.`, which is kept for asset inboxes;
+- must not be in use by any other channel or data source on heavendata. A channel's
+  username is checked on every save; a data source's only when it is saved with
+  **Enabled** ticked, because that is when its login is created.
+
+Spaces before or after it are ignored. A save that breaks one of these rules is refused,
+and says which. A username already in use, for example, reads:
+
+> Couldn't save the data source. The username "supplier-a" is already in use. Choose
+> another username. (E03-109)
 
 ## Connect with encryption (FTPS)
 
@@ -104,7 +121,8 @@ then you download the previous run's files.
 This is the import direction: you, or a supplier, upload files, and a data source
 imports them. First set up and enable an **FTP push** data source — see
 [setting up an FTP push source](/en/import/data-sources.html#setting-up-an-ftp-push-source).
-Until it is enabled, the server refuses its FTP credentials.
+A source that has never been saved enabled has no login on the server yet, so the server
+refuses its FTP credentials.
 
 Give each file the file name its dataset is set up with. The server refuses a file whose
 name matches none of the data source's datasets.
@@ -116,13 +134,18 @@ root in an FTP client to see it.
 | Path | What is in it |
 | --- | --- |
 | `<data source>/import` | Where you upload files |
-| `<data source>/archive/<timestamp>-<id>` | One folder per import, holding the files that import read |
+| `<data source>/archive/<reference>` | The files each run read, one folder per run |
 
 **An import starts when every file the data source expects has arrived** — one for
 each of its datasets. A partial set waits in `import` for the rest.
 
 When an import starts, the files it takes are moved out of `import` into a new folder
 under `archive`. A file that has left `import` has been read.
+
+`archive` lists its runs newest first, and holds the runs you started in the app too, such
+as **Upload and import** or **Run stored files**. Each folder is named by the run's **Reference**, which
+the run's details show in [Background jobs](/en/troubleshooting/background-jobs.html), so
+you can match a folder to its run.
 
 **Archived imports are kept for 30 days, or the most recent 5,000 imports of that data
 source — whichever comes first.** After that the folder and its files are removed. The
@@ -131,6 +154,18 @@ completed a set stays until you remove it.
 
 How long the runs themselves are kept is in
 [Background jobs](/en/troubleshooting/background-jobs.html#how-long-runs-are-kept).
+
+### When the data source is disabled
+
+Once a source has been saved enabled, disabling it does not take its FTP credentials
+away. From the save that disables it, an upload is still accepted into `import`, but
+it is not imported: the file is neither refused nor deleted, and waits there. A new
+username or password saved while the source is disabled takes effect only at the
+save that enables it again; until then the old ones still log in.
+
+Enabling the source again does not import what is waiting. Uploads after that are
+handled as usual, and a file already waiting in `import` counts towards the set that
+starts the next import.
 
 ## Upload files to an asset inbox
 

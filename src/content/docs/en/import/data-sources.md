@@ -53,16 +53,18 @@ both are entered under **Connection and format**. Then tick **Enabled** and save
 
 ### Setting up an FTP push source
 
-Choose **FTP push** under **Connection and format**, enter a **Username** and a **Password**, and
-give each dataset the file name the uploaded file will have. These are the data source's
-FTP credentials on the [heavendata FTP server](/en/import/ftp-pull.html#upload-files-for-a-data-source).
-The username must not be in use anywhere else on heavendata.
+Choose **FTP push** under **Connection and format**, enter a **Username** and a **Password**
+under **FTP credentials**, and give each dataset the file name the uploaded file will have.
+These are the data source's FTP credentials on the
+[heavendata FTP server](/en/import/ftp-pull.html#upload-files-for-a-data-source). Some
+usernames are refused — [choosing a username](/en/import/ftp-pull.html#choosing-a-username).
 
 **Enable the source before anyone uploads to it.** A data source is created with
-**Enabled** unchecked, and the server refuses its FTP credentials until it is enabled. In
-the save that enables it, type the password again: a source enabled without its password
-being entered in the same save has FTP credentials with no password, and the server keeps
-refusing them.
+**Enabled** unchecked, and until it is first saved enabled, the server refuses its FTP
+credentials. The password you entered while it was disabled is kept, so you need not type
+it again in the save that enables it. Disabling the source later works differently: the
+server still accepts uploads, but does not import them —
+[when the data source is disabled](/en/import/ftp-pull.html#when-the-data-source-is-disabled).
 
 ## Publish settings
 
@@ -75,6 +77,9 @@ imports with them — unless the dataset sets its own.
 | **Publish new products** | Publishes the products and product variants the import created. |
 | **Apply changes to published products** | Updates product variants that are already published. Nothing new becomes visible. |
 | **Publish modified products** | Publishes each product variant a record in the file matches, including one that was never published before. A record keyed by article number addresses only the product, so it publishes no new product variant. |
+
+A product variant the import doesn't publish never stops the others from being published,
+even when it lacks a required value.
 
 The settings apply to product datasets only; a custom entity dataset has none.
 
@@ -102,12 +107,13 @@ drops the dataset's own settings.
 A dataset with settings of its own shows **Custom publish settings** on its card in
 **Datasets**.
 
-Actions on untouched products, the products an import did not include, follow the same split:
+Actions on products not in the file — existing products that no row of the file
+matches — follow the same split:
 
 | Actions | Set under | Settings they use |
 | --- | --- | --- |
-| A dataset's own | the dataset's **Untouched Products** tab | the settings that dataset imports with |
-| The data source's, on products **none** of its datasets included | the data source's **Options** | always the data source's, because those products belong to no dataset |
+| A dataset's own | the dataset's **Products not in the file** tab | the settings that dataset imports with |
+| The data source's, on products that **no** file of its datasets matches | the data source's **Products not in any file** section | always the data source's, because those products belong to no dataset |
 
 Each product dataset's log file names the settings it ran with —
 [which publish settings a dataset used](#which-publish-settings-a-dataset-used).
@@ -181,7 +187,7 @@ shown back to you.
 - To **change** it, type the new password and save.
 
 There is no way to empty a stored password. A source without one cannot connect, so
-if a source should stop running, disable or delete the source instead.
+if a source should stop running on its own, disable or delete the data source instead.
 
 ## Data Format
 
@@ -286,6 +292,11 @@ also start one yourself from the row menu (⋮) in **Integrations → Data sourc
 | **Run selected datasets** | Only the datasets you tick, each fetched from the server |
 | **Upload and import** | Only the datasets you give a file to, using the file you upload |
 
+A disabled data source doesn't run on its schedule or when a file arrives by FTP push, but
+you can still run it by hand — with the actions its connection offers, or with **Run
+stored files** on a past run. You can use that to try a new data source before you enable it — but it is not a
+trial run: it imports for real, with the source's publish settings.
+
 ### Running only some datasets
 
 **Run selected datasets** lists the source's datasets so you can choose which to
@@ -352,11 +363,17 @@ the run never reached says only that.
 
 | The step says | What it means |
 | --- | --- |
-| A count of records imported | The file was read and those records went in |
-| A count imported, and a count of records with values that could not be read | Some values in the file were not accepted. Read the step's log file before assuming the rest of those records went in — it names each one and what was wrong with it |
-| Records that could not be imported | Those records were not written. The step's log file lists them |
+| *imported*, with counts of records created, updated, deleted and skipped — `products.csv: imported — 57 records created, 1,180 updated, and 3 skipped` | The file was read, and the counts say what became of its records. A count of none is left out. The step's log file names each skipped record |
+| *imported — the file has no rows* | The file was read, but had no records in it |
+| The counts, and a count of records with values that couldn't be read | Some values in the file were not accepted. Read the step's log file before assuming the rest of those records went in — it names each one and what was wrong with it |
+| *imported*, with the counts, then how many records couldn't be imported — `products.csv: imported — 57 records created; 3 couldn't be imported — see the log file` | Part of the file went in, as counted; the records that couldn't be imported were not written. The step's log file lists them |
+| *couldn't be imported — its 20 records couldn't be imported — see the log file* | Every record in the file was refused, so nothing from it went in. The step's log file lists them |
 | Couldn't be imported — a value for an attribute is already in use by another product | The run stopped at this dataset: the attribute, named by its code, holds unique values, and another product already has the one quoted. Records already imported are kept. Change the value in the file or in the other product, and import again |
 | Not imported, naming an earlier file | The run stopped at that earlier dataset, so this one never ran |
+
+A run from before these counts existed reads differently: `products.csv: 1,180 records
+imported` counts every row the file had, skipped ones too, and
+`products.csv: 3 of 20 records couldn't be imported` says only how many were refused.
 
 A run that stops part-way still has a step for every dataset **in it**, so you
 can see where it stopped rather than finding the history simply ending. Datasets you

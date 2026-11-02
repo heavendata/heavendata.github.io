@@ -115,6 +115,6 @@ Defines how other systems can access this feed.
 | Transfer | Description
 | --- | ---
 | Http pull | We will provide a URL. The other system simply reads this URL and imports the products. This is the most common option. 
-| Ftp server | We store the generated feed on our ftp server. Other system can log-in to this server using the username and password you provide to read the products.
+| Ftp server | We store the generated feed on our ftp server. Other system can log-in to this server using the username and password you provide to read the products. The username is required, and some are refused — see [choosing a username](/en/import/ftp-pull.html#choosing-a-username).
 | File transfer | We save the generated file on external file servers. If a delivery can't reach the server, the run's step says why, and what to do next — see [when a run can't reach a server](/en/troubleshooting/background-jobs.html#when-a-run-cant-reach-a-server).
 | E-mail | We send the generated file as an e-mail
