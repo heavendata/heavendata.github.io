@@ -80,7 +80,7 @@ The search field allows you to search for multiple values, e.g., multiple SKUs. 
 4. Choose an operator and enter or pick a value.
 5. To add another condition, click **Add condition** again. To combine some conditions separately from the rest, click **Add group**.
 
-A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group that shows **AND** or **OR**. Beside it the group says *All conditions must match* or *At least one condition must match*. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
+A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group that shows **AND** or **OR**. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied. A filter is part of the list settings a [product view](#product-views) saves.
 
 **A filter reaches a field whether or not its column is shown.** To find products created last week, filter on **Created on**; there is no need to add a column for it first.
 
