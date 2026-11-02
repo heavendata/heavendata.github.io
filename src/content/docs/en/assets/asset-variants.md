@@ -6,13 +6,13 @@ sidebar:
 ---
 An image variant is an image made from an asset to set its dimensions, file format and background. A channel links to it by its key. It is made when an image is first requested under its key, and the result is reused for later requests.
 
-Image variants are made for PNG, JPEG, GIF, TIFF, WebP, BMP, PSD, AVIF and JXL images, and for PDF and Illustrator files. A PDF or Illustrator file is rendered to an image from its first page. Any other file, such as an SVG image, has no image variant. The images can come from asset attributes or from the Cloud drive.
+Image variants are made for PNG, JPEG, GIF, TIFF, WebP, BMP, PSD, AVIF and JXL images, and for PDF and Illustrator files. A PDF or Illustrator file is rendered to an image from its first page. Any other file, such as an SVG image, has no image variant. The images can come from asset attributes or from the cloud drive.
 
-To create one, go to **Settings** > **Assets** > **Thumbnails** and select **New variant**. Enter a **Name** and a **Url key**, then fill in the settings below.
+To create one, go to **Settings** > **Assets** > **Image variants** and select **New image variant**. Enter a **Name** and a **Key**, then fill in the settings below.
 
 ## The key in the asset URL
 
-You specify which image variant to use by providing the key as part of the asset URL: the public address of an asset is made of your account, the key and the asset ID. A file name can follow the asset ID, but it is ignored. Open an asset in the Cloud drive and select **Details** > **URLs** to see its URL for each image variant.
+You specify which image variant to use by providing the key as part of the asset URL: the public address of an asset is made of your account, the key and the asset ID. A file name can follow the asset ID, but it is ignored. Open an asset in the cloud drive and select **Details** > **URLs** to see its URL for each image variant.
 
 A key can contain letters, numbers and the characters `_`, `-` and `.`, and each key is used once. The URL does not change when you change the settings of an image variant.
 
@@ -51,7 +51,7 @@ Choose a corner when your images come in both shapes and the subject sits in the
 
 Changing the crop position of an image variant changes the images served under its key, including images that were already made. Saving clears the stored images in the background, and each image is made again with the new crop position on its next request. Clearing takes longer the more assets your account has, so for a while some requests still return the old image. A shop or marketplace that has already copied an image keeps its copy.
 
-To try a change first, create a second image variant with a new key and the crop position you want to compare. Then look at a few of your images under that key: select them in the Cloud drive and download them as that image variant from the actions menu. Only when the result looks right, change the crop position of the image variant your channels use, or switch your channels to the new key.
+To try a change first, create a second image variant with a new key and the crop position you want to compare. Then look at a few of your images under that key: select them in the cloud drive and download them as that image variant from the actions menu. Only when the result looks right, change the crop position of the image variant your channels use, or switch your channels to the new key.
 
 ### Transformations
 Transformations change the look of the image after it is resized and converted to the file format. They run in the order they are listed.
