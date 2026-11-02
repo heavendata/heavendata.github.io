@@ -17,9 +17,9 @@ Let's assume you're a retailer for technical products and want to include the ma
 
 We could create product attributes for those data, but then we'd have to type it for each product. With custom entities, we separate that information:
 
-1. Create custom entity "Manufacturer"
+1. Create custom entity "Manufacturers"
 2. Add the "name", "url", "phone number", "repair contact" attributes in custom entity settings
-3. Go to **Settings > Attributes & sections** and, in a section, add an attribute "manufacturer" with **New attribute → Custom entity reference**, which creates an **Object reference** attribute. Select "Manufacturer" as its **Target**.
+3. Go to **Settings > Attributes & sections** and, in a section, add an attribute "manufacturer" with **New attribute → Custom entity reference**, which creates an **Object reference** attribute. Select "Manufacturers" as its **Target**.
 4. Enable the "manufacturer" attribute in relevant [product types](./product-types.html#attribute-sections).
 
 ## Custom entity settings
@@ -133,6 +133,8 @@ Deleting a record removes it from every product and record that uses it, in requ
 | --- | --- | --- | --- |
 | One record | The custom entity's list, ⋯ on the record's row → **Delete** | `Delete "‹name›"?` — **Delete record** | Asks again, with the same button |
 | Every record of a custom entity | **Settings > Custom entities**, ⋯ on the custom entity's row → **Delete all records** | `Delete all records in "‹name›"?` — **Delete all records** | Asks again, with *them* in place of *it* and the same button |
+
+The second question comes only when everything that uses the record in a required field is a published product or another record. When something else uses it there, or the app cannot say what does, it asks nothing more: it says it couldn't delete the record and what to replace first, and nothing is deleted.
 
 **Cancel** at either question leaves everything as it was. After a confirmed delete that unpublished products, the message says how many, for example `"Acme" deleted and 2 products unpublished`. The unpublished products stay in the product list; publish them again once their required field has a value.
 
