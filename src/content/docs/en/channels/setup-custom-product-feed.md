@@ -30,6 +30,14 @@ These are some general setting for your feed.
 | Do not execute before | This in an enhanced feature. Example: Let's assume you have an import job, that updates your prices once a day at 8 am and you want to create a feed that should be updated once a day too. Now we should generate this feed after the import was done, so e.g. not before 8.30 am to ensure we have up-to-date price data.
 | Entities to export | Set the checkbox for 'Product data'
 
+## Filter
+
+A feed contains every product unless you give it a filter. To set one, open the feed under **Feeds** and choose **Add filter** in its header, beside **Edit file settings** and **Transpose**; once the filter has conditions, the button reads **Filter (‹n›)**. A [template channel](/en/channels/templates.html) has its **Filter** under **Options** instead.
+
+A filter is built the same way as the product list's: conditions on fields, combined into groups by AND or OR — see [Filter](/en/products/product-list.html#filter).
+
+**A condition on an attribute that has since been deleted is ignored.** The feed then contains the products the rest of the filter matches, which can be more or fewer than before, and it keeps running. See [Filters and sorts that named the attribute](/en/concepts/attributes.html#filters-and-sorts-that-named-the-attribute).
+
 ## Mapping
 
 This tab defines what fields to include in a feed. On the left side, you see the source fields. That's the product data in your heavendata database. On the right side you see "output columns" that will be written to your feed.
@@ -91,14 +99,6 @@ When you import through a [data source](/en/import/data-sources.html), the mappi
 | Language code | `meta.languagecode` | Names the language the row's values are in, for translatable attributes. |
 
 The IDs, **Created on**, **Last updated** and the product type fields are read-only: the platform sets them, so they are never offered as import targets. A custom entity import can set its custom attributes only.
-
-## Filter
-
-A feed contains every product unless you give it a filter. To set one, open the feed under **Feeds** and choose **Add filter** in its header, beside **Edit file settings** and **Transpose**; once the filter has conditions, the button reads **Filter (‹n›)**. A template channel has its **Filter** under **Options** instead.
-
-A filter is built the same way as the product list's: conditions on fields, combined into groups by AND or OR — see [Filter](/en/products/product-list.html#filter).
-
-**A condition on an attribute that has since been deleted is ignored.** The feed then contains the products the rest of the filter matches, which can be more or fewer than before, and it keeps running. See [Filters and sorts that named the attribute](/en/concepts/attributes.html#filters-and-sorts-that-named-the-attribute).
 
 ## Output
 

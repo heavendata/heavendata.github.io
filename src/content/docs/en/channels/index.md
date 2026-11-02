@@ -39,12 +39,12 @@ permission see it, because a version holds the channel's whole configuration.
 
 ### What is kept
 
-| | |
+| Event | What is kept |
 |---|---|
-| **A save** | Keeps the channel as it was before the save. A save that changes nothing keeps nothing, so choosing **Save** without an edit adds no version. |
+| **A save** | Keeps the channel as it was before the save. Only a save that changes a setting keeps a version, so choosing **Save** without an edit adds none. |
 | **Creating a channel** | Keeps nothing: there is no earlier version yet. Versions are kept from October 2026 on, so a channel last saved before then has only its current version until its next save. |
 | **How many** | Up to 500 earlier versions per channel, besides the current one. The save that would keep a 501st deletes the oldest. |
-| **Passwords** | Never part of a version. A version holds no password, and the page never shows one. |
+| **Passwords** | Never kept: a version holds no password, and the page never shows one. |
 | **Deleting the channel** | Deletes its versions with it. A deleted channel cannot be brought back from them. |
 
 ### The list
@@ -94,7 +94,7 @@ in the channel editor, and the channel runs on the restored version's schedule.
 | **Passwords** | They stay as they are now. A restore never brings back an old password, so it cannot undo a password change. |
 | **A version with a different publishing method** | If the version delivers by another publishing method than the channel does now — **File transfer** where the channel now uses **FTP server**, say — that method has no password after the restore. The dialog says so; enter the password under **Publishing** before the channel runs. |
 | **An HTTP pull version with a different authentication method** | If the version and the channel both use **HTTP pull** but with different authentication methods — a username and password in one, an access key in the other, or none now — the version comes back without its password or access key. The dialog does not warn about this case. Enter it again under **Publishing**. |
-| **A version that cannot run** | It is restored as disabled, the same way the editor saves an enabled channel whose **Publishing** step is incomplete ([Saving a channel before Publishing is complete](#saving-a-channel-before-publishing-is-complete)). A message says what to fill in, for example *Version restored as disabled. Enter a host name under Publishing to enable this channel.* |
+| **A version that cannot run** | It is restored as disabled — see [Saving a channel before Publishing is complete](#saving-a-channel-before-publishing-is-complete). A message says what to fill in, for example *Version restored as disabled. Enter a host name under Publishing to enable this channel.* |
 
 If a restore fails, the channel is unchanged, and the message says why:
 
