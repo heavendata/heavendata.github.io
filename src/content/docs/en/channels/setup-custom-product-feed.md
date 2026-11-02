@@ -106,13 +106,13 @@ The IDs, **Created on**, **Last updated** and the product type fields are read-o
 Machines need a fixed format to be able to read a feed. When creating a feed, you need to specify which format the other system expects.
 
 #### Comma separated values (CSV)
-That's the most common format. It's just a text file where the first row contains the attribute names and then we'll write one line for each product.
+That's the most common format. It's just a text file where the first row contains the attribute names and then we'll write one line for each product variant, and one for a product that has no product variants.
 
 #### Excel
 Used if this channel is intended for manual processing. E.g. combine it with file transfer "e-mail" to send updates to other departments.
 
 #### JSON
-This will create a JSON array with one JSON object for each product.
+This will create a JSON array with one JSON object for each product variant, and one for a product that has no product variants.
 
 #### Custom template
 A format of your own, such as XML or HTML, is not chosen here. Create a [template channel](/en/channels/templates.html) from the **Template product feed** card instead. Its own templates write the output.

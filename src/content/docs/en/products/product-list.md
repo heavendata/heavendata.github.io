@@ -5,13 +5,11 @@ sidebar:
 ---
 Most tasks related to product editing, import and export start at the product list page.
 
-![Product list screenshot](./images/product-list.png)
-
 ## Page toolbar
 
 Element | Description
 --- | ---
-Number of products | The number of products the list shows, with the search and filter applied. It is shown beside the **Products** heading.
+Number of products | The number of products the list shows, with its search, categories and filters applied. It is shown beside the **Products** heading.
 Export | Opens **Export products**; see [Exporting products](#exporting-products).
 Import | Opens a menu: **Products** imports products from a file, **Products to delete** deletes the products a file lists. See [Import or delete products from a file](/en/import/import-products.html); for files that arrive regularly, use a [data source](/en/import/data-sources.html) instead.
 New product | Create a new product.
@@ -35,7 +33,7 @@ Language | The language picker: choose your [working language](/en/concepts/lang
 Select rows with the checkbox at the start of each row, then choose an action from the **Actions** button.
 
 - **One row at a time:** tick the checkbox of each row you want.
-- **Select all:** tick the checkbox in the header of that column. This selects every row the list matches with its search and filter applied, including rows not yet loaded on screen. To leave some out, untick them afterwards.
+- **Select all:** tick the checkbox in the header of that column. This selects every row the list matches with its search, categories and filters applied, including rows not yet loaded on screen. To leave some out, untick them afterwards.
 - **To clear the selection,** click the header checkbox again while any row is selected.
 
 **With List product variants on, the rows are product variants, and so is the selection.** Select all then selects every product variant the list shows, and **Publish**, **Unpublish**, **Delete** and **Bulk edit** apply to those product variants rather than to the whole products they belong to.
@@ -52,7 +50,7 @@ Delete | Deletes the selected products or product variants.
 Change product type | Gives the selected products another [product type](/en/concepts/product-types.html), with one of its variant configurations.
 Bulk edit | Opens **Bulk edit products** — or **Bulk edit product variants** while **List product variants** is on — to change attribute values on every selected row at once.
 
-**A product type applies to the whole product.** So after a select all with **List product variants** on, **Change product type** cannot be chosen, and the menu says: *Turn off List product variants and select products first. A product type applies to the whole product.* Turn **List product variants** off, select the products, and choose **Change product type** again.
+**A product type applies to the whole product.** So after a select all with **List product variants** on, **Change product type** cannot be chosen, and the menu says: *Turn off List product variants and select products first. A product type applies to the whole product.* Turn **List product variants** off, select the products, and choose **Change product type** again. With product variant rows ticked one at a time, **Change product type** can be chosen, and it changes the whole products they belong to, including product variants you didn't select.
 
 ## Searching and filtering products
 
@@ -60,9 +58,9 @@ Three tools narrow the list, and they work together: the search box finds produc
 
 ### Search text box
 
-The search box finds products by their SKU, article number, GTIN or product name. By default it searches all of them; to search only one, choose it in the dropdown to the left of the search box.
+The search box finds products by their SKU, article number, GTIN or product name. By default it searches all of them that have an attribute assigned; to search only one, choose it in the dropdown to the left of the search box.
 
-Search needs to know which of your attributes holds each of these. Until that is set, the search box is replaced by *Search needs to know which attribute holds the SKU, article number, GTIN, or product name.* and an **Assign attribute roles** button.
+Search needs to know which of your attributes holds each of these. Until at least one of them is assigned, the search box is replaced by *Search needs to know which attribute holds the SKU, article number, GTIN, or product name.* and an **Assign attribute roles** button.
 
 The search box also finds several values at once, such as several SKUs. To search for several values:
 
@@ -80,7 +78,7 @@ The search box also finds several values at once, such as several SKUs. To searc
 4. Choose an operator and enter or pick a value.
 5. To add another condition, click **Add condition** again. To combine some conditions separately from the rest, click **Add group**.
 
-A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group that shows **AND** or **OR**. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied.
+A group matches when **all** of its conditions match (AND) or when **at least one** does (OR); to switch, click the badge at the top of the group, which shows its level and its logic, such as **L0 · AND** or **L1 · OR**. The list updates as soon as every condition is complete, and the **Filter** button is highlighted while a filter is applied.
 
 **A filter reaches a field whether or not its column is shown.** To find products created last week, filter on **Created on**; there is no need to add a column for it first.
 
@@ -121,7 +119,7 @@ Product views save your list settings so you can restore them quickly. A view sa
 Option | Choices
 --- | ---
 Columns | **All product attributes**, or **Visible product attributes (n)** — only the attributes shown as columns in the list.
-Products | **All products**; **Filtered products (n)** — the products the list matches with its search and filter applied; or **Selected products (n)** — the rows you selected. While **List product variants** is on, the last option reads **Selected product variants (n)**, and the export holds the product variants you selected.
+Products | **All products**; **Filtered products (n)** — the products the list matches with its search, categories and filters applied; or **Selected products (n)** — the rows you selected. While **List product variants** is on, the last option reads **Selected product variants (n)**, and the export holds the product variants you selected.
 Data | **Published data** — only published products, with the values that are published; or **Latest saved data** — every product with its saved changes, including those that aren't published yet.
 Format | **Excel workbook** or **CSV file**.
 
