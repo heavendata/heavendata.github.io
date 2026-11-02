@@ -161,7 +161,7 @@ The `if` matters: on a product with no value, `record.package_size` does not exi
 | `export.attribute.package_size.configuration.unit` | The unit every measurement is in, by its name in the unit list — `Length.Centimeter`, not `cm`. [`export.convert_unit`](/en/channels/templates/functions.html#exportconvert_unit) accepts it as a unit. |
 | `export.attribute.package_size.configuration.measurements` | The measurements, in the attribute's order, each with a `code` and the `label` the app shows |
 
-`configuration.unit` is a name, not a symbol, so it is not what a receiving system wants to read. To write a unit, convert to that unit and write its symbol yourself — the output stays right even if the attribute's unit is changed later. Each measurement with its label, in millimeters:
+`configuration.unit` is a name, not a symbol, so it is not what a receiving system wants to read. To write a unit, convert to that unit and write its symbol yourself — the output stays in that unit even if the attribute's unit is changed later. Changing an attribute's unit converts none of its stored values, though: after such a change, the numbers already entered are read in the new unit. Each measurement with its label, in millimeters:
 
 ```plaintext frame="none"
 {{ if record.package_size }}

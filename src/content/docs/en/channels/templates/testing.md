@@ -21,7 +21,7 @@ The preview renders **at most five products**, not the whole catalog — each wi
 
 | Control | What it does |
 | --- | --- |
-| A field, then the **Search** box | Shows only the products whose value in that field **starts with** one of the values you enter, ignoring case. The field is the account's SKU attribute to begin with, on a product feed that has one, and otherwise the first text field; any text attribute of the feed can be chosen. Type or paste several values at once — a tab, `;`, `,` or a new line separates them — and press Enter to apply them. A feed with no text field has no search, only the filter. |
+| A field, then the **Search** box | Shows only the products whose value in that field **starts with** one of the values you enter, ignoring case. The field is the account's SKU attribute to begin with, on a product feed that has one, and otherwise the first text field; any text attribute of the feed can be chosen. Type or paste several values at once — a tab, `;`, `,` or a new line separates them — and press Enter to apply them; typing `;` applies them too. A feed with no text field has no search, only the filter. |
 | **Add filter** | Opens **Filter the preview** — the same filter editor, fields and conditions as the channel's own **Filter** under **Options**. Once set, the button reads **Filter (‹n›)**. |
 | **Ignore the channel's filter** (filter icon) | Shown only while the channel's own **Filter** has a condition. Pressed, the preview leaves that filter out; the search and the preview's filter still apply. |
 | **Reset preview** | Empties the search and the filter, and applies the channel's filter again. |
@@ -32,7 +32,7 @@ The preview renders **at most five products**, not the whole catalog — each wi
 
 **When nothing matches**, the panel shows *No products match the search* (or *… the filter*, with no search) and **Clear search** or **Reset filter**, instead of a file of header and footer alone. While the channel's own Filter applies and has a condition, it adds *The preview includes only products the channel's filter lets through* — that filter may be why.
 
-**A condition on a translatable field matches in any of the account's languages** — in the preview's search and filter, in the channel's own Filter, and so in what a run exports. The list of a custom entity's records in the app is the exception: its search and filter match the account's default language only.
+**A text condition on a translatable field matches in any of the account's languages** — *equals*, *contains*, *starts with* and *ends with*, each with a value, and their negations — in the preview's search and filter, in the channel's own Filter, and so in what a run exports. Any other condition on a translatable field, such as **is empty**, and any condition on a translatable number, is refused on a product feed — the preview and a run fail — and matches the account's default language only on a custom entity feed. The list of a custom entity's records in the app matches the default language only, for every condition.
 
 ## See everything that is available
 
@@ -81,7 +81,7 @@ Check **Options → Template language**. If it says **Liquid**, the examples in 
 ## Before you enable a channel
 
 - The preview shows what you expect, for more than one product.
-- A product with **empty** optional attributes still renders — this is what breaks in production. To find one, [choose it in the preview](#choosing-what-the-preview-renders) with a filter on that attribute and the condition **is empty**.
+- A product with **empty** optional attributes still renders — this is what breaks in production. To find one, [choose it in the preview](#choosing-what-the-preview-renders) with a filter on that attribute and the condition **is empty** — on a product feed, only for an attribute that is not translatable, since a translatable one [refuses that condition](#choosing-what-the-preview-renders).
 - A product **without variants** renders; looping over `variants` handles both. Search the preview for the SKU of one.
 - Every value going into XML is escaped with `export.xmlize`.
 - `debug.dump` has been removed.

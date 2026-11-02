@@ -58,7 +58,7 @@ With no image variant, `asset.url` gives the **`default`** image variant, not th
 
 When the asset's file last changed. **Replacing the file in the asset library moves the date** to that upload, on every product and custom entity record that uses the asset — published products included, without publishing them again. Renaming the asset does not move it; that is [`asset.metadata_updated`](#assetmetadata_updated). Assets with no recorded date — everything from before that field was introduced — return **27 September 2022**.
 
-Takes an optional *variant*: with one, you get the later of the asset's own date and that image variant's last settings change, which is what you want for cache-busting an image variant URL.
+Takes an optional *variant*: with one, you get the later of the asset's own date and that image variant's last settings change — for an asset with no recorded date, that settings change alone — which is what you want for cache-busting an image variant URL.
 
 ```plaintext frame="none"
 {{ for a in record.my_images }}
@@ -80,7 +80,7 @@ When the asset's name or file name last changed — so a receiving system can te
 {{ end }}
 ```
 
-**Until the asset is renamed, it returns the same date as `asset.updated`**, including that function's fallback date. Until that first rename it also moves with every replaced file: a receiving system that compares it with the date it last read may read an unchanged name again. It does not miss a rename.
+**Until the asset is renamed, it returns the same date as `asset.updated`**, including that function's fallback date. Until that first rename it also moves with every replaced file: a receiving system that compares it with the date it last read may read an unchanged name again. Compared for any difference from that date, not only a later one, it does not miss a rename.
 
 The members `a.updated` and `a.metadata_updated` have no fallback — see the table [above](#the-asset-attribute). A JSON channel writes the same two dates on each asset as `updated` and `metadataUpdated`, `null` when none is recorded.
 
