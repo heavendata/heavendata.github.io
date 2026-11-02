@@ -73,7 +73,7 @@ If a run failed, the step that failed is the one to read first: its message name
 
 ### Reading a log file
 
-A step's log files are listed under **Log files** inside the step, and files that belong to the run as a whole under **Log files** below the steps. Select a file, or its **View**, and it opens in a window titled *Log file "‹name›"*, one entry per row:
+A step lists its own log files under **Log files** inside the step. **Log files** below the steps lists every log file of the run — the steps' files included — and is the only place an export's log files are listed. Select a file, or its **View**, and it opens in a window titled *Log file "‹name›"*, one entry per row:
 
 | Column | What it shows |
 | --- | --- |
@@ -88,7 +88,7 @@ A step's log files are listed under **Log files** inside the step, and files tha
 A column no entry fills is left out. An export's log has no **Row**, for example: the records an export writes come from your catalog, not from a file.
 
 - **Errors**, **Warnings** and **Info**, above the grid, each show how many entries the file has of that severity. Clear one to hide those entries.
-- **Search** keeps only the entries whose message, row, record or field contains what you type.
+- **Search** keeps only the entries whose message, row, record, field or file contains what you type.
 - Select a column's header to sort by it. The window opens in the order the entries were written.
 - **Download** saves the file as a **Text file (.txt)**, one line per entry, ready to paste into a ticket — or as a **JSON file (.json)** for a script: one entry per line, each a JSON object in the compact log event format (CLEF).
 
@@ -99,11 +99,13 @@ What an import's entries mean for your data:
 | A warning on a field — *The record was imported without this field's value.* | The record went in, but without this one value. The rest of the message says what was wrong with it |
 | A warning on a record — *The record was skipped.* | The record was left out, and the rest of the file went on |
 | An error on a record — *Couldn't import the record.* | That record was not written |
-| An error on a row — *Couldn't import the row.* | The row could not be read, and the dataset stopped there: its step names the row. Correct the row in the file and import again |
+| An error on a row — *Couldn't import the row.* | That row was not imported, and the rest of the message says why — it has no value for the identifier, for example |
 
-**Which file is which.** An import's step has one log file per dataset, named after the dataset's file with `.log.json` added — `products.csv.log.json`. An export has one per data set, named after the file that data set writes, also ending in `.log.json`. A delivery by **File transfer** writes `ftp-publisher.log.json`, listed with the run's own files.
+**A row that cannot be read at all stops the dataset.** Its log file has an error on that row, the dataset's step names the row, and the datasets after it in the run are not imported. Correct the row in the file and import again.
 
-**A file ending in `.log` instead is plain text.** It opens as its lines, with no columns, and **Download** saves it as it is.
+**Which file is which.** An import's step has one log file per dataset, named after the dataset's file with `.log.json` added — `products.csv.log.json`. An export has one per feed, named after the file that feed writes, also ending in `.log.json`. A delivery by **File transfer** writes `ftp-publisher.log.json`, listed with the run's own files.
+
+**A file ending in `.log` instead is plain text.** It opens as its lines, with no columns; the severity filters and **Search** still work on it, and **Download** saves it as it is.
 
 ### When a run can't reach a server
 
@@ -129,7 +131,7 @@ A step's files sit under **Input and result files**, with a **Download** beside 
 
 That is the point of keeping them: by the time anyone looks into a run that went wrong, the file on the supplier's server has often been replaced, so downloading it again answers a different question. The copy under the step does not change.
 
-**A channel run offers the file it created.** Its feed step — the one that says it created the feed, one for each data set — has a **Download** button with the file's name. It saves the file exactly as that run wrote it, whatever has happened since to the copy it delivered. Runs from before 20 October 2026 have no such button.
+**A channel run offers the file it created.** Each feed of the run has a step that says it created the feed, and that step has a **Download** button with the file's name. It saves the file exactly as that run wrote it, whatever has happened since to the copy it delivered. Runs from before 20 October 2026 have no such button.
 
 A run whose files have already been cleared lists none, and its downloads are no longer offered. That is expected — see [how long runs are kept](#how-long-runs-are-kept).
 
