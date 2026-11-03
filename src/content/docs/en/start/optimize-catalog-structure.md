@@ -10,7 +10,7 @@ Different types of products need different attributes to describe them. That's w
 
 ## Define Product Attributes
 Product attributes describe which data fields are available for your products.
-Go to **Settings > Attributes & sections** and define which attributes you need. A minimal list could be:
+Go to **Settings → Attributes & sections** and define which attributes you need. A minimal list could be:
 
 * name (text)
 * description (text)
@@ -25,7 +25,7 @@ The article [Attribute Settings](../settings/attributes.html) describes how to c
 Different types of products may need a different set of attributes to describe them. For example, we'll need an attribute
 "display size" for tvs but not for shoes. Product types define which attributes should be available.
 
-1. Go to **Settings > Product types**
+1. Go to **Settings → Product types**
 2. Click "add" (top right)
 3. Name it e.g. "TV"
 4. Add all attributes
@@ -38,7 +38,7 @@ The article [Product Type Settings](../settings/product-types.html) describes ho
 You'll typically have attributes like "product name" or "sku" shared by all products. To simplify the setup, you should
 add those attributes as "common attributes."
 
-1. Go to **Settings > Common attributes**
+1. Go to **Settings → Common attributes**
 2. Add all sections that contain attributes shared by all products
 3. Check the attributes
 4. Click "Save"

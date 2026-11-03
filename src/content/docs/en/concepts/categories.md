@@ -24,13 +24,12 @@ Your trees are under **Settings → Categories**, which lists your category tree
 
 In a tree:
 
-- **New category**, above the tree beside **Collapse all**, adds a category at the tree's first level. A tree that is still empty says *No categories yet*, with **New category** under it.
+- **New category**, above the tree beside **Collapse all**, adds a category at the tree's first level. In an empty tree, which says *No categories yet*, it is under that message.
 - **New subcategory** on a category's row adds a category under it.
 - **Drag** a category to move it. Drop it onto another category to make it a subcategory there, or between two categories to put it at that place in the list.
 - **Rename** a category by clicking its name: the check mark saves the new name, and the ✕, **Cancel**, keeps the old one. Or use the pencil on its row, which opens the category's settings.
+- **Auto assignment**, in a category's settings, saves the categories you pick and shows them on the category's row, but adds the category to no product, in the app or in an export.
 - **Delete** a category with the trash can on its row. A category that still has subcategories can't be deleted: delete its subcategories first. Its products aren't moved to another category; in an export, the deleted category no longer appears in their list.
-
-A category's settings also have an **Auto assignment** section, where you can pick other categories, and the category's row in the tree shows them; it is saved, but it adds the category to no product, in the app or in an export.
 
 A category tree's own page has its name, its category key, the **Primary** toggle and the delete button; you can also delete a category tree with **Delete** in its row menu on the list. A new category tree is primary.
 
