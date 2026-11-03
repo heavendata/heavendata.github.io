@@ -1,13 +1,13 @@
 ---
-title: "The Heavendata Product Data Platform"
+title: "heavendata documentation"
 description: "heavendata user documentation"
 ---
 
-heavendata.com user documentation
+heavendata user documentation
 
 ## Support Contact
 
-heavendata.com - Support  
+heavendata support  
 support@heavendata.com  
 
 Or schedule a meeting: <https://heavendata.com/en/about/schedule-meeting/>

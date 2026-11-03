@@ -27,7 +27,7 @@ export default defineConfig({
   // Keys have no .html because Astro routes do not; `build.format: 'file'` emits
   // each one as <key>.html, which is what the old site served.
   //
-  // The three marked (product) are linked from inside the product itself and must
+  // The ones marked (product) are linked from inside the product itself and must
   // never be removed.
   redirects: {
     '/en/initial-setup': '/en/start.html',
@@ -57,12 +57,18 @@ export default defineConfig({
     '/en/settings/asset-variants': '/en/assets/asset-variants.html',
     '/en/settings/brand-portal': '/en/brand-portal/overview.html',
     '/en/settings/background-jobs': '/en/troubleshooting/background-jobs.html',
+
+    // The admin app is named Organization settings (decided 2026-10-06), and its
+    // section moved with the name.
+    '/en/administration': '/en/organization-settings.html',
+    '/en/administration/overview': '/en/organization-settings/overview.html', // (product) admin app user dashboard
+    '/en/administration/user-management': '/en/organization-settings/user-management.html',
   },
 
   integrations: [
     starlight({
-      title: 'heavendata.com',
-      description: 'heavendata Product Data Platform — user documentation',
+      title: 'heavendata',
+      description: 'heavendata user documentation',
       // The wordmark sets "heaven" in the brand navy rgb(16,16,58), which is
       // invisible on a dark background — only "data" stayed readable. The dark
       // variant recolours that half to white and is generated from the light one
@@ -70,7 +76,7 @@ export default defineConfig({
       logo: {
         light: './src/assets/heavendata-logo.png',
         dark: './src/assets/heavendata-logo-dark.png',
-        alt: 'heavendata.com',
+        alt: 'heavendata',
         replacesTitle: true,
       },
       // The hexagon icon cropped out of the wordmark — a 4.66:1 wordmark is
@@ -151,7 +157,7 @@ export default defineConfig({
           ],
         },
         { label: 'Brand portal', items: [{ autogenerate: { directory: 'en/brand-portal' } }] },
-        { label: 'Account administration', items: [{ autogenerate: { directory: 'en/administration' } }] },
+        { label: 'Organization settings', items: [{ autogenerate: { directory: 'en/organization-settings' } }] },
         { label: 'Reference', items: [{ autogenerate: { directory: 'en/reference' } }] },
         { label: 'Troubleshooting', items: [{ autogenerate: { directory: 'en/troubleshooting' } }] },
       ],
