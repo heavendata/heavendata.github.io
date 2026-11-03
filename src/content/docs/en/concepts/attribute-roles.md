@@ -27,10 +27,10 @@ The attribute that holds `system.identifier` or `system.basecode` must not be **
 
 | Where the role is refused | Title of the refusal |
 | --- | --- |
-| The section editor, when you choose **Save** — under **Settings → Attributes & sections**, or a section opened from a product type | `Couldn't save the section` |
+| The section editor, when you choose **Save** — under **Settings → Attributes & sections**, or a section opened from a product type (**Create**, for a section created there) | `Couldn't save the section` |
 | The **Assign attribute roles** dialog | `Couldn't assign the role` |
 
-The **Assign attribute roles** button shows while a role the app needs is not assigned: in the product import and the product editor for `system.identifier`, and in the product list's search for `system.basecode` and the search roles.
+The **Assign attribute roles** button shows while a role the app needs is not assigned: in the product imports while no attribute holds `system.identifier`, in the product editor while no attribute holds `system.identifier` or `product.name`, and in the product list's search while no attribute holds any of `product.sku`, `system.basecode`, `product.gtin` and `product.name`.
 
 ## A ready-made product type assigns the required roles
 

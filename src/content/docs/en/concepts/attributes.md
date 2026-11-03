@@ -91,11 +91,13 @@ A section that holds such an attribute is not saved. Choosing **Save** shows:
 
 > An attribute with the system.identifier or system.basecode role, or marked Indexed, can't be Translatable. Move the role to an attribute that isn't Translatable, or turn off Indexed.
 
-The **Assign attribute roles** dialog refuses the same roles in the same words.
+The message does not name the attribute: look for the rows that show **Translatable** in the section.
+
+The **Assign attribute roles** dialog shows the same words. It saves the whole section that holds the attribute you pick, so it refuses any role while that section holds such an attribute.
 
 | The attribute | What to do |
 | --- | --- |
-| Saved, and marked **Indexed** | Turn off **Indexed**. **Translatable** cannot be changed once an attribute is saved. |
+| Saved, and marked **Indexed** | Turn off **Indexed**, and move a `system.identifier` or `system.basecode` role it holds as the next row says. **Translatable** cannot be changed once an attribute is saved. |
 | Saved, with `system.identifier` or `system.basecode` | Move the role to an attribute that is not translatable. |
 | New, not saved yet | Turn off **Translatable**, or do either of the above. |
 
@@ -105,7 +107,7 @@ Deleting an attribute deletes its values on every product and removes it from ev
 
 1. In the sidebar, open **Settings → Attributes & sections**, and select the section that holds the attribute.
 2. On the attribute's row, choose ⋯ **More actions** → **Delete**. The app asks `Delete "‹name›"?`; confirm with **Delete attribute**.
-3. Choose **Save**. The attribute is deleted only when the section is saved. While a product type still includes it, the save stops at `Couldn't save the section` — *At least one product type still includes "‹name›".* Choose **Remove and save** to remove the attribute from every product type that includes it and save the section.
+3. Choose **Save**. The attribute is deleted only when the section is saved. While a product type still includes it, the save stops at `Couldn't save the section` — *At least one product type still includes "‹name›".* Choose **Remove and save** to remove the attribute from every product type that includes it and save the section. **Remove and save** is not offered while a variant configuration splits products into product variants by the attribute: change those variant configurations so that none splits by it, then save the section again.
 
 ### Filters and sorts that named the attribute
 
@@ -149,7 +151,7 @@ The attribute type and translatable settings affect how data is stored in databa
 1. Export products (product list > export) and select the product identifier column and the column you need to change
 2. Verify your export and ensure it contains the proper data
 3. [Delete the attribute](#delete-an-attribute). Until step 4, filter conditions on it are ignored — see [Filters and sorts that named the attribute](#filters-and-sorts-that-named-the-attribute).
-4. Create a new attribute with the same name and code. It starts with no values on any product. Filter conditions on that code apply to it again; check that each still fits the new type.
+4. Create a new attribute with the same name and code. The old values are removed in the background, from every product not saved since the delete. Filter conditions on that code apply to it again; check that each still fits the new type.
 5. Enable the new attribute in product types
 6. Re-import products from step 2 (product list > import). This is what brings the values back.
 
