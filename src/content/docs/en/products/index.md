@@ -20,7 +20,7 @@ A product variant can't be published while an attribute marked **Required** has 
 | The **Required** attribute is | It needs, for the product variant to be published |
 | --- | --- |
 | Not translatable | A value. A text counts when it is not empty; a measurement set needs every one of its measurements. |
-| Translatable, and no language is a [required language](/en/concepts/languages.html#required-languages) | Text in at least one of your languages. |
+| Translatable, and no language is a [required language](/en/concepts/languages.html#required-languages) | A value in at least one language. |
 | Translatable, and one or more languages are required | A value of its own in each required language. A value in a language's [fallback language](/en/concepts/languages.html#fallback-languages) doesn't count. |
 
 The same check runs however the product is published: from the product editor, with **Publish** on the [product list](/en/products/product-list.html), by a bulk edit, and by an import that publishes.

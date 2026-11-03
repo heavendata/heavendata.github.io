@@ -51,15 +51,15 @@ With these settings, you write a product's text once in British English and add 
 
 An Excel export and a JSON export leave the value empty. The product editor and the product list show the value of your working language, or nothing; they never show the fallback language's value in its place.
 
-**A fallback chains.** If the fallback language has no value either, its own fallback language is used next, and so on until a language has no fallback language.
+**A fallback chains.** If the fallback language has no value either, its own fallback language is used next, and so on until a language has no fallback language, or its fallback language is one already tried.
 
 ## Required languages
 
-A required language is one a product variant must have its own value in, for every **Required** translatable attribute, before it can be published. Turn on **Required language** on each language that must be filled in before a product goes out; several languages can be required at once. Languages that are not required are not checked, and while no language is required, a **Required** translatable attribute needs text in at least one language, whichever.
+A required language is one a product variant must have its own value in, for every **Required** translatable attribute, before it can be published. Turn on **Required language** on each language that must be filled in before a product goes out; several languages can be required at once. Languages that are not required are not checked, and while no language is required, a **Required** translatable attribute needs a value in at least one language, whichever.
 
 **A value in the fallback language doesn't count.** In the [example above](#fallback-languages), mark British English (United Kingdom) required and leave American English (United States) not required: a product variant can't be published without a British English name, and a CSV export or a template still fills the American English name from the British one. If you mark American English (United States) required instead, or as well, every variant needs an American English value of its own, even where it would be the same text.
 
-While your working language is a required language, the product editor marks an empty **Required** translatable field with `Required.` A refused publish names each language the value is missing in — see [Products → What refuses a publish](/en/products.html#what-refuses-a-publish) for the message and what else refuses a publish.
+While your working language is a required language, the product editor marks an empty **Required** translatable text field with `Required.` A refused publish names each language the value is missing in — see [Products → What refuses a publish](/en/products.html#what-refuses-a-publish) for the message and what else refuses a publish.
 
 A new language starts not required. Deleting a required language stops it being checked from the next publish on.
 
