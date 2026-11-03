@@ -99,7 +99,7 @@ What an import's entries mean for your data:
 | An error on a record or a field — *Couldn't import the record.* | That record was not written |
 | An error on a row — *Couldn't import the row.* | That row was not imported, and the rest of the message says why — it has no value for the identifier, for example |
 
-**A step that counts values the field processing pipeline couldn't build** — *12 values that the field processing pipeline couldn't build — see the log file* — finished with those fields left out. Its log file lists them on their fields, with the row or the record and why; what each reason means is on [Field processing pipeline nodes](/en/reference/pipeline-nodes.html#when-a-node-cant-build-a-value).
+**A step that counts values the field processing pipeline couldn't build** — *12 values that the field processing pipeline couldn't build — see the log file* — finished, and its log file lists each of those values on its field, with the row or the record and why; what each reason means is on [Field processing pipeline nodes](/en/reference/pipeline-nodes.html#when-a-node-cant-build-a-value).
 
 **A row that cannot be read at all stops the dataset.** Its log file has an error on that row, the dataset's step names the row, and the datasets after it in the run are not imported. Correct the row in the file and import again.
 
