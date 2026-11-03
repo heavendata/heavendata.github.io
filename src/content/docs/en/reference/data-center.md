@@ -10,19 +10,16 @@ Our solution is hosted by Azure in Europe.
 
 ## Web addresses
 
-On 1 November 2026, the app and its sign-in moved to `heavendata.app`. If your network lets through only the web addresses on a list, allow these:
+To use heavendata behind a firewall that lets through only the web addresses on a list, allow these. The app and its sign-in moved to `heavendata.app` on 1 November 2026.
 
 | Allow | What it is |
 | --- | --- |
-| `*.heavendata.app` and `heavendata.app` | The app at `https://‹account›.heavendata.app/pim`, sign-in and sign-up at `https://www.heavendata.app`, and Organization settings at `https://profile.heavendata.app` |
-| `*.40three.net` | Everything that did not move: links to your files, feeds, the heavendata FTP server, the API, and the services the app calls in the background |
+| `*.heavendata.app` and `heavendata.app` | The app at `https://‹account›.heavendata.app/pim`, sign-in and sign-up at `https://www.heavendata.app`, and Organization settings at `https://profile.heavendata.app`. List both: many firewalls do not count `heavendata.app` as part of `*.heavendata.app` |
+| `*.40three.net` | Everything that did not move: links to your files, feeds, the heavendata FTP server, the API, and the services the app calls in the background. The app does not work without it |
+| `assets.eu.40three.net`, `feeds.eu.40three.net` and `ftp.eu.40three.net` | Your files, feeds and the heavendata FTP server, by name — for a firewall whose wildcard covers only one level of name |
 | `*.productdata.cloud` | Brand portals |
 
-Many firewalls do not count `heavendata.app` itself as part of `*.heavendata.app`, so list both. A wildcard that covers only one level of name also misses three addresses one level deeper — `assets.eu.40three.net`, `feeds.eu.40three.net` and `ftp.eu.40three.net` — so list those by name too. Keep `*.40three.net` on the list: the app on `heavendata.app` still calls it, and without it the app does not work.
-
-### What kept its address
-
-Links to your files, feeds, the heavendata FTP server, the API and every address an integration calls are where they were. A shop, a feed reader or an integration that uses them needs no change.
+Every address that did not move answers as before, so a shop, a feed reader or an integration that uses one needs no change.
 
 ### The old addresses still open
 
@@ -32,7 +29,9 @@ Links to your files, feeds, the heavendata FTP server, the API and every address
 | `https://www.40three.net`, `https://auth.40three.net`, `https://40three.net` | `https://www.heavendata.app` |
 | `https://profile.40three.net` | `https://profile.heavendata.app` |
 
-The rest of the address is kept, so a bookmark, or a link in an email sent before the move, opens the same page at the new address. The old addresses keep working with no end date. The first time you open heavendata at the new address, you sign in again.
+The rest of the address is kept, so a bookmark, or a link in an email sent before the move, opens the same page at the new address. The old addresses keep working indefinitely.
+
+The first time you open heavendata at the new address, you sign in again.
 
 ## Our IP Address
 
