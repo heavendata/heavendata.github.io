@@ -20,15 +20,17 @@ Categories are how you file products: category trees you build once, each a top-
 
 ## Building the tree
 
-Your trees are under **Settings → Categories**, which lists your category trees by name. **New category tree** creates one; click a category tree to open it.
+Your trees are under **Settings → Categories**, on the **Category trees** page, which lists them by name. **New category tree** creates one; click a category tree to open it.
 
 In a tree:
 
-- **New category**, below the tree, adds a category at the tree's first level. In a tree that is still empty, the button is **Add category**.
-- **Add subcategory** on a category's row adds a category under it.
+- **New category**, above the tree beside **Collapse all**, adds a category at the tree's first level. A tree that is still empty says *No categories yet*, with **New category** under it.
+- **New subcategory** on a category's row adds a category under it.
 - **Drag** a category to move it. Drop it onto another category to make it a subcategory there, or between two categories to put it at that place in the list.
-- **Rename** a category by clicking its name, or with the pencil on its row, which opens the category's settings.
+- **Rename** a category by clicking its name: the check mark saves the new name, and the ✕, **Cancel**, keeps the old one. Or use the pencil on its row, which opens the category's settings.
 - **Delete** a category with the trash can on its row. A category that still has subcategories can't be deleted: delete its subcategories first. Its products aren't moved to another category; in an export, the deleted category no longer appears in their list.
+
+A category's settings also have an **Auto assignment** section, where you can pick other categories, and the category's row in the tree shows them; it is saved, but it adds the category to no product, in the app or in an export.
 
 A category tree's own page has its name, its category key, the **Primary** toggle and the delete button; you can also delete a category tree with **Delete** in its row menu on the list. A new category tree is primary.
 
@@ -36,7 +38,7 @@ The sort index follows the order you set: a parent category comes before its sub
 
 ### Setting a category key
 
-Open a category with the pencil on its row in the tree, or open a category tree's page, and fill in **Category key**. The field is also there when you create a category with **New category** or **Add subcategory**, and when you create a category tree with **New category tree**. On a category tree's page, the pencil edits the name and the key together, and the check mark saves both.
+Open a category with the pencil on its row in the tree, or open a category tree's page, and fill in **Category key**. The field is also there when you create a category with **New category** or **New subcategory**, and when you create a category tree with **New category tree**. On a category tree's page, the pencil edits the name and the key together, and the check mark saves both.
 
 - **The key is optional.** Empty the field to remove a key.
 - **It's saved without spaces, tabs or line breaks at the start or end.** Spaces inside a key are kept.
@@ -77,7 +79,7 @@ To undo it before the next run, set the old key back. After the run, the new cat
 | Its parent category — you dragged it under another category | Moved back under the parent category in the source system. |
 | Its place among its sibling categories | Moved back to the order in the source system. |
 | **Primary**, on a category tree | Kept. |
-| **Auto Assignment** | Kept. |
+| **Auto assignment** | Kept. |
 | A category the import doesn't send — including every category without a key | Its name, parent category and settings are kept. Its place can change: where it has sibling categories the import sends, it moves after them, keeping its order among the others the import doesn't send. |
 | You delete the category | The next run creates it again, as a new category. Products are in it only if the import files them there. |
 
