@@ -189,7 +189,7 @@ shown back to you.
 There is no way to empty a stored password. A source without one cannot connect, so
 if a source should stop running on its own, disable or delete the data source instead.
 
-## Data Format
+## Data format
 
 **Data format**, under **Connection and format**, says how the source's files write dates,
 numbers and several values in one cell: **Date format**, the decimal and group separators
@@ -218,7 +218,7 @@ one of the other formats, then save again.
 
 ### Timezone
 
-The Data Format's **Timezone** is not used: a saved data source shows `UTC` there, and
+The **Timezone** under **Data format** is not used: a saved data source shows `UTC` there, and
 the source reads its dates as [an import does](/en/import/import-products.html#date-format).
 The schedule's **Timezone** is a separate setting.
 

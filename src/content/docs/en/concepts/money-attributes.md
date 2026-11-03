@@ -56,7 +56,7 @@ A column's header names the attribute, not the currency; each cell names the cur
 
 ## Import and export
 
-**An import reads the amount as a number.** Map the column onto the money attribute as you would a number. The currency comes from the attribute, so the column needs only the amount. With the default **Data Format**, where the decimal separator is `.`:
+**An import reads the amount as a number.** Map the column onto the money attribute as you would a number. The currency comes from the attribute, so the column needs only the amount. With the default **Data format**, where the decimal separator is `.`:
 
 | In the file | Stored |
 | --- | --- |
