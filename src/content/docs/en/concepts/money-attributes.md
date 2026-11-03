@@ -22,12 +22,12 @@ A money attribute can be **translatable**. It then holds one amount per language
 
 ## Create a money attribute
 
-1. Go to **Settings > Attributes & sections** and select a section.
+1. Go to **Settings → Attributes & sections** and select a section.
 2. Click **New attribute** and choose **Money**.
 3. On the **General** tab, enter its **Name** — the **Code** is filled in from it — and decide whether it is **Translatable**.
 4. On the **Settings** tab, choose the **Currency** — see [Set the currency](#set-the-currency).
 5. Click **Done**, then **Save** the section.
-6. Enable the attribute in **Settings > Product types** where you need it.
+6. Enable the attribute in **Settings → Product types** where you need it.
 
 The type can't be changed after the attribute is created. To turn an existing attribute into a money attribute, see [Attributes & sections → Change attribute type](/en/concepts/attributes.html#change-attribute-type-or-translatable-settings-later).
 
@@ -64,7 +64,7 @@ A column's header names the attribute, not the currency; each cell names the cur
 | `12.50 EUR` | `12.50` — the currency text is dropped |
 | `$9.00` | `9.00` |
 
-**Only the mapping step looks at the currency.** On **Map columns**, a column whose amounts carry another currency than the attribute's — or two currencies, when the attribute has none — is not suggested for the attribute, and a remembered mapping that places it there is marked with how many rows it would import wrong. If you map such a column yourself, the import does not check the currency: a column of US dollar amounts mapped onto a euro attribute is stored as euros. How decimal and thousands separators in the file are read is set in the data set's **Data Format** — see [Import products](/en/import/import-products.html).
+**Only the mapping step looks at the currency.** On **Map columns**, a column whose amounts carry another currency than the attribute's — or two currencies, when the attribute has none — is not suggested for the attribute, and a remembered mapping that places it there is marked with how many rows it would import wrong. If you map such a column yourself, the import does not check the currency: a column of US dollar amounts mapped onto a euro attribute is stored as euros. How decimal and thousands separators in the file are read is set under **Data format** on that step — see [Import products](/en/import/import-products.html).
 
 **An export carries the amount without the currency.** In a feed or a template the money attribute is a plain number, `record.<code>`. If the receiving system needs the currency code, add it yourself — in a template, write the code as text next to the amount.
 

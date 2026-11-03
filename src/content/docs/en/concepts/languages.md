@@ -4,11 +4,11 @@ description: "The languages your account keeps product data in — how to add on
 sidebar:
   order: 8
 ---
-Your account's languages are the languages a translatable attribute can hold a value in. Manage them under **Settings > Languages**: each language can have a [fallback language](#fallback-languages) and can be a [required language](#required-languages).
+Your account's languages are the languages a translatable attribute can hold a value in. Manage them under **Settings → Languages**: each language can have a [fallback language](#fallback-languages) and can be a [required language](#required-languages).
 
 ## The Languages list
 
-**Settings > Languages** lists your account's languages, sorted by name. **New language** adds one; a row's menu has **Edit** and **Delete**.
+**Settings → Languages** lists your account's languages, sorted by name. **New language** adds one; a row's menu has **Edit** and **Delete**.
 
 | Column | What it shows |
 | --- | --- |
@@ -21,7 +21,7 @@ Your account's languages are the languages a translatable attribute can hold a v
 
 ## A language's settings
 
-A language's page groups its settings under three headings.
+A language's page groups its settings in three sections.
 
 | Section | Field | What it does |
 | --- | --- | --- |
