@@ -15,9 +15,11 @@ To use heavendata behind a firewall that lets through only the web addresses on 
 | Allow | What it is |
 | --- | --- |
 | `*.heavendata.app` and `heavendata.app` | The app at `https://‹account›.heavendata.app/pim`, sign-in and sign-up at `https://www.heavendata.app`, and Organization settings at `https://profile.heavendata.app`. List both: many firewalls do not count `heavendata.app` as part of `*.heavendata.app` |
-| `*.40three.net` | Everything that did not move: links to your files, feeds, the heavendata FTP server, the API, and the services the app calls in the background. The app does not work without it |
+| `*.40three.net` and `40three.net` | Everything that did not move: links to your files, feeds, the heavendata FTP server, the API, and the services the app calls in the background. The app does not work without it. It also lets the old addresses below through, so they can open the new ones |
 | `assets.eu.40three.net`, `feeds.eu.40three.net` and `ftp.eu.40three.net` | Your files, feeds and the heavendata FTP server, by name — for a firewall whose wildcard covers only one level of name |
 | `*.productdata.cloud` | Brand portals |
+
+Signing up also loads Google's bot check from `www.google.com` and `www.gstatic.com`; without them, the sign-up is refused. Signing in with Google or Microsoft goes through their own sign-in pages, such as `accounts.google.com` and `login.microsoftonline.com`. Allow those too if your people sign up, or sign in that way, from behind the firewall.
 
 Every address that did not move answers as before, so a shop, a feed reader or an integration that uses one needs no change.
 
@@ -25,7 +27,7 @@ Every address that did not move answers as before, so a shop, a feed reader or a
 
 | Old address | Opens |
 | --- | --- |
-| `https://‹account›.40three.net/pim` | `https://‹account›.heavendata.app/pim` |
+| `https://‹account›.40three.net/pim`, `https://‹account›.40three.net` | `https://‹account›.heavendata.app/pim` |
 | `https://www.40three.net`, `https://auth.40three.net`, `https://40three.net` | `https://www.heavendata.app` |
 | `https://profile.40three.net` | `https://profile.heavendata.app` |
 
