@@ -16,7 +16,7 @@ Use these for a one-off file. For a file that arrives again and again — from a
 
 **Import** is a button in the product list's header, between **Export** and **New product**. If you cannot see it, you lack the permission to import products — ask an administrator for it. That one permission covers both menu items, deleting included.
 
-Every step has the same footer: **Cancel** at the left, and **Back** and the step's own button at the right — **Next** on every step before **Review**. Nothing is imported or deleted until you select the button on **Review**.
+Every step has the same footer: **Cancel** at the left, and the step's own button at the right — **Next** on every step before **Review** — with **Back** beside it from the second step on. Nothing is imported or deleted until you select the button on **Review**.
 
 ## Before you start: the identifier attribute
 
@@ -80,7 +80,7 @@ A column you do not map is not imported, so **leave a column unmapped to leave t
 
 **Translations** have one target per language: a translatable attribute *Name* is offered as **Name** and as **Name (en)**, **Name (de)** and so on, for each language of your account.
 
-**Next** stays disabled until a column is mapped to the identifier attribute. Until then the step names it — for an identifier attribute called *SKU*: *Map a column to "SKU", the identifier attribute, before you continue.*
+**Next** stays disabled until a column is mapped to the identifier attribute — or, if your account has one, to the [base code](/en/concepts/attribute-roles.html) attribute, by which the import then finds each product. Until then the step names the identifier attribute — for an identifier attribute called *SKU*: *Map a column to "SKU", the identifier attribute, before you continue.*
 
 **Data format**, under the rows, sets how numbers, lists and dates in the file are read:
 
@@ -102,12 +102,12 @@ When the step opens, both decimal separators are set to the one your file uses, 
 | --- | --- |
 | **Date with offset** | `2011-12-03+01:00` |
 | **Date and time with offset** — the default | `2011-12-03T10:15:30+01:00` |
-| **RFC 1123 date and time** | `Tue, 03 Jun 2008 11:05:30 GMT` — the day always in two digits |
+| **RFC 1123 date and time** | `Tue, 3 Jun 2008 11:05:30 GMT` |
 | **Custom format** | the pattern you enter in **Pattern** |
 
 A date with an offset is converted to UTC; one without keeps the time as written.
 
-A **Pattern** is a .NET custom date and time format string: it spells a date out with letters, and with the `.`, `/`, `-`, `:` or space between them that the file writes. The letters most files need are these, and the app lists the same ones under the box:
+A **Pattern** is a .NET custom date and time format string: it spells a date out with letters, and with the `.`, `/`, `-`, `:` or space between them that the file writes. The letters most files need are these; the app lists them under the box too, all but `H`:
 
 | Letters | Stand for | Example |
 | --- | --- | --- |
@@ -141,7 +141,7 @@ The **Data format** and the **Import options** are not remembered; set them for 
 
 The options decide whether the import may create products, and what it publishes — for new products, and for the existing products the file changes.
 
-**Create new products** is **off** when the step opens. Off, the import only changes products you already have: a row whose identifier matches no product is skipped, and the run still finishes without warnings. **Turn it on if your file contains new products.**
+**Create new products** is **off** when the step opens. Off, the import only changes products you already have: a row whose identifier matches no product is skipped — counted as skipped, and logged as information rather than as a warning. **Turn it on if your file contains new products.**
 
 | Option | What it does |
 | --- | --- |
@@ -219,7 +219,7 @@ What happens to a deleted product:
 
 ## If the import does not start
 
-If you select **Import products** or **Delete products** and the job cannot start, **Review** says so first — *Couldn't start the import.* or *Couldn't start deleting the products.* — and why. Nothing was changed, and you can select the button again.
+If you select **Import products** or **Delete products** and the job cannot start, **Review** says so first — *Couldn't start the import.* or *Couldn't start deleting the products.* — and why, and you can select the button again. If the start was refused, nothing was changed. If the answer was lost instead — the connection dropped, say — the job may have started all the same: pressing the button again then shows that job, with *Couldn't apply your changes — the import had already started with the earlier settings.* above it if you had changed anything since.
 
 ## If you leave the page
 
