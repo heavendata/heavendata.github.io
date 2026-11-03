@@ -29,8 +29,8 @@ Organization settings is navigated from the menu bar across the top of every pag
 | Menu bar entry | What it opens |
 | --- | --- |
 | The organization's name | **Manage Organizations**, where you switch to another organization. |
-| **Dashboard** | The organization's details and its accounts, with **Edit organization**, where you can [require two-factor authentication](/en/organization-settings/user-management.html#require-two-factor-authentication). |
-| **Accounts** | The organization's accounts. |
+| **Dashboard** | The organization's details and its accounts, with **Edit organization**, where you can [require two-factor authentication](/en/organization-settings/user-management.html#require-two-factor-authentication), and [delete the organization](/en/organization-settings/delete-account-or-organization.html#delete-an-organization). |
+| **Accounts** | The organization's accounts, where you can [delete an account](/en/organization-settings/delete-account-or-organization.html#delete-an-account). |
 | **Team** | **Users**, **User Groups** and **Pending Invitations**, where you [add users](/en/organization-settings/user-management.html#adding-users). |
 | **Transactions** | The organization's invoices. |
 | **Settings** | **Billing** and **Domains**, where you add [email domains](/en/organization-settings/user-management.html#email-domains). |
@@ -38,3 +38,7 @@ Organization settings is navigated from the menu bar across the top of every pag
 What you see depends on your permissions: **Accounts** is there only if you may
 manage accounts, and an item under **Team** or **Settings** that you lack the
 permission for is shown but can't be selected.
+
+How you sign in yourself — your password, Google and Microsoft, two-factor
+authentication — isn't in Organization settings: each user manages it on their own
+[Security page](/en/organization-settings/sign-in-security.html).

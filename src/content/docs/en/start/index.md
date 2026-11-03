@@ -6,8 +6,8 @@ sidebar:
   label: "Overview"
 ---
 
-Your first half hour with heavendata. Start with the setup option you chose when
-the account was created, then plan the structure your catalog needs before you
+Your first half hour with heavendata. [Sign up](/en/start/sign-up.html) if you haven't yet,
+then start with the setup option you chose when the account was created, then plan the structure your catalog needs before you
 load data into it — a little thought here saves a lot of re-import later.
 
 If you already have products in the system and want to change them, go to
