@@ -25,7 +25,7 @@ function convert(input, record) {
 
 With `T-Shirt` as the input and `red` in the record's `color` attribute, it gives `T-Shirt red`; with `color` missing or empty, `T-Shirt`. With no input it gives **No output**, so an import leaves the field's stored value as it is. The example works on text: for a value per language, read one language first, as in `input.get('en-US')`.
 
-A new node starts with a script that gives its input on unchanged: `function convert(input, record) { return input; }`.
+A new node starts with a script that gives its input on unchanged — two comment lines, then `function convert(input, record) { return input; }`.
 
 ### What `convert` receives
 
@@ -94,7 +94,7 @@ When a script fails, the message says why. A run's log file shows it with the va
 
 ## When a script fails
 
-**The field is left out of the record**, as for any node that can't build a value — see [when a node can't build a value](/en/reference/pipeline-nodes.html#when-a-node-cant-build-a-value). The nodes after the JavaScript node don't run, so a field is never built from what was left after a failed script.
+**The field is left out of the record**, as for any node that can't build a value — see [when a node can't build a value](/en/reference/pipeline-nodes.html#when-a-node-cant-build-a-value). The nodes after the JavaScript node don't run, so a field is never built from what was left after a failed script. The one exception is *Couldn't use the script's result*: the node after it gets that error as its input, and the field is left out where that node can't do anything with it.
 
 The log file has an entry per value for a script that failed while it ran, with the message from the table above — and **one entry per field** for a script that couldn't be loaded, with the number of records it affected, such as *Affected 1200 records.* — the script failed the same way for every one of them.
 
