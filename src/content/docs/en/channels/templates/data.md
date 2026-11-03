@@ -141,7 +141,7 @@ This tests the categories the product is **assigned** to. To match a category an
 
 ## Measurement sets
 
-A **Measurement set** attribute holds two to four measurements in one unit — a product's or a package's dimensions, for example length, width and height in cm. In a template it is an object with **one member per measurement code**, each a number in the attribute's unit. Printed whole, `record.‹code›` gives the text the CSV and Excel formats write, the unit once at the end: `20 x 10 x 5 cm`.
+A **Measurement set** attribute holds two to four measurements in one unit — a product's or a package's dimensions, for example length, width and height in cm ([Measurements and units](/en/concepts/measurements.html)). In a template it is an object with **one member per measurement code**, each a number in the attribute's unit. Printed whole, `record.‹code›` gives the text the CSV and Excel formats write, the unit once at the end: `20 x 10 x 5 cm`.
 
 ```plaintext frame="none"
 {{ if record.package_size }}

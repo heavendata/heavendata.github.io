@@ -15,6 +15,12 @@ Note: Do not add all those data in one single text attribute. Prefer one attribu
 
 A selling price is not an attribute: a product variant has its own prices, in price lists — see [Money attributes and prices](./money-attributes.html#money-attributes-and-prices).
 
+## Units and measurement sets
+
+An **Integer number** or **Number with decimals** attribute can have a **Unit**, such as kilograms, set on its **Settings** tab. Its values are plain numbers in that unit, and the app shows the unit after them. For a product's dimensions, the **Measurement set** type holds two to four measurements, such as length, width and height, in one unit. **New attribute** offers it as three ready sets: *Measurement set (length × width × height)*, *(width × height)* and *(width × height × depth)*.
+
+An attribute with a unit can't be **Translatable**, and a measurement set is never translatable or indexed. Changing a unit converts no value. See [Measurements and units](./measurements.html).
+
 ### Attribute Sections
 An attribute is always part of one attribute section — just a group for better readability.
 
@@ -62,7 +68,7 @@ A section lists its attributes in their order, one row per attribute. Each row s
 | Part of the row | What it shows |
 | --- | --- |
 | The handle | Drag the row by it to move the attribute. |
-| The type | The attribute type's icon and its name, such as **Text**, **Yes/no**, **Integer number** or **Number with decimals**. |
+| The type | The attribute type's icon and its name, such as **Text**, **Yes/no**, **Integer number**, **Number with decimals** or **Measurement set**. |
 | The name and the code | The attribute's label in your working language, or its name, followed by its code. |
 | The properties | One word for each of these properties the attribute has, in this order: **Common**, **Translatable**, **Internal**, **Required**. A property the attribute does not have shows nothing. |
 | ✎ **Edit attribute** | Opens the attribute's window. |
@@ -166,4 +172,5 @@ The attribute type and translatable settings affect how data is stored in databa
 * [Common attributes](./common-attributes.html) - enable attributes for all products
 * [Custom entities](./custom-entities.html) - the attributes of a custom entity, listed the same way
 * [Money attributes](./money-attributes.html) - amounts with a currency
+* [Measurements and units](./measurements.html) - numbers with a unit, and measurement sets for dimensions
 * [Optimize catalog structure](../initial-setup/optimize-catalog-structure.html)
