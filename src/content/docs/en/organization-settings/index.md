@@ -31,9 +31,9 @@ Organization settings is navigated from the menu bar across the top of every pag
 | The organization's name | **Manage Organizations**, where you switch to another organization. |
 | **Dashboard** | The organization's details and its accounts, with **Edit organization**, where you can [require two-factor authentication](/en/organization-settings/user-management.html#require-two-factor-authentication). Under **Administration** you can [delete the organization](/en/organization-settings/delete-account-or-organization.html#delete-an-organization). |
 | **Accounts** | The organization's accounts, where you can [delete an account](/en/organization-settings/delete-account-or-organization.html#delete-an-account). |
-| **Team** | **Users**, **User Groups** and **Pending Invitations**, where you [add users](/en/organization-settings/user-management.html#adding-users). |
+| **Team** | **Users**, **User groups** and **Invitations**, where you [add users](/en/organization-settings/user-management.html#adding-users). |
 | **Transactions** | The organization's invoices. |
-| **Settings** | **Billing** and **Domains**, where you add [email domains](/en/organization-settings/user-management.html#email-domains). |
+| **Settings** | **Billing** and **Email domains**, where you add [email domains](/en/organization-settings/user-management.html#email-domains). |
 
 What you see depends on your permissions: **Accounts** is there only if you may
 manage accounts, and an item under **Team** or **Settings** that you lack the

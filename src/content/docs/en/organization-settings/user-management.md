@@ -28,14 +28,14 @@ What else you can do with a user depends on how they joined:
 
 1. [Open Organization settings](/en/organization-settings.html#open-organization-settings).
 2. In the menu bar, select **Team** > **Users**.
-3. Select **New user** at the top right. The **Invited Users** page, under **Team** >
-   **Pending Invitations**, has the same button.
+3. Select **New user** at the top right. The **Invitations** page, under **Team** >
+   **Invitations**, has the same button.
 4. Enter the user's **Email**, **Given name** and **Family name**.
 5. Select the button at the bottom of the page. What it reads depends on the address:
 
 | The address ends in | The button reads | What happens |
 | --- | --- | --- |
-| A domain your organization hasn't verified | **Invite user** | We email the user an invitation to join your organization. You can add a message of your own to it first. You then see **Invited Users**, which lists your organization's invitations and whether each was accepted or declined. Once the user accepts, they're on the users list. |
+| A domain your organization hasn't verified | **Invite user** | We email the user an invitation to join your organization. You can add a message of your own to it first, under **Invitation message (optional)**. You then see **Invitations**, which lists your organization's invitations and whether each was accepted or declined. Once the user accepts, they're on the users list. |
 | One of your verified email domains | **Add user** | You can also set the user's **User interface language** and **Preferred language**. The user is added at once, without an invitation, and we send them no email — so tell them yourself. They sign in for the first time through **Forgot your password?** on the sign-in page. If the address already has a heavendata login, that user is only added to your organization, as an accepted invitation would add them. |
 
 **Cancel**, or the Back button at the top of the page, asks before it discards what
@@ -52,16 +52,16 @@ To verify the domain, you need access to its web server or to its DNS
 configuration. If you're not familiar with either, ask your system administrator.
 
 1. [Open Organization settings](/en/organization-settings.html#open-organization-settings).
-2. In the menu bar, select **Settings** > **Domains**.
+2. In the menu bar, select **Settings** > **Email domains**.
 3. Select **New email domain**.
-4. Enter the **Domain name**, such as `example.com`, without `http://` or anything else.
+4. Enter the **Email domain**, such as `example.com`, without `http://` or anything else.
 5. Select **Add email domain**.
 6. Prove that your organization owns the domain in one of the two ways the next page
    shows:
    - add the TXT record it shows to the domain's DNS, or
    - place the verification file it names, holding the code it shows, in the root
      folder of the domain's web server.
-7. Select **Re-verify now**. Once the domain is verified, the page says so.
+7. Select **Verify again**. Once the domain is verified, the page says **This email domain is verified.**
 
 ## Require two-factor authentication
 
