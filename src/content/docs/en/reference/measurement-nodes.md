@@ -15,7 +15,7 @@ Three nodes of the **Field processing pipeline** read, convert and write measure
 
 **To add a node**, open the field's pipeline with the arrow button beside the field (pointing at it shows **Edit pipeline**) — on a feed's fields in a channel, on a data source dataset's **Mapping** tab, or on the **Map columns** step of an import. In the pipeline, point at a node and choose the **+** that appears beneath it.
 
-**A node knows a unit only from a Source field connected directly to it.** A source field that reads a number with a unit, a measurement set or one of its measurements passes its unit on. Any other node's output carries no unit: **Convert unit** outputs a plain number, so to convert and then write text, set the unit in **Measurements to text** instead of chaining the two.
+**A node gets a unit from a Source field connected directly to it, or from Text to measurements.** A source field that reads a number with a unit, a measurement set or one of its measurements passes its unit on, and **Text to measurements** outputs the unit it read. Any other node's output carries no unit: **Convert unit** outputs a plain number, so to convert and then write text, set the unit in **Measurements to text** instead of chaining the two.
 
 ## Text to measurements
 
@@ -38,9 +38,9 @@ The text is read as pasting reads it: `x`, `X`, `×` or `*` between the numbers,
 
 **A number without a unit** is taken to be in the unit set under **Unit if the source has none**. With **The attribute's unit**, in an import, it is taken to be in the unit of the attribute the field fills; in a feed, it has no unit.
 
-**Into a field with a unit**, as the field's last node, the node converts every number to the field's unit and keeps at most four decimal places; into an **Integer number** it rounds to the nearest whole number. The count of numbers must match the measurement set's measurements.
+**Into a field with a unit**, as the field's last node, the node converts every number to the field's unit and keeps at most four decimal places; into an **Integer number** it rounds a converted number to the nearest whole number. The count of numbers must match the measurement set's measurements.
 
-**Anywhere else** — in a feed, or before another node — it outputs the numbers as the text gives them, in the first unit the source names. Their measurements have no codes then, so a **Custom pattern** in a following **Measurements to text** can use only `{unit}`, not a code such as `{width}`.
+**Anywhere else** — in a feed, into a field without a unit, or before another node — it outputs as many numbers as the text holds, converted to the first unit the source names: `20cm x 100mm x 5cm` gives 20, 10 and 5 in cm. Their measurements have no codes then, so a **Custom pattern** in a following **Measurements to text** can use only `{unit}`, not a code such as `{width}`.
 
 The canvas sums the node up as *Reads 3 inputs*, with *, assuming mm* when a unit is set.
 
@@ -93,7 +93,7 @@ A pattern is literal text with placeholders in braces. Everything outside the br
 | A measurement set | Each measurement's code, such as `{length}`, `{width}`, `{height}`, and `{unit}` |
 | A number with a unit | `{number}` and `{unit}` |
 
-| Pattern, for a set in cm, **Unit** millimeters | Writes |
+| Pattern, for a set of 40 × 20 × 10.5 cm, **Unit** millimeters | Writes |
 | --- | --- |
 | `{length} x {width} x {height} {unit}` | `400 x 200 x 105 mm` |
 | `L {length} / W {width} / H {height}` | `L 400 / W 200 / H 105` |
@@ -115,7 +115,9 @@ Each node's **Preview** runs it on test inputs you type, with the unit of the So
 
 ## When a value is refused
 
-A node that can't handle a value leaves **that field** out of the record. The rest of the record is written, and in an import the value stored before stays. The run's log has one warning for the value. Each message begins *The record was imported without this field's value.* in an import, or *The record was exported without this field's value.* in a feed, and goes on:
+A node that can't handle a value leaves **that field** out of the record. The rest of the record is written, and in an import the value stored before stays. The run's log has one warning for the value. Each message begins *The record was imported without this field's value.* in an import, or *The record was exported without this field's value.* in a feed, and goes on as below.
+
+**Text to measurements**, and an import into a field with a unit — as an import writes them:
 
 | Why | The rest of the message |
 | --- | --- |
@@ -126,6 +128,13 @@ A node that can't handle a value leaves **that field** out of the record. The re
 | Measurements into a number without a unit | `"20 x 10 x 5 cm" was read as measurements, and this field holds a number without a unit. …` |
 | Measurements into a field of another type | `"20 x 10 x 5 cm" was read as measurements, and this field can't hold them. …` |
 | **Text to measurements** assumes a unit of another kind than the field's | `"Text to measurements" assumes kg, a weight unit, for numbers without a unit, and this field holds length values in cm. …` |
+
+In a feed, the first four lines end *Change the value and export again.*, and the last *… and export again.* The two lines about measurements read the same in a feed: `"20 x 10 x 5 cm" was read as measurements, and this field can't hold them. Add Measurements to text after "Text to measurements", and export again.`
+
+**Convert unit** and **Measurements to text** — as a feed writes them:
+
+| Why | The rest of the message |
+| --- | --- |
 | **Convert unit** got something that isn't a number | `"n/a" isn't a number. Change the value and export again.` |
 | **Convert unit** got a whole measurement set | `This value has 3 measurements, and "Convert unit" converts one number. Connect one measurement's field instead, or use Measurements to text in its place, and export again.` |
 | **Convert unit** has no unit to convert from | `This value has no unit to convert from. In "Convert unit", choose the unit this value is in, and export again.` |
@@ -135,7 +144,7 @@ A node that can't handle a value leaves **that field** out of the record. The re
 | The pattern names a placeholder the value has none for | `"{width}" isn't a placeholder for this value. Change the pattern in "Measurements to text" and export again.` |
 | A node is set to a unit that no longer exists | `"Convert unit" is set to a unit that no longer exists. Choose another unit in "Convert unit" and export again.` |
 
-The same lines end with *… and export again.* when the node runs in a feed, and with *… import again.* in an import.
+In an import, these lines end *… and import again.*; a line that says *Change the value* reads *Change the value in the file and import again.*
 
 ## Related articles
 
