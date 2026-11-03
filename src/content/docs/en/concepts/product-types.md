@@ -32,7 +32,7 @@ The page that opens is the page every product type has ([Change a product type](
 
 | What you see | What it means |
 | --- | --- |
-| **New** badge on a section or attribute | Your account does not have it yet. **Create** creates it, and an attribute you leave out is not created. The line above the sections says so: *A New badge marks attributes and sections your account doesn't have yet. They're created only when you select Create, and never if you leave without creating the product type. An attribute you leave out isn't created.* |
+| **New** badge on a section or attribute | Your account does not have it yet. **Create** creates it. The line above the sections says so: *A New badge marks attributes and sections your account doesn't have yet. They're created only when you select Create, and never if you leave without creating the product type. An attribute you leave out isn't created.* |
 | An included attribute without a badge | Your account already has this attribute. It is reused as it is, not created again, and shown under the section of yours that holds it, whatever that section is called. Untick it to leave it out, unless it is a [common attribute](./common-attributes.html), which every product type includes. |
 | An attribute that is not ticked, without a badge | An attribute of yours in one of those sections that the ready-made product type does not include. Tick it to include it. |
 | *Your account already has every attribute this product type needs. Create adds only the product type.* in place of the line | Nothing new is created; **Create** adds the product type alone. |

@@ -12,7 +12,7 @@ Typically creating attributes needs two steps: 1) create the attribute (in attri
 
 1. Ensure all attributes are already created. If not, [create them first](./attributes.html)
 2. In the sidebar, go to settings > common attributes
-3. Choose **Add / remove sections**, tick the sections that hold the attributes, and choose **Ok**
+3. Choose **Add or remove sections**, tick the sections that hold the attributes, and choose **Done**
 4. Enable the checkbox for all attributes that should be enabled for all products
 5. Click "Save"
 

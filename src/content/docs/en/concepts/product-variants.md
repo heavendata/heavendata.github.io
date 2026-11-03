@@ -22,7 +22,7 @@ With product variants, *Shirt with logo* and *Shirt uni* are two products with t
 - **The attribute that splits a product into product variants**, here *Size code*. Each of its values becomes one product variant.
 - **Which attributes hold one value for the whole product** and which hold one for each product variant. Here *Product name* and *Material* hold one value for the whole product, and *SKU* one for each product variant.
 
-Both are set in a **variant configuration**, which belongs to a [product type](./product-types.html). A variant configuration can split a product more than once, into up to five levels: *Color, then size* first splits a product by color, then each color by size, and the sizes are its product variants. A product type can have several variant configurations, and each product uses one of them.
+Both are set in a **variant configuration**, which belongs to a [product type](./product-types.html). A variant configuration can split a product more than once, into up to five levels: *Color, then size* first splits a product by color, then each color by size, and the sizes are its product variants. A level can also split by more than one attribute at once, as the second level of *Color, then waist size and inseam length* does. A product type can have several variant configurations, and each product uses one of them.
 
 ## Which attributes can split a product
 
@@ -35,7 +35,7 @@ An attribute a variant configuration splits by is always part of the product typ
 1. In the sidebar, open **Settings → Product types** and select the product type, or create a new one ([Product types](./product-types.html)).
 2. Under **Variant configurations**, choose **New variant configuration**.
 3. Give it a **Name**, such as *Color, then size*.
-4. Under **Level 1**, choose the attribute that splits a product first, such as *Color*. To split it again, choose **Add level** and choose the attribute for **Level 2**, such as *Size*. A variant configuration has up to 5 levels, and no two levels split by the same attribute.
+4. Under **Level 1**, choose the attribute that splits a product first, such as *Color*; choose several to split by all of them at once. To split it again, choose **Add level** and choose the attribute for **Level 2**, such as *Size*. A variant configuration has up to 5 levels, and no two levels split by the same attribute.
 5. Choose **Create**. The **Variant configuration** window opens, where you choose which attributes each level holds ([below](#choose-which-attributes-each-level-holds)). Close it when you are done; the variant configuration is listed under **Variant configurations**, and each attribute it splits by is now included in the product type.
 6. Choose **Save** on the product type, or **Create** on a product type not yet created. Nothing about the variant configuration is saved before that.
 
@@ -48,12 +48,12 @@ The **Variant configuration** window opens when you create a variant configurati
 | Column | An attribute in it holds |
 | --- | --- |
 | **Whole product**, *One value for the whole product* | One value for the whole product, the same for every product variant, such as *Product name* or *Material*. |
-| **Level 1**, *By color* | One value for each value of the level's attribute, such as one set of images for each color. |
+| **Level 1**, *By Color* | One value for each value of the level's attribute, such as one set of images for each color. |
 | The last level, such as **Level 2**, *By Size* | One value for each product variant, such as its *SKU* or *GTIN*. |
 
 Drag an attribute to the column where it belongs. The attribute that splits a level stays in that level's column. **Remove from level**, the minus beside an attribute, moves it back to **Whole product**.
 
-<!-- Screenshot: the Variant configuration window for Color, then size, with Whole product, Level 1 By color and Level 2 By Size. -->
+<!-- Screenshot: the Variant configuration window for Color, then size, with Whole product, Level 1 By Color and Level 2 By Size. -->
 
 ### Check it
 
