@@ -53,7 +53,7 @@ if (!existsSync(navProbe)) {
 // the app's own links are updated. See pim-docs → content-structure.md (D-A).
 for (const [from, to] of [
   ['en/distribution/templates.html', '/en/channels/templates.html'], // channel template editor
-  ['en/administration/overview.html', null],                          // admin dashboard (not moved)
+  ['en/administration/overview.html', '/en/organization-settings/overview.html'], // admin app user dashboard
   ['index.html', null],                                               // help centre + user dropdown
 ]) {
   const f = join(DIST, from);

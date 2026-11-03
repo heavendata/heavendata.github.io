@@ -109,7 +109,7 @@ Machines need a fixed format to be able to read a feed. When creating a feed, yo
 That's the most common format. It's just a text file where the first row contains the attribute names and then we'll write one line for each product variant, and one for a product that has no product variants.
 
 #### Excel
-Used if this channel is intended for manual processing. E.g. combine it with the file transfer **Email** to send updates to other departments.
+Used if this channel is intended for manual processing. E.g. combine it with the **Email** transfer to send updates to other departments.
 
 #### JSON
 This will create a JSON array with one JSON object for each product variant, and one for a product that has no product variants.
@@ -123,6 +123,6 @@ Defines how other systems can access this feed.
 | Transfer | Description
 | --- | ---
 | HTTP pull | We will provide a URL. The other system simply reads this URL and imports the products. This is the most common option. 
-| FTP server | We store the generated feed on our ftp server. Other system can log-in to this server using the username and password you provide to read the products. The username is required, and some are refused — see [choosing a username](/en/import/ftp-pull.html#choosing-a-username).
+| FTP server | We store the generated feed on the heavendata FTP server. Other systems can sign in to this server using the username and password you provide to read the products. The username is required, and some are refused — see [choosing a username](/en/import/ftp-pull.html#choosing-a-username).
 | File transfer | We save the generated file on external file servers. If a delivery can't reach the server, the run's step says why, and what to do next — see [when a run can't reach a server](/en/troubleshooting/background-jobs.html#when-a-run-cant-reach-a-server).
-| Email | We send the generated file as an e-mail
+| Email | We send the generated file by email
