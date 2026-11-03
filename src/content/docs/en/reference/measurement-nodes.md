@@ -7,11 +7,11 @@ sidebar:
 
 Three nodes of the **Field processing pipeline** read, convert and write measurements — numbers with a unit, and [measurement sets](/en/concepts/measurements.html) such as length × width × height. All three are offered in imports and in channel feeds alike.
 
-| Node | What it does | Category in **Add node** |
+| Node | What it does | Listed in **Add node** under |
 | --- | --- | --- |
-| [Text to measurements](#text-to-measurements) | Reads numbers and their unit from text, such as `20x10x5 cm` | Text, Numbers |
+| [Text to measurements](#text-to-measurements) | Reads numbers and their unit from text, such as `20x10x5 cm` | Both Text and Numbers |
 | [Convert unit](#convert-unit) | Converts one number from one unit to another, such as cm to mm | Numbers |
-| [Measurements to text](#measurements-to-text) | Writes measurements and their unit as text, such as `20 x 10 x 5 cm` | Text, Numbers |
+| [Measurements to text](#measurements-to-text) | Writes measurements and their unit as text, such as `20 x 10 x 5 cm` | Both Text and Numbers |
 
 **To add a node**, open the field's pipeline with the arrow button beside the field (pointing at it shows **Edit pipeline**) — on a feed's fields in a channel, on a data source dataset's **Mapping** tab, or on the **Map columns** step of an import. In the pipeline, point at a node and choose the **+** that appears beneath it.
 
@@ -34,7 +34,7 @@ Reads numbers with their units. In an import, as the field's last node, it conve
 | **One per measurement** | One input per measurement, in the measurements' order; each a number, or a number with a unit | `20`, `10`, `5` |
 | **One per measurement, then a unit** | One input per measurement, then one for the unit | `20`, `10`, `5` and `cm` |
 
-The text is read as pasting reads it: `x`, `X`, `×` or `*` between the numbers, a unit after each number, once at the end, or not at all, and `"` as inches. An empty place or a dash leaves that measurement empty. See [What paste reads](/en/concepts/measurements.html#enter-and-paste-values).
+The text is read as pasting reads it — see [Enter and paste values](/en/concepts/measurements.html#enter-and-paste-values).
 
 **A number without a unit** is taken to be in the unit set under **Unit if the source has none**. With **The attribute's unit**, in an import, it is taken to be in the unit of the attribute the field fills; in a feed, it has no unit.
 
@@ -43,6 +43,8 @@ The text is read as pasting reads it: `x`, `X`, `×` or `*` between the numbers,
 **Anywhere else** — in a feed, into a field without a unit, or before another node — it outputs as many numbers as the text holds, converted to the first unit the source names: `20cm x 100mm x 5cm` gives 20, 10 and 5 in cm. Their measurements have no codes then, so a **Custom pattern** in a following **Measurements to text** can use only `{unit}`, not a code such as `{width}`.
 
 The canvas sums the node up as *Reads 3 inputs*, with *, assuming mm* when a unit is set.
+
+**Example:** a supplier file has the columns `Länge`, `Breite`, `Höhe` and `Einheit`, with `200`, `100`, `50` and `mm` in a row. Map them onto a measurement set in cm, add **Text to measurements** with **Inputs** set to **One per measurement, then a unit**, and connect the four columns in that order. The set is stored as `20`, `10`, `5`.
 
 ## Convert unit
 
@@ -59,13 +61,15 @@ The node takes **one number** — a number, a measurement, or a text that is a n
 
 The canvas sums it up as *cm to mm*.
 
+**Example:** to send a marketplace the height in inches, add a feed field with the Source field *Package size › Height*, then **Convert unit** with **Unit to write** set to **Inches (in)**. A height of 10.5 cm is written as `4.1339`; to fix the decimals, follow it with **Number to text**.
+
 ## Measurements to text
 
 Writes measurements as text, in the unit and format a feed needs. It writes a source with a unit: a number with a unit, a measurement set, one measurement, or the output of **Text to measurements**.
 
 | Setting | Choices | Default |
 | --- | --- | --- |
-| **Unit** | **The attribute's unit**, or any unit from the list to convert to | **The attribute's unit** |
+| **Unit** | **The attribute's unit** — each value stays in the unit it is in — or any unit from the list to convert to | **The attribute's unit** |
 | **Format** | One of the presets below, or **Custom pattern** | The first preset |
 | **Pattern** | Shown with **Custom pattern** — see [The pattern](#the-pattern) | — |
 | **Decimals** | 0 to 28. Empty writes each number as stored, without trailing zeros. | Empty |
@@ -111,7 +115,7 @@ A pattern can leave measurements out and repeat them. Every `{` needs a closing 
 
 ## Preview
 
-Each node's **Preview** runs it on test inputs you type, with the unit of the Source field connected to it. For a Source field with a unit, the first test input offers **Number** or **Measurements** — for a measurement set, *Enter 3 numbers, such as 20 x 10 x 5 cm*. In a feed, it is the default; in an import, it is listed after **Text**.
+A node's **Preview** uses the unit of the Source field connected to it. For a Source field with a unit, the first test input offers **Number** or **Measurements** — for a measurement set, *Enter 3 numbers, such as 20 x 10 x 5 cm*. In a feed, it is the default; in an import, it is listed after **Text**.
 
 ## When a value is refused
 

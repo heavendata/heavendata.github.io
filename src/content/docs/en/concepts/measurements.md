@@ -7,7 +7,7 @@ sidebar:
 
 A unit belongs to the **attribute**, not to the value. Give a *Weight* attribute the unit kilograms, and every product's weight in it is a plain number read as kilograms. For a product's dimensions — length, width and height — use a **Measurement set** attribute: two to four numbers in one unit, edited and exported as one value.
 
-Values are stored as entered. Units are converted only on the way in, when you paste or import a value in another unit, and on the way out, when a channel asks for another unit. **Changing an attribute's unit converts nothing**: the numbers stay and are read in the new unit — see [Changing a unit](#changing-a-unit).
+Units are converted only on the way in, when you paste or import a value in another unit, and on the way out, when a channel asks for another unit. **Changing an attribute's unit converts nothing**: the numbers stay and are read in the new unit — see [Changing a unit](#changing-a-unit).
 
 ## Two ways to store a measurement
 
@@ -23,7 +23,7 @@ Values are stored as entered. Units are converted only on the way in, when you p
 | **Filter the product list by it** | Yes | By each measurement on its own |
 | **Sort the product list by it** | Yes | No |
 
-Both work on products, product variants and custom entities.
+Both work on products, product variants and custom entities: on a custom entity type, **New attribute** offers the same choices.
 
 ## Give a number attribute a unit
 
@@ -62,8 +62,6 @@ Switching **Type** between **Integer number** and **Number with decimals** keeps
 5. Under **Measurements**, rename, reorder, add or remove measurements, until the set has the ones you need.
 6. Choose **Done**, then **Save** the section, and include the attribute in the [product types](/en/concepts/product-types.html#attribute-sections) that need it.
 
-On a custom entity type, **New attribute** offers the same three measurement sets.
-
 Each measurement has a **Code** and a **Label**:
 
 | | Rule |
@@ -74,7 +72,7 @@ Each measurement has a **Code** and a **Label**:
 | **Order** | The order the editor shows the inputs in, and the order exports write the numbers in. |
 | **Minimum value**, **Maximum value** | Optional, on the **Settings** tab. Each applies to every measurement of the set. |
 
-**After the first save**, you can still change the labels, the order and the unit. Which measurements a set has, and their codes, are fixed: **Add measurement** and each remove button are disabled. To change them, create a new attribute.
+**After the first save**, you can still change the labels, the order and the unit. The measurements themselves and their codes are fixed — **Add measurement** and each remove button are disabled — so to change them, create a new attribute.
 
 **Required** and **Internal** work on a measurement set as on any attribute. A required measurement set needs every one of its measurements before a product variant can be published.
 
@@ -83,10 +81,8 @@ Each measurement has a **Code** and a **Label**:
 You can change or remove the unit of a saved attribute at any time. **The stored numbers stay exactly as they are and are read in the new unit** — the window says so: *Changing it keeps the numbers as they are and doesn't convert them, so 10 kg becomes 10 lb.*
 
 :::caution[Changing a unit converts nothing]
-A weight of `10` in kilograms becomes `10` in pounds. No value is recalculated, and no other warning appears.
+A weight of `10` in kilograms becomes `10` in pounds. That is how to fix a unit chosen wrongly: if the numbers were always millimeters but the attribute says centimeters, choose millimeters and the values are right. To convert the values themselves, change them — for example with an [import](/en/import/import-products.html).
 :::
-
-This is how to fix a unit chosen wrongly: if the numbers were always millimeters but the attribute says centimeters, choose millimeters and the values are right. To convert the values themselves, change them — for example with an [import](/en/import/import-products.html) — before or after you change the unit.
 
 ## Enter and paste values
 
