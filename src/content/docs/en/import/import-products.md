@@ -20,11 +20,13 @@ Every step has the same footer: **Cancel** at the left, and the step's own butto
 
 ## Before you start: the identifier attribute
 
-An import finds each product by its **identifier attribute** — the attribute that holds a unique code for every product, in most catalogs the SKU. Every row of your file needs a value for it.
+An import finds each product by its **identifier attribute** — the attribute that holds a unique code for every product, in most catalogs the SKU. Every row of your file needs a value for it, or for the article number when you map that instead — see [Map columns](#2--map-columns).
 
 If your account has no identifier attribute yet, the **Upload** step says so instead of offering the upload:
 
 > Choose the identifier attribute before you import products. An import finds the product to update for each row by this attribute's value, usually the SKU.
+
+The deletion steps say the same in their own words: *Choose the identifier attribute before you delete products from a file. The file names each product to delete by this attribute's value, usually the SKU.*
 
 Select **Assign attribute roles** beside the message and choose which of your attributes is the identifier. [Attribute roles](/en/concepts/attribute-roles.html) explains the role.
 
@@ -56,7 +58,7 @@ Each row of this step is one column of your file, under **Columns of the file**.
 | --- | --- |
 | **Earlier import** | The last import your account started with a column of this name — see [what is remembered](#what-is-remembered-for-the-next-file). |
 | **Name match** | The column's name matches an attribute's code or name. |
-| **Value match** | The column's values fit one attribute — every value is a GTIN, for example, or every value is one of an attribute's list values. It does not mean the values already exist in your catalog. |
+| **Value match** | The column's values fit one attribute — every value is a GTIN, for example, or every value is one of an attribute's allowed values. It does not mean the values already exist in your catalog. |
 | **AI suggestion** | A language model, for the columns the other three leave open. It sees the column names, up to 10 sample values of each, and your attributes — none of your stored products. |
 
 The icon at the start of each tag shows how sure the suggestion is — a green check for **high**, a yellow exclamation mark for **medium**, a red triangle for **low** — as a line above the rows repeats. **Check the low rows first.** A row you mapped or changed yourself has no tag.
@@ -80,7 +82,7 @@ A column you do not map is not imported, so **leave a column unmapped to leave t
 
 **Translations** have one target per language: a translatable attribute *Name* is offered as **Name** and as **Name (en)**, **Name (de)** and so on, for each language of your account.
 
-**Next** stays disabled until a column is mapped to the identifier attribute — or, if your account has one, to the [base code](/en/concepts/attribute-roles.html) attribute, by which the import then finds each product. Until then the step names the identifier attribute — for an identifier attribute called *SKU*: *Map a column to "SKU", the identifier attribute, before you continue.*
+**Next** stays disabled until a column is mapped to the identifier attribute — or, if your account has one, to the article number attribute, the one with the [base code](/en/concepts/attribute-roles.html) role, by which the import then finds each product. A row found by its article number addresses the product as a whole, not one of its product variants. Until then the step names the identifier attribute — for an identifier attribute called *SKU*: *Map a column to "SKU", the identifier attribute, before you continue.*
 
 **Data format**, under the rows, sets how numbers, lists and dates in the file are read:
 
@@ -145,7 +147,7 @@ The options decide whether the import may create products, and what it publishes
 
 | Option | What it does |
 | --- | --- |
-| **Create new products** | Lets a row whose identifier matches no product create one. |
+| **Create new products** | Lets a row whose identifier matches no product create one. A row that lacks a value its product type needs to split it into product variants is skipped. |
 | **Default product type** | The [product type](/en/concepts/product-types.html) a new product is created with when its row names none. Required while **Create new products** is on — **Next** stays disabled until you choose one. |
 | **Publish new products** | New products are published, so channels get them. |
 | **Create drafts without publishing** | New products aren't published — channels get them only once you publish them. Selected by default. |
@@ -162,7 +164,7 @@ Under **Existing products**, choose what channels get when a row updates a produ
 
 So to import existing products without publishing anything, keep the default, **Save changes without publishing**; the changed products show their unpublished changes until someone publishes them.
 
-These are the [publish settings](/en/import/data-sources.html#publish-settings) a data source has, under the same names. Here you choose one of the three options for existing products, where a data source lets you tick both of its settings:
+These are the [publish settings](/en/import/data-sources.html#publish-settings) a data source has, under the same names. Here you choose one of the three options for existing products, where a data source lets you tick **Apply changes to published products** and **Publish modified products** together:
 
 | Here | On a data source |
 | --- | --- |
@@ -182,15 +184,15 @@ If something is not what you want, go **Back** and change it. Select **Import pr
 
 ### After you start the import
 
-The job then takes the place of the steps, and **the import runs in the background**: you can leave the page or close your browser, and it carries on. While it is queued or running you can have an email sent when it completes — enter the address and select **Notify me**.
+The job then takes the place of the steps, and **the import runs in the background**: you can leave the page or close your browser, and it carries on. While it is queued or running you can have an email sent when it completes: select **Notify me** to be emailed at your own address, or enter another address first.
 
-When it has ended, the page shows how it ended — **Completed**, or **Failed** with *Couldn't finish "Import default". Select View details to see why.* — and what became of your file's records, as one sentence:
+When it has ended, the page shows how it ended — **Completed**, with *Check the warnings below.* when the run logged warnings, or **Failed** with *Couldn't finish "Import default". Select View details to see why.* — and what became of your file's records, as one sentence:
 
 > default (uploaded as products.csv): imported — 57 records created, 1,180 updated, and 3 skipped
 
 A count of none is left out. If some records could not be imported, the sentence counts them after the others, and if every record was refused, it says the file couldn't be imported. Every form the sentence takes, and what each means, is in [reading what a run did](/en/import/data-sources.html#reading-what-a-run-did). With **Create new products** off, every new product in the file is counted as skipped.
 
-**Download** beside your file's name gives you back the file the import read, **View details** opens the run with its log file, which names each skipped record and the publish options the import ran with, as *chosen for this import*, and **Continue to product list** takes you back. To find the run again later, see [background jobs](/en/troubleshooting/background-jobs.html). **The run is listed as *Import default*** — for every import and deletion from this menu.
+**Download** followed by your file's name — **Download products.csv** — under the sentence gives you back the file the import read, **View details** opens the run with its log file, which names each skipped record and the publish options the import ran with, as *chosen for this import*, and **Continue to product list** takes you back. To find the run again later, see [background jobs](/en/troubleshooting/background-jobs.html). **The run is listed as *Import default*** — for every import and deletion from this menu.
 
 ## Delete products
 
@@ -199,11 +201,11 @@ A count of none is left out. If some records could not be imported, the sentence
 Your file needs one column: the identifier of each product or product variant to delete. Any other columns are ignored.
 
 1. On the product list, select **Import** → **Products to delete**.
-2. **Upload** your file. Format detection, **File format** and the preview work as they do [for an import](#1--upload). This step shows no **Errors** list: check the preview before you go on.
+2. **Upload** your file. Format detection, **File format** and the preview work as they do [for an import](#1--upload), except that while the file is read the step says *Upload a file to continue.* rather than *Reading the file…*, and it shows no **Errors** list: check the preview before you go on.
 3. On **Map columns**, map the column that holds the identifiers to the identifier attribute: select **Select product** beside it and choose the one entry offered, the identifier attribute, shown with its key — `data.` followed by its code, for example `data.product_sku`. A column headed with the code itself is mapped for you. **Next** stays disabled until the column is mapped.
 4. On **Review**, read what will be deleted. The step names your file and the column it reads, and ends with a warning:
    > Deleted products and product variants are unpublished first, so channels stop getting them. This can't be undone.
-5. Select **Delete products**. The deletion starts and its job takes the place of the steps, as [for an import](#after-you-start-the-import); its sentence counts the records deleted — `default (uploaded as delete.csv): imported — 12 records deleted`. It runs in the background, so you can leave the page.
+5. Select **Delete products**. The deletion starts and its job takes the place of the steps, as [for an import](#after-you-start-the-import); its sentence counts the records deleted — *default (uploaded as delete.csv): imported — 12 records deleted*. It runs in the background, so you can leave the page.
 
 | The row's identifier matches | What is deleted |
 | --- | --- |
@@ -219,7 +221,11 @@ What happens to a deleted product:
 
 ## If the import does not start
 
-If you select **Import products** or **Delete products** and the job cannot start, **Review** says so first — *Couldn't start the import.* or *Couldn't start deleting the products.* — and why, and you can select the button again. If the start was refused, nothing was changed. If the answer was lost instead — the connection dropped, say — the job may have started all the same: pressing the button again then shows that job, with *Couldn't apply your changes — the import had already started with the earlier settings.* above it if you had changed anything since.
+If you select **Import products** or **Delete products** and the job cannot start, **Review** says so first — *Couldn't start the import.* or *Couldn't start deleting the products.* — and why, and you can select the button again. If the start was refused, nothing was changed. If the answer was lost instead — the connection dropped, say — the job may have started all the same: pressing the button again then shows that job. If you had changed anything since, the job runs with the earlier settings, and above it the page says:
+
+> Couldn't apply your changes — the import had already started with the earlier settings. To import with your changes, start the import again.
+
+A deletion says *the deletion had already started* and *To delete with your changes, start the deletion again.* To start again, open **Import** → **Products** — or **Products to delete** — from the product list.
 
 ## If you leave the page
 
