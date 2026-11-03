@@ -21,7 +21,7 @@ In **Channels**, select **New channel**, then select **Create** on one of the te
 The editor of a template channel has no **Feeds** step — a template channel always has exactly **one feed** — and no **Format** step. In their place it shows **Header template**, **Record template**, **Footer template** and **Options**.
 
 :::note
-**An existing CSV, JSON or Excel channel cannot be turned into a template channel** — its **Format** step offers only those three. Create a new channel from a template card instead. In the channels list a template channel shows **Text** in the *Format* column; that is a label, not a choice you can make.
+**An existing CSV, JSON or Excel channel cannot be turned into a template channel** — its **Format** step offers only those three. Create a new channel from a template card instead. In the channels list a template channel shows **Custom template** in the *Format* column; that is a label, not a choice you can make.
 :::
 
 **The content type is fixed by the card**, and the editor has no field to change it. The file is named with a `.txt` extension unless you set **File name** under **Options**.

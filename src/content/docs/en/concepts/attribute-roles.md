@@ -21,6 +21,21 @@ The app relies on these five roles. Assign each to one attribute.
 | `product.sku` | The stock keeping unit, the code that is unique for each product variant. |
 | `product.image` | The asset attribute that holds the product's images. |
 
+## The identifier and base code roles need an attribute that isn't translatable
+
+The attribute that holds `system.identifier` or `system.basecode` must not be **Translatable**: a product is matched by one value, not one per language. Saving an attribute that is both is refused with this message:
+
+> An attribute with the system.identifier or system.basecode role, or marked Indexed, can't be Translatable. Move the role to an attribute that isn't Translatable, or turn off Indexed.
+
+The refusal appears wherever you give an attribute a role:
+
+| Where | Opened from | Title of the refusal |
+| --- | --- | --- |
+| The section editor, when you choose **Save** | **Settings → Attributes & sections → the section**, or a section opened from a product type | `Couldn't save the section` |
+| The **Assign attribute roles** dialog | The **Assign attribute roles** button, which shows while a role the app needs is not assigned: in the product import and the product editor for `system.identifier`, and in the product list's search for `system.basecode` and the search roles | `Couldn't assign the role` |
+
+Give the role to an attribute that is not translatable instead. **Translatable** cannot be changed once an attribute is saved — see [A translatable attribute cannot be indexed or identify a product](./attributes.html#a-translatable-attribute-cannot-be-indexed-or-identify-a-product).
+
 ## A ready-made product type assigns the required roles
 
 When you create a [ready-made product type](/en/start/ready-made-product-types.html), its attributes get the required roles without you doing anything:
