@@ -23,18 +23,14 @@ The app relies on these five roles. Assign each to one attribute.
 
 ## The identifier and base code roles need an attribute that isn't translatable
 
-The attribute that holds `system.identifier` or `system.basecode` must not be **Translatable**: a product is matched by one value, not one per language. Saving an attribute that is both is refused with this message:
+The attribute that holds `system.identifier` or `system.basecode` must not be **Translatable**: a product is matched by one value, not one per language. Give either role to an attribute that is not translatable. **Translatable** cannot be changed once an attribute is saved, so a translatable attribute cannot be made to fit — see [A translatable attribute cannot be indexed or identify a product](./attributes.html#a-translatable-attribute-cannot-be-indexed-or-identify-a-product) for the message the app shows.
 
-> An attribute with the system.identifier or system.basecode role, or marked Indexed, can't be Translatable. Move the role to an attribute that isn't Translatable, or turn off Indexed.
+| Where the role is refused | Title of the refusal |
+| --- | --- |
+| The section editor, when you choose **Save** — under **Settings → Attributes & sections**, or a section opened from a product type | `Couldn't save the section` |
+| The **Assign attribute roles** dialog | `Couldn't assign the role` |
 
-The refusal appears wherever you give an attribute a role:
-
-| Where | Opened from | Title of the refusal |
-| --- | --- | --- |
-| The section editor, when you choose **Save** | **Settings → Attributes & sections → the section**, or a section opened from a product type | `Couldn't save the section` |
-| The **Assign attribute roles** dialog | The **Assign attribute roles** button, which shows while a role the app needs is not assigned: in the product import and the product editor for `system.identifier`, and in the product list's search for `system.basecode` and the search roles | `Couldn't assign the role` |
-
-Give the role to an attribute that is not translatable instead. **Translatable** cannot be changed once an attribute is saved — see [A translatable attribute cannot be indexed or identify a product](./attributes.html#a-translatable-attribute-cannot-be-indexed-or-identify-a-product).
+The **Assign attribute roles** button shows while a role the app needs is not assigned: in the product import and the product editor for `system.identifier`, and in the product list's search for `system.basecode` and the search roles.
 
 ## A ready-made product type assigns the required roles
 

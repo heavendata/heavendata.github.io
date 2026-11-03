@@ -91,19 +91,20 @@ A section that holds such an attribute is not saved. Choosing **Save** shows:
 
 > An attribute with the system.identifier or system.basecode role, or marked Indexed, can't be Translatable. Move the role to an attribute that isn't Translatable, or turn off Indexed.
 
-**Translatable** cannot be changed once an attribute is saved, so fix it on the other side:
+The **Assign attribute roles** dialog refuses the same roles in the same words.
 
-- turn off **Indexed** on the attribute, or
-- move the role to an attribute that is not translatable.
-
-A new attribute that is not saved yet can instead have **Translatable** turned off.
+| The attribute | What to do |
+| --- | --- |
+| Saved, and marked **Indexed** | Turn off **Indexed**. **Translatable** cannot be changed once an attribute is saved. |
+| Saved, with `system.identifier` or `system.basecode` | Move the role to an attribute that is not translatable. |
+| New, not saved yet | Turn off **Translatable**, or do either of the above. |
 
 ## Delete an attribute
 
 Deleting an attribute deletes its values on every product and removes it from every product type that includes it. It cannot be undone.
 
 1. In the sidebar, open **Settings → Attributes & sections**, and select the section that holds the attribute.
-2. On the attribute's row, choose ⋯ **More actions** → **Delete**. The app asks `Delete "‹name›"?`, says how many product types the attribute is removed from, and that its values on every product are deleted when you save the section. Confirm with **Delete attribute**.
+2. On the attribute's row, choose ⋯ **More actions** → **Delete**. The app asks `Delete "‹name›"?`; confirm with **Delete attribute**.
 3. Choose **Save**. The attribute is deleted only when the section is saved. While a product type still includes it, the save stops at `Couldn't save the section` — *At least one product type still includes "‹name›".* Choose **Remove and save** to remove the attribute from every product type that includes it and save the section.
 
 ### Filters and sorts that named the attribute
@@ -132,7 +133,7 @@ Before you delete an attribute, check which channels, product views and collecti
 Deleting a section deletes every attribute in it, with their values on every product, and removes those attributes from every product type that includes them. It cannot be undone.
 
 1. In the sidebar, open **Settings → Attributes & sections**.
-2. On the section's row, open the ⋮ menu and choose **Delete** — or, with the section open, choose **Delete** at the right end of the bar that holds **Save**. The app asks `Delete "‹name›" and its ‹n› attributes?` (`… and its attribute?` for one, `Delete "‹name›"?` for an empty section), names up to three of the attributes and how many product types they are removed from.
+2. On the section's row, open the ⋮ menu and choose **Delete** — or, with the section open, choose **Delete** at the right end of the bar that holds **Save**. The app asks `Delete "‹name›" and its ‹n› attributes?` (`… and its attribute?` for one, `Delete "‹name›"?` for an empty section).
 3. Confirm with **Delete section**. The section is deleted at once; there is no **Save** to choose.
 
 | What stands in the way | What the app does |
@@ -147,7 +148,7 @@ The attribute type and translatable settings affect how data is stored in databa
 
 1. Export products (product list > export) and select the product identifier column and the column you need to change
 2. Verify your export and ensure it contains the proper data
-3. [Delete the attribute](#delete-an-attribute). Its values on every product are deleted with it. Until step 4, filter conditions on it are ignored — see [Filters and sorts that named the attribute](#filters-and-sorts-that-named-the-attribute).
+3. [Delete the attribute](#delete-an-attribute). Until step 4, filter conditions on it are ignored — see [Filters and sorts that named the attribute](#filters-and-sorts-that-named-the-attribute).
 4. Create a new attribute with the same name and code. It starts with no values on any product. Filter conditions on that code apply to it again; check that each still fits the new type.
 5. Enable the new attribute in product types
 6. Re-import products from step 2 (product list > import). This is what brings the values back.
