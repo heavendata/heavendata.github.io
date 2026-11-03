@@ -67,7 +67,7 @@ If the values of a column do not fit the attribute it is mapped to, the row says
 
 > The import misreads or rejects the value in 3 of the 10 rows checked for this attribute. Select Edit pipeline to change the conversion, or map the column to another attribute.
 
-The warning does not stop the import. Change the conversion with the button at the left of the row, or map the column elsewhere.
+The warning does not stop the import. Change the conversion with the button at the left of the row, or map the column elsewhere. Every node a conversion can use is listed in [Field processing pipeline nodes](/en/reference/pipeline-nodes.html).
 
 Suggestions take a moment on a large file. The step shows *Getting mapping suggestions…* while it waits, and **Next** waits too. If the language model failed or could not answer in time, a note above the rows says how many columns it could not suggest for — map those yourself, or select **Auto map** to ask again.
 

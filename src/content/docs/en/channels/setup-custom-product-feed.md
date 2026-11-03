@@ -93,7 +93,7 @@ When you import through a [data source](/en/import/data-sources.html), the mappi
 | Field | Key | What the import does with it |
 | --- | --- | --- |
 | Categories | `categories` | Sets the categories the product is in, given as [category keys](/en/concepts/categories.html). |
-| Prices | `prices` | Sets the product variant's prices. |
+| Prices | `prices` | Sets the product variant's prices, and finds or creates their [price lists](/en/concepts/price-lists.html#how-an-import-finds-a-price-list). |
 | Delivery windows | `deliverywindows` | Sets the product variant's delivery windows. |
 | Variant configuration ID | `variantspaceid` | Chooses the variant configuration a **new** product is created with — either its ID, or a product type key, in which case the best-matching variant configuration of that product type is used. |
 | Language code | `meta.languagecode` | Names the language the row's values are in, for translatable attributes. |

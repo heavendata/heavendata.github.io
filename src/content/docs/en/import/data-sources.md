@@ -91,7 +91,7 @@ source with two product datasets:
 | Dataset | What the file carries | Settings it needs |
 | --- | --- | --- |
 | `variants.csv` | New and changed products, ready to go live | **Publish new products** and **Publish modified products** |
-| `prices.csv` | Price changes only | **Apply changes to published products** only — a price change should reach what is live, but must not publish a product nobody has finished |
+| `prices.csv` | Price changes only — each price finds or creates its [price list](/en/concepts/price-lists.html) | **Apply changes to published products** only — a price change should reach what is live, but must not publish a product nobody has finished |
 
 Set the data source's settings for the variant file, then give the price file its own:
 

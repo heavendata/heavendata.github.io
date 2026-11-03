@@ -70,7 +70,7 @@ A column's header names the attribute, not the currency; each cell names the cur
 
 ## Money attributes and prices
 
-A product variant's selling prices are its **prices**, which an import fills; each belongs to a **price list** — a named set of prices in one currency, such as retail prices in euros.
+A product variant's selling prices are its **prices**, which an import fills; each belongs to a [**price list**](/en/concepts/price-lists.html) — a named set of prices in one currency, such as retail prices in euros.
 
 | | Money attribute | Prices |
 | --- | --- | --- |

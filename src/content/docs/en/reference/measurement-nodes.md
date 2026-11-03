@@ -1,11 +1,11 @@
 ---
 title: "Measurement nodes"
-description: "The three field pipeline nodes for measurements — Text to measurements, Convert unit and Measurements to text: every setting, the presets and the pattern placeholders, what each node outputs, and the log warning a refused value leaves."
+description: "The three field processing pipeline nodes for measurements — Text to measurements, Convert unit and Measurements to text: every setting, the presets and the pattern placeholders, what each node outputs, and the log warning a refused value leaves."
 sidebar:
-  order: 5
+  order: 6
 ---
 
-Three nodes of the **Field processing pipeline** read, convert and write measurements — numbers with a unit, and [measurement sets](/en/concepts/measurements.html) such as length × width × height. All three are offered in imports and in channel feeds alike.
+Three nodes of the field processing pipeline read, convert and write measurements — numbers with a unit, and [measurement sets](/en/concepts/measurements.html) such as length × width × height. All three are offered in imports and in channel feeds alike.
 
 | Node | What it does | Listed in **Add node** under |
 | --- | --- | --- |
@@ -13,7 +13,7 @@ Three nodes of the **Field processing pipeline** read, convert and write measure
 | [Convert unit](#convert-unit) | Converts one number from one unit to another, such as cm to mm | Numbers |
 | [Measurements to text](#measurements-to-text) | Writes measurements and their unit as text, such as `20 x 10 x 5 cm` | Both Text and Numbers |
 
-**To add a node**, open the field's pipeline with the arrow button beside the field (pointing at it shows **Edit pipeline**) — on a feed's fields in a channel, on a data source dataset's **Mapping** tab, or on the **Map columns** step of an import. In the pipeline, point at a node and choose the **+** that appears beneath it.
+How to open a field's pipeline and add a node, and every other node, are on [Field processing pipeline nodes](/en/reference/pipeline-nodes.html#how-a-pipeline-works).
 
 **A node gets a unit from a Source field connected directly to it, or from Text to measurements.** A source field that reads a number with a unit, a measurement set or one of its measurements passes its unit on, and **Text to measurements** outputs the unit it read. Any other node's output carries no unit: **Convert unit** outputs a plain number, so to convert and then write text, set the unit in **Measurements to text** instead of chaining the two.
 
@@ -115,11 +115,11 @@ A pattern can leave measurements out and repeat them. Every `{` needs a closing 
 
 ## Preview
 
-A node's **Preview** uses the unit of the Source field connected to it. For a Source field with a unit, the first test input offers **Number** or **Measurements** — for a measurement set, *Enter 3 numbers, such as 20 x 10 x 5 cm*. In a feed, it is the default; in an import, it is listed after **Text**.
+A node's [Preview](/en/reference/pipeline-nodes.html#test-a-node-in-the-preview) uses the unit of the Source field connected to it. For a Source field with a unit, the first test input offers **Number** or **Measurements** — for a measurement set, *Enter 3 numbers, such as 20 x 10 x 5 cm*. In a feed, it is the default; in an import, it is listed after **Text**.
 
 ## When a value is refused
 
-A node that can't handle a value leaves **that field** out of the record. The rest of the record is written, and in an import the value stored before stays. The run's log has one warning for the value. Each message begins *The record was imported without this field's value.* in an import, or *The record was exported without this field's value.* in a feed, and goes on as below.
+A node that can't handle a value leaves **that field** out of the record, as any node does — see [when a node can't build a value](/en/reference/pipeline-nodes.html#when-a-node-cant-build-a-value). The run's log has one warning for the value. Each message begins *The record was imported without this field's value.* in an import, or *The record was exported without this field's value.* in a feed, and goes on as below.
 
 **Text to measurements** as the last node of a field with a unit, and an import into a field with a unit — as an import writes them:
 

@@ -54,13 +54,64 @@ A product feed writes one row per product variant, and one row for a product tha
 | `meta.variantdimensions` | Variant dimensions | Product variants | The attribute codes that split the product into product variants, one list per level from the top, for example `[["color"], ["size"]]`. Taken from the product's variant configuration, so the same on every row of one product. |
 | `meta.dimensionpath` | Variant path | Product variants | This row's values for those attributes, one entry per level from the top, for example `["red", "M"]`. Where one level splits on several attributes, its values are joined by commas. Not on the product's top level. |
 | `meta.isvirtual` | Has product variants | Product variants | `true` on a row that has product variants below it, `false` on the lowest level. A feed mapped on the Mapping step writes the lowest level only, so there it is always `false`. |
-| `prices` | Prices | Prices and availability | The row's prices, as a list. Only on rows that have prices. |
+| `prices` | Prices | Prices and availability | The row's prices, as a list — see [Prices](#prices). Only on rows that have prices. |
 | `deliverywindows` | Delivery windows | Prices and availability | The row's delivery windows, as a list: named periods, each with an optional `from` and `until` date. An import sets them; the product editor does not. Only on rows that have delivery windows. |
 | `id.stage` | *Not offered* | — | `draft` or `live` — which version of the products the run exported. The same on every row of one run. |
 
 A column mapped from a key a row does not carry is empty on that row.
 
 Two further fields appear on the Mapping step of an **import** but are not in an exported record: **Variant configuration ID** and **Language code**. See [which fields an import can set](/en/channels/setup-custom-product-feed.html#which-fields-an-import-can-set).
+
+## Prices
+
+Each entry of `prices` is one price of the row's product variant, in one [price list](/en/concepts/price-lists.html). In a template, `record._prices` is the list, and each price has these keys:
+
+| Key | What it holds |
+| --- | --- |
+| `amount` | The price |
+| `special_amount` | The sale price, or empty when there is none |
+| `effective_amount` | The sale price where there is one, otherwise the price |
+| `valid_from`, `valid_until` | The start and end of the validity period, in UTC, or empty |
+| `price_list.id` | The price list's own ID. It never changes while the list exists, whatever is renamed |
+| `price_list.name`, `price_list.currency`, `price_list.type` | The price list's name, currency and type, as they are now |
+| `price_list.external_ids` | Every external ID of the price list, by its system, such as `erp` and `shop`. Empty when the list has none |
+| `price_list.external_id` | One external ID: the one under the system that comes first in character-code order — digits before capital letters, capital letters before small ones. Empty when the list has none |
+
+`record._prices` holds every price of the variant — in every price list, and every validity period. Once a price list has external IDs in more than one system, read the one you need by its system rather than `external_id`. This writes the price a customer pays, with its currency, for each price whose list has an external ID under `erp`, and skips the others:
+
+```
+{{ for p in record._prices }}{{ erp = p.price_list.external_ids.erp }}{{ if erp }}{{ p.effective_amount }} {{ p.price_list.currency }} {{ erp }}
+{{ end }}{{ end }}
+```
+
+And this lists each price's list by name, with every external ID it has, as `system=ID`:
+
+```
+{{ for p in record._prices }}{{ p.price_list.name }}:{{ for e in p.price_list.external_ids }} {{ e.key }}={{ e.value }}{{ end }}
+{{ end }}
+```
+
+**A JSON feed spells the keys in camel case** and nests the price list under `priceListRef`. It has no effective amount:
+
+```json
+{
+  "_type": "price",
+  "amount": 10.0,
+  "specialAmount": 8.5,
+  "validFrom": "2026-03-09T00:00:00+00:00",
+  "validUntil": "2026-04-08T00:00:00+00:00",
+  "priceListRef": {
+    "id": "f1e2d3c4-b5a6-4978-8695-a4b3c2d1e0f9",
+    "currency": "EUR",
+    "externalId": "retail-de",
+    "externalIds": { "erp": "retail-de", "shop": "S-1" },
+    "name": "Retail DE",
+    "type": "retail"
+  }
+}
+```
+
+For a price list without external IDs, `externalId` is `null` and `externalIds` is `{}`.
 
 ## Custom entity keys
 
@@ -84,3 +135,4 @@ In a template the two are `_meta.name` and `_meta.identifier`; reading them on a
 - [Custom product feeds → Mapping](/en/channels/setup-custom-product-feed.html#mapping) — picking these fields as sources
 - [The data in a template](/en/channels/templates/data.html) — `record`, `variants` and attribute values
 - [Product variants](/en/concepts/product-variants.html) — how a product type splits a product into product variants
+- [Price lists](/en/concepts/price-lists.html) — what a price list is, and its external IDs
