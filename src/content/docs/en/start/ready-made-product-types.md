@@ -9,7 +9,7 @@ A ready-made product type is a product type we have already set up for one kind 
 
 There are 149 ready-made product types in 18 groups, listed below. Every one of them starts with the same 13 attributes, then adds the attributes its kind of product needs. Names, values and search are in English or German, depending on your account's languages ([which language](/en/concepts/product-types.html#which-language-a-ready-made-product-type-is-created-in)).
 
-To create one, go to **Settings → Product types → New product type**, search or scroll to the card, select it and choose **Create**. The steps, what you can untick and what a second product type reuses are on [Product types](/en/concepts/product-types.html#create-a-product-type-from-a-ready-made-one). After [Standard setup](/en/start/setup-options.html#standard-setup) your account already has one of them, *General products*.
+To create one, go to **Settings → Product types → New product type**, search or scroll to the card, select it and choose **Create**. The steps, what you can change before you create it and what a second product type reuses are on [Product types](/en/concepts/product-types.html#create-a-product-type-from-a-ready-made-one). After [Standard setup](/en/start/setup-options.html#standard-setup) your account already has one of them, *General products*.
 
 ## What every ready-made product type brings
 

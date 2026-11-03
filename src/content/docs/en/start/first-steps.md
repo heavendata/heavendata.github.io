@@ -20,8 +20,8 @@ You can build attributes and product types one by one under **Settings → Attri
 
 1. In the sidebar, open **Settings → Product types** and choose **New product type**.
 2. The **New product type** page lists the ready-made product types as cards, in groups. Type what you sell into **Search product types**, for example `shoes`, or scroll to the group.
-3. Select the card. The create page opens, titled with the product type's name, and lists its variant configurations and every attribute it brings, all ticked.
-4. Untick any attribute you don't need ([what each tick, badge and lock means](/en/concepts/product-types.html#choose-its-attributes)).
+3. Select the card. The product type's page opens with its name, its attributes and its variant configurations. Nothing is created yet.
+4. Untick any attribute you don't need, or rename the product type ([what each tick, badge and line means](/en/concepts/product-types.html#choose-its-attributes)).
 5. Choose **Create**. The product type is created with its attributes and sections, and the **Product types** list opens.
 
 Now look at what was created:
