@@ -21,16 +21,18 @@ Your account's languages are the languages a translatable attribute can hold a v
 
 ## A language's settings
 
-| Field | What it does |
-| --- | --- |
-| **Language** | The language itself, chosen from a list. It can't be changed after you save, because its translations are stored under it. To use another language, add a new language. |
-| **Default language** | Values without a language are taken to be in this language, for example when an attribute is made translatable. One language at most is the default: turning it on for one language turns it off for the one that was the default before. |
-| **Fallback language** | Optional. The language whose value is used for this one where a translatable attribute has no value in it — see [Fallback languages](#fallback-languages). It is chosen from your account's languages. |
-| **Required language** | A product variant can't be published while a **Required** translatable attribute has no value in this language. A value in the fallback language doesn't count — see [Required languages](#required-languages). |
-| **Custom language codes** | Optional. Codes your import files use for this language, if the accepted codes don't include them. Enter one per line. |
-| **Accepted language codes** | Not a field you fill in: the codes an import accepts for this language, worked out from **Language** and **Custom language codes** as you edit them. |
+A language's page groups its settings under three headings: **Language**, **Missing translations** and **Imports**.
 
-Click **Save** to keep your changes, or **Cancel** to leave without saving.
+| Section | Field | What it does |
+| --- | --- | --- |
+| **Language** | **Language** | The language itself, chosen from a list. It can't be changed after you save, because its translations are stored under it. To use another language, add a new language. |
+| **Language** | **Default language** | Values without a language are taken to be in this language, for example when an attribute is made translatable. One language at most is the default: turning it on for one language turns it off for the one that was the default before, and turning it off leaves your account with no default language. |
+| **Missing translations** | **Fallback language** | Optional. The language whose value is used for this one where a translatable attribute has no value in it — see [Fallback languages](#fallback-languages). It is chosen from your account's languages. |
+| **Missing translations** | **Required language** | A product variant can't be published while a **Required** translatable attribute has no value in this language. A value in the fallback language doesn't count — see [Required languages](#required-languages). |
+| **Imports** | **Custom language codes** | Optional. Codes your import files use for this language, if the accepted codes don't include them. Enter one per line. |
+| **Imports** | **Accepted language codes** | Not a field you fill in: the codes an import accepts for this language, worked out from **Language** and **Custom language codes** as you edit them. |
+
+Click **Save** to keep your changes, or **Cancel** to leave without saving. A saved language also has **Delete**.
 
 ## Fallback languages
 
