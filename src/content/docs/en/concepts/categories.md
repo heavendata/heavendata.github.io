@@ -20,7 +20,7 @@ Categories are how you file products: category trees you build once, each a top-
 
 ## Building the tree
 
-Your trees are under **Settings → Categories**, on the **Category trees** page, which lists them by name. **New category tree** creates one; click a category tree to open it.
+Your trees are under **Settings → Categories**, which lists your category trees by name. **New category tree** creates one; click a category tree to open it.
 
 In a tree:
 
