@@ -15,20 +15,20 @@ and its billing.
 1. In the app, open the user menu: the person icon at the top right of the header.
 2. Beside your organization's name, select **Organization settings**.
 
-If you belong to more than one organization, the user menu lists the others under
-**Switch account**, each with its own **Organization settings** link where you may
-manage that organization.
+To manage another organization, open the user menu and look under
+**Switch account**, which lists your other accounts by organization. Select
+**Organization settings** beside the organization; it is there for each one you may
+manage.
 
 ## Find your way around
 
-Organization settings has no sidebar. Its navigation is the menu bar across the
-top of every page:
+Organization settings is navigated from the menu bar across the top of every page:
 
 | Menu bar entry | What it opens |
 | --- | --- |
-| **Dashboard** | The organization's details and its accounts, with **Edit organization**. |
+| **Dashboard** | The organization's details and its accounts, with **Edit organization**, where you can [require two-factor authentication](/en/organization-settings/user-management.html#require-two-factor-authentication). |
 | **Accounts** | The organization's accounts. |
-| **Team** | **Users**, **User Groups** and **Pending Invitations**. |
+| **Team** | **Users**, **User Groups** and **Pending Invitations**, where you [add users](/en/organization-settings/user-management.html#adding-users). |
 | **Transactions** | The organization's invoices. |
 | **Settings** | **Billing** and **Domains**, where you add [email domains](/en/organization-settings/user-management.html#email-domains). |
 

@@ -7,7 +7,7 @@ sidebar:
 ---
 Our platform provides a rich set of administration features including
 
-* Sub accounts
+* Several accounts per organization
 * User permission management
 * Support for agencies and consultants
 
@@ -19,11 +19,11 @@ Each user represents a single person. There are no shared logins supported. Each
 ## Organizations
 An organization represents a heavendata customer. That's where things like billing addresses and tax-related settings are stored.
 
-## (Sub) Accounts
+## Accounts
 Each account is a fully separated PIM database. An organization has at least one account. Use additional accounts if you need a separate playground database or need separated accounts for multiple departments or customers.
 
-## Organization Memberships
-Users can have access to multiple organizations and their accounts. If a user has access to an organization, we call him a member. You can invite new or existing users to join your organization, which will make them members.
+## Users in several organizations
+A user can belong to more than one organization and work in its accounts. You can [invite new or existing users](/en/organization-settings/user-management.html#adding-users) to join your organization.
 
 ## User Groups
 Each organization can have user groups for permission management. This allows you to configure permissions at a central place instead of managing them for each user separately.
