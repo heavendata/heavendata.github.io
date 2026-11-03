@@ -35,8 +35,9 @@ The page that opens is the page every product type has ([Change a product type](
 | **New** badge on a section or attribute | Your account does not have it yet. **Create** creates it, and an attribute you leave out is not created. The line above the sections says so: *A New badge marks attributes and sections your account doesn't have yet. They're created only when you select Create, and never if you leave without creating the product type. An attribute you leave out isn't created.* |
 | An included attribute without a badge | Your account already has this attribute. It is reused as it is, not created again, and shown under the section of yours that holds it, whatever that section is called. Untick it to leave it out, unless it is a [common attribute](./common-attributes.html), which every product type includes. |
 | An attribute that is not ticked, without a badge | An attribute of yours in one of those sections that the ready-made product type does not include. Tick it to include it. |
-| A ticked attribute you cannot untick, with the line *The variant configuration "Color, then size" splits a product into product variants by this attribute, so this attribute is always included.* | A variant configuration splits products by it, so it is always included. |
 | *Your account already has every attribute this product type needs. Create adds only the product type.* in place of the line | Nothing new is created; **Create** adds the product type alone. |
+
+An attribute a variant configuration splits by, such as *Color* in *Color, then size*, is always included and its tick cannot be removed; [Attribute sections](#attribute-sections) lists every kind of tick.
 
 Reuse works by the attribute's [role](./attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles), not its name: an attribute an earlier ready-made product type created is reused even after you renamed it, and an attribute you built by hand is not recognized, even with the same name, so the ready-made product type creates its own beside it.
 
@@ -53,11 +54,11 @@ What **Create** creates:
 | | What happens |
 | --- | --- |
 | Attributes | Each new attribute still included is created, not required and not translatable, with its values to pick from where it has a list. A value list also accepts any other value. |
-| Sections | A new section is created for each new attribute's section, named after the ready-made section. A section of yours with exactly that name is used instead. A new section none of whose attributes is still included is not created. |
+| Sections | A new section is created for each new attribute's section, named after the ready-made section. A section of yours with exactly that name is used instead. A new section is not created when you have left out all of its attributes. |
 | Roles | SKU, Article number, Name and Images get the [required roles](./attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles), unless an attribute of yours already holds the role. |
 | The product type | Created with the name, key, included attributes and variant configurations the page shows. The **Key** starts as the English name in kebab case, `tops-and-shirts`, whatever language the name is in. An import that names a product type uses this key. |
 
-**Create** is refused, and nothing is created, when an attribute a variant configuration splits by cannot split products ([which attributes can](./product-variants.html#which-attributes-can-split-a-product)). The message names the attribute: *Couldn't create the product type. "Color" can't split products into product variants. Only Text, Integer number and Number with decimals attributes that aren't translatable can. Choose another attribute.* It is also refused when an attribute of yours that the product type reuses is deleted while the page is open: *Couldn't create the product type. The attribute "Care instructions" no longer exists. Leave it out, then select Create again.*
+**Create** is refused, and nothing is created, when an attribute a variant configuration splits by cannot split products; the message names the attribute ([which attributes can](./product-variants.html#which-attributes-can-split-a-product)). It is also refused when an attribute of yours that the product type reuses is deleted while the page is open: *Couldn't create the product type. The attribute "Care instructions" no longer exists. Leave it out, then select Create again.*
 
 ### Create the same one twice
 
@@ -107,7 +108,7 @@ To change a section's attributes from here, choose the section's pencil, **Edit 
 
 ### Variant configurations
 
-A product type's variant configurations are listed under **Variant configurations**, each with the attributes that split it, level by level. **New variant configuration** adds one. **Allow products without product variants**, available once the product type has a variant configuration, lets a product of this type also be created without product variants. A ready-made product type comes with its variant configurations, for example *Color, then size*, and with **Allow products without product variants** ticked; the [list](/en/start/ready-made-product-types.html) counts that as the variant configuration *No product variants*. See [Product variants](./product-variants.html).
+A product type's variant configurations are listed under **Variant configurations**, each with the attributes that split it, level by level. **New variant configuration** adds one, and **Allow products without product variants** lets products of this type also be created without them. A ready-made product type comes with its variant configurations, for example *Color, then size*, and with **Allow products without product variants** ticked; the [list](/en/start/ready-made-product-types.html) counts that as the variant configuration *No product variants*. See [Product variants](./product-variants.html).
 
 ## Related articles
 

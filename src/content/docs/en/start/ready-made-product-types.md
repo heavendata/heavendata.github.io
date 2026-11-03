@@ -18,7 +18,7 @@ Every ready-made product type creates these 13 attributes in three sections, unl
 | Section | Attribute | Type | Note |
 | --- | --- | --- | --- |
 | General | SKU | Text | Identifies one product variant. |
-| General | Article number | Text | The code a product's variants share. |
+| General | Article number | Text | The code all product variants of a product share. |
 | General | Name | Text | |
 | General | Description | Text | |
 | General | Brand | Text | |

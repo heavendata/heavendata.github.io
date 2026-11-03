@@ -67,4 +67,4 @@ This lets you prepare a product without pushing incomplete data to your channels
 | Draft | Not visible to channels. No published version exists yet. |
 | Published | Visible to channels, with the latest saved changes. |
 | Modified | Visible to channels, without the latest saved changes. An older version is published and there is a newer internal version. |
-| Partially published | Only some of the product's variants are visible to channels. |
+| Partially published | Only some of the product's product variants are visible to channels. |

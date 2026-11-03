@@ -4,7 +4,7 @@ description: "How a variant configuration splits a product into product variants
 sidebar:
   order: 5
 ---
-Product variants let you manage all versions of one product together. A typical example is a fashion product sold in several sizes.
+A variant configuration says how a product of a product type is split into product variants: which attributes split it, and which attributes hold one value for the whole product. Product variants let you manage all versions of one product together. A typical example is a fashion product sold in several sizes.
 
 | Product name | Size code | Material | SKU |
 | --- | --- | --- | --- |
