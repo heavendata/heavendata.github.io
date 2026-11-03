@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-To import products from a file, open the [product list](/en/products/product-list.html) and select **Import** → **Products**. To delete the products a file lists, select **Import** → **Products to delete** instead. Both walk one file through a few steps, end on a **Review** step that says what the job will do, and then run in the background.
+To import products from a file, open the [product list](/en/products/product-list.html) and select **Import** → **Products**. To delete the products a file lists, select **Import** → **Products to delete** instead — see [Delete products](#delete-products). Both walk one file through a few steps, end on a **Review** step that says what the job will do, and then run in the background.
 
 Use these for a one-off file. For a file that arrives again and again — from a supplier, or every night — set up a [data source](/en/import/data-sources.html), which keeps its mapping and runs on a schedule; a supplier can upload the files to the [heavendata FTP server](/en/import/ftp-pull.html). To run a file through a data source's existing mapping instead, use **Upload and import** on the data source — see [running files you have to hand](/en/import/data-sources.html#running-files-you-have-to-hand).
 
@@ -135,7 +135,7 @@ A custom format needs a pattern: until you enter one, **Next** stays disabled an
 
 #### What is remembered for the next file
 
-When the import starts, your account remembers each mapped column — its name, its attribute and its conversion. The next file with a column of the same name opens with it mapped, tagged **Earlier import**. Nothing is remembered from an import you do not start.
+When the import starts, your account remembers each mapped column — its name, its attribute and its conversion. The next file with a column of the same name opens with it mapped, tagged **Earlier import**. Only an import that starts is remembered.
 
 The **Data format** and the **Import options** are not remembered; set them for each file.
 
@@ -158,7 +158,7 @@ Under **Existing products**, choose what channels get when a row updates a produ
 
 | Option | What it does |
 | --- | --- |
-| **Apply changes to published products** | Published products get the values from the file, so channels get them. Nothing that was not published becomes published. |
+| **Apply changes to published products** | Published products get the values from the file, so channels get them. Products never published stay unpublished. |
 | **Publish modified products** | Each product variant the import finds by a row's identifier attribute value is published with all its changes, including one never published before. A row without an identifier attribute value publishes nothing. |
 | **Save changes without publishing** | Published products change, but channels see the new values only once you publish the changes. Selected by default. |
 
@@ -180,7 +180,7 @@ These are the [publish settings](/en/import/data-sources.html#publish-settings) 
 
 > Existing values in the attributes you map are replaced, and an empty cell clears the value. This can't be undone.
 
-If something is not what you want, go **Back** and change it. Select **Import products** to start the import. Nothing asks again.
+If something is not what you want, go **Back** and change it. Select **Import products** to start the import.
 
 ### After you start the import
 
@@ -190,7 +190,8 @@ When it has ended, the page shows how it ended — **Completed**, with *Check th
 
 > default (uploaded as products.csv): imported — 57 records created, 1,180 updated, and 3 skipped
 
-A count of none is left out. If some records could not be imported, the sentence counts them after the others, and if every record was refused, it says the file couldn't be imported. Every form the sentence takes, and what each means, is in [reading what a run did](/en/import/data-sources.html#reading-what-a-run-did). With **Create new products** off, every new product in the file is counted as skipped.
+An import from the product list always names its file *default*, with your file's name after it.
+A count of none is left out. If some records could not be imported, the sentence counts them after the others, and if every record was refused, it says the file couldn't be imported. Every form the sentence takes, and what each means, is in [reading what a run did](/en/import/data-sources.html#reading-what-a-run-did).
 
 **Download** followed by your file's name — **Download products.csv** — under the sentence gives you back the file the import read, **View details** opens the run with its log file, which names each skipped record and the publish options the import ran with, as *chosen for this import*, and **Continue to product list** takes you back. To find the run again later, see [background jobs](/en/troubleshooting/background-jobs.html). **The run is listed as *Import default*** — for every import and deletion from this menu.
 
@@ -205,19 +206,16 @@ Your file needs one column: the identifier of each product or product variant to
 3. On **Map columns**, map the column that holds the identifiers to the identifier attribute: select **Select product** beside it and choose the one entry offered, the identifier attribute, shown with its key — `data.` followed by its code, for example `data.product_sku`. A column headed with the code itself is mapped for you. **Next** stays disabled until the column is mapped.
 4. On **Review**, read what will be deleted. The step names your file and the column it reads, and ends with a warning:
    > Deleted products and product variants are unpublished first, so channels stop getting them. This can't be undone.
-5. Select **Delete products**. The deletion starts and its job takes the place of the steps, as [for an import](#after-you-start-the-import); its sentence counts the records deleted — *default (uploaded as delete.csv): imported — 12 records deleted*. It runs in the background, so you can leave the page.
+5. Select **Delete products**. The deletion starts and its job takes the place of the steps, as [for an import](#after-you-start-the-import); its sentence counts the records deleted — *default (uploaded as delete.csv): imported — 12 records deleted*. 
 
 | The row's identifier matches | What is deleted |
 | --- | --- |
 | A product | The product with all its product variants |
 | One product variant | That product variant, with any product variants below it. The rest of the product stays |
 | Nothing | Nothing — the row is skipped and the log says so |
+| A product or product variant that a published product or record still requires | Nothing — the row is skipped with a warning in the log, and the other rows go on |
 
-What happens to a deleted product:
-
-- It is **unpublished first**, so channels stop receiving it.
-- **References to it from other products are removed.**
-- If a published product or record still requires it, it is **not deleted**: the row is skipped with a warning in the log, and the other rows go on.
+References to a deleted product from other products are removed.
 
 ## If the import does not start
 
@@ -235,6 +233,6 @@ A deletion says *the deletion had already started* and *To delete with your chan
 
 Select **Discard settings** to leave and lose the file, the mapping and the options, or **Keep editing** to stay. Reloading the page or closing the tab gets your browser's own warning instead. The deletion steps ask *Discard your deletion settings?* the same way. Before a file is chosen there is nothing to lose, and nothing asks.
 
-The mappings of earlier imports are remembered whatever you choose — see [what is remembered for the next file](#what-is-remembered-for-the-next-file). Once the import has started, leaving the page does not stop it, and nothing asks.
+The mappings of earlier imports are remembered whatever you choose — see [what is remembered for the next file](#what-is-remembered-for-the-next-file). Once the import has started, nothing asks.
 
 <!-- Screenshot: the Map columns step with Earlier import, Name match and AI suggestion tags and their confidence icons. -->
