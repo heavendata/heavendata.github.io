@@ -107,7 +107,7 @@ Deleting an attribute deletes its values on every product and removes it from ev
 
 1. In the sidebar, open **Settings → Attributes & sections**, and select the section that holds the attribute.
 2. On the attribute's row, choose ⋯ **More actions** → **Delete**. The app asks `Delete "‹name›"?`; confirm with **Delete attribute**.
-3. Choose **Save**. The attribute is deleted only when the section is saved. While a product type still includes it, the save stops at `Couldn't save the section` — *At least one product type still includes "‹name›".* Choose **Remove and save** to remove the attribute from every product type that includes it and save the section. **Remove and save** is not offered while a variant configuration splits products into product variants by the attribute: change those variant configurations so that none splits by it, then save the section again.
+3. Choose **Save**. The attribute is deleted only when the section is saved. While a product type still includes it, the save stops at `Couldn't save the section` — *At least one product type still includes "‹name›".* Choose **Remove and save** to remove the attribute from every product type that includes it and save the section. While a variant configuration splits products into product variants by the attribute, the save stops with *It's used by at least one product type.* instead, and **Remove and save** is not offered: change those variant configurations so that none splits by the attribute, then save the section again.
 
 ### Filters and sorts that named the attribute
 
