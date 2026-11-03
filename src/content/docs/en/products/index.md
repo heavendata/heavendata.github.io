@@ -15,7 +15,7 @@ for what a field or a product type *means* rather than how to change it, see
 
 ## What refuses a publish
 
-**A product variant can't be published while an attribute marked Required has no value for it.** A value set on the product counts for each of its product variants. Saving is never refused for this: you can save a product with a required value still empty, and only publishing is refused.
+A product variant can't be published while an attribute marked **Required** has no value for it. A value set on the product counts for each of its product variants. Saving is never refused for this: you can save a product with a required value still empty, and only publishing is refused.
 
 | The **Required** attribute is | It needs, for the product variant to be published |
 | --- | --- |

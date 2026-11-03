@@ -4,7 +4,7 @@ description: "The languages your account keeps product data in — how to add on
 sidebar:
   order: 8
 ---
-Your account's languages are the languages a translatable attribute can hold a value in. Each language can have a fallback language, which a CSV export, a template and copying values use when a value is missing, and can be a required language, which a product variant must have a value in before it can be published. Manage them under **Settings > Languages**.
+Your account's languages are the languages a translatable attribute can hold a value in. Manage them under **Settings > Languages**: each language can have a [fallback language](#fallback-languages) and can be a [required language](#required-languages).
 
 ## The Languages list
 
@@ -55,22 +55,11 @@ An Excel export and a JSON export leave the value empty. The product editor and 
 
 ## Required languages
 
-A required language is one a product variant must have its own value in, for every **Required** translatable attribute, before it can be published. Turn on **Required language** on each language that must be filled in before a product goes out; several languages can be required at once.
-
-| Your languages | When a variant is published, a **Required** translatable attribute needs |
-| --- | --- |
-| No language is required | Text in at least one language, whichever. |
-| One or more languages are required | A value of its own in each required language. Languages that are not required are not checked. |
+A required language is one a product variant must have its own value in, for every **Required** translatable attribute, before it can be published. Turn on **Required language** on each language that must be filled in before a product goes out; several languages can be required at once. Languages that are not required are not checked, and while no language is required, a **Required** translatable attribute needs text in at least one language, whichever.
 
 **A value in the fallback language doesn't count.** In the [example above](#fallback-languages), mark British English (United Kingdom) required and leave American English (United States) not required: a product variant can't be published without a British English name, and a CSV export or a template still fills the American English name from the British one. If you mark American English (United States) required instead, or as well, every variant needs an American English value of its own, even where it would be the same text.
 
-**Only publishing checks it.** You can save a product with a required language still empty. While your working language is a required language, the product editor marks an empty **Required** translatable field with `Required.`
-
-**When a publish is refused, the message names each missing language** by its name, for example:
-
-`"short_title" needs a value in American English (United States). Add a value, and save again.`
-
-Switch your working language to the language it names, fill in the value and publish again. What else refuses a publish: [Products → What refuses a publish](/en/products.html#what-refuses-a-publish).
+While your working language is a required language, the product editor marks an empty **Required** translatable field with `Required.` A refused publish names each language the value is missing in — see [Products → What refuses a publish](/en/products.html#what-refuses-a-publish) for the message and what else refuses a publish.
 
 A new language starts not required. Deleting a required language stops it being checked from the next publish on.
 
@@ -80,12 +69,11 @@ An import puts a row's values into a language when the column mapped to **Langua
 
 ## Working language
 
-Your **working language** is the one of these languages you see and edit product data in. It decides which value of a translatable attribute you see, and which [label](./attributes.html#name-and-labels) each attribute is shown by — in **Settings** too. It is your own choice, kept in your browser, and it is not the language of the app itself. It is not a required language either: choosing it checks nothing.
+Your **working language** is the one of these languages you see and edit product data in. It decides which value of a translatable attribute you see, and which [label](/en/concepts/attributes.html#name-and-labels) each attribute is shown by — in **Settings** too. It is your own choice, kept in your browser, and it is not the language of the app itself. It is not a required language either: choosing it checks nothing.
 
 Choose it with the language picker — the globe button showing a code such as `en-US` — on the products list, in the product editor and on custom entity pages. **Settings** has no language picker of its own and follows your working language. Until you choose one, the app uses the first language in the language picker's list.
 
 ## Related articles
 
 - [Attributes & sections](/en/concepts/attributes.html) — make an attribute translatable or required
-- [Products](/en/products.html) — what refuses a publish
 - [Translatable attributes in templates](/en/channels/templates/translations.html) — reading a value in a language, with its fallback
