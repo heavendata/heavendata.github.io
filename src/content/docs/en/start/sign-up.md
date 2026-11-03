@@ -80,7 +80,7 @@ to your sign-in**. No second user or organization is created.
 | **Account URL key cannot be used.** | That web address is taken or reserved. Choose another under **Subdomain**. |
 | **Couldn't use your Google account. Google didn't share your email address. Sign in or sign up with your email address.** (or Microsoft) | Sign up with your email address instead. |
 | **Couldn't finish the sign-up. The sign-up page was open for more than 5 minutes. Sign up again.** | Start again from **Sign up with Google** or **Sign up with Microsoft**. |
-| **Something went wrong...** after selecting **Confirm** in the email | The confirmation link is no longer valid. Sign up again for a new one. |
+| **Something went wrong...** after selecting **Confirm** in the email | The confirmation link is no longer valid, or was used already. If you finished signing up, sign in. Otherwise contact support: signing up again with the same address sends **Your Sign-Up**, not a new link. |
 
 ## Sign in
 

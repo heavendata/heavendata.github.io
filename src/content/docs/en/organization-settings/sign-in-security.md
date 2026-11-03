@@ -111,8 +111,9 @@ remove it.
 
 ### Change your password
 
-On your Security page, select **Change password**. Enter your **Current password** and your
-**New password** twice, and select **Change password**.
+On your Security page, select **Change password**. Enter your **Current password**, then a
+**New password** of at least 6 characters with at least one upper-case letter, and the same
+again under **Repeat new password**. Select **Change password**.
 
 ### Forgot your password?
 

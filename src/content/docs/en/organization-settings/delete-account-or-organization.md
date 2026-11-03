@@ -15,7 +15,7 @@ canceled. After those 30 days it can no longer be canceled, by you or by support
 Once you delete, nobody can open the account, so export the data you want to keep first.
 There is no single export of a whole account. Export your products from the product list —
 see [Exporting products](/en/products/product-list.html#exporting-products) — and select
-**Include asset files** to get your asset files with them.
+**Include asset files** on the **Assets** tab to get your asset files with them.
 
 ## Account or organization — what differs
 
@@ -70,6 +70,10 @@ Anyone else sees **Access denied**.
 ## Cancel the deletion
 
 You can cancel a deletion until the date shown.
+
+The app doesn't open a pending account. To get to the right page from there, open the
+account's address: the page **"‹name›" is pending deletion** has **Open Organization
+settings** for whoever may cancel the deletion, and it takes you straight there.
 
 **An account:** in Organization settings, select **Accounts**, then the account, and select
 **Cancel deletion**. The page says **Deletion canceled**, and the account works again as
