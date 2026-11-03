@@ -21,7 +21,7 @@ An **Integer number** or **Number with decimals** attribute can have a **Unit**,
 
 An attribute with a unit can't be **Translatable**, and a measurement set is never translatable or indexed. Changing a unit converts no value. See [Measurements and units](./measurements.html).
 
-### Attribute Sections
+### Attribute sections
 An attribute is always part of one attribute section — just a group for better readability.
 
 Example:
