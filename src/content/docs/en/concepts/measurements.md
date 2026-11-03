@@ -43,7 +43,7 @@ The unit list is grouped by what a unit measures. **Length**, **Weight**, **Volu
 | Area | cm², m² |
 | Temperature | °C, °F, K |
 
-Switching **Type** between **Integer number** and **Number with decimals** keeps the unit.
+On a new attribute, switching **Type** between **Integer number** and **Number with decimals** keeps the unit.
 
 **A unit and Translatable exclude each other.** An attribute with a unit holds one value for every language:
 
