@@ -93,11 +93,11 @@ A section that holds such an attribute is not saved. Choosing **Save** shows:
 
 The message does not name the attribute: look for the rows that show **Translatable** in the section.
 
-The **Assign attribute roles** dialog shows the same words. It saves the whole section that holds the attribute you pick, so it refuses any role while that section holds such an attribute.
+The **Assign attribute roles** dialog shows the same words: it saves the whole section that holds the attribute you pick, so it refuses any role while that section holds such an attribute.
 
 | The attribute | What to do |
 | --- | --- |
-| Saved, and marked **Indexed** | Turn off **Indexed**, and move a `system.identifier` or `system.basecode` role it holds as the next row says. **Translatable** cannot be changed once an attribute is saved. |
+| Saved, and marked **Indexed** | Turn off **Indexed**. If it also holds either role, see the next row. **Translatable** cannot be changed once an attribute is saved. |
 | Saved, with `system.identifier` or `system.basecode` | Move the role to an attribute that is not translatable. |
 | New, not saved yet | Turn off **Translatable**, or do either of the above. |
 
@@ -107,7 +107,12 @@ Deleting an attribute deletes its values on every product and removes it from ev
 
 1. In the sidebar, open **Settings → Attributes & sections**, and select the section that holds the attribute.
 2. On the attribute's row, choose ⋯ **More actions** → **Delete**. The app asks `Delete "‹name›"?`; confirm with **Delete attribute**.
-3. Choose **Save**. The attribute is deleted only when the section is saved. While a product type still includes it, the save stops at `Couldn't save the section` — *At least one product type still includes "‹name›".* Choose **Remove and save** to remove the attribute from every product type that includes it and save the section. While a variant configuration splits products into product variants by the attribute, the save stops with *It's used by at least one product type.* instead, and **Remove and save** is not offered: change those variant configurations so that none splits by the attribute, then save the section again.
+3. Choose **Save**. The attribute is deleted only when the section is saved.
+
+| What stands in the way | What the app does |
+| --- | --- |
+| A product type still includes the attribute | The save stops at `Couldn't save the section` — *At least one product type still includes "‹name›".* Choose **Remove and save** to remove the attribute from every product type that includes it and save the section. |
+| A variant configuration splits products into product variants by the attribute | The save stops with *It's used by at least one product type.*, and **Remove and save** is not offered. Change those variant configurations so that none splits by the attribute, then save the section again. |
 
 ### Filters and sorts that named the attribute
 

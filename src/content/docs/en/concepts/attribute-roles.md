@@ -23,7 +23,7 @@ The app relies on these five roles. Assign each to one attribute.
 
 ## The identifier and base code roles need an attribute that isn't translatable
 
-The attribute that holds `system.identifier` or `system.basecode` must not be **Translatable**: a product is matched by one value, not one per language. Give either role to an attribute that is not translatable. **Translatable** cannot be changed once an attribute is saved, so a translatable attribute cannot be made to fit — see [A translatable attribute cannot be indexed or identify a product](./attributes.html#a-translatable-attribute-cannot-be-indexed-or-identify-a-product) for the message the app shows.
+The attribute that holds `system.identifier` or `system.basecode` must not be **Translatable**: a product is matched by one value, not one per language. Give either role to an attribute that is not translatable. The message the app shows, and what to do, are in [A translatable attribute cannot be indexed or identify a product](./attributes.html#a-translatable-attribute-cannot-be-indexed-or-identify-a-product).
 
 | Where the role is refused | Title of the refusal |
 | --- | --- |
