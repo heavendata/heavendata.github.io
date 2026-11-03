@@ -35,7 +35,7 @@ What else you can do with a user depends on how they joined:
 
 | The address ends in | The button reads | What happens |
 | --- | --- | --- |
-| An email domain your organization hasn't verified | **Invite user** | We email the user an invitation to join your organization. You can add a message of your own to it first, under **Invitation message (optional)**. You then see the **Invitations** page, which shows whether each invitation was accepted or declined. Once the user accepts, they're on the users list. |
+| Any domain that isn't one of your verified email domains | **Invite user** | We email the user an invitation to join your organization. You can add a message of your own to it first, under **Invitation message (optional)**. You then see the **Invitations** page, which shows each invitation's status: **Waiting for response**, **Accepted** or **Declined**. Once the user accepts, they're on the users list. |
 | One of your verified email domains | **Add user** | You can also set the user's **User interface language** and **Preferred language**. The user is added at once, without an invitation, and we send them no email — so tell them yourself. They sign in for the first time through **Forgot your password?** on the sign-in page. If the address already has a heavendata login, that user is only added to your organization, as an accepted invitation would add them. |
 
 **Cancel**, or the Back button at the top of the page, asks before it discards what
@@ -61,7 +61,8 @@ configuration. If you're not familiar with either, ask your system administrator
    - add the TXT record it shows to the domain's DNS, or
    - place the verification file it names, holding the code it shows, in the root
      folder of the domain's web server.
-7. Select **Verify again**. Once the email domain is verified, the page says **This email domain is verified.**
+7. Select **Verify again**. Once the email domain is verified, the page says
+   **This email domain is verified.**
 
 ## Require two-factor authentication
 
