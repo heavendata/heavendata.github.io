@@ -55,7 +55,7 @@ Converts a number to another unit of the same kind — a length to a length, a w
 | **Unit it is in** | When the connected Source field has a unit: only *The source field's unit (cm)*. Otherwise any unit from the list, or empty. | The source field's unit; otherwise empty |
 | **Unit to write** | Any unit from the list. Required. | — |
 
-Left empty, **Unit it is in** uses the unit each value is in, and a number without a unit is left out. **Unit to write** must measure the same kind of thing as the number: *Choose a length unit, such as cm.*
+A value that carries its own unit, such as the output of **Text to measurements**, is converted from that unit whatever **Unit it is in** says; the setting is the unit of a number without one. Left empty, a number without a unit is left out. **Unit to write** must measure the same kind of thing as the number: *Choose a length unit, such as cm.*
 
 The node takes **one number** — a number, a measurement, or a text that is a number written with a decimal point — and outputs a plain number in **Unit to write**, rounded to four decimal places. A list is converted item by item. **A whole measurement set is refused**: connect one measurement's Source field, such as *Package size › Height*, instead.
 
@@ -121,7 +121,7 @@ A node's **Preview** uses the unit of the Source field connected to it. For a So
 
 A node that can't handle a value leaves **that field** out of the record. The rest of the record is written, and in an import the value stored before stays. The run's log has one warning for the value. Each message begins *The record was imported without this field's value.* in an import, or *The record was exported without this field's value.* in a feed, and goes on as below.
 
-**Text to measurements**, and an import into a field with a unit — as an import writes them:
+**Text to measurements** as the last node of a field with a unit, and an import into a field with a unit — as an import writes them:
 
 | Why | The rest of the message |
 | --- | --- |
@@ -133,7 +133,7 @@ A node that can't handle a value leaves **that field** out of the record. The re
 | Measurements into a field of another type | `"20 x 10 x 5 cm" was read as measurements, and this field can't hold them. …` |
 | **Text to measurements** assumes a unit of another kind than the field's | `"Text to measurements" assumes kg, a weight unit, for numbers without a unit, and this field holds length values in cm. …` |
 
-In a feed, the first four lines end *Change the value and export again.*, and the last *… and export again.* The two lines about measurements read the same in a feed: `"20 x 10 x 5 cm" was read as measurements, and this field can't hold them. Add Measurements to text after "Text to measurements", and export again.`
+Anywhere else — in a feed, or before another node — there is no field's unit to compare with, so the count of numbers is never refused, and a unit is compared with the value's own first unit: `"kg" is a weight unit, and the rest of this value is in cm, a length unit.`, `"parsec" isn't a unit.` In a feed, every such line ends *Change the value and export again.*, and the line about the unit to assume *… and export again.* The two lines about measurements read the same in a feed: `"20 x 10 x 5 cm" was read as measurements, and this field can't hold them. Add Measurements to text after "Text to measurements", and export again.`
 
 **Convert unit** and **Measurements to text** — as a feed writes them:
 

@@ -23,7 +23,7 @@ Units are converted only on the way in, when you paste or import a value in anot
 | **Filter the product list by it** | Yes | By each measurement on its own |
 | **Sort the product list by it** | Yes | No |
 
-Both work on products, product variants and custom entities: on a custom entity type, **New attribute** offers the same choices.
+Both work on products, product variants and custom entities: on a custom entity type, **New attribute** offers the same number and measurement set choices.
 
 ## Give a number attribute a unit
 
@@ -78,10 +78,10 @@ Each measurement has a **Code** and a **Label**:
 
 ## Changing a unit
 
-You can change or remove the unit of a saved attribute at any time. **The stored numbers stay exactly as they are and are read in the new unit** — the window says so: *Changing it keeps the numbers as they are and doesn't convert them, so 10 kg becomes 10 lb.*
+You can change the unit of a saved attribute — a number's or a measurement set's — and remove a number's. **The stored numbers stay exactly as they are and are read in the new unit** — the window says so: *Changing it keeps the numbers as they are and doesn't convert them, so 10 kg becomes 10 lb.*
 
 :::caution[Changing a unit converts nothing]
-A weight of `10` in kilograms becomes `10` in pounds. That is how to fix a unit chosen wrongly: if the numbers were always millimeters but the attribute says centimeters, choose millimeters and the values are right. To convert the values themselves, change them — for example with an [import](/en/import/import-products.html).
+No value is recalculated, and no other warning appears. So a unit chosen wrongly is fixed by choosing the right one: if the numbers were always millimeters but the attribute says centimeters, choose millimeters and the values are right. To convert the values themselves, change them — for example with an [import](/en/import/import-products.html).
 :::
 
 ## Enter and paste values
@@ -97,7 +97,7 @@ A number with a unit shows its unit's symbol after the input, such as `kg`. A me
 | A number in cm | `20` | `20` — a number without a unit is taken to be in the attribute's unit |
 | Any input of a set in cm | `20 x 10 x 5 cm` | `20`, `10`, `5`, filled in order from the first measurement |
 | Any input of a set in cm | `200mm x 10 cm x 50 mm` | `20`, `10`, `5` |
-| Any input of a set in cm | `20 × — × 5 cm` or `20 x  x 5 cm` | `20`, empty, `5` — a dash or an empty place leaves that measurement empty |
+| Any input of a set in cm | `20 × — × 5 cm` or `20 x  x 5 cm` | `20`, empty, `5` — an em dash (`—`) or an empty place leaves that measurement empty; a hyphen (`-`) is not read |
 | One input of a set in cm | `25 mm` | `2.5`, in that input only |
 
 What paste reads:
@@ -114,6 +114,7 @@ What paste reads:
 | A unit of another kind, such as `kg` for a length | `"kg" is a weight unit. Use a length unit, such as cm.` |
 | A unit the list does not hold | `"parsec" isn't a unit this attribute accepts. Use a length unit, such as cm.` |
 | Too many or too few numbers for the set | `This attribute has 3 measurements: Length, Width, and Height. Paste 3 numbers, such as 20 x 10 x 5.` |
+| Numbers that can't be read, such as `20 by 10` | `Paste 3 numbers in cm or another length unit, such as 20 x 10 x 5 cm.` |
 | No number | `Enter a number in cm, such as 20.` |
 
 The input then holds the converted numbers, which you see before you save.
