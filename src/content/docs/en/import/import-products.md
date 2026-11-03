@@ -46,7 +46,7 @@ To start over with another file, remove this one with the **×** beside its name
 
 ### 2 · Map columns
 
-Each row of this step is one column of your file. Choose the product attribute it fills under **Target Attribute**.
+Each row of this step is one column of your file. Choose the product attribute it fills under **Fields to import into**.
 
 **The step opens already filled in.** Most columns get a suggested attribute, and where its values need it, a conversion; a column nothing fits is left for you to map. Each suggestion carries a tag that says where it came from:
 

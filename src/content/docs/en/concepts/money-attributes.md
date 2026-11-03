@@ -13,7 +13,7 @@ Use it for a fixed amount that describes a product, such as a deposit, a recycli
 
 | Part | Where it is set | What it is |
 | --- | --- | --- |
-| **Amount** | Per product or product variant, in the product editor | A decimal number. It can be negative. The product editor takes up to 3 decimal places. |
+| **Amount** | Per product or product variant, in the product editor | A decimal number. It can be negative. The product editor keeps every decimal place you type. |
 | **Currency** | Once per attribute, in the attribute's settings | An ISO 4217 currency code, such as `EUR` or `CHF`. Optional — but set it: see [Set the currency](#set-the-currency). |
 
 **To keep amounts in two currencies, create two money attributes**, for example *Deposit EUR* and *Deposit CHF*.
@@ -26,16 +26,16 @@ A money attribute can be **translatable**. It then holds one amount per language
 2. Click **New attribute** and choose **Money**.
 3. On the **General** tab, enter its **Name** — the **Code** is filled in from it — and decide whether it is **Translatable**.
 4. On the **Settings** tab, choose the **Currency** — see [Set the currency](#set-the-currency).
-5. Click **Ok**, then **Save** the section.
+5. Click **Done**, then **Save** the section.
 6. Enable the attribute in **Settings > Product types** where you need it.
 
 The type can't be changed after the attribute is created. To turn an existing attribute into a money attribute, see [Attributes & sections → Change attribute type](/en/concepts/attributes.html#change-attribute-type-or-translatable-settings-later).
 
 ## Set the currency
 
-**Currency** is on the attribute's **Settings** tab, after **Default value**. Choose the currency from the list; it lists every currency by its ISO 4217 code and English name.
+**Currency** is on the attribute's **Settings** tab, after **Default value**. Choose the currency from the list; it names each currency in the app's language, followed by its ISO 4217 code, such as *Swiss Franc (CHF)*.
 
-Set it when you create the attribute. A money attribute without a currency shows its amounts in the product editor as US dollars.
+Set it when you create the attribute. A money attribute without a currency shows its amounts as bare numbers, with no currency anywhere in the app.
 
 :::caution[Changing the currency converts nothing]
 You can change **Currency** at any time. The amounts stay exactly as they are: an amount of `100` in euros becomes `100` in Swiss francs. No exchange rate is applied and the app does not warn you. If the amounts must change too, update them — for example with an [import](/en/import/import-products.html).
@@ -43,10 +43,16 @@ You can change **Currency** at any time. The amounts stay exactly as they are: a
 
 ## Where the amount shows
 
+Every screen writes an amount the same way: the number, then a space and the attribute's currency code, such as `129.95 EUR`. The number has at least as many decimal places as the currency uses — two for euros, none for yen — and every further decimal place stored, never rounded: `129.90 EUR`, `1,200 JPY`, `1,234.567 EUR`. Without a currency it is the number alone, with the decimal places it has, such as `5` or `1,234.567`. Digits are grouped and separated the way the app's own language writes numbers, for example `1.234,567 EUR` when the app is in German.
+
 | Where | What you see |
 | --- | --- |
-| **Product editor** | The amount, with the attribute's currency. |
-| **Product list** column | The amount alone, rounded to 2 decimal places. The currency is not shown. |
+| **Product editor** | The amount in the input, with the currency code after the input. Without a currency there is no code. |
+| **Product list** column | The amount and the currency code. With **List product variants** off, a product's row lists the amounts of its product variants, separated by commas: `129.95 EUR, 99.00 EUR`. |
+| **Custom entity** list column | The amount and the currency code. A translatable attribute has no column in that list. |
+| **Brand portal** product list, and a product's own page | The amount and the currency code. |
+
+A column's header names the attribute, not the currency; each cell names the currency.
 
 ## Import and export
 
@@ -58,7 +64,7 @@ You can change **Currency** at any time. The amounts stay exactly as they are: a
 | `12.50 EUR` | `12.50` — the currency text is dropped |
 | `$9.00` | `9.00` |
 
-**The import does not compare the file's currency with the attribute's.** A column of US dollar amounts mapped onto a euro attribute is stored as euros. How decimal and group separators in the file are read is set in the data set's **Data Format** — see [Import products](/en/import/import-products.html).
+**Only the mapping step looks at the currency.** On **Map columns**, a column whose amounts carry another currency than the attribute's — or two currencies, when the attribute has none — is not suggested for the attribute, and a remembered mapping that places it there is marked with how many rows it would import wrong. If you map such a column yourself, the import does not check the currency: a column of US dollar amounts mapped onto a euro attribute is stored as euros. How decimal and thousands separators in the file are read is set in the data set's **Data Format** — see [Import products](/en/import/import-products.html).
 
 **An export carries the amount without the currency.** In a feed or a template the money attribute is a plain number, `record.<code>`. If the receiving system needs the currency code, add it yourself — in a template, write the code as text next to the amount.
 
