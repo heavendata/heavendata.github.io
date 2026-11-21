@@ -18,7 +18,7 @@ A **price list** is a named set of prices in one currency — retail prices in e
 
 A change to a price list reaches every price in it at once, on draft and published products alike, without publishing anything. A feed shows it from its next run; files already delivered are not sent again.
 
-Prices are not attributes — how they differ from a money attribute is in [Money attributes and prices](/en/concepts/money-attributes.html#money-attributes-and-prices).
+A selling price can also be kept in a money attribute — how the two differ, and which fits when, is in [Money attributes and prices](/en/concepts/money-attributes.html#money-attributes-and-prices).
 
 ## How an import finds a price list
 

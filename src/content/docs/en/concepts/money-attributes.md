@@ -7,7 +7,7 @@ sidebar:
 
 A money attribute holds an amount of money, such as `129.95`, in the currency set on the attribute, such as euros. Every product's amount in that attribute is in that currency. The amount is stored as a number. The currency is stored with the attribute, not with each amount.
 
-Use it for a fixed amount that describes a product, such as a deposit, a recycling fee or a declared customs value. For the amount a product is sold for — retail, wholesale, in several currencies, with validity dates — use prices instead: see [Money attributes and prices](#money-attributes-and-prices).
+Use it for a fixed amount that describes a product, such as a deposit, a recycling fee or a declared customs value — or for a selling price: see [Money attributes and prices](#money-attributes-and-prices).
 
 ## What a money attribute holds
 
@@ -70,13 +70,19 @@ A column's header names the attribute, not the currency; each cell names the cur
 
 ## Money attributes and prices
 
-A product variant's selling prices are its **prices**, which an import fills; each belongs to a [**price list**](/en/concepts/price-lists.html) — a named set of prices in one currency, such as retail prices in euros.
+You can keep a product variant's selling prices in either of two ways. Both are supported:
+
+- **Money attributes** — one for each kind of selling price, for example *Wholesale price* and *MSRP*. Recommended while you have one price list's worth of prices, each in one currency. There is no reason to move them to price lists while that is all you need.
+- **Prices in price lists** — a product variant's **prices**, each in a [**price list**](/en/concepts/price-lists.html), a named set of prices in one currency, such as retail prices in euros. Recommended once you need a second price list (for example a list of its own for each customer you sell to), prices that change on set dates, or the same price in a second currency.
 
 | | Money attribute | Prices |
 | --- | --- | --- |
 | Currency | One per attribute, optional | One per price list, required |
 | Validity dates, sale price | No | Yes |
+| Setting up | An attribute, like any other | Price lists, and prices added in the product editor or mapped in an import |
 | In an export | A number, without currency | `prices`, each price with its price list's currency — the key is listed in [Record keys](/en/reference/record-keys.html) |
+
+To say what a money attribute holds, you can give it a [role](/en/concepts/attribute-roles.html#other-roles): `offer.price` for the selling price, `40three.msrp` for the suggested retail price. The roles are optional.
 
 ## Related articles
 

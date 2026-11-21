@@ -13,7 +13,9 @@ It's crucial to have all pieces of information in dedicated fields. We call thes
 
 Note: Do not add all those data in one single text attribute. Prefer one attribute for each fact.
 
-A selling price is not an attribute: a product variant has its own prices, in price lists — see [Money attributes and prices](./money-attributes.html#money-attributes-and-prices).
+A selling price can be kept in a [money attribute](./money-attributes.html) or as a price in a [price list](./price-lists.html) — see which fits when in [Money attributes and prices](./money-attributes.html#money-attributes-and-prices).
+
+Stock is an attribute too: keep how many of a product variant can be sold in an **Integer number** attribute, optionally with the [role](./attribute-roles.html#other-roles) `40three.stock`.
 
 ## Units and measurement sets
 

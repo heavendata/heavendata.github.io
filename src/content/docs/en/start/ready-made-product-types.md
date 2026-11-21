@@ -35,7 +35,7 @@ Three more things hold for every ready-made product type:
 
 - **The roles are assigned.** SKU, Article number, Name and Images get the roles the app needs to identify products ([Attribute roles](/en/concepts/attribute-roles.html#a-ready-made-product-type-assigns-the-required-roles)).
 - **Every one has the variant configuration *No product variants***, for products sold in one version. The *Variant configurations* column below lists the others; all but ten product types have at least one, and half of them split by Color first, then by size or another attribute. See [Product variants](/en/concepts/product-variants.html).
-- **No price.** Prices live in price lists, not in an attribute. See [Money attributes and prices](/en/concepts/money-attributes.html#money-attributes-and-prices).
+- **No selling price.** No ready-made product type creates a money attribute for one. Keep it in a money attribute of your own, or as prices in price lists — see [Money attributes and prices](/en/concepts/money-attributes.html#money-attributes-and-prices).
 
 Most of a product type's own attributes, listed below, offer values to pick from and accept any other value you type. A value list is created in the language the product type is created in. Every attribute is created as not required and not translatable.
 

@@ -17,9 +17,9 @@ Go to **Settings → Attributes & sections** and define which attributes you nee
 * gtin (text)
 * article_number (text)
 
-A selling price is not an attribute: a product variant has its own prices, in price lists — see [Money attributes and prices](../concepts/money-attributes.html#money-attributes-and-prices).
-
 The article [Attribute Settings](../settings/attributes.html) describes how to configure attributes and sections.
+
+A selling price can be kept in a [money attribute](../concepts/money-attributes.html) or as a price in a [price list](../concepts/price-lists.html) — see which fits when in [Money attributes and prices](../concepts/money-attributes.html#money-attributes-and-prices).
 
 ## Define a Product Type
 Different types of products may need a different set of attributes to describe them. For example, we'll need an attribute
