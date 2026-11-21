@@ -49,4 +49,29 @@ Every attribute a ready-made product type creates carries a role of its own, suc
 
 ## Other roles
 
-Other roles are not required. They help the app map your data to the formats target systems expect, such as which attribute holds the GTIN or the brand. You can ignore them during setup.
+The **Roles** field offers 20 more roles. None of them is required on a product attribute. Each option shows the role's name and its id, such as *product price (offer.price)*; type the id to find it in the list. Any of them can be given to a product attribute of any type. The field also shows, by its id, any other role an attribute already holds, such as a ready-made product type's own role.
+
+Where the app reads a role, the last column says what for. A dash means the role only says what the attribute holds. *Reused by ready-made product types*: a ready-made product type that brings an attribute with this role uses yours — see [A ready-made product type assigns the required roles](#a-ready-made-product-type-assigns-the-required-roles).
+
+| Role | What it marks | What the app does with it |
+| --- | --- | --- |
+| `system.customEntityName` | The attribute whose value is shown as a custom entity record's name | Set for you when you choose the custom entity's **Label attribute** — see [Custom entities](./custom-entities.html#general) |
+| `articleNumber` | An article number that groups the variants of an article | Reused by ready-made product types |
+| `product.gtin` | The GTIN (Global Trade Item Number) | The product list's search looks in it. A product import suggests a column of GTINs for this attribute. Reused by ready-made product types |
+| `product.ean` | The EAN (European Article Number), the 13-digit GTIN | — |
+| `product.upc` | The UPC (Universal Product Code), the 12-digit GTIN | — |
+| `product.isbn` | The ISBN (International Standard Book Number) | — |
+| `product.asin` | The ASIN (Amazon Standard Identification Number) | — |
+| `product.mpn` | The manufacturer part number | Reused by ready-made product types |
+| `product.description` | The product description | Reused by ready-made product types |
+| `product.brand` | The brand name | Reused by ready-made product types |
+| `offer.url` | The product's landing page | Reused by ready-made product types |
+| `offer.mobileUrl` | The product's landing page for mobile devices | — |
+| `offer.availability` | The product's availability | — |
+| `offer.availabilityStarts` | The date the product becomes available | — |
+| `offer.availabilityEnds` | The date the product stops being available | — |
+| `offer.price` | The selling price, kept in a money attribute — see [Money attributes and prices](./money-attributes.html#money-attributes-and-prices) | — |
+| `40three.msrp` | The suggested retail price (MSRP), kept in a money attribute | — |
+| `40three.stock` | Stock: how many of the product variant can be sold | — |
+| `offer.itemCondition` | The product's condition | — |
+| `40three.energyEfficiencyClass` | The energy efficiency class | — |
